@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sciences de Gestion et Numérique · BAC STMG 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .gestion { --card-color: var(--gestion); }
+    .breadcrumb {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .82rem; color: var(--text2); padding: 1rem 0 0;
+    }
+    .breadcrumb a { color: var(--text2); transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--gestion); }
+    .breadcrumb-sep { color: var(--border); }
+    .breadcrumb-current { color: var(--gestion); font-weight: 600; }
+    .overall-progress-wrap {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem 1.5rem; margin-bottom: 1.25rem;
+    }
+    .overall-progress-label {
+      font-size: .8rem; color: var(--text2); margin-bottom: .4rem; display: block;
+    }
+    .overall-progress-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(90deg, var(--gestion), #c084fc);
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+    }
+    .ch-done-wrap {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .82rem; color: var(--text2); margin-left: auto;
+    }
+    .ch-done { accent-color: var(--gestion); width: 1rem; height: 1rem; cursor: pointer; }
+    .formula-code {
+      font-family: 'Courier New', monospace; font-size: .88rem;
+      background: #0d1117; border: 1px solid var(--border);
+      border-radius: 8px; padding: .75rem 1rem; color: #e6edf3;
+      line-height: 1.7; margin: .5rem 0; overflow-x: auto;
+    }
+    .formula-kw { color: #ff7b72; font-weight: 700; }
+    .formula-fn { color: #d2a8ff; }
+    .formula-str { color: #a5d6ff; }
+    .quality-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .75rem; margin: 1rem 0;
+    }
+    .quality-item {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: .85rem 1rem;
+      display: flex; flex-direction: column; gap: .3rem;
+    }
+    .quality-icon { font-size: 1.4rem; }
+    .quality-label { font-size: .82rem; font-weight: 700; color: var(--text); }
+    .quality-desc  { font-size: .78rem; color: var(--text2); }
+    .porter-wrap {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; margin: 1rem 0;
+    }
+    .porter-support {
+      background: rgba(147,51,234,.1); border-bottom: 1px solid var(--border);
+      padding: .6rem 1rem; display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .porter-primary {
+      display: flex; align-items: stretch; gap: 0;
+    }
+    .porter-cell {
+      flex: 1; padding: .75rem 1rem; border-right: 1px solid var(--border);
+      text-align: center; font-size: .82rem;
+    }
+    .porter-cell:last-child { border-right: none; }
+    .porter-cell strong { display: block; margin-bottom: .2rem; color: var(--text); font-size: .85rem; }
+    .porter-cell span { color: var(--text2); font-size: .78rem; }
+    .porter-arrow {
+      display: flex; align-items: center; justify-content: center;
+      padding: .75rem .5rem; color: var(--gestion); font-size: 1.2rem;
+    }
+    .porter-margin {
+      background: rgba(147,51,234,.15); border-left: 3px solid var(--gestion);
+      padding: .75rem 1rem; display: flex; align-items: center;
+      justify-content: center; font-weight: 700; color: var(--gestion);
+      writing-mode: horizontal-tb; font-size: .88rem;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem; margin: 1rem 0;
+    }
+    .kpi-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.1rem 1.25rem;
+      border-top: 3px solid var(--gestion);
+    }
+    .kpi-category { font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--gestion); margin-bottom: .5rem; }
+    .kpi-list { list-style: disc; padding-left: 1.1rem; }
+    .kpi-list li { font-size: .85rem; color: var(--text2); padding: .15rem 0; }
+  </style>
+</head>
+<body class="gestion">
+
+<!-- ══ NAVBAR ══════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo">🎓 <span>BAC STMG</span> 2026</a>
+    <div class="navbar-links">
+      <a href="economie.html" class="nav-eco">Économie</a>
+      <a href="droit.html" class="nav-droit">Droit</a>
+      <a href="management.html" class="nav-mgmt">Management</a>
+      <a href="gestion-marketing.html" class="nav-sg">Gestion</a>
+      <a href="sig.html" class="nav-sig">SIG</a>
+      <a href="sciences-gestion.html" class="nav-sg" style="font-weight:700;">Sc. Gestion</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ PAGE HEADER ════════════════════════════════════════════ -->
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Sciences de Gestion et Numérique</span>
+    </div>
+    <div class="page-header-inner" style="margin-top:1.5rem;">
+      <div class="page-header-icon">🔢</div>
+      <div class="page-header-text">
+        <h1 style="color:var(--gestion);">Sciences de Gestion et Numérique</h1>
+        <p>Tronc commun 1ère STMG · Information, valeur, processus, outils numériques, décision et transformation des organisations.</p>
+        <div class="page-header-badges">
+          <span class="badge badge-gestion">1ère STMG</span>
+          <span class="badge badge-neutral">8 chapitres</span>
+          <span class="badge badge-success">Exercices corrigés</span>
+          <span class="badge badge-warning">Quiz interactifs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LAYOUT PRINCIPAL ════════════════════════════════════════ -->
+<div class="container">
+  <div class="page-layout">
+
+    <!-- ── Sidebar ─────────────────────────────────────────── -->
+    <aside class="sidebar">
+
+      <!-- Progression globale -->
+      <div class="overall-progress-wrap">
+        <span class="overall-progress-label">Progression</span>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill overall-progress-fill" style="width:0%"></div>
+        </div>
+        <span class="overall-progress-label" style="margin-top:.35rem;" id="prog-label">0/8 chapitres vus (0%)</span>
+      </div>
+
+      <!-- TOC sidebar -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">📋 Sommaire</div>
+        <a href="#ch1" class="sidebar-link">1 · L'information dans l'organisation</a>
+        <a href="#ch2" class="sidebar-link">2 · Les systèmes d'information</a>
+        <a href="#ch3" class="sidebar-link">3 · La valeur dans l'organisation</a>
+        <a href="#ch4" class="sidebar-link">4 · Les processus</a>
+        <a href="#ch5" class="sidebar-link">5 · La communication numérique</a>
+        <a href="#ch6" class="sidebar-link">6 · Décision et outils numériques</a>
+        <a href="#ch7" class="sidebar-link">7 · Organisation et performance</a>
+        <a href="#ch8" class="sidebar-link">8 · Numérique et transformation</a>
+      </div>
+
+      <!-- Autres matières -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">📚 Autres matières</div>
+        <a href="economie.html" class="sidebar-link">📊 Économie</a>
+        <a href="droit.html" class="sidebar-link">⚖️ Droit</a>
+        <a href="management.html" class="sidebar-link">🏢 Management</a>
+        <a href="gestion-marketing.html" class="sidebar-link">📱 Gestion & Marketing</a>
+        <a href="sig.html" class="sidebar-link">💻 SIG (Terminale)</a>
+      </div>
+
+    </aside>
+
+    <!-- ── Contenu principal ───────────────────────────────── -->
+    <main>
+
+      <!-- TOC inline -->
+      <div class="toc">
+        <div class="toc-title">📋 Table des matières</div>
+        <div class="toc-grid">
+          <a href="#ch1" class="toc-item"><span class="toc-item-num">01</span>L'information dans l'organisation</a>
+          <a href="#ch2" class="toc-item"><span class="toc-item-num">02</span>Les systèmes d'information</a>
+          <a href="#ch3" class="toc-item"><span class="toc-item-num">03</span>La valeur dans l'organisation</a>
+          <a href="#ch4" class="toc-item"><span class="toc-item-num">04</span>Les processus</a>
+          <a href="#ch5" class="toc-item"><span class="toc-item-num">05</span>La communication numérique</a>
+          <a href="#ch6" class="toc-item"><span class="toc-item-num">06</span>Décision et outils numériques</a>
+          <a href="#ch7" class="toc-item"><span class="toc-item-num">07</span>Organisation et performance</a>
+          <a href="#ch8" class="toc-item"><span class="toc-item-num">08</span>Numérique et transformation</a>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 1 — L'information dans l'organisation
+      ══════════════════════════════════════════════════ -->
+      <section id="ch1" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">1</div>
+          <h2>L'information dans l'organisation</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch1" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch1" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Information — Définition</div>
+          <p><strong>Donnée traitée et mise en contexte</strong>, ayant une signification pour son destinataire. La donnée brute devient information quand elle est interprétée.</p>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">La chaîne Donnée → Information → Connaissance</h3>
+        <div class="schema-diagram">
+          <div class="schema-box" style="background:rgba(147,51,234,.15);border-color:var(--gestion);color:#d8b4fe;">📊 Donnée brute<br><small style="font-weight:400;font-size:.75rem;color:var(--text2);">Fait brut non interprété</small></div>
+          <div class="schema-arrow">→ traitement</div>
+          <div class="schema-box accent" style="background:rgba(147,51,234,.1);border-color:var(--gestion);">💡 Information<br><small style="font-weight:400;font-size:.75rem;color:var(--text2);">Donnée mise en contexte</small></div>
+          <div class="schema-arrow">→ intégration</div>
+          <div class="schema-box" style="background:rgba(22,163,74,.1);border-color:var(--green);color:#86efac;">🧠 Connaissance<br><small style="font-weight:400;font-size:.75rem;color:var(--text2);">Savoir acquis et mémorisé</small></div>
+        </div>
+
+        <div class="example-box">
+          <div class="example-title">💡 Exemple concret</div>
+          <p><strong>Donnée brute :</strong> "1 850" (chiffre de ventes du mois)</p>
+          <p><strong>Information :</strong> "Les ventes ont baissé de 10 % ce mois-ci par rapport au mois précédent"</p>
+          <p><strong>Connaissance :</strong> "Une baisse de ventes en décembre est souvent due à une saisonnalité — il faut anticiper avec des promotions"</p>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Les qualités d'une bonne information</h3>
+        <div class="quality-grid">
+          <div class="quality-item">
+            <div class="quality-icon">✅</div>
+            <div class="quality-label">Fiable</div>
+            <div class="quality-desc">Source vérifiée, sans erreur</div>
+          </div>
+          <div class="quality-item">
+            <div class="quality-icon">🎯</div>
+            <div class="quality-label">Pertinente</div>
+            <div class="quality-desc">Utile pour la décision visée</div>
+          </div>
+          <div class="quality-item">
+            <div class="quality-icon">⚡</div>
+            <div class="quality-label">Disponible</div>
+            <div class="quality-desc">Accessible quand on en a besoin</div>
+          </div>
+          <div class="quality-item">
+            <div class="quality-icon">📋</div>
+            <div class="quality-label">Complète</div>
+            <div class="quality-desc">Couvre tous les aspects nécessaires</div>
+          </div>
+          <div class="quality-item">
+            <div class="quality-icon">🔄</div>
+            <div class="quality-label">À jour</div>
+            <div class="quality-desc">Récente, non obsolète</div>
+          </div>
+          <div class="quality-item">
+            <div class="quality-icon">🔒</div>
+            <div class="quality-label">Sécurisée</div>
+            <div class="quality-desc">Protégée contre les accès non autorisés</div>
+          </div>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Typologies de l'information</h3>
+        <div class="key-points">
+          <div class="key-points-title">📌 Classements de l'information</div>
+          <ul>
+            <li><strong>Interne</strong> (produite par l'org.) ↔ <strong>Externe</strong> (provenant de l'environnement)</li>
+            <li><strong>Formelle</strong> (structurée, documentée) ↔ <strong>Informelle</strong> (rumeur, échange oral)</li>
+            <li><strong>Quantitative</strong> (chiffres, mesures) ↔ <strong>Qualitative</strong> (opinions, descriptions)</li>
+            <li><strong>Flux entrant</strong> (reçue de l'extérieur) · <strong>Flux sortant</strong> (émise vers l'ext.) · <strong>Flux interne</strong></li>
+          </ul>
+        </div>
+
+        <div class="notice-box">
+          <div class="notice-title">⚠️ Infobésité (surcharge informationnelle)</div>
+          <p>Phénomène de <strong>surcharge d'informations</strong> rendant difficile la sélection des informations pertinentes. Conséquences : perte de temps, stress, mauvaises décisions. Remèdes : filtrage, hiérarchisation, outils de veille.</p>
+        </div>
+
+        <!-- Exercice 1 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>📝 Exercice 1 — Évaluer la qualité de l'information</h4>
+            <button class="correction-toggle btn btn-sm">📖 Voir la correction</button>
+          </div>
+          <div class="exercise-body">
+            <p><strong>Situation :</strong> La directrice commerciale de la société Clothière reçoit les informations suivantes :</p>
+            <p style="margin:.5rem 0;">A. Un rapport de ventes de 2022 (actuellement on est en 2026)<br>
+            B. Un article de presse non sourcé disant "les ventes de mode augmentent"<br>
+            C. Le tableau de bord mensuel interne montrant les ventes par produit ce mois-ci<br>
+            D. Un email d'un commercial disant "j'ai l'impression que les clients préfèrent le bleu cette saison"</p>
+            <div class="exercise-question">
+              Pour chaque information (A, B, C, D), évaluez au moins deux qualités ou défauts.
+            </div>
+            <div class="correction-content">
+              <div class="example-box">
+                <div class="example-title">✅ Correction</div>
+                <p><strong>A.</strong> Rapport 2022 : <em>Non à jour</em> (4 ans de retard), <em>interne</em>, <em>formelle</em>. Inutilisable pour décider en 2026.</p>
+                <p><strong>B.</strong> Article non sourcé : <em>peu fiable</em> (source inconnue), <em>externe</em>, <em>qualitative</em>, <em>peu pertinente</em> (trop vague).</p>
+                <p><strong>C.</strong> Tableau de bord mensuel : <em>fiable</em>, <em>à jour</em>, <em>pertinente</em>, <em>quantitative</em>, <em>interne</em>. Information de qualité.</p>
+                <p><strong>D.</strong> Email commercial : <em>informelle</em>, <em>qualitative</em>, <em>peu fiable</em> (impression subjective), mais potentiellement <em>pertinente</em> si confirmée.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 1</h3>
+          <div class="quiz-question">
+            <p>Un chiffre de ventes brut (ex : "2 340") est une :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Un nombre sans contexte est une donnée brute. Il devient information quand on lui donne un sens (ex : hausse de 5% ce mois-ci).">
+                <span class="quiz-option-letter">A</span> Donnée brute
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Une information a déjà été traitée et mise en contexte. Un chiffre seul n'est pas encore une information.">
+                <span class="quiz-option-letter">B</span> Information
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="La connaissance est un savoir acquis et intégré, plus élaboré qu'un simple chiffre.">
+                <span class="quiz-option-letter">C</span> Connaissance
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Un KPI est un indicateur de performance, pas la définition d'un chiffre brut.">
+                <span class="quiz-option-letter">D</span> KPI
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 2 — Les systèmes d'information
+      ══════════════════════════════════════════════════ -->
+      <section id="ch2" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">2</div>
+          <h2>Les systèmes d'information</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch2" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch2" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Système d'Information (SI)</div>
+          <p>Ensemble organisé de ressources permettant de <strong>collecter, stocker, traiter et diffuser</strong> l'information au sein d'une organisation. Inclut les humains, outils, procédures et données.</p>
+        </div>
+
+        <div class="notice-box">
+          <div class="notice-title">📌 Pour aller plus loin</div>
+          <p>Ce chapitre présente les bases du SI. Pour approfondir (MCD, SQL, ERP, sécurité, transformation numérique), consulte la page <a href="sig.html" style="color:var(--sig);font-weight:600;">SIG — Terminale</a>.</p>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Types de logiciels</h3>
+        <div class="key-points">
+          <div class="key-points-title">💾 Progiciels et applications</div>
+          <ul>
+            <li><strong>Progiciel</strong> — logiciel standard vendu à de nombreuses entreprises (tableur, traitement de texte, PGI/ERP)</li>
+            <li><strong>Application métier</strong> — logiciel développé spécifiquement pour une activité (logiciel d'un médecin, d'un architecte)</li>
+            <li><strong>SaaS</strong> — logiciel accessible via internet, sans installation (Google Docs, Slack, Canva)</li>
+          </ul>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Les réseaux informatiques</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Réseau</th><th>Définition</th><th>Exemple</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>LAN</strong> (Local Area Network)</td><td>Réseau local, limité à un bâtiment</td><td>Réseau d'une entreprise</td></tr>
+              <tr><td><strong>WAN</strong> (Wide Area Network)</td><td>Réseau étendu, couvre de grandes distances</td><td>Réseau reliant plusieurs agences</td></tr>
+              <tr><td><strong>Internet</strong></td><td>Réseau mondial public</td><td>Web, e-mail</td></tr>
+              <tr><td><strong>Intranet</strong></td><td>Réseau privé interne à l'entreprise</td><td>Site RH interne, espace collaboratif</td></tr>
+              <tr><td><strong>Extranet</strong></td><td>Intranet étendu à des partenaires externes</td><td>Portail fournisseurs / clients</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 2</h3>
+          <div class="quiz-question">
+            <p>Un portail web accessible uniquement aux fournisseurs d'une entreprise est un :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Internet est public et accessible à tous.">
+                <span class="quiz-option-letter">A</span> Internet
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="L'intranet est réservé aux seuls membres internes de l'entreprise.">
+                <span class="quiz-option-letter">B</span> Intranet
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Un extranet étend le réseau privé à des partenaires extérieurs sélectionnés (fournisseurs, clients, distributeurs).">
+                <span class="quiz-option-letter">C</span> Extranet
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Le LAN est le réseau local d'un bâtiment, pas un portail partenaires.">
+                <span class="quiz-option-letter">D</span> LAN
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 3 — La valeur dans l'organisation
+      ══════════════════════════════════════════════════ -->
+      <section id="ch3" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">3</div>
+          <h2>La valeur dans l'organisation</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch3" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch3" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Valeur créée</div>
+          <p>Utilité supplémentaire apportée par l'organisation à travers ses activités. Une entreprise crée de la valeur en transformant des ressources (matières premières, travail, capital) en produits ou services ayant plus de valeur que les ressources consommées.</p>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">🔑 Valeur Ajoutée (VA)</div>
+          <div class="formula">VA = Production – Consommations intermédiaires</div>
+          <p style="color:var(--text2);margin-top:.75rem;font-size:.9rem;">La VA mesure la richesse créée par l'entreprise elle-même (ce qu'elle a ajouté aux matières premières achetées).</p>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Pour qui est créée la valeur ?</h3>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-category">🛒 Client</div>
+            <ul class="kpi-list">
+              <li>Utilité du produit/service</li>
+              <li>Rapport qualité/prix</li>
+              <li>Satisfaction, fidélité</li>
+            </ul>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-category">💼 Actionnaire</div>
+            <ul class="kpi-list">
+              <li>Profit, dividendes</li>
+              <li>Rentabilité des capitaux</li>
+              <li>Plus-value boursière</li>
+            </ul>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-category">👷 Salarié</div>
+            <ul class="kpi-list">
+              <li>Salaire, primes</li>
+              <li>Conditions de travail</li>
+              <li>Évolution professionnelle</li>
+            </ul>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-category">🌍 Société</div>
+            <ul class="kpi-list">
+              <li>Emplois créés</li>
+              <li>Impôts et cotisations</li>
+              <li>Innovations, services publics</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">La chaîne de valeur de Porter</h3>
+        <div class="def-box">
+          <div class="def-title">📖 Chaîne de valeur (Porter, 1985)</div>
+          <p>Modèle décomposant les activités de l'entreprise en <strong>activités primaires</strong> (qui créent directement la valeur pour le client) et <strong>activités de soutien</strong> (qui supportent les activités primaires). La différence entre la valeur créée et les coûts forme la <strong>marge</strong>.</p>
+        </div>
+
+        <div class="porter-wrap">
+          <!-- Activités de soutien -->
+          <div class="porter-support">
+            <span style="font-size:.78rem;color:var(--gestion);font-weight:700;white-space:nowrap;">Activités de soutien :</span>
+            <span style="font-size:.82rem;color:var(--text2);">🏗️ Infrastructure (direction, finance, juridique)</span>
+            <span style="font-size:.82rem;color:var(--text2);">👥 Gestion des RH</span>
+            <span style="font-size:.82rem;color:var(--text2);">💻 Développement technologique</span>
+            <span style="font-size:.82rem;color:var(--text2);">📦 Approvisionnements</span>
+          </div>
+          <!-- Activités primaires -->
+          <div style="display:flex;align-items:stretch;">
+            <div style="flex:1;">
+              <div class="porter-primary">
+                <div class="porter-cell">
+                  <strong>📥 Logistique entrante</strong>
+                  <span>Réception, stockage des matières</span>
+                </div>
+                <div class="porter-arrow">→</div>
+                <div class="porter-cell">
+                  <strong>⚙️ Production</strong>
+                  <span>Transformation, fabrication</span>
+                </div>
+                <div class="porter-arrow">→</div>
+                <div class="porter-cell">
+                  <strong>📤 Logistique sortante</strong>
+                  <span>Stockage, expédition produits finis</span>
+                </div>
+                <div class="porter-arrow">→</div>
+                <div class="porter-cell">
+                  <strong>📢 Commercialisation</strong>
+                  <span>Vente, marketing, distribution</span>
+                </div>
+                <div class="porter-arrow">→</div>
+                <div class="porter-cell">
+                  <strong>🔧 SAV</strong>
+                  <span>Service après-vente, maintenance</span>
+                </div>
+              </div>
+            </div>
+            <div class="porter-margin">MARGE →</div>
+          </div>
+        </div>
+
+        <!-- Exercice 3 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>📝 Exercice 3 — Identifier les activités créatrices de valeur</h4>
+            <button class="correction-toggle btn btn-sm">📖 Voir la correction</button>
+          </div>
+          <div class="exercise-body">
+            <p><strong>Cas :</strong> La brasserie artisanale "HopCity" produit et vend des bières. Elle achète le houblon et le malt, réalise la fermentation en interne, vend via son site e-commerce et des bars partenaires, assure un service de livraison et répond aux réclamations clients.</p>
+            <div class="exercise-question">
+              1. Classez chaque activité de HopCity dans la chaîne de valeur de Porter.<br>
+              2. Identifiez deux activités de soutien possibles pour HopCity.
+            </div>
+            <div class="correction-content">
+              <div class="example-box">
+                <div class="example-title">✅ Correction</div>
+                <p><strong>1. Activités primaires :</strong></p>
+                <p>— <em>Logistique entrante</em> : achat et réception du houblon et du malt</p>
+                <p>— <em>Production</em> : fermentation, mise en bouteille</p>
+                <p>— <em>Logistique sortante</em> : préparation des livraisons, stockage des bières finies</p>
+                <p>— <em>Commercialisation</em> : vente via site e-commerce, partenariats avec les bars</p>
+                <p>— <em>SAV</em> : gestion des réclamations clients</p>
+                <p style="margin-top:.75rem;"><strong>2. Activités de soutien possibles :</strong></p>
+                <p>— <em>Gestion RH</em> : recrutement des brasseurs, formation, paie</p>
+                <p>— <em>Développement technologique</em> : site e-commerce, logiciel de gestion des stocks</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 3</h3>
+          <div class="quiz-question">
+            <p>Dans la chaîne de valeur de Porter, la "Gestion des Ressources Humaines" est une :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Les activités primaires sont celles qui créent directement la valeur pour le client (logistique, production, ventes, SAV).">
+                <span class="quiz-option-letter">A</span> Activité primaire
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! La GRH est une activité de soutien : elle ne crée pas directement de la valeur pour le client mais supporte toutes les activités primaires.">
+                <span class="quiz-option-letter">B</span> Activité de soutien
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Porter ne classe pas les activités comme 'secondaires'.">
+                <span class="quiz-option-letter">C</span> Activité secondaire
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="La marge est le résultat de la chaîne de valeur, pas une activité.">
+                <span class="quiz-option-letter">D</span> Une marge
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 4 — Les processus dans l'organisation
+      ══════════════════════════════════════════════════ -->
+      <section id="ch4" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">4</div>
+          <h2>Les processus dans l'organisation</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch4" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch4" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Processus — Définition</div>
+          <p>Ensemble d'<strong>activités coordonnées</strong> qui transforment des <strong>éléments entrants</strong> (ressources, informations, matières) en <strong>éléments sortants</strong> (produits, services, décisions) en apportant de la valeur ajoutée.</p>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Les 3 types de processus</h3>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-category">⚙️ Opérationnels (métier)</div>
+            <ul class="kpi-list">
+              <li>Créent directement la valeur</li>
+              <li>Ex : traiter une commande, fabriquer, vendre</li>
+              <li>En lien direct avec le client</li>
+            </ul>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-category">🔧 De support</div>
+            <ul class="kpi-list">
+              <li>Supportent les processus métier</li>
+              <li>Ex : paie, comptabilité, maintenance SI</li>
+              <li>Pas de contact direct client</li>
+            </ul>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-category">🎯 De management</div>
+            <ul class="kpi-list">
+              <li>Pilotent et orientent l'org.</li>
+              <li>Ex : définir la stratégie, contrôle de gestion</li>
+              <li>Assurent la cohérence globale</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Optimisation des processus</h3>
+        <div class="key-points">
+          <div class="key-points-title">📌 Méthodes d'amélioration</div>
+          <ul>
+            <li><strong>Lean management</strong> — éliminer les gaspillages (activités sans valeur ajoutée) pour gagner en efficacité</li>
+            <li><strong>Amélioration continue (PDCA)</strong> — cycle Plan → Do → Check → Act : planifier, faire, vérifier, corriger</li>
+            <li><strong>Kaizen</strong> — philosophie japonaise d'amélioration petite et quotidienne impliquant tous les salariés</li>
+            <li><strong>Automatisation / RPA</strong> — remplacer les tâches répétitives par des outils numériques</li>
+          </ul>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 4</h3>
+          <div class="quiz-question">
+            <p>Le processus "définir la stratégie de l'entreprise" est un processus :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Les processus opérationnels créent directement la valeur pour le client (vente, production...).">
+                <span class="quiz-option-letter">A</span> Opérationnel
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Les processus de support accompagnent les processus métier (comptabilité, maintenance...).">
+                <span class="quiz-option-letter">B</span> De support
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! La définition de la stratégie est un processus de management : il pilote et oriente toute l'organisation.">
+                <span class="quiz-option-letter">C</span> De management
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Le Lean est une méthode d'optimisation, pas un type de processus.">
+                <span class="quiz-option-letter">D</span> Lean
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 5 — La communication numérique
+      ══════════════════════════════════════════════════ -->
+      <section id="ch5" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">5</div>
+          <h2>La communication numérique</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch5" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch5" class="ch-done">
+          </div>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1rem 0 .75rem;">Outils collaboratifs</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Outil</th><th>Fonction</th><th>Exemples</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Messagerie électronique</strong></td><td>Communication asynchrone</td><td>Gmail, Outlook</td></tr>
+              <tr><td><strong>Messagerie instantanée</strong></td><td>Communication synchrone, groupes</td><td>Slack, Teams, WhatsApp</td></tr>
+              <tr><td><strong>Visioconférence</strong></td><td>Réunion à distance</td><td>Zoom, Teams, Google Meet</td></tr>
+              <tr><td><strong>Partage de documents</strong></td><td>Collaboration en temps réel</td><td>Google Drive, SharePoint, OneDrive</td></tr>
+              <tr><td><strong>Réseau social pro</strong></td><td>Networking, recrutement, veille</td><td>LinkedIn</td></tr>
+              <tr><td><strong>Wiki / Base de connaissances</strong></td><td>Documentation collaborative</td><td>Notion, Confluence</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Sécurité numérique personnelle</h3>
+        <div class="key-points">
+          <div class="key-points-title">🔒 Bonnes pratiques</div>
+          <ul>
+            <li><strong>Mot de passe fort</strong> — 12+ caractères, majuscules, chiffres, symboles ; unique par service</li>
+            <li><strong>Phishing</strong> — ne jamais cliquer sur un lien suspect, vérifier l'expéditeur</li>
+            <li><strong>RGPD</strong> — droit à l'effacement, consentement, minimisation des données collectées</li>
+            <li><strong>Authentification à deux facteurs (2FA)</strong> — ajouter un second facteur de vérification</li>
+          </ul>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Présentation de données numériques</h3>
+        <div class="key-points">
+          <div class="key-points-title">📊 Outils de visualisation</div>
+          <ul>
+            <li><strong>Tableur</strong> (Excel, Sheets) — tableaux, graphiques, TCD</li>
+            <li><strong>Diagramme</strong> — histogramme, camembert, courbe pour représenter des données</li>
+            <li><strong>Infographie</strong> — représentation visuelle synthétique de données ou processus</li>
+            <li><strong>Dashboard / Tableau de bord</strong> — regroupement de plusieurs indicateurs visuels</li>
+          </ul>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 5</h3>
+          <div class="quiz-question">
+            <p>Slack et Microsoft Teams sont principalement des outils de :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Ce sont des outils de communication/collaboration, pas des bases de données.">
+                <span class="quiz-option-letter">A</span> Gestion de bases de données
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Slack et Teams sont des plateformes de messagerie et collaboration instantanée pour les équipes.">
+                <span class="quiz-option-letter">B</span> Messagerie et collaboration d'équipe
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Ce ne sont pas des ERP ; ils ne gèrent pas les processus métier intégrés.">
+                <span class="quiz-option-letter">C</span> ERP / PGI
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Ces outils ne sont pas des antivirus.">
+                <span class="quiz-option-letter">D</span> Protection contre les virus
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 6 — La prise de décision avec les outils numériques
+      ══════════════════════════════════════════════════ -->
+      <section id="ch6" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">6</div>
+          <h2>La prise de décision avec les outils numériques</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch6" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch6" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Tableau de bord</div>
+          <p>Outil de <strong>synthèse visuelle</strong> regroupant les <strong>indicateurs clés de performance (KPI)</strong> permettant aux dirigeants de piloter l'organisation et de prendre des décisions éclairées.</p>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">🔑 KPI — Key Performance Indicator</div>
+          <div class="formula">KPI = indicateur mesurable, en lien avec un objectif précis</div>
+          <p style="color:var(--text2);margin-top:.75rem;font-size:.9rem;">Exemples : taux de satisfaction client, chiffre d'affaires mensuel, taux d'absentéisme, nombre de réclamations</p>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Fonctions essentielles du tableur</h3>
+        <div class="formula-code">
+<span class="formula-cmt">// Fonctions de base</span>
+<span class="formula-fn">=SOMME(</span>B2:B12<span class="formula-fn">)</span>          <span class="formula-cmt">// somme d'une plage</span>
+<span class="formula-fn">=MOYENNE(</span>B2:B12<span class="formula-fn">)</span>        <span class="formula-cmt">// moyenne d'une plage</span>
+<span class="formula-fn">=MAX(</span>B2:B12<span class="formula-fn">)</span>            <span class="formula-cmt">// valeur maximale</span>
+<span class="formula-fn">=MIN(</span>B2:B12<span class="formula-fn">)</span>            <span class="formula-cmt">// valeur minimale</span>
+<span class="formula-fn">=NB(</span>B2:B12<span class="formula-fn">)</span>             <span class="formula-cmt">// nombre de cellules non vides</span>
+
+<span class="formula-cmt">// Condition et recherche</span>
+<span class="formula-fn">=SI(</span>B2&gt;1000<span class="formula-fn">;</span><span class="formula-str">"Objectif atteint"</span><span class="formula-fn">;</span><span class="formula-str">"À améliorer"</span><span class="formula-fn">)</span>
+<span class="formula-fn">=RECHERCHEV(</span>A2<span class="formula-fn">;</span>TableProduits<span class="formula-fn">;</span>3<span class="formula-fn">;</span>FAUX<span class="formula-fn">)</span>  <span class="formula-cmt">// recherche verticale</span>
+
+<span class="formula-cmt">// Taux de variation</span>
+=(B3-B2)/B2*100         <span class="formula-cmt">// évolution en %</span>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Le Tableau Croisé Dynamique (TCD)</h3>
+        <div class="def-box">
+          <div class="def-title">📖 TCD — Tableau Croisé Dynamique</div>
+          <p>Outil du tableur permettant de <strong>synthétiser, regrouper et analyser</strong> rapidement de grandes quantités de données en croisant plusieurs dimensions (ex : ventes par produit et par région). Très puissant pour le reporting.</p>
+        </div>
+
+        <!-- Exercice 6a -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>📝 Exercice 6a — Formules de tableur</h4>
+            <button class="correction-toggle btn btn-sm">📖 Voir la correction</button>
+          </div>
+          <div class="exercise-body">
+            <p><strong>Contexte :</strong> Vous disposez d'un tableau Excel avec les colonnes : A=Mois, B=CA (en €), C=Objectif (en €).</p>
+            <div class="exercise-question">
+              1. Quelle formule calcule la somme du CA de janvier (B2) à décembre (B13) ?<br>
+              2. Quelle formule affiche "Atteint" si le CA (B2) dépasse l'objectif (C2), sinon "Non atteint" ?<br>
+              3. Quelle formule calcule le taux d'évolution entre le CA du mois précédent (B2) et le mois actuel (B3) ?
+            </div>
+            <div class="correction-content">
+              <div class="example-box">
+                <div class="example-title">✅ Correction</div>
+                <div class="formula-code">
+<span class="formula-cmt">// 1. Somme du CA annuel</span>
+<span class="formula-fn">=SOMME(</span>B2:B13<span class="formula-fn">)</span>
+
+<span class="formula-cmt">// 2. Condition objectif atteint</span>
+<span class="formula-fn">=SI(</span>B2&gt;C2<span class="formula-fn">;</span><span class="formula-str">"Atteint"</span><span class="formula-fn">;</span><span class="formula-str">"Non atteint"</span><span class="formula-fn">)</span>
+
+<span class="formula-cmt">// 3. Taux d'évolution en %</span>
+=(B3-B2)/B2*100
+<span class="formula-cmt">// Exemple : si B2=1000 et B3=1100 → (1100-1000)/1000*100 = 10 %</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercice 6b -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>📝 Exercice 6b — Construire et interpréter un tableau de bord</h4>
+            <button class="correction-toggle btn btn-sm">📖 Voir la correction</button>
+          </div>
+          <div class="exercise-body">
+            <p><strong>Situation :</strong> La directrice de la boutique "StylePlus" souhaite piloter ses performances mensuelle. Elle dispose des données : CA mensuel (objectif 15 000 €), nombre de clients, taux de satisfaction (enquête), nombre de réclamations, panier moyen.</p>
+            <div class="exercise-question">
+              1. Proposez 4 KPI adaptés à StylePlus et précisez leur type (économique, commercial, qualité).<br>
+              2. Interprétez : CA = 12 500 €, taux satisfaction = 78 %, 8 réclamations, panier moyen = 42 €.
+            </div>
+            <div class="correction-content">
+              <div class="example-box">
+                <div class="example-title">✅ Correction</div>
+                <p><strong>1. KPI proposés :</strong></p>
+                <p>— <em>CA mensuel</em> (économique) : mesure le chiffre d'affaires réalisé vs objectif</p>
+                <p>— <em>Taux d'atteinte de l'objectif</em> (économique) : CA / objectif × 100</p>
+                <p>— <em>Taux de satisfaction client</em> (qualité) : % de clients satisfaits ou très satisfaits</p>
+                <p>— <em>Panier moyen</em> (commercial) : CA / nombre de clients</p>
+                <p style="margin-top:.75rem;"><strong>2. Interprétation :</strong></p>
+                <p>— CA 12 500 € pour un objectif de 15 000 € → taux d'atteinte = 83,3 % : objectif non atteint, écart de 2 500 €</p>
+                <p>— Satisfaction 78 % : acceptable mais perfectible (viser > 85 %)</p>
+                <p>— 8 réclamations : à surveiller, identifier les causes (qualité produit ? délais ?)</p>
+                <p>— Panier moyen 42 € : levier possible → encourager les ventes complémentaires</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 6</h3>
+          <div class="quiz-question">
+            <p>La fonction Excel =SI(B2&gt;1000;"OK";"KO") affiche "OK" si :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Si B2 est inférieur à 1000, la fonction retourne 'KO'.">
+                <span class="quiz-option-letter">A</span> B2 est inférieur à 1 000
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! La condition B2>1000 est vraie quand B2 est strictement supérieur à 1 000, donc la fonction retourne 'OK'.">
+                <span class="quiz-option-letter">B</span> B2 est strictement supérieur à 1 000
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Si B2 vaut exactement 1000, la condition B2>1000 est fausse, donc la fonction retourne 'KO'.">
+                <span class="quiz-option-letter">C</span> B2 est égal à 1 000
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="La fonction SI ne dépend pas des valeurs d'autres colonnes ici.">
+                <span class="quiz-option-letter">D</span> La colonne A est vide
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 7 — L'organisation et la performance
+      ══════════════════════════════════════════════════ -->
+      <section id="ch7" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">7</div>
+          <h2>L'organisation et la performance</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch7" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch7" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Performance globale</div>
+          <p>Capacité d'une organisation à atteindre ses objectifs de manière <strong>durable</strong> en conciliant trois dimensions : <strong>économique</strong> (efficacité financière), <strong>sociale</strong> (bien-être des salariés) et <strong>environnementale</strong> (impact écologique). On parle aussi de <strong>triple bottom line</strong>.</p>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Indicateurs de performance selon les dimensions</h3>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-category">💰 Économique</div>
+            <ul class="kpi-list">
+              <li>Chiffre d'affaires (CA)</li>
+              <li>Résultat net, marge</li>
+              <li>Part de marché</li>
+              <li>Taux de croissance du CA</li>
+              <li>ROI (retour sur investissement)</li>
+            </ul>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-category">👥 Sociale</div>
+            <ul class="kpi-list">
+              <li>Taux de satisfaction salariés</li>
+              <li>Taux de turnover (rotation)</li>
+              <li>Taux d'absentéisme</li>
+              <li>Nombre d'accidents du travail</li>
+              <li>Heures de formation / salarié</li>
+            </ul>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-category">🌿 Environnementale</div>
+            <ul class="kpi-list">
+              <li>Bilan carbone (CO₂ émis)</li>
+              <li>Consommation d'énergie</li>
+              <li>Taux de déchets recyclés</li>
+              <li>Part d'énergies renouvelables</li>
+              <li>Empreinte eau</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="def-box" style="margin-top:1rem;">
+          <div class="def-title">📖 RSE — Responsabilité Sociétale des Entreprises</div>
+          <p>Démarche volontaire par laquelle une entreprise intègre des <strong>préoccupations sociales et environnementales</strong> dans ses activités. Le <strong>reporting extra-financier</strong> (DPEF pour les grandes entreprises) formalise ces engagements et résultats.</p>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 7</h3>
+          <div class="quiz-question">
+            <p>Le "taux de turnover" est un indicateur de performance :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Les indicateurs économiques mesurent la performance financière (CA, résultat, marges...).">
+                <span class="quiz-option-letter">A</span> Économique
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Le taux de turnover (rotation du personnel) est un indicateur social qui mesure le renouvellement des effectifs dans l'entreprise.">
+                <span class="quiz-option-letter">B</span> Sociale
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Les indicateurs environnementaux mesurent l'impact écologique (CO₂, énergie, déchets...).">
+                <span class="quiz-option-letter">C</span> Environnementale
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Le turnover n'est pas un indicateur commercial lié aux ventes.">
+                <span class="quiz-option-letter">D</span> Commerciale
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 8 — Le numérique et la transformation des organisations
+      ══════════════════════════════════════════════════ -->
+      <section id="ch8" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">8</div>
+          <h2>Le numérique et la transformation des organisations</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch8" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch8" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Transformation numérique</div>
+          <p>Changement profond des <strong>modèles d'affaires, des processus et des pratiques</strong> d'une organisation grâce à l'intégration du numérique. Va au-delà de la simple informatisation : remet en cause les façons de travailler et de créer de la valeur.</p>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Nouvelles formes d'organisation</h3>
+        <div class="key-points">
+          <div class="key-points-title">🚀 Transformations en cours</div>
+          <ul>
+            <li><strong>E-commerce</strong> — vente en ligne, suppression d'intermédiaires, ouverture 24h/24</li>
+            <li><strong>Marketplace</strong> — plateforme mettant en relation acheteurs et vendeurs (Amazon, Leboncoin, Airbnb)</li>
+            <li><strong>Économie des plateformes</strong> — modèle où la plateforme crée de la valeur en connectant des utilisateurs</li>
+            <li><strong>Travail à distance (télétravail)</strong> — flexibilité, besoin d'outils collaboratifs, nouveaux défis managériaux</li>
+            <li><strong>Organisations agiles</strong> — structures plates, équipes autonomes, itération rapide</li>
+          </ul>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Technologies émergentes</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Technologie</th><th>Description</th><th>Impact pour les organisations</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>IA générative</strong></td>
+                <td>IA créant du texte, des images, du code (ChatGPT, Copilot, Gemini)</td>
+                <td>Productivité, aide à la décision, nouveaux métiers</td>
+              </tr>
+              <tr>
+                <td><strong>Big Data</strong></td>
+                <td>Analyse de volumes massifs de données</td>
+                <td>Personnalisation, prédiction, marketing ciblé</td>
+              </tr>
+              <tr>
+                <td><strong>Cloud computing</strong></td>
+                <td>Services informatiques à la demande via internet</td>
+                <td>Agilité, réduction des coûts, scalabilité</td>
+              </tr>
+              <tr>
+                <td><strong>IoT</strong></td>
+                <td>Objets connectés remontant des données</td>
+                <td>Suivi en temps réel, maintenance prédictive</td>
+              </tr>
+              <tr>
+                <td><strong>Blockchain</strong></td>
+                <td>Registre décentralisé et inaltérable</td>
+                <td>Traçabilité, sécurité des transactions</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="color:var(--gestion);margin:1.5rem 0 .75rem;">Enjeux éthiques du numérique</h3>
+        <div class="notice-box">
+          <div class="notice-title">⚠️ Questions éthiques à maîtriser</div>
+          <p><strong>Biais algorithmiques</strong> — les IA peuvent reproduire ou amplifier des discriminations (genre, origine) présentes dans leurs données d'entraînement.</p>
+          <p style="margin-top:.5rem;"><strong>Emploi et automatisation</strong> — certains métiers disparaissent (tâches répétitives), de nouveaux émergent (data scientist, prompt engineer). Enjeu de reconversion.</p>
+          <p style="margin-top:.5rem;"><strong>Vie privée</strong> — collecte massive de données personnelles, surveillance, ciblage publicitaire intrusif. Encadrée par le RGPD.</p>
+          <p style="margin-top:.5rem;"><strong>Fracture numérique</strong> — inégalités d'accès aux outils et compétences numériques entre individus, territoires, pays.</p>
+        </div>
+
+        <!-- Exercice BAC -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>📝 Exercice BAC — "En quoi le numérique transforme-t-il cette organisation ?"</h4>
+            <span class="badge badge-gestion">Type BAC</span>
+            <button class="correction-toggle btn btn-sm">📖 Voir la correction</button>
+          </div>
+          <div class="exercise-body">
+            <p><strong>Cas :</strong> "LibrairieViva" est une librairie indépendante de 12 salariés. Jusqu'en 2023, elle ne vendait qu'en boutique. Depuis, elle a lancé un site e-commerce, utilise un ERP pour gérer ses stocks en temps réel, a mis en place un CRM pour fidéliser ses clients et communique via Instagram et une newsletter. Elle réfléchit à utiliser une IA pour recommander des livres personnalisés.</p>
+            <div class="exercise-question">
+              En vous appuyant sur le cas de LibrairieViva, montrez comment le numérique transforme son organisation (activités, processus, relation client, enjeux).
+            </div>
+            <div class="correction-content">
+              <div class="example-box">
+                <div class="example-title">✅ Correction type BAC</div>
+                <p><strong>1. Transformation des activités :</strong></p>
+                <p>— Le lancement du site e-commerce crée un nouveau canal de vente, complémentaire à la boutique physique : LibrairieViva n'est plus limitée à sa zone géographique</p>
+                <p>— L'ERP automatise la gestion des stocks et supprime les tâches manuelles → gain de productivité et réduction des erreurs</p>
+
+                <p style="margin-top:.75rem;"><strong>2. Transformation des processus :</strong></p>
+                <p>— Le processus de commande est partiellement automatisé (commande en ligne, mise à jour des stocks automatique)</p>
+                <p>— Le processus de communication passe de l'affichage local à une communication numérique multicanal (Instagram, newsletter) touchant un plus large public</p>
+
+                <p style="margin-top:.75rem;"><strong>3. Transformation de la relation client :</strong></p>
+                <p>— Le CRM centralise les préférences et l'historique d'achat des clients → relation personnalisée et fidélisation renforcée</p>
+                <p>— L'IA de recommandation (si déployée) permettrait une personnalisation encore plus poussée, augmentant la satisfaction et le panier moyen</p>
+
+                <p style="margin-top:.75rem;"><strong>4. Enjeux à anticiper :</strong></p>
+                <p>— Formation des salariés aux nouveaux outils (conduite du changement)</p>
+                <p>— Protection des données clients (RGPD) pour la newsletter et le CRM</p>
+                <p>— Biais possibles de l'IA de recommandation (recommande toujours les mêmes genres)</p>
+                <p>— Risque de dépendance aux plateformes numériques</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 8</h3>
+          <div class="quiz-question">
+            <p>Une "marketplace" est :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Un ERP est un progiciel de gestion intégré, pas une plateforme d'échanges commerciaux.">
+                <span class="quiz-option-letter">A</span> Un progiciel de gestion intégré (ERP)
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Un CRM gère la relation client, pas les échanges entre vendeurs et acheteurs.">
+                <span class="quiz-option-letter">B</span> Un outil de gestion de la relation client
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Une marketplace est une plateforme numérique qui met en relation des vendeurs et des acheteurs, comme Amazon, Etsy ou Leboncoin.">
+                <span class="quiz-option-letter">C</span> Une plateforme mettant en relation vendeurs et acheteurs
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Un réseau social professionnel comme LinkedIn sert au networking, pas aux transactions commerciales.">
+                <span class="quiz-option-letter">D</span> Un réseau social professionnel
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div><!-- /.page-layout -->
+</div><!-- /.container -->
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-brand">🔢 Sciences de Gestion et Numérique</div>
+      <div class="footer-desc">BAC STMG 2026 · 1ère STMG · Programme officiel Éducation Nationale</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Accueil</a>
+      <a href="sig.html">SIG (Terminale)</a>
+      <a href="management.html">Management</a>
+      <a href="economie.html">Économie</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>BacSTMG 2026 — Révision complète</span>
+    <span>Bon courage ! 💪</span>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+  // Override progress label for this page
+  function updateOverallProgress() {
+    const total = document.querySelectorAll('.ch-done').length;
+    const done  = document.querySelectorAll('.ch-done:checked').length;
+    const pct   = total ? Math.round((done / total) * 100) : 0;
+    const fill  = document.querySelector('.overall-progress-fill');
+    const lbl   = document.getElementById('prog-label');
+    if (fill) fill.style.width = pct + '%';
+    if (lbl)  lbl.textContent  = `${done}/${total} chapitres vus (${pct}%)`;
+  }
+</script>
+</body>
+</html>

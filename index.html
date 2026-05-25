@@ -1,108 +1,713 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>STMG Elite 2026 — Plateforme Ultra</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Révise ton BAC STMG 2026 avec des fiches complètes, exercices corrigés, quiz interactifs pour toutes les matières : Économie, Droit, Management, SGN, Mercatique, RHC, Gestion & Finance, SIG, Maths.">
+  <title>BAC STMG 2026 — Révision complète | Fiches, Exercices, Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="hero">
-    <div class="container">
-      <p class="badge">Bac STMG 2026 • Mercatique + Gestion/Finance • Niveau Elite</p>
-      <h1>STMG Elite 2026</h1>
-      <p>Plateforme ultra-poussée : parcours personnalisé, examens blancs, analytics, annales, quiz adaptatif, fiches et calculs complets.</p>
-      <div class="hero-actions">
-        <a class="btn" href="#plan">Commencer</a>
-        <a class="btn ghost" href="#exam">Mode Examen</a>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        🎓 BAC STMG 2026
+      </a>
+      <div class="navbar-links">
+        <a href="economie.html"        class="nav-eco">📊 Économie</a>
+        <a href="droit.html"           class="nav-droit">⚖️ Droit</a>
+        <a href="management.html"      class="nav-mgmt">🏢 Management</a>
+        <a href="sciences-gestion.html"class="nav-sg">💻 SGN</a>
+        <a href="mercatique.html"      class="nav-merca">📣 Mercatique</a>
+        <a href="rhc.html"             class="nav-rhc">👥 RHC</a>
+        <a href="gestion-finance.html" class="nav-gf">💰 G&F</a>
+        <a href="sig.html"             class="nav-sig">🖥️ SIG</a>
+        <a href="maths.html"           class="nav-maths">🔢 Maths</a>
+        <a href="grand-oral.html"      class="nav-go">🎤 Grand Oral</a>
+        <a href="annales.html"         class="badge badge-neutral" style="border-radius:8px;">📂 Annales</a>
       </div>
     </div>
-  </header>
+  </div>
+</nav>
 
-  <main class="container">
-    <section class="card">
-      <h2>Vue globale</h2>
-      <div class="kpis">
-        <div class="kpi"><span id="kpiLevel">Niveau 0</span><small>Niveau actuel</small></div>
-        <div class="kpi"><span id="kpiProgress">0%</span><small>Progression globale</small></div>
-        <div class="kpi"><span id="kpiWeak">-</span><small>Matière faible</small></div>
-        <div class="kpi"><span id="kpiStrong">-</span><small>Matière forte</small></div>
-        <div class="kpi"><span id="kpiStreak">0</span><small>Streak (jours)</small></div>
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="hero-badge">
+      ✅ Programme officiel 2026 · Hachette &amp; Foucher
+    </div>
+    <h1>Révise ton BAC STMG<br>et vise le <span>20/20</span></h1>
+    <p class="hero-desc">
+      Fiches de révision complètes, exercices corrigés, quiz interactifs et annales
+      pour toutes les matières du BAC STMG — organisés par chapitre, conformes au programme officiel.
+    </p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-value">10</span>
+        <span class="stat-label">Matières</span>
       </div>
-      <canvas id="progressChart" width="1000" height="220"></canvas>
-    </section>
-
-    <section class="card" id="plan">
-      <h2>Plan adaptatif intelligent</h2>
-      <p>Le plan quotidien se génère automatiquement selon tes scores et tes tâches non faites.</p>
-      <button id="generatePlan" class="btn">Générer mon plan du jour</button>
-      <ul id="adaptivePlan" class="list"></ul>
-    </section>
-
-    <section class="grid2">
-      <section class="card">
-        <h2>Banque d'annales + correction active</h2>
-        <div class="row">
-          <input id="annaleInput" placeholder="Ex: G&F Métropole 2023" />
-          <button id="annaleAdd" class="btn">Ajouter</button>
-        </div>
-        <ul id="annales" class="list"></ul>
-      </section>
-
-      <section class="card">
-        <h2>Flashcards mémorisation</h2>
-        <p id="flashQ" class="flash">Question</p>
-        <p id="flashA" class="muted hidden">Réponse</p>
-        <div class="row">
-          <button id="showAnswer" class="btn">Afficher réponse</button>
-          <button id="know" class="btn">Je sais</button>
-          <button id="dontKnow" class="btn danger">Je ne sais pas</button>
-        </div>
-      </section>
-    </section>
-
-    <section class="card">
-      <h2>Calculateur complet Gestion & Finance</h2>
-      <div class="form-grid">
-        <label>CA<input id="ca" type="number"></label>
-        <label>CV<input id="cv" type="number"></label>
-        <label>CF<input id="cf" type="number"></label>
-        <label>Capitaux propres<input id="cp" type="number"></label>
-        <label>Dettes<input id="dettes" type="number"></label>
-        <label>Actif<input id="actif" type="number"></label>
+      <div class="hero-stat">
+        <span class="stat-value">60+</span>
+        <span class="stat-label">Chapitres</span>
       </div>
-      <button id="calcBtn" class="btn">Calculer tous les indicateurs</button>
-      <div id="calcOut" class="result"></div>
-    </section>
+      <div class="hero-stat">
+        <span class="stat-value">150+</span>
+        <span class="stat-label">Exercices</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-value">300+</span>
+        <span class="stat-label">Définitions</span>
+      </div>
+    </div>
 
-    <section class="grid2">
-      <section class="card">
-        <h2>Quiz adaptatif par matière</h2>
-        <div class="row">
-          <select id="quizSubject"></select>
-          <button id="nextQ" class="btn ghost">Changer question</button>
+    <div class="hero-cta">
+      <a href="#matieres" class="btn btn-primary">🚀 Commencer à réviser</a>
+      <a href="annales.html" class="btn btn-secondary">📂 Voir les annales</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     STRUCTURE DU BAC STMG 2026
+══════════════════════════════════════════════════════════ -->
+<section class="section" id="structure">
+  <div class="container">
+    <h2 class="section-title">🏫 Structure du BAC STMG 2026</h2>
+    <p class="section-subtitle">Répartition des épreuves et coefficients — session juin 2026</p>
+
+    <div class="epreuves-grid">
+      <!-- Épreuves terminales -->
+      <div class="epreuves-col">
+        <div class="epreuves-col-header">
+          <h3>📝 Épreuves terminales</h3>
+          <p class="text-merca">60 % de la note finale</p>
         </div>
-        <p id="qq"></p>
-        <div id="qa" class="answers"></div>
-        <p id="qf" class="muted"></p>
-      </section>
-
-      <section class="card" id="exam">
-        <h2>Mode Examen Blanc</h2>
-        <p>Timer 2h + score final + bilan erreurs.</p>
-        <div class="row">
-          <button id="startExam" class="btn">Lancer examen blanc</button>
-          <button id="stopExam" class="btn danger">Stop</button>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">⚖️ Droit &amp; Économie</div>
+            <div style="font-size:.78rem;color:var(--text2);">Épreuve écrite 4h</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 16</span>
         </div>
-        <h3 id="examTimer">02:00:00</h3>
-        <label>Score obtenu /20 <input id="examScore" type="number" min="0" max="20"></label>
-        <label>Erreurs principales <textarea id="examErrors" rows="3" placeholder="Méthode, notion, calcul..."></textarea></label>
-        <button id="saveExam" class="btn">Sauvegarder bilan</button>
-        <ul id="examHistory" class="list"></ul>
-      </section>
-    </section>
-  </main>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">🏢 Management &amp; SGN / Spécialité</div>
+            <div style="font-size:.78rem;color:var(--text2);">Épreuve écrite 4h</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 16</span>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">🎤 Grand Oral</div>
+            <div style="font-size:.78rem;color:var(--text2);">Oral 20 min préparation + 20 min passage</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 12</span>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">✍️ Français — Écrit</div>
+            <div style="font-size:.78rem;color:var(--text2);">Épreuve écrite 4h (1ère)</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 5</span>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">🗣️ Français — Oral</div>
+            <div style="font-size:.78rem;color:var(--text2);">Oral EAF (1ère)</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 5</span>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">🧠 Philosophie</div>
+            <div style="font-size:.78rem;color:var(--text2);">Épreuve écrite 4h</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 4</span>
+        </div>
+      </div>
 
-  <script src="script.js"></script>
+      <!-- Contrôle continu -->
+      <div class="epreuves-col">
+        <div class="epreuves-col-header">
+          <h3>📋 Contrôle continu</h3>
+          <p class="text-mgmt">40 % de la note finale</p>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">📚 Spécialité abandonnée (1ère)</div>
+            <div style="font-size:.78rem;color:var(--text2);">Épreuve de 1ère</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 8</span>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">🔢 Mathématiques STMG</div>
+            <div style="font-size:.78rem;color:var(--text2);">Épreuve écrite 3h</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 6</span>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">🌍 Histoire-Géographie</div>
+            <div style="font-size:.78rem;color:var(--text2);">Contrôle continu</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 6</span>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">🇬🇧 LVA (Langue vivante A)</div>
+            <div style="font-size:.78rem;color:var(--text2);">Contrôle continu</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 6</span>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">🌐 LVB (Langue vivante B)</div>
+            <div style="font-size:.78rem;color:var(--text2);">Contrôle continu</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 6</span>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">🏃 EPS</div>
+            <div style="font-size:.78rem;color:var(--text2);">Contrôle continu</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 6</span>
+        </div>
+        <div class="epreuve-item">
+          <div>
+            <div class="epreuve-name">⚖️ EMC (Enseignement Moral et Civique)</div>
+            <div style="font-size:.78rem;color:var(--text2);">Contrôle continu</div>
+          </div>
+          <span class="epreuve-coeff">coeff. 2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendrier -->
+    <h3 class="mt-4 mb-2" style="color:var(--text);">📅 Calendrier des épreuves — Juin 2026</h3>
+    <div class="calendar-grid">
+      <div class="calendar-item" data-subject="droit">
+        <div class="calendar-date">Mercredi 11 juin</div>
+        <div class="calendar-event">Français écrit</div>
+        <div class="calendar-detail">Épreuve 1ère · 4h</div>
+      </div>
+      <div class="calendar-item" data-subject="gestion">
+        <div class="calendar-date">Dimanche 15 juin</div>
+        <div class="calendar-event">Philosophie</div>
+        <div class="calendar-detail">Terminale · 4h</div>
+      </div>
+      <div class="calendar-item" data-subject="eco">
+        <div class="calendar-date">16 – 18 juin</div>
+        <div class="calendar-event">Épreuves de spécialités</div>
+        <div class="calendar-detail">Droit-Éco · Mgmt-SGN</div>
+      </div>
+      <div class="calendar-item" data-subject="go">
+        <div class="calendar-date">22 juin – 1er juil.</div>
+        <div class="calendar-event">Grand Oral</div>
+        <div class="calendar-detail">Convocation individuelle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     TRONC COMMUN TECHNOLOGIQUE
+══════════════════════════════════════════════════════════ -->
+<section class="section" id="matieres">
+  <div class="container">
+    <h2 class="section-title">📚 Tronc commun technologique</h2>
+    <p class="section-subtitle">Les 4 matières fondamentales du BAC STMG — présentes dans toutes les spécialités</p>
+
+    <div class="subjects-grid">
+
+      <!-- Économie -->
+      <a href="economie.html" class="subject-card" data-subject="eco">
+        <div class="subject-card-top"></div>
+        <div class="subject-card-body">
+          <div class="subject-card-icon">📊</div>
+          <div class="subject-card-name">Économie</div>
+          <p class="subject-card-desc">
+            Marchés, entreprises, mondialisation, régulations, croissance économique et politiques macroéconomiques.
+          </p>
+          <div class="subject-card-meta">
+            <span class="badge badge-eco">coeff. 16 (avec Droit)</span>
+            <span class="badge badge-neutral">Terminale</span>
+          </div>
+        </div>
+        <div class="subject-card-footer">
+          <span>15 chapitres · 40 fiches</span>
+          <span style="color:var(--eco);">Réviser →</span>
+        </div>
+      </a>
+
+      <!-- Droit -->
+      <a href="droit.html" class="subject-card" data-subject="droit">
+        <div class="subject-card-top"></div>
+        <div class="subject-card-body">
+          <div class="subject-card-icon">⚖️</div>
+          <div class="subject-card-name">Droit</div>
+          <p class="subject-card-desc">
+            Sources du droit, contrats, responsabilité, droit du travail, droit des sociétés et protection juridique.
+          </p>
+          <div class="subject-card-meta">
+            <span class="badge badge-droit">coeff. 16 (avec Éco)</span>
+            <span class="badge badge-neutral">Terminale</span>
+          </div>
+        </div>
+        <div class="subject-card-footer">
+          <span>14 chapitres · 35 fiches</span>
+          <span style="color:var(--droit);">Réviser →</span>
+        </div>
+      </a>
+
+      <!-- Management -->
+      <a href="management.html" class="subject-card" data-subject="mgmt">
+        <div class="subject-card-top"></div>
+        <div class="subject-card-body">
+          <div class="subject-card-icon">🏢</div>
+          <div class="subject-card-name">Management</div>
+          <p class="subject-card-desc">
+            Stratégie, organisation, décision, ressources humaines, leadership et performance de l'entreprise.
+          </p>
+          <div class="subject-card-meta">
+            <span class="badge badge-mgmt">coeff. 16 (avec SGN)</span>
+            <span class="badge badge-neutral">Terminale</span>
+          </div>
+        </div>
+        <div class="subject-card-footer">
+          <span>16 chapitres · 42 fiches</span>
+          <span style="color:var(--mgmt);">Réviser →</span>
+        </div>
+      </a>
+
+      <!-- Sciences de Gestion & Numérique -->
+      <a href="sciences-gestion.html" class="subject-card" data-subject="gestion">
+        <div class="subject-card-top"></div>
+        <div class="subject-card-body">
+          <div class="subject-card-icon">💻</div>
+          <div class="subject-card-name">Sciences de Gestion &amp; Numérique</div>
+          <p class="subject-card-desc">
+            Systèmes d'information, transformation numérique, données, processus organisationnels et outils digitaux.
+          </p>
+          <div class="subject-card-meta">
+            <span class="badge badge-gestion">coeff. 16 (avec Mgmt)</span>
+            <span class="badge badge-neutral">Terminale</span>
+          </div>
+        </div>
+        <div class="subject-card-footer">
+          <span>12 chapitres · 30 fiches</span>
+          <span style="color:var(--gestion);">Réviser →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SPÉCIALITÉS TERMINALE
+══════════════════════════════════════════════════════════ -->
+<section class="section" id="specialites">
+  <div class="container">
+    <h2 class="section-title">🎯 Spécialités Terminale STMG</h2>
+    <p class="section-subtitle">Choisissez 1 spécialité parmi 4 — intégrée à l'épreuve Management &amp; SGN (coeff. 16)</p>
+
+    <div class="notice-box" style="margin-bottom:2rem;">
+      <div class="notice-title">⚠️ Important</div>
+      <p>La spécialité choisie en Terminale est évaluée dans l'épreuve "Management &amp; Sciences de Gestion" coefficient 16. Elle doit être choisie en accord avec votre lycée dès la 1ère.</p>
+    </div>
+
+    <div class="subjects-grid">
+
+      <!-- Mercatique -->
+      <a href="mercatique.html" class="subject-card" data-subject="merca">
+        <div class="subject-card-top"></div>
+        <div class="subject-card-body">
+          <div class="subject-card-icon">📣</div>
+          <div class="subject-card-name">Mercatique</div>
+          <p class="subject-card-desc">
+            Marketing stratégique, comportement du consommateur, mix marketing, communication et relation client.
+          </p>
+          <div class="subject-card-meta">
+            <span class="badge badge-merca">Spécialité</span>
+            <span class="badge badge-neutral">Terminale</span>
+          </div>
+        </div>
+        <div class="subject-card-footer">
+          <span>12 chapitres · 35 fiches</span>
+          <span style="color:var(--merca);">Réviser →</span>
+        </div>
+      </a>
+
+      <!-- RHC -->
+      <a href="rhc.html" class="subject-card" data-subject="rhc">
+        <div class="subject-card-top"></div>
+        <div class="subject-card-body">
+          <div class="subject-card-icon">👥</div>
+          <div class="subject-card-name">Ressources Humaines &amp; Communication</div>
+          <p class="subject-card-desc">
+            Recrutement, formation, motivation, communication interne/externe, gestion des conflits et dialogue social.
+          </p>
+          <div class="subject-card-meta">
+            <span class="badge badge-rhc">Spécialité</span>
+            <span class="badge badge-neutral">Terminale</span>
+          </div>
+        </div>
+        <div class="subject-card-footer">
+          <span>11 chapitres · 30 fiches</span>
+          <span style="color:var(--rhc);">Réviser →</span>
+        </div>
+      </a>
+
+      <!-- Gestion & Finance -->
+      <a href="gestion-finance.html" class="subject-card" data-subject="gf">
+        <div class="subject-card-top"></div>
+        <div class="subject-card-body">
+          <div class="subject-card-icon">💰</div>
+          <div class="subject-card-name">Gestion &amp; Finance</div>
+          <p class="subject-card-desc">
+            Analyse financière, bilan, compte de résultat, trésorerie, investissement et financement de l'entreprise.
+          </p>
+          <div class="subject-card-meta">
+            <span class="badge badge-gf">Spécialité</span>
+            <span class="badge badge-neutral">Terminale</span>
+          </div>
+        </div>
+        <div class="subject-card-footer">
+          <span>13 chapitres · 40 fiches</span>
+          <span style="color:var(--gf);">Réviser →</span>
+        </div>
+      </a>
+
+      <!-- SIG -->
+      <a href="sig.html" class="subject-card" data-subject="sig">
+        <div class="subject-card-top"></div>
+        <div class="subject-card-body">
+          <div class="subject-card-icon">🖥️</div>
+          <div class="subject-card-name">Systèmes d'Information de Gestion</div>
+          <p class="subject-card-desc">
+            Architecture SI, bases de données, sécurité informatique, ERP, transformation numérique et gouvernance.
+          </p>
+          <div class="subject-card-meta">
+            <span class="badge badge-sig">Spécialité</span>
+            <span class="badge badge-neutral">Terminale</span>
+          </div>
+        </div>
+        <div class="subject-card-footer">
+          <span>12 chapitres · 32 fiches</span>
+          <span style="color:var(--sig);">Réviser →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     MATIÈRES GÉNÉRALES
+══════════════════════════════════════════════════════════ -->
+<section class="section" id="generales">
+  <div class="container">
+    <h2 class="section-title">📐 Matières générales</h2>
+    <p class="section-subtitle">Mathématiques spécifiques STMG et Grand Oral</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;">
+
+      <!-- Maths -->
+      <a href="maths.html" class="subject-card" data-subject="maths">
+        <div class="subject-card-top"></div>
+        <div class="subject-card-body">
+          <div class="subject-card-icon">🔢</div>
+          <div class="subject-card-name">Mathématiques STMG</div>
+          <p class="subject-card-desc">
+            Statistiques, probabilités, suites, fonctions, matrices et mathématiques financières adaptées à la filière STMG.
+          </p>
+          <div class="subject-card-meta">
+            <span class="badge badge-maths">coeff. 6</span>
+            <span class="badge badge-neutral">Contrôle continu</span>
+          </div>
+        </div>
+        <div class="subject-card-footer">
+          <span>10 chapitres · 50 exercices</span>
+          <span style="color:var(--maths);">Réviser →</span>
+        </div>
+      </a>
+
+      <!-- Grand Oral -->
+      <a href="grand-oral.html" class="subject-card" data-subject="go">
+        <div class="subject-card-top"></div>
+        <div class="subject-card-body">
+          <div class="subject-card-icon">🎤</div>
+          <div class="subject-card-name">Grand Oral</div>
+          <p class="subject-card-desc">
+            Méthodologie, choix de la question, construction de l'argumentaire, entraînement à l'oral et exemples de passages.
+          </p>
+          <div class="subject-card-meta">
+            <span class="badge badge-go">coeff. 12</span>
+            <span class="badge badge-neutral">Épreuve terminale</span>
+          </div>
+        </div>
+        <div class="subject-card-footer">
+          <span>Guide complet + exemples</span>
+          <span style="color:var(--go);">Réviser →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     MÉTHODES POUR AVOIR 20/20
+══════════════════════════════════════════════════════════ -->
+<section class="section" id="methodes">
+  <div class="container">
+    <h2 class="section-title text-center">💡 Méthodes pour décrocher 20/20</h2>
+    <p class="section-subtitle text-center">6 stratégies éprouvées pour maximiser votre note au BAC</p>
+
+    <div class="tips-grid">
+
+      <div class="tip-card">
+        <div class="tip-icon">📖</div>
+        <h4>Maîtriser les définitions</h4>
+        <p>Les définitions rapportent des points faciles. Apprenez au minimum 5 définitions clés par chapitre en utilisant des fiches de révision. Rédigez-les avec précision : chaque mot compte.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">📝</div>
+        <h4>S'entraîner aux annales</h4>
+        <p>Réalisez au moins 3 annales complètes en conditions réelles. Chronométrez-vous, rédigez vos réponses entièrement, puis comparez avec le corrigé officiel pour identifier vos lacunes.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🗂️</div>
+        <h4>Organiser ses révisions</h4>
+        <p>Planifiez vos révisions sur 8 semaines avec un tableau de bord. Alternez les matières pour éviter la saturation, et révisez en priorité les thèmes les plus souvent demandés aux examens.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🔗</div>
+        <h4>Faire des liens entre matières</h4>
+        <p>Droit et Économie sont évalués ensemble, Management et SGN également. Construisez des ponts conceptuels entre ces disciplines pour enrichir vos réponses et montrer une vision transversale.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">💬</div>
+        <h4>Argumenter avec des exemples</h4>
+        <p>Illustrez chaque argument avec un exemple concret tiré de l'actualité ou d'un cas d'entreprise. Un exemple bien choisi peut transformer une réponse correcte en réponse excellente.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🎯</div>
+        <h4>Soigner la présentation</h4>
+        <p>Structure claire, introduction/conclusion, numérotation des questions, écriture lisible. Les correcteurs valorisent les copies bien organisées. Un plan apparent montre votre maîtrise du sujet.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     ANNALES RÉCENTES
+══════════════════════════════════════════════════════════ -->
+<section class="section" id="annales">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem;">
+      <div>
+        <h2 class="section-title">📂 Annales récentes</h2>
+        <p style="color:var(--text2);">Sujets officiels avec corrigés détaillés</p>
+      </div>
+      <a href="annales.html" class="btn btn-secondary btn-sm">Voir toutes les annales →</a>
+    </div>
+
+    <div class="annales-grid">
+
+      <a href="annales.html#eco-2025" class="annale-card" data-subject="eco">
+        <div class="annale-year text-eco">2025</div>
+        <div class="annale-subject">Droit &amp; Économie</div>
+        <p class="annale-meta">Sujet complet · Corrigé détaillé</p>
+        <span class="badge badge-eco">Économie</span>
+      </a>
+
+      <a href="annales.html#mgmt-2025" class="annale-card" data-subject="mgmt">
+        <div class="annale-year text-mgmt">2025</div>
+        <div class="annale-subject">Management &amp; SGN</div>
+        <p class="annale-meta">Sujet complet · Corrigé détaillé</p>
+        <span class="badge badge-mgmt">Management</span>
+      </a>
+
+      <a href="annales.html#merca-2025" class="annale-card" data-subject="merca">
+        <div class="annale-year text-merca">2025</div>
+        <div class="annale-subject">Mercatique</div>
+        <p class="annale-meta">Sujet complet · Corrigé détaillé</p>
+        <span class="badge badge-merca">Spécialité</span>
+      </a>
+
+      <a href="annales.html#gf-2025" class="annale-card" data-subject="gf">
+        <div class="annale-year text-gf">2025</div>
+        <div class="annale-subject">Gestion &amp; Finance</div>
+        <p class="annale-meta">Sujet complet · Corrigé détaillé</p>
+        <span class="badge badge-gf">Spécialité</span>
+      </a>
+
+      <a href="annales.html#eco-2024" class="annale-card" data-subject="eco">
+        <div class="annale-year text-eco">2024</div>
+        <div class="annale-subject">Droit &amp; Économie</div>
+        <p class="annale-meta">Sujet complet · Corrigé détaillé</p>
+        <span class="badge badge-eco">Économie</span>
+      </a>
+
+      <a href="annales.html#rhc-2024" class="annale-card" data-subject="rhc">
+        <div class="annale-year text-rhc">2024</div>
+        <div class="annale-subject">Ressources Humaines &amp; Com.</div>
+        <p class="annale-meta">Sujet complet · Corrigé détaillé</p>
+        <span class="badge badge-rhc">Spécialité</span>
+      </a>
+
+      <a href="annales.html#sig-2024" class="annale-card" data-subject="sig">
+        <div class="annale-year text-sig">2024</div>
+        <div class="annale-subject">SIG</div>
+        <p class="annale-meta">Sujet complet · Corrigé détaillé</p>
+        <span class="badge badge-sig">Spécialité</span>
+      </a>
+
+      <a href="annales.html#maths-2024" class="annale-card" data-subject="maths">
+        <div class="annale-year text-maths">2024</div>
+        <div class="annale-subject">Mathématiques STMG</div>
+        <p class="annale-meta">Sujet complet · Corrigé détaillé</p>
+        <span class="badge badge-maths">Maths</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">🎓 BAC STMG 2026</div>
+        <p class="footer-desc">
+          Site de révision gratuit, indépendant, conforme au programme officiel Hachette &amp; Foucher.<br>
+          Conçu pour les lycéens de Terminale STMG — session 2026.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="economie.html">Économie</a>
+        <a href="droit.html">Droit</a>
+        <a href="management.html">Management</a>
+        <a href="sciences-gestion.html">SGN</a>
+        <a href="mercatique.html">Mercatique</a>
+        <a href="rhc.html">RHC</a>
+        <a href="gestion-finance.html">G&amp;F</a>
+        <a href="sig.html">SIG</a>
+        <a href="maths.html">Maths</a>
+        <a href="grand-oral.html">Grand Oral</a>
+        <a href="annales.html">Annales</a>
+        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 BAC STMG Révision — Usage personnel uniquement. Tous droits réservés.</span>
+      <span style="display:flex;align-items:center;gap:.5rem;">
+        Fait avec ❤️ pour les lycéens STMG
+        <a href="https://github.com" target="_blank" rel="noopener" style="color:var(--text2);">
+          ⭐ GitHub
+        </a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════════ -->
+<script>
+  /* ── Correction toggle ─────────────────────────────────── */
+  document.querySelectorAll('.correction-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const content = btn.closest('.exercise').querySelector('.correction-content');
+      if (!content) return;
+      content.classList.toggle('open');
+      btn.textContent = content.classList.contains('open')
+        ? '🙈 Masquer la correction'
+        : '💡 Voir la correction';
+    });
+  });
+
+  /* ── Quiz interactif ───────────────────────────────────── */
+  document.querySelectorAll('.quiz-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const question = opt.closest('.quiz-question');
+      if (!question || question.dataset.answered) return;
+      question.dataset.answered = 'true';
+
+      question.querySelectorAll('.quiz-option').forEach(o => {
+        o.style.cursor = 'default';
+        o.style.pointerEvents = 'none';
+        if (o.dataset.correct === 'true') {
+          o.classList.add('correct');
+        }
+      });
+
+      if (opt.dataset.correct !== 'true') {
+        opt.classList.add('wrong');
+      }
+    });
+  });
+
+  /* ── Smooth scroll pour ancres internes ────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  /* ── Active nav link (section visible) ─────────────────── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.navbar-links a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.navbar-links a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
 </body>
 </html>

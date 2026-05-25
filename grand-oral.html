@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prépare ton Grand Oral BAC STMG 2026 : méthode, choix de la question, structure de la présentation, critères de notation, 20 exemples de questions, entraînement jury.">
+  <title>Grand Oral BAC STMG 2026 — Méthode complète</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root { --card-color: var(--go); }
+    .grand-oral .chapter-header { border-left-color: var(--go); }
+    .grand-oral .chapter-number { background: var(--go); }
+    .grand-oral .def-box { border-left-color: var(--go); }
+    .grand-oral .def-box .def-title { color: var(--go); }
+    .grand-oral .key-points li::before { color: var(--go); }
+    .grand-oral .exercise-question { border-left-color: var(--go); }
+    .grand-oral .toc-item-num { color: var(--go); }
+    .hero-go {
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(234,88,12,.28) 0%, transparent 70%),
+                  linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+    }
+    .hero-go h1 span {
+      background: linear-gradient(135deg, #fb923c, #ea580c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Minuterie visuelle */
+    .timeline {
+      display: flex;
+      gap: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin: 1.5rem 0;
+    }
+    .timeline-step {
+      flex: 1;
+      padding: 1rem .75rem;
+      text-align: center;
+      position: relative;
+    }
+    .timeline-step:not(:last-child)::after {
+      content: '▶';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text2);
+      font-size: .7rem;
+      z-index: 2;
+    }
+    .timeline-step-time {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--go);
+      display: block;
+      margin-bottom: .2rem;
+    }
+    .timeline-step-label {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--text);
+      display: block;
+      margin-bottom: .15rem;
+    }
+    .timeline-step-desc {
+      font-size: .72rem;
+      color: var(--text2);
+    }
+    .timeline-step.t1 { background: rgba(234,88,12,.10); }
+    .timeline-step.t2 { background: rgba(234,88,12,.18); }
+    .timeline-step.t3 { background: rgba(234,88,12,.26); }
+    /* Grille d'auto-évaluation */
+    .eval-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .eval-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+    .eval-card h4 {
+      color: var(--text);
+      font-size: .95rem;
+      margin-bottom: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .eval-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .4rem 0;
+      border-bottom: 1px solid rgba(51,65,85,.4);
+      font-size: .85rem;
+      color: var(--text2);
+      gap: .5rem;
+    }
+    .eval-row:last-child { border-bottom: none; }
+    .stars { color: var(--go); font-size: .85rem; }
+    /* Questions exemples */
+    .questions-list {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      margin: 1rem 0;
+    }
+    .question-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .75rem 1rem;
+      font-size: .9rem;
+      color: var(--text2);
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .question-item:hover {
+      border-color: var(--go);
+      background: rgba(234,88,12,.06);
+      color: var(--text);
+    }
+    .question-num {
+      min-width: 1.6rem; height: 1.6rem;
+      background: rgba(234,88,12,.18);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 800;
+      color: #fdba74;
+      flex-shrink: 0;
+    }
+    /* Matière badge */
+    .mat-badge {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .15rem .6rem; border-radius: 999px;
+      font-size: .72rem; font-weight: 700;
+      background: rgba(234,88,12,.15); color: #fdba74;
+      margin-bottom: .6rem;
+    }
+    /* Plan step */
+    .plan-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: .9rem 0;
+      border-bottom: 1px solid rgba(51,65,85,.4);
+    }
+    .plan-step:last-child { border-bottom: none; }
+    .plan-step-num {
+      min-width: 2rem; height: 2rem;
+      background: var(--go);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .82rem; font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .plan-step-content strong { color: var(--text); font-size: .95rem; display: block; margin-bottom: .2rem; }
+    .plan-step-content p { font-size: .88rem; color: var(--text2); margin: 0; }
+    .plan-step-time { font-size: .72rem; color: var(--go); font-weight: 700; margin-left: auto; white-space: nowrap; }
+    /* Piège jury */
+    .jury-q {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--go);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+    }
+    .jury-q-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #fdba74; margin-bottom: .4rem; }
+    .jury-q-text { font-size: .95rem; color: var(--text); font-weight: 600; margin-bottom: .5rem; }
+    .jury-q-tip { font-size: .88rem; color: var(--text2); }
+    .jury-q-tip strong { color: var(--text); }
+  </style>
+</head>
+<body class="grand-oral">
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">🎓 BAC STMG 2026</a>
+      <div class="navbar-links">
+        <a href="economie.html"         class="nav-eco">📊 Économie</a>
+        <a href="droit.html"            class="nav-droit">⚖️ Droit</a>
+        <a href="management.html"       class="nav-mgmt">🏢 Management</a>
+        <a href="sciences-gestion.html" class="nav-sg">💻 SGN</a>
+        <a href="mercatique.html"       class="nav-merca">📣 Mercatique</a>
+        <a href="rhc.html"              class="nav-rhc">👥 RHC</a>
+        <a href="gestion-finance.html"  class="nav-gf">💰 G&amp;F</a>
+        <a href="sig.html"              class="nav-sig">🖥️ SIG</a>
+        <a href="maths.html"            class="nav-maths">🔢 Maths</a>
+        <a href="grand-oral.html"       class="nav-go" style="background:rgba(234,88,12,.12);">🎤 Grand Oral</a>
+        <a href="annales.html"          class="badge badge-neutral" style="border-radius:8px;">📂 Annales</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section class="hero hero-go">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="hero-badge" style="background:rgba(234,88,12,.15);border-color:rgba(234,88,12,.35);color:#fdba74;">
+      🎤 Grand Oral STMG · Coefficient 12 · Épreuve terminale
+    </div>
+    <h1>Réussir le<br><span>Grand Oral</span></h1>
+    <p class="hero-desc">
+      Méthode complète : choisir sa question, structurer sa présentation en 5 min, convaincre le jury en 10 min et valoriser son projet d'orientation.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-value">20 min</span>
+        <span class="stat-label">Durée totale</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-value">coeff. 12</span>
+        <span class="stat-label">Au BAC</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-value">20</span>
+        <span class="stat-label">Exemples de questions</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-value">10</span>
+        <span class="stat-label">Questions pièges</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#format" class="btn" style="background:linear-gradient(135deg,#ea580c,#c2410c);color:#fff;">🚀 Découvrir la méthode</a>
+      <a href="#entrainement" class="btn btn-secondary">🎯 Entraînement jury</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CONTENU
+══════════════════════════════════════════════════════════ -->
+<main class="section">
+  <div class="container">
+
+    <!-- Table des matières -->
+    <div class="toc">
+      <div class="toc-title">📋 Sommaire</div>
+      <div class="toc-grid">
+        <a href="#format"        class="toc-item"><span class="toc-item-num">1</span> Format et déroulement</a>
+        <a href="#question"      class="toc-item"><span class="toc-item-num">2</span> Choisir sa question</a>
+        <a href="#structure"     class="toc-item"><span class="toc-item-num">3</span> Structure des 5 minutes</a>
+        <a href="#notation"      class="toc-item"><span class="toc-item-num">4</span> Critères de notation</a>
+        <a href="#exemples"      class="toc-item"><span class="toc-item-num">5</span> 20 exemples de questions</a>
+        <a href="#entrainement"  class="toc-item"><span class="toc-item-num">6</span> Questions pièges du jury</a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SECTION 1 — Format
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="format">
+      <div class="chapter-header">
+        <div class="chapter-number">1</div>
+        <div>
+          <h2>Format et déroulement du Grand Oral</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">Ce qui vous attend le jour J — 20 minutes au total</p>
+        </div>
+      </div>
+
+      <!-- Minuterie visuelle -->
+      <div class="timeline">
+        <div class="timeline-step t1">
+          <span class="timeline-step-time">5 min</span>
+          <span class="timeline-step-label">Présentation</span>
+          <span class="timeline-step-desc">Sans notes, debout</span>
+        </div>
+        <div class="timeline-step t2">
+          <span class="timeline-step-time">10 min</span>
+          <span class="timeline-step-label">Échange avec le jury</span>
+          <span class="timeline-step-desc">Questions sur la question choisie</span>
+        </div>
+        <div class="timeline-step t3">
+          <span class="timeline-step-time">5 min</span>
+          <span class="timeline-step-label">Projet d'orientation</span>
+          <span class="timeline-step-desc">Motivations, parcours post-BAC</span>
+        </div>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Déroulement officiel</div>
+        <p><strong>Avant l'épreuve :</strong> le candidat remet au jury une fiche de présentation mentionnant ses deux questions préparées. Le jury choisit l'une des deux questions.</p>
+        <p style="margin-top:.5rem;"><strong>Pendant l'épreuve :</strong></p>
+        <ul style="margin:.4rem 0 0 1.25rem;list-style:disc;color:var(--text2);">
+          <li><strong>5 min de présentation</strong> — le candidat présente sa réponse à la question choisie, sans notes, debout face au jury.</li>
+          <li><strong>10 min d'échange</strong> — le jury pose des questions pour approfondir, tester la réactivité et la maîtrise du sujet.</li>
+          <li><strong>5 min d'orientation</strong> — discussion libre sur le projet post-BAC, motivations, liens avec les enseignements.</li>
+        </ul>
+        <p style="margin-top:.5rem;"><strong>Jury :</strong> 2 examinateurs dont au moins un enseignant de la spécialité choisie.</p>
+      </div>
+
+      <div class="key-points">
+        <div class="key-points-title">Informations pratiques</div>
+        <ul>
+          <li>Coefficient 12 dans la voie technologique (STMG) — l'une des épreuves les plus importantes</li>
+          <li>Deux questions préparées pendant l'année de Terminale avec les professeurs</li>
+          <li>La question est en lien direct avec l'enseignement technologique (management, droit, économie, mercatique, etc.)</li>
+          <li>Le candidat peut s'appuyer sur un tableau blanc / paper board pendant l'oral si besoin (schémas, chiffres)</li>
+          <li>La tenue vestimentaire soignée est vivement conseillée — le non-verbal compte</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SECTION 2 — Choisir sa question
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="question">
+      <div class="chapter-header">
+        <div class="chapter-number">2</div>
+        <div>
+          <h2>Choisir sa question</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">Les critères d'une bonne question pour le Grand Oral STMG</p>
+        </div>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Qu'est-ce qu'une bonne question ?</div>
+        <p>Une bonne question pour le Grand Oral doit être :</p>
+        <ul style="margin:.5rem 0 0 1.25rem;list-style:disc;color:var(--text2);">
+          <li><strong>Ouverte</strong> — elle appelle une réflexion, pas une réponse factuelle courte</li>
+          <li><strong>Liée à votre spécialité</strong> — management, mercatique, droit, économie, G&amp;F, RHC, SIG</li>
+          <li><strong>Problématisable</strong> — elle pose un enjeu, une tension, une contradiction</li>
+          <li><strong>Maîtrisable</strong> — vous devez pouvoir en parler pendant 5 min avec aisance</li>
+          <li><strong>Actuelle</strong> — elle fait écho à des réalités contemporaines (RSE, numérique, mondialisation…)</li>
+        </ul>
+      </div>
+
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-icon">✅</div>
+          <h4>Formulation recommandée</h4>
+          <p>Commencez par « En quoi… », « Comment… », « Dans quelle mesure… », « Pourquoi… ». Évitez les questions fermées (réponse oui/non) ou trop factuelles.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-icon">🎯</div>
+          <h4>Lien avec votre vécu</h4>
+          <p>La meilleure question est celle qui vous passionne vraiment. Un exemple tiré d'un stage, d'une actualité ou d'une entreprise que vous connaissez renforce votre crédibilité.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-icon">📚</div>
+          <h4>Construire avec vos professeurs</h4>
+          <p>Les questions se travaillent en cours avec vos enseignants tout au long de la Terminale. N'attendez pas le dernier moment — la préparation dure plusieurs mois.</p>
+        </div>
+      </div>
+
+      <h3 style="color:var(--text);margin:2rem 0 1rem;">Exemples de bonnes questions STMG</h3>
+      <div class="questions-list">
+        <div class="question-item">
+          <div class="question-num">1</div>
+          <div><span class="mat-badge">🏢 Management</span><br>En quoi la RSE est-elle devenue une nécessité stratégique pour les entreprises ?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-num">2</div>
+          <div><span class="mat-badge">📣 Mercatique</span><br>Comment le marketing digital a-t-il transformé la relation client ?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-num">3</div>
+          <div><span class="mat-badge">⚖️ Droit</span><br>La responsabilité pénale de l'entreprise suffit-elle à prévenir les fraudes ?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-num">4</div>
+          <div><span class="mat-badge">💻 SGN</span><br>Quels sont les enjeux de la transformation numérique pour les PME ?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-num">5</div>
+          <div><span class="mat-badge">📊 Économie</span><br>Dans quelle mesure la mondialisation est-elle une chance pour les pays en développement ?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SECTION 3 — Structure de la présentation
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="structure">
+      <div class="chapter-header">
+        <div class="chapter-number">3</div>
+        <div>
+          <h2>Structure de la présentation — 5 minutes</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">Le plan en 6 étapes pour captiver le jury dès la première seconde</p>
+        </div>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Principe</div>
+        <p>5 minutes, c'est court. Chaque seconde compte. La structure ci-dessous est <strong>éprouvée</strong> pour maximiser l'impact et la clarté de votre présentation. Entraînez-vous jusqu'à maîtriser parfaitement le minutage.</p>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin:1.5rem 0;">
+        <div class="plan-step">
+          <div class="plan-step-num">1</div>
+          <div class="plan-step-content">
+            <strong>Accroche</strong>
+            <p>Commencez par un fait marquant, un chiffre percutant, une citation ou une question rhétorique. L'objectif : capturer l'attention immédiatement.</p>
+            <p style="margin-top:.25rem;font-style:italic;color:#fdba74;font-size:.82rem;">Exemple : « Selon une étude Deloitte 2024, 73 % des consommateurs préfèrent acheter chez une marque engagée. Mais la RSE est-elle vraiment sincère ? »</p>
+          </div>
+          <span class="plan-step-time">~30 sec</span>
+        </div>
+        <div class="plan-step">
+          <div class="plan-step-num">2</div>
+          <div class="plan-step-content">
+            <strong>Contexte et définitions</strong>
+            <p>Définissez les termes clés de la question. Montrez que vous avez compris les enjeux. Situez le sujet dans son contexte économique ou juridique actuel.</p>
+          </div>
+          <span class="plan-step-time">~30 sec</span>
+        </div>
+        <div class="plan-step">
+          <div class="plan-step-num">3</div>
+          <div class="plan-step-content">
+            <strong>Problématisation</strong>
+            <p>Expliquez pourquoi cette question se pose, quel est l'enjeu central, quelle tension ou contradiction elle met en évidence. C'est le cœur intellectuel de votre oral.</p>
+          </div>
+          <span class="plan-step-time">~30 sec</span>
+        </div>
+        <div class="plan-step">
+          <div class="plan-step-num">4</div>
+          <div class="plan-step-content">
+            <strong>Annonce du plan</strong>
+            <p>Annoncez clairement 2 ou 3 axes de réponse. Soyez bref et précis : « Je développerai d'abord… puis… »</p>
+          </div>
+          <span class="plan-step-time">~15 sec</span>
+        </div>
+        <div class="plan-step">
+          <div class="plan-step-num">5</div>
+          <div class="plan-step-content">
+            <strong>Développement</strong>
+            <p>2 à 3 arguments structurés, chacun illustré par un exemple concret (entreprise réelle, actualité, cas étudié en cours). Évitez les généralités vagues.</p>
+          </div>
+          <span class="plan-step-time">~2 min 30</span>
+        </div>
+        <div class="plan-step">
+          <div class="plan-step-num">6</div>
+          <div class="plan-step-content">
+            <strong>Conclusion et réponse</strong>
+            <p>Répondez explicitement à la question posée. Terminez par une ouverture (perspective, limite, question complémentaire) pour montrer la profondeur de votre réflexion.</p>
+          </div>
+          <span class="plan-step-time">~30 sec</span>
+        </div>
+      </div>
+
+      <div class="notice-box">
+        <div class="notice-title">⚠️ Erreurs fréquentes à éviter</div>
+        <p><strong>Lire ses notes</strong> — interdit, et très mal perçu. La présentation doit être mémorisée.<br>
+        <strong>Dépasser les 5 minutes</strong> — le jury peut vous interrompre. Chronométrez-vous.<br>
+        <strong>Réciter un plan scolaire rigide</strong> — montrez de la réflexion personnelle, pas une dissertation récitée.<br>
+        <strong>Ignorer le jury</strong> — regardez les examinateurs, cherchez le contact visuel.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SECTION 4 — Critères de notation
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="notation">
+      <div class="chapter-header">
+        <div class="chapter-number">4</div>
+        <div>
+          <h2>Critères de notation</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">Ce que le jury évalue — grille officielle et auto-évaluation</p>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Critère</th>
+              <th>Ce que le jury observe</th>
+              <th>Points max</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Qualité de la présentation orale</strong></td>
+              <td>Voix posée et audible, articulation, rythme, posture, contact visuel, absence de notes</td>
+              <td><span class="badge badge-go">6 pts</span></td>
+            </tr>
+            <tr>
+              <td><strong>Maîtrise du sujet</strong></td>
+              <td>Exactitude des connaissances, richesse des exemples, terminologie précise</td>
+              <td><span class="badge badge-go">6 pts</span></td>
+            </tr>
+            <tr>
+              <td><strong>Capacité à répondre aux questions</strong></td>
+              <td>Réactivité, honnêteté en cas de doute, capacité à rebondir, ouverture d'esprit</td>
+              <td><span class="badge badge-go">4 pts</span></td>
+            </tr>
+            <tr>
+              <td><strong>Qualité de l'argumentation</strong></td>
+              <td>Structure, cohérence logique, nuance, prise de position argumentée</td>
+              <td><span class="badge badge-go">4 pts</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="color:var(--text);margin:2rem 0 1rem;">Grille d'auto-évaluation</h3>
+      <div class="eval-grid">
+        <div class="eval-card">
+          <h4>🎙️ Présentation orale</h4>
+          <div class="eval-row"><span>Voix audible et posée</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Articulation claire</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Contact visuel avec le jury</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Posture assurée, sans notes</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Respect du temps imparti</span><span class="stars">⭐⭐⭐</span></div>
+        </div>
+        <div class="eval-card">
+          <h4>📚 Maîtrise du sujet</h4>
+          <div class="eval-row"><span>Définitions exactes et précises</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Exemples concrets et récents</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Vocabulaire technique approprié</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Connaissance du programme</span><span class="stars">⭐⭐⭐</span></div>
+        </div>
+        <div class="eval-card">
+          <h4>💬 Questions du jury</h4>
+          <div class="eval-row"><span>Écoute active de la question</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Réponse directe et structurée</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Honnêteté en cas de doute</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Capacité à nuancer</span><span class="stars">⭐⭐⭐</span></div>
+        </div>
+        <div class="eval-card">
+          <h4>🧭 Argumentation</h4>
+          <div class="eval-row"><span>Plan clair et annoncé</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Arguments cohérents</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Réponse explicite à la question</span><span class="stars">⭐⭐⭐</span></div>
+          <div class="eval-row"><span>Nuance et prise de recul</span><span class="stars">⭐⭐⭐</span></div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-title">Comment utiliser cette grille ?</div>
+        <p>Après chaque entraînement, notez-vous de 1 à 3 étoiles sur chaque critère. Identifiez vos 2 points les plus faibles et concentrez votre préparation dessus la semaine suivante.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SECTION 5 — 20 exemples de questions
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="exemples">
+      <div class="chapter-header">
+        <div class="chapter-number">5</div>
+        <div>
+          <h2>20 exemples de questions par matière</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">Banque de questions pour s'inspirer et construire sa propre question</p>
+        </div>
+      </div>
+
+      <!-- Management -->
+      <h3 style="color:var(--text);margin:1.5rem 0 .75rem;display:flex;align-items:center;gap:.5rem;">🏢 Management <span class="badge badge-mgmt">5 questions</span></h3>
+      <div class="questions-list">
+        <div class="question-item"><div class="question-num">1</div><div>En quoi la RSE est-elle devenue une nécessité stratégique pour les entreprises contemporaines ?</div></div>
+        <div class="question-item"><div class="question-num">2</div><div>Comment la transformation numérique redéfinit-elle les modes de management des équipes ?</div></div>
+        <div class="question-item"><div class="question-num">3</div><div>Dans quelle mesure la motivation des salariés influe-t-elle sur la performance de l'entreprise ?</div></div>
+        <div class="question-item"><div class="question-num">4</div><div>Comment une PME peut-elle construire un avantage concurrentiel durable face aux grandes entreprises ?</div></div>
+        <div class="question-item"><div class="question-num">5</div><div>En quoi la structure d'une organisation détermine-t-elle sa capacité d'adaptation aux changements ?</div></div>
+      </div>
+
+      <!-- Droit -->
+      <h3 style="color:var(--text);margin:1.5rem 0 .75rem;display:flex;align-items:center;gap:.5rem;">⚖️ Droit <span class="badge badge-droit">5 questions</span></h3>
+      <div class="questions-list">
+        <div class="question-item"><div class="question-num">6</div><div>En quoi le droit du travail protège-t-il efficacement le salarié dans un contexte d'ubérisation ?</div></div>
+        <div class="question-item"><div class="question-num">7</div><div>La protection du consommateur dans le commerce en ligne est-elle suffisante en France ?</div></div>
+        <div class="question-item"><div class="question-num">8</div><div>La responsabilité pénale de l'entreprise est-elle un outil suffisant pour prévenir les fraudes fiscales ?</div></div>
+        <div class="question-item"><div class="question-num">9</div><div>Comment le droit encadre-t-il les contrats conclus sur les plateformes numériques ?</div></div>
+        <div class="question-item"><div class="question-num">10</div><div>Quelles sont les spécificités et limites de la SARL comme forme juridique pour les PME ?</div></div>
+      </div>
+
+      <!-- Économie -->
+      <h3 style="color:var(--text);margin:1.5rem 0 .75rem;display:flex;align-items:center;gap:.5rem;">📊 Économie <span class="badge badge-eco">5 questions</span></h3>
+      <div class="questions-list">
+        <div class="question-item"><div class="question-num">11</div><div>Dans quelle mesure la mondialisation est-elle une opportunité pour les pays en développement ?</div></div>
+        <div class="question-item"><div class="question-num">12</div><div>Le développement durable est-il compatible avec la croissance économique ?</div></div>
+        <div class="question-item"><div class="question-num">13</div><div>Comment les crises financières remettent-elles en question le modèle libéral ?</div></div>
+        <div class="question-item"><div class="question-num">14</div><div>Quel rôle l'État doit-il jouer dans la régulation de l'économie de marché ?</div></div>
+        <div class="question-item"><div class="question-num">15</div><div>La monnaie numérique représente-t-elle une révolution ou une menace pour le système bancaire ?</div></div>
+      </div>
+
+      <!-- Spécialités -->
+      <h3 style="color:var(--text);margin:1.5rem 0 .75rem;display:flex;align-items:center;gap:.5rem;">🎯 Spécialités <span class="badge badge-go">5 questions</span></h3>
+      <div class="questions-list">
+        <div class="question-item">
+          <div class="question-num">16</div>
+          <div><span class="mat-badge">📣 Mercatique</span><br>En quoi l'influence marketing sur les réseaux sociaux redéfinit-elle les stratégies de communication des marques ?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-num">17</div>
+          <div><span class="mat-badge">💻 SIG</span><br>Comment les systèmes d'information contribuent-ils à la prise de décision stratégique dans les entreprises ?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-num">18</div>
+          <div><span class="mat-badge">👥 RHC</span><br>Dans quelle mesure la gestion des ressources humaines est-elle un levier de performance organisationnelle ?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-num">19</div>
+          <div><span class="mat-badge">💰 G&amp;F</span><br>Comment l'analyse financière permet-elle d'évaluer la santé et la pérennité d'une entreprise ?</div>
+        </div>
+        <div class="question-item">
+          <div class="question-num">20</div>
+          <div><span class="mat-badge">🏢 Management</span><br>En quoi la diversité au sein des équipes constitue-t-elle un avantage compétitif pour les entreprises ?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         SECTION 6 — Entraînement questions pièges
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="entrainement">
+      <div class="chapter-header">
+        <div class="chapter-number">6</div>
+        <div>
+          <h2>Questions pièges du jury — Entraînement</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">10 questions types posées par le jury + stratégies de réponse</p>
+        </div>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Pourquoi le jury pose-t-il des questions « difficiles » ?</div>
+        <p>Le jury cherche à évaluer votre <strong>capacité à penser sous pression</strong>, votre honnêteté intellectuelle, votre aptitude à nuancer et votre autonomie de réflexion. Ces questions ne sont pas des pièges mais des opportunités de briller.</p>
+      </div>
+
+      <div class="jury-q">
+        <div class="jury-q-label">Question piège n°1</div>
+        <div class="jury-q-text">« Votre réponse à la question était intéressante. Mais y a-t-il des arguments contre votre position ? »</div>
+        <div class="jury-q-tip"><strong>Stratégie :</strong> Ne vous défendez pas — <em>rebondissez</em>. Le jury teste votre capacité à nuancer. Répondez : « En effet, on peut objecter que… Toutefois, j'estime que… » Montrez que vous connaissez les limites de votre argumentation.</div>
+      </div>
+
+      <div class="jury-q">
+        <div class="jury-q-label">Question piège n°2</div>
+        <div class="jury-q-text">« Pouvez-vous me donner un exemple précis d'une entreprise réelle qui illustre ce que vous venez de dire ? »</div>
+        <div class="jury-q-tip"><strong>Stratégie :</strong> Préparez <em>toujours</em> 3 exemples concrets pour chaque argument (entreprise, chiffre, actualité). Si vous ne trouvez pas : « Je n'ai pas de référence précise en mémoire, mais je pourrais citer à titre d'illustration… » — ne jamais inventer.</div>
+      </div>
+
+      <div class="jury-q">
+        <div class="jury-q-label">Question piège n°3</div>
+        <div class="jury-q-text">« Vous avez utilisé le terme "performance". Qu'entendez-vous exactement par là ? »</div>
+        <div class="jury-q-tip"><strong>Stratégie :</strong> Le jury vérifie que vous maîtrisez le vocabulaire que vous employez. Définissez précisément : « Par performance j'entends la capacité d'une organisation à atteindre ses objectifs — qu'ils soient économiques, sociaux ou environnementaux. »</div>
+      </div>
+
+      <div class="jury-q">
+        <div class="jury-q-label">Question piège n°4</div>
+        <div class="jury-q-text">« En quoi ce sujet est-il en lien avec votre projet d'orientation ? »</div>
+        <div class="jury-q-tip"><strong>Stratégie :</strong> Anticipez cette question. Préparez un lien sincère entre votre question et votre projet (BTS, école de commerce, licence…). Même si le lien est indirect, montrez que vous avez réfléchi à votre avenir.</div>
+      </div>
+
+      <div class="jury-q">
+        <div class="jury-q-label">Question piège n°5</div>
+        <div class="jury-q-text">« Si vous deviez critiquer votre propre présentation, qu'auriez-vous fait différemment ? »</div>
+        <div class="jury-q-tip"><strong>Stratégie :</strong> Le jury apprécie la <em>lucidité</em>. Identifiez une vraie limite de votre exposé (un angle non traité, un exemple manquant) et expliquez comment vous l'auriez développé. N'inventez pas un défaut — soyez authentique.</div>
+      </div>
+
+      <div class="jury-q">
+        <div class="jury-q-label">Question piège n°6</div>
+        <div class="jury-q-text">« Est-ce que vous pensez vraiment que… [résumé provocateur de votre position] ? »</div>
+        <div class="jury-q-tip"><strong>Stratégie :</strong> Ne vous laissez pas déstabiliser par le ton. Reformulez calmement votre position avec nuance : « Ce que j'affirme plus précisément c'est que… dans certaines conditions, tandis que… » Maintenez votre point de vue si vous l'assumez.</div>
+      </div>
+
+      <div class="jury-q">
+        <div class="jury-q-label">Question piège n°7</div>
+        <div class="jury-q-text">« Votre plan était en deux parties. Auriez-vous pu traiter un troisième angle ? »</div>
+        <div class="jury-q-tip"><strong>Stratégie :</strong> Montrez votre capacité à élargir la réflexion. Proposez un troisième axe : les limites de votre analyse, une perspective internationale, une dimension historique… Cela prouve que votre réflexion n'est pas figée.</div>
+      </div>
+
+      <div class="jury-q">
+        <div class="jury-q-label">Question piège n°8</div>
+        <div class="jury-q-text">« Je ne connais pas bien ce domaine. Pouvez-vous me réexpliquer la notion X comme si j'étais un lycéen de seconde ? »</div>
+        <div class="jury-q-tip"><strong>Stratégie :</strong> C'est une chance ! Simplifiez sans vulgariser à l'excès. Utilisez une analogie du quotidien. Cela prouve que vous avez <em>vraiment</em> compris et pas seulement appris par cœur.</div>
+      </div>
+
+      <div class="jury-q">
+        <div class="jury-q-label">Question piège n°9</div>
+        <div class="jury-q-text">« Pourquoi avez-vous choisi cette question plutôt que votre deuxième question ? »</div>
+        <div class="jury-q-tip"><strong>Stratégie :</strong> Préparez cette réponse à l'avance. Exprimez un intérêt sincère pour le sujet, évoquez un événement déclencheur (cours, stage, actualité) et montrez que vous vous sentez plus à l'aise et plus passionné sur cette question.</div>
+      </div>
+
+      <div class="jury-q">
+        <div class="jury-q-label">Question piège n°10</div>
+        <div class="jury-q-text">« Avez-vous une question à nous poser ? » (fin de l'épreuve)</div>
+        <div class="jury-q-tip"><strong>Stratégie :</strong> <em>Ayez toujours une question préparée.</em> Évitez « non merci ». Posez une question sur l'actualité du domaine, votre orientation, ou demandez une perspective professionnelle : « Selon vous, quelle compétence est aujourd'hui la plus valorisée dans ce secteur ? »</div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">🎓 BAC STMG 2026</div>
+        <p class="footer-desc">
+          Guide complet du Grand Oral STMG — Méthode, questions et entraînement.<br>
+          Conforme au programme officiel · Session juin 2026.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="economie.html">Économie</a>
+        <a href="droit.html">Droit</a>
+        <a href="management.html">Management</a>
+        <a href="maths.html">Maths</a>
+        <a href="grand-oral.html" style="color:var(--go);">Grand Oral</a>
+        <a href="annales.html">Annales</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BAC STMG Révision — Usage personnel uniquement.</span>
+      <span>Fait avec ❤️ pour les lycéens STMG</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

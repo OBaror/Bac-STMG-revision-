@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Droit — BAC STMG 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Accent droit pour TOC et section h3 */
+    .toc a:hover { color: #f87171; }
+    .section h3 { color: #f87171; }
+
+    /* Méthode box */
+    .methode-box {
+      background: rgba(220,38,38,0.07);
+      border: 2px solid rgba(220,38,38,0.4);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+    }
+    .methode-box .methode-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #f87171;
+      margin-bottom: 1rem;
+    }
+    .methode-box ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding: 0;
+    }
+    .methode-box li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: var(--text2);
+      font-size: 0.95rem;
+    }
+    .methode-box li .step-badge {
+      min-width: 1.6rem;
+      height: 1.6rem;
+      background: rgba(220,38,38,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #f87171;
+      flex-shrink: 0;
+    }
+    .methode-box li strong { color: var(--text); }
+
+    /* Pyramid (Kelsen) */
+    .pyramid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin: 1rem 0;
+    }
+    .pyramid-level {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      padding: 0.55rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--text);
+    }
+    .pyramid-level.l1 { background: rgba(220,38,38,0.35); width: 180px; }
+    .pyramid-level.l2 { background: rgba(220,38,38,0.27); width: 240px; }
+    .pyramid-level.l3 { background: rgba(220,38,38,0.20); width: 300px; }
+    .pyramid-level.l4 { background: rgba(220,38,38,0.14); width: 360px; }
+    .pyramid-level.l5 { background: rgba(220,38,38,0.09); width: 420px; }
+    .pyramid-caption {
+      font-size: 0.78rem;
+      color: var(--text2);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    /* Theme separator */
+    .theme-sep {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 3rem 0 2rem;
+    }
+    .theme-sep .theme-label {
+      white-space: nowrap;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #f87171;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(220,38,38,0.35);
+      border-radius: 99px;
+      background: rgba(220,38,38,0.08);
+    }
+    .theme-sep .theme-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Niveau badge */
+    .niveau-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .niveau-premiere { background: rgba(37,99,235,0.2); color: #60a5fa; }
+    .niveau-terminale { background: rgba(220,38,38,0.2); color: #f87171; }
+
+    /* Progress chapter row */
+    .ch-done-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+    .ch-done-wrap label {
+      font-size: 0.8rem;
+      color: var(--text2);
+      cursor: pointer;
+    }
+    .ch-done-wrap input[type=checkbox] {
+      accent-color: #dc2626;
+      cursor: pointer;
+    }
+
+    /* Overall progress */
+    .overall-progress-bar {
+      height: 6px;
+      background: var(--bg3);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .overall-progress-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #dc2626, #f87171);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav>
+  <a href="index.html" class="nav-brand">🎓 <span>BAC STMG</span> 2026</a>
+  <ul class="nav-links">
+    <li><a href="economie.html" class="eco">Économie</a></li>
+    <li><a href="droit.html" class="droit active">Droit</a></li>
+    <li><a href="management.html" class="mgmt">Management</a></li>
+    <li><a href="gestion-marketing.html" class="gestion">Gestion &amp; Marketing</a></li>
+  </ul>
+</nav>
+
+<!-- ========== BREADCRUMB + PAGE HEADER ========== -->
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="index.html">Accueil</a> › <span style="color:var(--text)">Droit</span>
+  </div>
+  <h1>⚖️ <span style="background:linear-gradient(135deg,#dc2626,#f87171);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Droit</span> — BAC STMG 2026</h1>
+  <p>Règles juridiques, personnes, contrats, responsabilité civile, droit du travail, droit des sociétés… Tout le programme 1ère &amp; Terminale avec définitions, tableaux, cas pratiques corrigés et QCM.</p>
+  <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;">
+    <span class="badge badge-droit">15 Chapitres</span>
+    <span class="badge badge-gold">15 Exercices corrigés</span>
+    <span class="badge badge-gray">1ère &amp; Terminale</span>
+    <span class="badge badge-gray">Coeff. 4</span>
+  </div>
+
+  <!-- Progression globale -->
+  <div style="margin-top:1.5rem;">
+    <div style="font-size:0.8rem;font-weight:600;color:var(--text2);margin-bottom:0.35rem;">
+      Ma progression : <span class="overall-progress-label">0/15 chapitres vus (0%)</span>
+    </div>
+    <div class="overall-progress-bar">
+      <div class="overall-progress-fill"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== CONTENT WRAPPER ========== -->
+<div class="content-wrapper">
+
+  <!-- ===== TABLE OF CONTENTS ===== -->
+  <div class="toc">
+    <h3>📚 Sommaire — 15 chapitres</h3>
+    <ol>
+      <!-- 1ère -->
+      <li><a href="#ch1" data-num="01">Qu'est-ce que le droit ?</a></li>
+      <li><a href="#ch2" data-num="02">Les sources du droit</a></li>
+      <li><a href="#ch3" data-num="03">Les personnes juridiques</a></li>
+      <li><a href="#ch4" data-num="04">La preuve des droits</a></li>
+      <li><a href="#ch5" data-num="05">Formation du contrat</a></li>
+      <li><a href="#ch6" data-num="06">Exécution du contrat</a></li>
+      <li><a href="#ch7" data-num="07">Responsabilité délictuelle</a></li>
+      <li><a href="#ch8" data-num="08">Responsabilité contractuelle</a></li>
+      <!-- Terminale -->
+      <li><a href="#ch9" data-num="09">L'entreprise en société</a></li>
+      <li><a href="#ch10" data-num="10">Formes de sociétés</a></li>
+      <li><a href="#ch11" data-num="11">Le contrat de travail</a></li>
+      <li><a href="#ch12" data-num="12">Rupture du contrat de travail</a></li>
+      <li><a href="#ch13" data-num="13">Relations collectives</a></li>
+      <li><a href="#ch14" data-num="14">Protection du consommateur</a></li>
+      <li><a href="#ch15" data-num="15">Responsabilité pénale</a></li>
+    </ol>
+  </div>
+
+  <!-- ===== MÉTHODE BAC (encadrée) ===== -->
+  <div class="methode-box">
+    <div class="methode-title">⭐ MÉTHODE BAC — Cas pratique de droit (à connaître par cœur)</div>
+    <ol>
+      <li><span class="step-badge">1</span><div><strong>FAITS</strong> — Identifier et résumer les faits pertinents de la situation</div></li>
+      <li><span class="step-badge">2</span><div><strong>PROBLÈME JURIDIQUE</strong> — Formuler la question de droit (ex : "Peut-on obtenir la nullité du contrat ?")</div></li>
+      <li><span class="step-badge">3</span><div><strong>RÈGLE DE DROIT</strong> — Énoncer le texte applicable (article du Code civil, loi…)</div></li>
+      <li><span class="step-badge">4</span><div><strong>APPLICATION</strong> — Appliquer la règle aux faits de l'espèce</div></li>
+      <li><span class="step-badge">5</span><div><strong>CONCLUSION</strong> — Répondre clairement au problème juridique</div></li>
+    </ol>
+  </div>
+
+  <!-- ================================================================
+       PREMIÈRE — THÈME 1 : Le droit et les règles juridiques
+  ================================================================ -->
+  <div class="theme-sep">
+    <span class="theme-label">Première · Thème 1</span>
+    <div class="theme-line"></div>
+    <span style="font-size:0.78rem;color:var(--text2);white-space:nowrap;">Le droit et les règles juridiques</span>
+  </div>
+
+  <!-- CH 1 -->
+  <div class="chapter" id="ch1">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 01 <span class="niveau-badge niveau-premiere">Première</span></div>
+        <h2>Qu'est-ce que le droit ?</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch1">
+          <label for="done-ch1">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions essentielles</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Droit objectif</div>
+        <p>Ensemble des règles juridiques qui régissent la vie en société — un système de normes obligatoires s'imposant à tous.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Droit subjectif</div>
+        <p>Prérogatives (facultés d'agir) reconnues à une personne : droit de propriété, droit au travail, droit à l'image, liberté d'expression…</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — 4 CARACTÈRES</div>
+        <div class="def-term">La règle de droit</div>
+        <p><strong>Générale</strong> — s'applique à tous sans exception de personne.</p>
+        <p><strong>Obligatoire</strong> — son respect n'est pas facultatif.</p>
+        <p><strong>Coercitive</strong> — son non-respect est sanctionné par l'État (amende, peine d'emprisonnement…).</p>
+        <p><strong>Permanente</strong> — applicable depuis son entrée en vigueur jusqu'à son abrogation.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Droit public vs Droit privé</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Critère</th>
+              <th>Droit public</th>
+              <th>Droit privé</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Définition</strong></td>
+              <td>Régit les rapports entre l'État et les particuliers, et l'organisation de l'État</td>
+              <td>Régit les rapports entre personnes privées</td>
+            </tr>
+            <tr>
+              <td><strong>Branches</strong></td>
+              <td>Droit constitutionnel, droit administratif, droit fiscal, droit international public</td>
+              <td>Droit civil, droit commercial, droit du travail, droit de la famille</td>
+            </tr>
+            <tr>
+              <td><strong>Juridictions</strong></td>
+              <td>Tribunaux administratifs, Conseil d'État</td>
+              <td>Tribunaux judiciaires, Cour de cassation</td>
+            </tr>
+            <tr>
+              <td><strong>Exemple</strong></td>
+              <td>Contrat entre une mairie et une entreprise BTP</td>
+              <td>Contrat de vente entre deux particuliers</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="key-points">
+        <h4>Les grandes branches du droit</h4>
+        <ul>
+          <li><strong>Droit civil</strong> — personnes, famille, contrats, responsabilité, propriété</li>
+          <li><strong>Droit commercial</strong> — actes de commerce, commerçants, sociétés, fonds de commerce</li>
+          <li><strong>Droit pénal</strong> — infractions et sanctions (crimes, délits, contraventions)</li>
+          <li><strong>Droit administratif</strong> — organisation et action des pouvoirs publics</li>
+          <li><strong>Droit du travail</strong> — relations employeur/salarié, contrats de travail, conventions collectives</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exemple concret</h3>
+      <div class="example-box">
+        <div class="example-label">📌 EXEMPLE</div>
+        <p><strong>Le Code de la route</strong> est une règle de droit parfaite :</p>
+        <p>→ <strong>Générale</strong> : s'applique à tous les conducteurs.</p>
+        <p>→ <strong>Obligatoire</strong> : vous devez respecter le feu rouge même seul sur la route.</p>
+        <p>→ <strong>Coercitive</strong> : le non-respect est sanctionné (amende, retrait de points).</p>
+        <p>→ <strong>Permanente</strong> : applicable 24h/24 depuis sa promulgation.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice — Identifier les branches du droit</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 01</span>
+            <span class="exercise-name">Classer des situations dans les branches du droit</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-easy">Facile</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Classez chacune des situations suivantes dans la branche du droit correspondante (droit civil, droit commercial, droit pénal, droit administratif, droit du travail) :</p>
+            <p><strong>A.</strong> Marie licencie son salarié Lucas sans motif valable.<br>
+            <strong>B.</strong> Paul achète un véhicule d'occasion à un particulier.<br>
+            <strong>C.</strong> La société Dupont SA signe un contrat avec une commune pour rénover l'école.<br>
+            <strong>D.</strong> Un commerçant refuse de payer la TVA due au Trésor public.<br>
+            <strong>E.</strong> Un individu est poursuivi pour vol avec violence.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">A</div>
+              <div class="step-text"><strong>Droit du travail</strong> — relation employeur/salarié, licenciement sans cause réelle et sérieuse.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">B</div>
+              <div class="step-text"><strong>Droit civil</strong> — contrat de vente entre deux particuliers (hors activité professionnelle).</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">C</div>
+              <div class="step-text"><strong>Droit administratif</strong> — contrat impliquant une personne publique (commune) = contrat administratif.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">D</div>
+              <div class="step-text"><strong>Droit fiscal</strong> (branche du droit public) — fraude fiscale, obligations envers l'État.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">E</div>
+              <div class="step-text"><strong>Droit pénal</strong> — vol avec violence = délit ou crime, poursuivi par l'État, sanction pénale.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch1 -->
+
+  <!-- CH 2 -->
+  <div class="chapter" id="ch2">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 02 <span class="niveau-badge niveau-premiere">Première</span></div>
+        <h2>Les sources du droit</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch2">
+          <label for="done-ch2">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Les sources internes</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Constitution</div>
+        <p>Loi fondamentale de l'État, au sommet de la hiérarchie des normes. Le <strong>bloc de constitutionnalité</strong> inclut la Constitution de 1958, la DDHC de 1789 et le Préambule de 1946.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Loi, ordonnance, décret, arrêté</div>
+        <p><strong>Loi</strong> : votée par le Parlement (Assemblée nationale + Sénat), promulguée par le Président.</p>
+        <p><strong>Ordonnance</strong> : prise par le gouvernement dans le domaine de la loi sur habilitation du Parlement (art. 38).</p>
+        <p><strong>Décret</strong> : acte réglementaire du Président ou du Premier ministre.</p>
+        <p><strong>Arrêté</strong> : acte d'un ministre, préfet ou maire — portée plus limitée.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Jurisprudence</div>
+        <p>Ensemble des décisions de justice qui font référence et créent des précédents. Bien que non obligatoire (contrairement aux pays de Common Law), elle interprète la loi et guide les juges.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Coutume et usages</div>
+        <p>Pratiques répétées et considérées comme obligatoires. La coutume peut compléter la loi (<em>secundum legem</em>) ou combler ses lacunes (<em>praeter legem</em>). Les usages commerciaux sont fréquents en droit des affaires.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Les sources européennes et internationales</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Traités internationaux</div>
+        <p>Accords entre États. Depuis l'arrêt <em>Jacques Vabre</em> (1975) et l'art. 55 de la Constitution, les traités ont <strong>primauté sur la loi nationale</strong>. La CJUE (Cour de Justice de l'Union Européenne) veille à leur respect.</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Source européenne</th>
+              <th>Définition</th>
+              <th>Applicabilité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Règlement européen</strong></td>
+              <td>Acte législatif de l'UE d'application générale</td>
+              <td><strong>Directement applicable</strong> dans tous les États membres, sans transposition</td>
+            </tr>
+            <tr>
+              <td><strong>Directive européenne</strong></td>
+              <td>Acte fixant des objectifs à atteindre</td>
+              <td><strong>À transposer</strong> en droit national dans un délai fixé — les États choisissent les moyens</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>La pyramide de Kelsen — Hiérarchie des normes</h3>
+
+      <div class="pyramid">
+        <div class="pyramid-level l1">Constitution</div>
+        <div class="pyramid-level l2">Traités internationaux</div>
+        <div class="pyramid-level l3">Lois &amp; ordonnances ratifiées</div>
+        <div class="pyramid-level l4">Décrets &amp; règlements</div>
+        <div class="pyramid-level l5">Arrêtés · Circulaires · Contrats</div>
+        <div class="pyramid-caption">Toute norme inférieure doit être conforme à la norme supérieure — sinon elle est inconstitutionnelle ou illégale.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice — Hiérarchie des normes</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 02</span>
+            <span class="exercise-name">Classer les sources et analyser un conflit de normes</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-medium">Moyen</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Classez ces sources du plus haut au plus bas dans la hiérarchie de Kelsen :</p>
+            <p>Un décret préfectoral — La Constitution de 1958 — Une directive européenne — Une loi ordinaire — Un règlement européen — Un arrêté municipal</p>
+            <p>Puis répondez : une loi française peut-elle contredire un traité international ? Justifiez.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>Classement de haut en bas :</strong></p>
+            <div class="correction-step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Constitution de 1958</strong> — norme suprême du système juridique français.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>Règlement européen</strong> (et traités) — primauté sur le droit national (art. 55 Constitution).</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>Directive européenne</strong> — norme européenne mais nécessite transposition.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">4</div>
+              <div class="step-text"><strong>Loi ordinaire</strong> — votée par le Parlement, inférieure aux traités.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">5</div>
+              <div class="step-text"><strong>Décret préfectoral</strong> — acte réglementaire, doit respecter les lois.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">6</div>
+              <div class="step-text"><strong>Arrêté municipal</strong> — au bas de la hiérarchie, doit respecter tous les niveaux supérieurs.</div>
+            </div>
+            <p style="margin-top:0.75rem;"><strong>Conflit loi/traité :</strong> Non, une loi française ne peut pas contredire un traité international. En vertu de l'article 55 de la Constitution et de la jurisprudence <em>Jacques Vabre</em> (Cour de cassation, 1975), les traités ont <strong>primauté sur la loi nationale</strong>. La loi contraire doit être écartée par le juge.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch2 -->
+
+  <!-- ================================================================
+       PREMIÈRE — THÈME 2 : Les personnes et les acteurs juridiques
+  ================================================================ -->
+  <div class="theme-sep">
+    <span class="theme-label">Première · Thème 2</span>
+    <div class="theme-line"></div>
+    <span style="font-size:0.78rem;color:var(--text2);white-space:nowrap;">Les personnes et les acteurs juridiques</span>
+  </div>
+
+  <!-- CH 3 -->
+  <div class="chapter" id="ch3">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 03 <span class="niveau-badge niveau-premiere">Première</span></div>
+        <h2>Les personnes juridiques</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch3">
+          <label for="done-ch3">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Personnalité juridique</div>
+        <p>Aptitude à être titulaire de droits et d'obligations. Elle est acquise à la naissance (sous réserve : l'infans conceptus peut hériter) et perdue à la mort pour les personnes physiques.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Personne physique</div>
+        <p>Tout être humain, de la naissance à la mort. Elle peut être identifiée par son <strong>état civil</strong> (nom, prénom, date de naissance, nationalité) et son <strong>domicile</strong> (lieu de résidence principal).</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Personne morale</div>
+        <p>Groupement de personnes ou de biens reconnu par le droit, ayant une personnalité juridique distincte de ses membres : société, association, syndicat, collectivité publique, État.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — À DISTINGUER</div>
+        <div class="def-term">Capacité juridique</div>
+        <p><strong>Capacité de jouissance</strong> : aptitude à avoir des droits et obligations (tout être humain l'a dès la naissance).</p>
+        <p><strong>Capacité d'exercice</strong> : aptitude à exercer soi-même ses droits (acquise à la majorité, 18 ans).</p>
+        <p><strong>Incapacité</strong> : mineur non émancipé, majeur sous tutelle ou curatelle — ils ont des droits mais ne peuvent les exercer seuls.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exemple</h3>
+      <div class="example-box">
+        <div class="example-label">📌 EXEMPLE — Personne morale</div>
+        <p>Une <strong>SARL</strong> est une personne morale : elle a son propre patrimoine, peut signer des contrats en son nom, ester en justice (agir en tant que demandeur ou défendeur), être propriétaire de biens immobiliers.</p>
+        <p>→ Elle est juridiquement <strong>distincte</strong> de ses associés : les dettes de la société ne sont pas les dettes personnelles des associés (responsabilité limitée aux apports).</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice — Capacité juridique</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 03</span>
+            <span class="exercise-name">Déterminer la capacité juridique</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-easy">Facile</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Pour chaque situation, précisez si la personne a la capacité d'exercice et les conséquences :</p>
+            <p><strong>A.</strong> Théo, 15 ans, souhaite signer seul un contrat de bail pour un appartement.<br>
+            <strong>B.</strong> Nadia, 25 ans, sous tutelle, veut acheter une voiture seule.<br>
+            <strong>C.</strong> L'association "Sport Loisirs" veut louer une salle de sport.<br>
+            <strong>D.</strong> Emma, 17 ans émancipée par le juge, signe un contrat de travail.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">A</div>
+              <div class="step-text"><strong>Théo, 15 ans :</strong> mineur non émancipé → <strong>incapacité d'exercice</strong>. Il ne peut pas signer seul un bail. L'acte doit être signé par ses représentants légaux (parents). L'acte serait annulable pour incapacité.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">B</div>
+              <div class="step-text"><strong>Nadia, sous tutelle :</strong> majeur protégé → <strong>incapacité d'exercice totale</strong>. L'achat doit être réalisé par son tuteur. Un acte signé seul peut être annulé.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">C</div>
+              <div class="step-text"><strong>L'association :</strong> personne morale dotée de la personnalité juridique → <strong>capacité juridique</strong> de passer des contrats, représentée par son président ou son représentant légal.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">D</div>
+              <div class="step-text"><strong>Emma, émancipée :</strong> l'émancipation lui confère la pleine <strong>capacité d'exercice</strong>. Elle peut signer seule son contrat de travail, même mineure.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch3 -->
+
+  <!-- CH 4 -->
+  <div class="chapter" id="ch4">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 04 <span class="niveau-badge niveau-premiere">Première</span></div>
+        <h2>La preuve des droits</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch4">
+          <label for="done-ch4">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">La preuve</div>
+        <p>Démonstration de l'existence d'un droit ou d'un fait juridique. Elle est indispensable pour faire valoir ses droits en justice.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">PRINCIPE — LATIN</div>
+        <div class="def-term">Charge de la preuve</div>
+        <p><strong><em>Actori incumbit probatio</em></strong> — "la preuve incombe à celui qui réclame". Celui qui allègue un fait doit le prouver (art. 1353 Code civil). En matière pénale : la présomption d'innocence renverse la charge.</p>
+      </div>
+
+      <div class="key-points">
+        <h4>Les modes de preuve (art. 1341 et suivants Code civil)</h4>
+        <ul>
+          <li><strong>Acte authentique</strong> : rédigé par un officier public (notaire), force probante absolue</li>
+          <li><strong>Acte sous seing privé (ou sous signature privée)</strong> : rédigé et signé par les parties, sans officier public</li>
+          <li><strong>Témoignage</strong> : déclaration d'une personne ayant connaissance des faits</li>
+          <li><strong>Présomption</strong> : déduction d'un fait inconnu à partir d'un fait connu</li>
+          <li><strong>Aveu judiciaire</strong> : reconnaissance en justice d'un fait par la partie adverse</li>
+          <li><strong>Serment judiciaire</strong> : engagement solennel de dire la vérité</li>
+          <li><strong>Preuve électronique</strong> : e-mail, signature électronique qualifiée (eIDAS), horodatage</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exemple</h3>
+      <div class="example-box">
+        <div class="example-label">📌 EXEMPLE — Preuve électronique</div>
+        <p>Un contrat signé électroniquement avec une <strong>signature électronique qualifiée</strong> (conforme au règlement européen eIDAS) a la même valeur probante qu'un acte sous seing privé (art. 1367 Code civil).</p>
+        <p>Un simple e-mail peut constituer un <strong>commencement de preuve par écrit</strong> et être complété par d'autres éléments.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice — Modes de preuve</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 04</span>
+            <span class="exercise-name">Identifier les modes de preuve</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-medium">Moyen</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Pour chaque situation, identifiez le mode de preuve utilisé et appréciez sa valeur :</p>
+            <p><strong>A.</strong> Léa montre à la cour un contrat de vente signé chez le notaire.<br>
+            <strong>B.</strong> Marc présente des SMS échangés avec son employeur prouvant l'accord sur une prime.<br>
+            <strong>C.</strong> Un voisin affirme avoir vu l'accident depuis sa fenêtre.<br>
+            <strong>D.</strong> Le défendeur reconnaît devant le juge ne pas avoir remboursé le prêt.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">A</div>
+              <div class="step-text"><strong>Acte authentique</strong> (notarié) → force probante absolue, très difficile à contester. C'est le mode de preuve le plus fort.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">B</div>
+              <div class="step-text"><strong>Preuve électronique</strong> (SMS) → peut constituer un commencement de preuve par écrit (art. 1362 Code civil). Sa valeur dépend de l'authenticité vérifiable des messages. En droit du travail, preuve libre.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">C</div>
+              <div class="step-text"><strong>Témoignage</strong> → preuve admise mais soumise à l'appréciation souveraine des juges. Le témoin peut être entendu sous serment.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">D</div>
+              <div class="step-text"><strong>Aveu judiciaire</strong> → reconnaissance d'un fait par la partie adverse devant le juge. Fort effet probatoire, irrévocable.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch4 -->
+
+  <!-- ================================================================
+       PREMIÈRE — THÈME 3 : Le contrat
+  ================================================================ -->
+  <div class="theme-sep">
+    <span class="theme-label">Première · Thème 3</span>
+    <div class="theme-line"></div>
+    <span style="font-size:0.78rem;color:var(--text2);white-space:nowrap;">Le contrat</span>
+  </div>
+
+  <!-- CH 5 -->
+  <div class="chapter" id="ch5">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 05 <span class="niveau-badge niveau-premiere">Première</span></div>
+        <h2>La formation du contrat</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch5">
+          <label for="done-ch5">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Contrat</div>
+        <p>Accord de volontés entre deux ou plusieurs personnes destiné à créer, modifier, transmettre ou éteindre des obligations (art. 1101 Code civil).</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — 3 CONDITIONS DE VALIDITÉ (art. 1128)</div>
+        <div class="def-term">Conditions de validité du contrat</div>
+        <p><strong>1. Consentement libre et éclairé</strong> : les parties doivent exprimer leur accord de manière libre (sans vice).</p>
+        <p><strong>2. Capacité</strong> : les parties doivent avoir la capacité juridique de contracter.</p>
+        <p><strong>3. Contenu licite et certain</strong> : l'objet du contrat doit être légal et déterminable.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — 3 VICES DU CONSENTEMENT</div>
+        <div class="def-term">Vices du consentement (art. 1130 et s.)</div>
+        <p><strong>Erreur</strong> : fausse représentation de la réalité. Seule l'erreur sur les qualités essentielles de la chose ou de la personne entraîne la nullité (<em>erreur sur la substance</em>).</p>
+        <p><strong>Dol</strong> : tromperie intentionnelle par manœuvres frauduleuses, mensonges ou dissimulation (réticence dolosive).</p>
+        <p><strong>Violence</strong> : contrainte physique ou morale déterminante du consentement (violence économique possible).</p>
+      </div>
+
+      <div class="key-points">
+        <h4>Typologies des contrats</h4>
+        <ul>
+          <li><strong>Synallagmatique</strong> : obligations réciproques (ex : vente — vendeur livre, acheteur paye)</li>
+          <li><strong>Unilatéral</strong> : obligations d'un seul côté (ex : donation)</li>
+          <li><strong>À titre onéreux</strong> : contrepartie financière (ex : contrat de travail)</li>
+          <li><strong>À titre gratuit</strong> : sans contrepartie (ex : prêt sans intérêt)</li>
+          <li><strong>De gré à gré</strong> : conditions librement négociées par les parties</li>
+          <li><strong>D'adhésion</strong> : conditions imposées par une partie, l'autre adhère sans négocier (ex : contrat d'abonnement téléphonique)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exemple BAC — Vice du consentement</h3>
+      <div class="example-box">
+        <div class="example-label">📌 EXEMPLE — Cas pratique type BAC</div>
+        <p><strong>Situation :</strong> Paul achète un tableau croyant qu'il est d'un peintre célèbre. Le vendeur le savait mais ne l'a pas dit. Paul découvre ensuite que c'est une copie.</p>
+        <p>→ <strong>Vice du consentement :</strong> <mark>dol par réticence</mark> (dissimulation intentionnelle d'une information déterminante).</p>
+        <p>→ <strong>Conséquence :</strong> le contrat peut être annulé (nullité relative) + dommages-intérêts possible.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice (cas pratique) — Vice du consentement</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 05</span>
+            <span class="exercise-name">Cas pratique — Formation du contrat</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-hard">Difficile</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Sophie achète une voiture d'occasion à un garagiste professionnel. Le vendeur lui affirme que le véhicule a fait 50 000 km. Une fois rentrée chez elle, Sophie fait réviser la voiture et le mécanicien lui indique que le compteur a été trafiqué et que la voiture a en réalité parcouru 180 000 km. Sophie n'aurait jamais acheté ce véhicule à ce prix si elle l'avait su.</p>
+            <p><strong>Peut-elle obtenir la nullité du contrat ? Justifiez selon la méthode du cas pratique.</strong></p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>FAITS :</strong> Sophie achète une voiture à un garagiste. Le kilométrage réel (180 000 km) a été dissimulé : le compteur a été trafiqué. Le vendeur a affirmé 50 000 km. Sophie n'aurait pas contracté si elle avait connu la réalité.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>PROBLÈME JURIDIQUE :</strong> Le consentement de Sophie a-t-il été vicié, permettant l'annulation du contrat ?</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>RÈGLE DE DROIT :</strong> Art. 1137 Code civil — le dol est le fait pour un contractant d'obtenir le consentement de l'autre par des manœuvres ou des mensonges. La réticence dolosive est assimilée au dol lorsqu'une partie dissimule intentionnellement une information déterminante. Le dol est une cause de nullité relative (art. 1178 Code civil).</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">4</div>
+              <div class="step-text"><strong>APPLICATION :</strong> Le garagiste a sciemment trafiqué le compteur et affirmé un kilométrage faux = manœuvre frauduleuse intentionnelle. Le kilométrage est une qualité essentielle d'une voiture d'occasion, déterminante du prix. Sophie n'aurait pas contracté à ce prix si elle avait su la vérité.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">5</div>
+              <div class="step-text"><strong>CONCLUSION :</strong> Oui, Sophie peut obtenir la <strong>nullité relative</strong> du contrat pour dol. Elle peut également demander des <strong>dommages-intérêts</strong> au titre de la responsabilité délictuelle du garagiste (art. 1240 Code civil).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch5 -->
+
+  <!-- CH 6 -->
+  <div class="chapter" id="ch6">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 06 <span class="niveau-badge niveau-premiere">Première</span></div>
+        <h2>L'exécution et l'inexécution du contrat</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch6">
+          <label for="done-ch6">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">PRINCIPE — LATIN</div>
+        <div class="def-term">Force obligatoire du contrat — Pacta sunt servanda</div>
+        <p>"Les conventions légalement formées tiennent lieu de loi à ceux qui les ont faites" (art. 1103 Code civil). Le contrat s'impose aux parties et ne peut être modifié unilatéralement.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">PRINCIPE</div>
+        <div class="def-term">Relativité du contrat</div>
+        <p>Le contrat ne produit d'effets qu'entre les parties contractantes. Les tiers ne peuvent ni être engagés ni se prévaloir du contrat (art. 1199 Code civil). <em>Exception : stipulation pour autrui.</em></p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Inexécution du contrat — Sanctions</div>
+        <p><strong>Exécution forcée</strong> : le juge oblige la partie défaillante à exécuter ses obligations.</p>
+        <p><strong>Résolution</strong> : anéantissement rétroactif du contrat (= comme s'il n'avait jamais existé).</p>
+        <p><strong>Résiliation</strong> : cessation du contrat pour l'avenir seulement (contrats à exécution successive).</p>
+        <p><strong>Dommages-intérêts</strong> : indemnisation du préjudice subi par la partie victime de l'inexécution.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — 3 CONDITIONS</div>
+        <div class="def-term">Force majeure (art. 1218 Code civil)</div>
+        <p>Événement <strong>imprévisible</strong>, <strong>irrésistible</strong> (impossible à surmonter) et <strong>extérieur</strong> aux parties qui empêche l'exécution du contrat. La force majeure exonère de responsabilité.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exemple — COVID-19 et force majeure</h3>
+      <div class="example-box">
+        <div class="example-label">📌 EXEMPLE D'ACTUALITÉ</div>
+        <p>Lors de la pandémie de COVID-19 (2020), de nombreux contrats n'ont pu être exécutés (concerts annulés, livraisons impossibles).</p>
+        <p>→ Les tribunaux ont reconnu la force majeure dans certains cas : <strong>imprévisibilité</strong> (la pandémie de cette ampleur), <strong>irrésistibilité</strong> (interdictions légales de circuler), <strong>extériorité</strong> (aucune faute des parties).</p>
+        <p>→ Conséquence : suspension ou extinction de l'obligation, sans responsabilité du débiteur.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice cas pratique — Inexécution de contrat</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 06</span>
+            <span class="exercise-name">Cas pratique — Inexécution et dommages-intérêts</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-hard">Difficile</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>La société BTP Express s'est engagée par contrat à livrer des matériaux à l'entreprise Construct+ avant le 15 mars pour un chantier urgent. Le contrat prévoit une clause pénale de 500 € par jour de retard. BTP Express livre avec 8 jours de retard, invoquant un problème de stock. Construct+ a également dû payer 1 200 € de pénalités à son client à cause du retard.</p>
+            <p><strong>1.</strong> BTP Express peut-elle invoquer la force majeure ? <strong>2.</strong> Calculez les dommages-intérêts dus selon la clause pénale. <strong>3.</strong> Construct+ peut-elle demander en plus les 1 200 € ?</p>
+          </div>
+          <div class="exercise-data">
+            <div class="data-title">DONNÉES</div>
+            <ul>
+              <li>Clause pénale : 500 € par jour de retard</li>
+              <li>Retard constaté : 8 jours</li>
+              <li>Préjudice supplémentaire de Construct+ : 1 200 €</li>
+            </ul>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Force majeure :</strong> Non. Un "problème de stock" n'est pas un événement imprévisible, irrésistible et extérieur. Il s'agit d'un aléa commercial prévisible et gérable. BTP Express ne peut pas s'exonérer par la force majeure. Elle est donc responsable de l'inexécution.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>Clause pénale :</strong> 500 € × 8 jours = <mark>4 000 €</mark>. La clause pénale est forfaitaire : elle s'applique indépendamment du préjudice réel. Le juge peut néanmoins la modérer si elle est manifestement excessive (art. 1231-5 Code civil).</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>Dommages complémentaires :</strong> En principe, la clause pénale est forfaitaire et exclusive d'autres indemnités, <strong>sauf</strong> si le contrat prévoit expressément que les pénalités s'ajoutent aux dommages-intérêts. Si le contrat ne le prévoit pas, Construct+ ne peut pas cumuler les 4 000 € et les 1 200 €.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch6 -->
+
+  <!-- ================================================================
+       PREMIÈRE — THÈME 4 : La responsabilité civile
+  ================================================================ -->
+  <div class="theme-sep">
+    <span class="theme-label">Première · Thème 4</span>
+    <div class="theme-line"></div>
+    <span style="font-size:0.78rem;color:var(--text2);white-space:nowrap;">La responsabilité civile</span>
+  </div>
+
+  <!-- CH 7 -->
+  <div class="chapter" id="ch7">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 07 <span class="niveau-badge niveau-premiere">Première</span></div>
+        <h2>La responsabilité délictuelle</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch7">
+          <label for="done-ch7">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Responsabilité civile</div>
+        <p>Obligation de réparer le préjudice causé à autrui. Elle a une fonction <strong>réparatrice</strong> (≠ responsabilité pénale qui est punitive).</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — ART. 1240 CODE CIVIL</div>
+        <div class="def-term">Responsabilité délictuelle (extracontractuelle)</div>
+        <p>Responsabilité engagée <strong>en dehors de tout contrat</strong>. Elle suppose la réunion de <strong>3 conditions cumulatives</strong> :</p>
+        <p><strong>1. Une faute</strong> (fait illicite intentionnel ou par négligence)</p>
+        <p><strong>2. Un dommage</strong> (matériel, moral ou corporel)</p>
+        <p><strong>3. Un lien de causalité</strong> direct entre la faute et le dommage</p>
+      </div>
+
+      <div class="key-points">
+        <h4>Types de préjudice</h4>
+        <ul>
+          <li><strong>Préjudice matériel</strong> : perte financière, destruction d'un bien</li>
+          <li><strong>Préjudice moral</strong> : souffrance psychologique, atteinte à l'honneur</li>
+          <li><strong>Préjudice corporel</strong> : atteinte à l'intégrité physique</li>
+        </ul>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Responsabilité du fait d'autrui (art. 1242)</div>
+        <p><strong>Parents/enfants</strong> : les parents sont responsables des dommages causés par leurs enfants mineurs vivant avec eux.</p>
+        <p><strong>Commettant/préposé</strong> : l'employeur (commettant) est responsable des fautes commises par son salarié (préposé) dans l'exercice de ses fonctions.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — ART. 1242 al. 1</div>
+        <div class="def-term">Responsabilité du fait des choses</div>
+        <p>Le <strong>gardien</strong> d'une chose (celui qui a l'usage, le contrôle et la direction) est responsable des dommages causés par cette chose, même sans faute personnelle.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exemples</h3>
+      <div class="example-box">
+        <div class="example-label">📌 EXEMPLES</div>
+        <p><strong>Accident de voiture :</strong> le conducteur (gardien) est responsable du dommage causé par son véhicule même sans faute prouvée de sa part → responsabilité du fait des choses.</p>
+        <p><strong>Salarié en livraison :</strong> un chauffeur-livreur renverse un piéton pendant sa tournée → l'employeur est responsable (responsabilité du commettant) ET le salarié peut être poursuivi pénalement si faute grave.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice — Qualifier la responsabilité</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 07</span>
+            <span class="exercise-name">Qualifier et analyser la responsabilité délictuelle</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-medium">Moyen</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Pour chaque situation, identifiez : le fondement de la responsabilité, les 3 conditions, le responsable désigné.</p>
+            <p><strong>A.</strong> Maxime, 10 ans, casse la vitre du voisin en jouant au ballon.<br>
+            <strong>B.</strong> Un chien mal attaché mord un promeneur dans un parc.<br>
+            <strong>C.</strong> Une caissière de supermarché renverse un client en poussant un caddie dans l'exercice de ses fonctions.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">A</div>
+              <div class="step-text"><strong>Responsabilité du fait d'autrui</strong> (art. 1242 al. 4). Faute : Maxime a cassé la vitre. Dommage : vitre brisée (matériel). Lien causal : direct. <strong>Responsable : les parents</strong> de Maxime (présomption de faute de surveillance, renversée seulement si force majeure ou faute de la victime).</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">B</div>
+              <div class="step-text"><strong>Responsabilité du fait des choses / des animaux</strong> (art. 1243). Le gardien du chien (propriétaire ou détenteur) est responsable. Dommage : morsure (corporel). Lien causal : direct. <strong>Responsable : le propriétaire du chien</strong>, sans qu'il soit besoin de prouver une faute.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">C</div>
+              <div class="step-text"><strong>Responsabilité du commettant</strong> (art. 1242 al. 5). La caissière agissait dans l'exercice de ses fonctions pour le supermarché. Dommage : corporel. <strong>Responsable : le supermarché</strong> (employeur/commettant), solidairement avec la salariée selon les circonstances.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch7 -->
+
+  <!-- CH 8 -->
+  <div class="chapter" id="ch8">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 08 <span class="niveau-badge niveau-premiere">Première</span></div>
+        <h2>La responsabilité contractuelle</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch8">
+          <label for="done-ch8">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Responsabilité contractuelle</div>
+        <p>Obligation de réparer le préjudice causé par l'inexécution ou la mauvaise exécution d'une obligation contractuelle. Nécessite également : faute + dommage + lien de causalité.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DISTINCTION IMPORTANTE</div>
+        <div class="def-term">Obligation de résultat vs Obligation de moyens</div>
+        <p><strong>Obligation de résultat</strong> : le débiteur s'engage à atteindre un résultat précis. Sa responsabilité est engagée automatiquement si le résultat n'est pas obtenu (ex : livreur = livraison).</p>
+        <p><strong>Obligation de moyens</strong> : le débiteur s'engage à mettre en œuvre tous les moyens nécessaires sans garantir le résultat. La victime doit prouver la faute (ex : médecin = donner les meilleurs soins).</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Types de dommages-intérêts contractuels</div>
+        <p><strong>Dommages-intérêts compensatoires</strong> : compensent le préjudice définitif subi (inexécution totale).</p>
+        <p><strong>Dommages-intérêts moratoires</strong> : compensent le retard dans l'exécution.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Tableau comparatif — Responsabilité délictuelle vs contractuelle</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Critère</th>
+              <th>Responsabilité délictuelle</th>
+              <th>Responsabilité contractuelle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Fondement</strong></td>
+              <td>Art. 1240 Code civil — hors contrat</td>
+              <td>Art. 1231 et s. Code civil — inexécution du contrat</td>
+            </tr>
+            <tr>
+              <td><strong>Conditions</strong></td>
+              <td>Faute + dommage + lien causal</td>
+              <td>Faute contractuelle + dommage + lien causal</td>
+            </tr>
+            <tr>
+              <td><strong>Mise en demeure</strong></td>
+              <td>Non nécessaire</td>
+              <td>Obligatoire avant toute action</td>
+            </tr>
+            <tr>
+              <td><strong>Clauses d'exonération</strong></td>
+              <td>Impossibles entre les parties</td>
+              <td>Possibles (clause limitative ou exonératoire)</td>
+            </tr>
+            <tr>
+              <td><strong>Exemple</strong></td>
+              <td>Accident de voiture entre inconnus</td>
+              <td>Artisan qui livre des travaux défectueux</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice — Médecin et obligation de moyens</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 08</span>
+            <span class="exercise-name">Cas pratique — Responsabilité médicale</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-hard">Difficile</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Madame Chen consulte le Dr Martin pour une opération du genou. L'opération se déroule mal et elle garde des séquelles permanentes. Elle engage la responsabilité du médecin.</p>
+            <p><strong>1.</strong> De quelle responsabilité s'agit-il ? <strong>2.</strong> Quelle est la nature de l'obligation du médecin ? <strong>3.</strong> Qui doit prouver quoi ?</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Responsabilité contractuelle</strong> : il existe un contrat de soins entre la patiente et le médecin. L'inexécution ou la mauvaise exécution de ce contrat engage la responsabilité contractuelle du Dr Martin.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>Obligation de moyens</strong> : le médecin ne s'engage pas à guérir son patient (il ne peut pas garantir le résultat). Il s'engage à prodiguer des soins consciencieux, attentifs et conformes aux données acquises de la science (arrêt Mercier, Cass. civ. 1936).</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>Charge de la preuve :</strong> Madame Chen doit prouver la <strong>faute</strong> du médecin (manquement aux règles de l'art, négligence, erreur de diagnostic). Elle doit également établir le dommage (séquelles) et le lien de causalité. Si elle n'apporte pas cette preuve, la responsabilité du médecin ne peut être engagée malgré le mauvais résultat.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch8 -->
+
+  <!-- ================================================================
+       TERMINALE — THÈME 1 : L'entreprise et les sociétés
+  ================================================================ -->
+  <div class="theme-sep">
+    <span class="theme-label">Terminale · Thème 1</span>
+    <div class="theme-line"></div>
+    <span style="font-size:0.78rem;color:var(--text2);white-space:nowrap;">L'entreprise et les sociétés</span>
+  </div>
+
+  <!-- CH 9 -->
+  <div class="chapter" id="ch9">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 09 <span class="niveau-badge niveau-terminale">Terminale</span></div>
+        <h2>L'entreprise en société</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch9">
+          <label for="done-ch9">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — ART. 1832 CODE CIVIL</div>
+        <div class="def-term">La société</div>
+        <p>Contrat par lequel deux ou plusieurs personnes conviennent de mettre en commun des <strong>apports</strong> en vue de partager les <strong>bénéfices</strong> ou de profiter de l'économie qui pourra en résulter, et s'engagent à contribuer aux <strong>pertes</strong>.</p>
+      </div>
+
+      <div class="key-points">
+        <h4>Éléments constitutifs d'une société</h4>
+        <ul>
+          <li><strong>Capital social</strong> : ensemble des apports des associés, garantie des créanciers</li>
+          <li><strong>Associés</strong> : personnes qui apportent des ressources et partagent les résultats</li>
+          <li><strong>Parts sociales / Actions</strong> : titres représentant les droits des associés (SARL = parts, SA/SAS = actions)</li>
+          <li><strong>Personnalité morale</strong> : acquise à l'immatriculation au RCS (Registre du Commerce et des Sociétés)</li>
+        </ul>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — 3 TYPES D'APPORTS</div>
+        <div class="def-term">Les apports</div>
+        <p><strong>Apport en numéraire</strong> : somme d'argent — doit être libéré selon les règles propres à chaque forme sociale.</p>
+        <p><strong>Apport en nature</strong> : bien (immeuble, fonds de commerce, brevet) — évalué par un commissaire aux apports.</p>
+        <p><strong>Apport en industrie</strong> : savoir-faire, travail, compétences — non pris en compte dans le capital social (SARL et SAS seulement).</p>
+      </div>
+    </div>
+  </div><!-- /ch9 -->
+
+  <!-- CH 10 -->
+  <div class="chapter" id="ch10">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 10 <span class="niveau-badge niveau-terminale">Terminale</span></div>
+        <h2>Les formes de sociétés</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch10">
+          <label for="done-ch10">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Les grandes formes de sociétés</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">SARL — Société à Responsabilité Limitée</div>
+        <p>1 à 100 associés, capital libre (1 € min.), parts sociales non librement cessibles, dirigée par un ou plusieurs <strong>gérants</strong>, responsabilité limitée aux apports. Unipersonnelle = <strong>EURL</strong>.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">SA — Société Anonyme</div>
+        <p>Minimum 2 actionnaires (7 si cotée en bourse), capital min. 37 000 €, titres = <strong>actions</strong>, deux structures possibles : <strong>CA + PDG</strong> ou <strong>Directoire + Conseil de Surveillance</strong>. Possible d'être cotée en bourse.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">SAS — Société par Actions Simplifiée</div>
+        <p>Grande <strong>liberté statutaire</strong>, 1 ou plusieurs actionnaires, capital libre, dirigée par un <strong>Président</strong>, responsabilité limitée aux apports. Unipersonnelle = <strong>SASU</strong>. Très flexible pour les startups.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">SNC — Société en Nom Collectif</div>
+        <p>Associés (commerçants) <strong>solidairement et indéfiniment responsables</strong> des dettes sur leur patrimoine personnel. Unanimité requise pour les décisions importantes. Peu utilisée, adaptée aux professions libérales réglementées.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Tableau comparatif des formes juridiques</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Critère</th>
+              <th>SARL</th>
+              <th>SA</th>
+              <th>SAS</th>
+              <th>SNC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Nb associés</strong></td>
+              <td>1 à 100</td>
+              <td>Min. 2 (7 si cotée)</td>
+              <td>1 et +</td>
+              <td>2 et +</td>
+            </tr>
+            <tr>
+              <td><strong>Capital min.</strong></td>
+              <td>1 €</td>
+              <td>37 000 €</td>
+              <td>1 €</td>
+              <td>Aucun</td>
+            </tr>
+            <tr>
+              <td><strong>Titres</strong></td>
+              <td>Parts sociales</td>
+              <td>Actions</td>
+              <td>Actions</td>
+              <td>Parts sociales</td>
+            </tr>
+            <tr>
+              <td><strong>Dirigeants</strong></td>
+              <td>Gérant(s)</td>
+              <td>PDG / CA ou Directoire</td>
+              <td>Président</td>
+              <td>Gérant(s)</td>
+            </tr>
+            <tr>
+              <td><strong>Responsabilité</strong></td>
+              <td>Limitée aux apports</td>
+              <td>Limitée aux apports</td>
+              <td>Limitée aux apports</td>
+              <td>Illimitée &amp; solidaire</td>
+            </tr>
+            <tr>
+              <td><strong>Cession des titres</strong></td>
+              <td>Agrément des associés requis</td>
+              <td>Libre en principe</td>
+              <td>Selon statuts</td>
+              <td>Unanimité requise</td>
+            </tr>
+            <tr>
+              <td><strong>Forme unipersonnelle</strong></td>
+              <td>EURL</td>
+              <td>—</td>
+              <td>SASU</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice BAC — Choisir la forme juridique</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 10</span>
+            <span class="exercise-name">Cas pratique — Création de société</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-hard">Difficile</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Antoine et Lucie souhaitent créer une startup numérique. Ils veulent :</p>
+            <p>→ Protéger leur patrimoine personnel des dettes de l'entreprise<br>
+            → Accueillir facilement de nouveaux investisseurs à l'avenir<br>
+            → Avoir une grande liberté dans l'organisation de la gouvernance<br>
+            → Commencer avec un capital réduit</p>
+            <p><strong>Quelle forme juridique leur conseillez-vous ? Justifiez avec 4 arguments.</strong></p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>Forme conseillée : SAS (Société par Actions Simplifiée)</strong></p>
+            <div class="correction-step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Protection du patrimoine :</strong> Dans la SAS, la responsabilité des associés est <strong>limitée aux apports</strong>. Les dettes de la société n'engagent pas le patrimoine personnel d'Antoine et Lucie.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>Accueil d'investisseurs :</strong> Les actions de SAS sont cessibles selon les conditions prévues par les statuts. Il est facile de créer de nouvelles actions pour accueillir des investisseurs (business angels, fonds de capital-risque).</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>Liberté statutaire :</strong> La SAS offre une <strong>très grande liberté d'organisation</strong> : répartition des pouvoirs, conditions de vote, pactes d'actionnaires… tout peut être aménagé dans les statuts.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">4</div>
+              <div class="step-text"><strong>Capital réduit :</strong> Le capital social minimum d'une SAS est de <strong>1 €</strong>, ce qui est parfaitement adapté à leur situation de startup débutante.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch10 -->
+
+  <!-- ================================================================
+       TERMINALE — Le contrat de travail
+  ================================================================ -->
+  <div class="theme-sep">
+    <span class="theme-label">Terminale · Droit du travail</span>
+    <div class="theme-line"></div>
+    <span style="font-size:0.78rem;color:var(--text2);white-space:nowrap;">Contrat de travail &amp; relations collectives</span>
+  </div>
+
+  <!-- CH 11 -->
+  <div class="chapter" id="ch11">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 11 <span class="niveau-badge niveau-terminale">Terminale</span></div>
+        <h2>Le contrat de travail</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch11">
+          <label for="done-ch11">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Contrat de travail</div>
+        <p>Convention par laquelle une personne (le <strong>salarié</strong>) s'engage à travailler pour le compte et sous la direction d'une autre personne (l'<strong>employeur</strong>) en contrepartie d'une <strong>rémunération</strong>.</p>
+        <p>Critère essentiel : le <strong>lien de subordination juridique</strong> — l'employeur donne des ordres, contrôle l'exécution et peut sanctionner. C'est ce qui distingue le salarié du travailleur indépendant.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">CDI — Contrat à Durée Indéterminée</div>
+        <p>Contrat de <strong>droit commun</strong> du travail, conclu sans terme fixé. Pas d'obligation d'écrit (sauf exceptions). Résiliable par démission, licenciement ou rupture conventionnelle.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — CAS LIMITATIFS</div>
+        <div class="def-term">CDD — Contrat à Durée Déterminée</div>
+        <p>Réservé à des cas précis : <strong>remplacement d'un salarié absent</strong>, <strong>accroissement temporaire d'activité</strong>, <strong>emploi saisonnier</strong>. Durée max. 18 mois (renouvellements inclus). Prime de précarité de <strong>10%</strong> à l'échéance.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Contrats d'alternance</div>
+        <p><strong>Contrat d'apprentissage</strong> : formation en alternance menant à un diplôme ou titre professionnel. Rémunération basée sur le SMIC selon l'âge et l'année.</p>
+        <p><strong>Contrat de professionnalisation</strong> : insertion ou reconversion professionnelle, mène à une qualification reconnue.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Tableau CDI vs CDD</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Critère</th>
+              <th>CDI</th>
+              <th>CDD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Durée</strong></td>
+              <td>Indéterminée</td>
+              <td>Fixée à l'avance, max. 18 mois</td>
+            </tr>
+            <tr>
+              <td><strong>Cas d'usage</strong></td>
+              <td>Emploi permanent et durable</td>
+              <td>Remplacement, accroissement activité, saisonnier</td>
+            </tr>
+            <tr>
+              <td><strong>Forme</strong></td>
+              <td>Pas d'obligation d'écrit en principe</td>
+              <td>Écrit obligatoire, remis sous 2 jours ouvrables</td>
+            </tr>
+            <tr>
+              <td><strong>Période d'essai</strong></td>
+              <td>2 mois (ouvriers), 3 mois (techniciens), 4 mois (cadres)</td>
+              <td>1 jour/semaine, max. 2 semaines (≤ 6 mois)</td>
+            </tr>
+            <tr>
+              <td><strong>Fin du contrat</strong></td>
+              <td>Démission, licenciement, rupture conventionnelle, retraite</td>
+              <td>Terme échu (prime précarité 10%) ou rupture anticipée</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice — Qualifier le contrat</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 11</span>
+            <span class="exercise-name">Qualifier un contrat de travail et identifier les irrégularités</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-medium">Moyen</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>La société TextilePro embauche Karim en CDD pour "renforcer son équipe commerciale" sans autre précision. Le contrat est oral et dure depuis 14 mois. La direction souhaite le renouveler pour 6 mois supplémentaires.</p>
+            <p><strong>1.</strong> Le motif de recours au CDD est-il valable ? <strong>2.</strong> Quelles irrégularités constatez-vous ? <strong>3.</strong> Que risque l'employeur ? <strong>4.</strong> Le renouvellement est-il possible ?</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Motif invalide :</strong> "Renforcer son équipe commerciale" est un besoin permanent qui ne correspond à aucun des cas limitatifs légaux du CDD (remplacement, accroissement temporaire, saisonnier). Ce motif est insuffisant et illicite.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>Irrégularités :</strong> (a) <strong>Absence d'écrit</strong> : le CDD doit obligatoirement être établi par écrit et remis sous 2 jours ouvrables — à défaut, il est réputé être un CDI. (b) <strong>Motif non valable</strong> : le recours au CDD n'est pas justifié.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>Risque de requalification en CDI :</strong> Karim peut saisir le Conseil de Prud'hommes pour obtenir la requalification du contrat en CDI (art. L1245-1 Code du travail). Il peut alors obtenir une indemnité de requalification d'au moins 1 mois de salaire + indemnités de licenciement si l'employeur rompt le contrat.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">4</div>
+              <div class="step-text"><strong>Renouvellement :</strong> La durée totale CDD (14 mois + 6 mois = 20 mois) dépasserait le maximum légal de <strong>18 mois</strong>. Le renouvellement tel que prévu est impossible. Il entraînerait une requalification automatique en CDI.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch11 -->
+
+  <!-- CH 12 -->
+  <div class="chapter" id="ch12">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 12 <span class="niveau-badge niveau-terminale">Terminale</span></div>
+        <h2>La rupture du contrat de travail</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch12">
+          <label for="done-ch12">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Démission</div>
+        <p>Rupture à l'initiative du <strong>salarié</strong>. Préavis obligatoire (durée selon la convention collective ou usage). Pas d'indemnités de chômage (sauf démission légitime reconnue par France Travail).</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — 3 TYPES DE FAUTES</div>
+        <div class="def-term">Licenciement pour motif personnel</div>
+        <p><strong>Faute simple</strong> : manquement professionnel — droit au préavis et aux indemnités.</p>
+        <p><strong>Faute grave</strong> : rend impossible le maintien dans l'entreprise — pas de préavis ni d'indemnités de licenciement (indemnités compensatrices de congés payés maintenues).</p>
+        <p><strong>Faute lourde</strong> : intention de nuire à l'employeur — même que faute grave + pas d'indemnités compensatrices de congés payés.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Rupture conventionnelle</div>
+        <p>Mode de rupture amiable, d'un commun accord entre employeur et salarié. Homologuée par la DREETS (ex-DIRECCTE). Ouvre droit aux allocations chômage. Indemnité spécifique ≥ indemnité légale de licenciement.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Indemnité légale de licenciement</h3>
+
+      <div class="formula-box">
+        <div class="formula-label">📐 FORMULE — INDEMNITÉ LÉGALE DE LICENCIEMENT (ILL)</div>
+        <div class="formula">ILL = (1/4 × SBM × ancienneté) pour les 10 premières années</div>
+        <div class="formula">ILL = ILL10ans + (1/3 × SBM × années au-delà de 10)</div>
+        <div class="formula-note">SBM = Salaire de référence (moyenne des 3 ou 12 derniers mois, le plus favorable au salarié). Ancienneté = années complètes (fractions proportionnelles).</div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">📌 EXEMPLE DE CALCUL</div>
+        <p>Salarié licencié pour faute simple, ancienneté 12 ans, SBM = 2 400 €</p>
+        <p>→ 10 premières années : 1/4 × 2 400 × 10 = <strong>6 000 €</strong></p>
+        <p>→ 2 années restantes : 1/3 × 2 400 × 2 = <strong>1 600 €</strong></p>
+        <p>→ <strong>ILL totale = 7 600 €</strong></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice — Calculer l'indemnité de licenciement</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 12</span>
+            <span class="exercise-name">Calcul d'indemnité légale de licenciement</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-medium">Moyen</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Monsieur Renard est licencié pour motif économique après 15 ans d'ancienneté dans l'entreprise. Son salaire mensuel brut moyen (12 derniers mois) est de 3 000 €.</p>
+            <p><strong>1.</strong> A-t-il droit à l'indemnité légale de licenciement ? <strong>2.</strong> Calculez le montant de son ILL.</p>
+          </div>
+          <div class="exercise-data">
+            <div class="data-title">DONNÉES</div>
+            <ul>
+              <li>Ancienneté : 15 ans</li>
+              <li>Salaire mensuel brut moyen : 3 000 €</li>
+              <li>Motif : licenciement économique</li>
+            </ul>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Droit à l'ILL :</strong> Oui. Le licenciement économique est un motif non disciplinaire. M. Renard a droit à l'indemnité légale de licenciement (à condition d'avoir au moins 8 mois d'ancienneté — art. L1234-9 Code du travail).</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">2</div>
+              <div class="step-text">
+                <strong>Calcul :</strong><br>
+                • 10 premières années : 1/4 × 3 000 × 10 = <mark>7 500 €</mark><br>
+                • 5 années restantes (au-delà de 10) : 1/3 × 3 000 × 5 = <mark>5 000 €</mark><br>
+                • <strong>ILL totale = 7 500 + 5 000 = 12 500 €</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch12 -->
+
+  <!-- CH 13 -->
+  <div class="chapter" id="ch13">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 13 <span class="niveau-badge niveau-terminale">Terminale</span></div>
+        <h2>Les relations collectives du travail</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch13">
+          <label for="done-ch13">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Syndicat</div>
+        <p>Organisation professionnelle dont l'objet est la défense des intérêts professionnels, économiques et sociaux de ses membres. La liberté syndicale est un droit fondamental (art. L2141-1 Code du travail).</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">CSE — Comité Social et Économique</div>
+        <p>Instance représentative du personnel obligatoire dans les entreprises de 11 salariés et plus. Fusion des anciennes instances (CE, DP, CHSCT). Attributions : consultation sur les décisions économiques, conditions de travail, activités sociales.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Convention collective</div>
+        <p>Accord conclu entre des organisations syndicales représentatives de salariés et des employeurs (ou organisations patronales). Elle améliore les dispositions du Code du travail et s'applique à toutes les entreprises du secteur concerné.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Droit de grève</div>
+        <p>Droit constitutionnel reconnu à tout salarié : <strong>cessation collective et concertée du travail</strong> pour soutenir des revendications professionnelles. La grève suspend le contrat de travail (pas de salaire pendant la grève). Limites : service minimum dans certains secteurs (transports, hôpitaux).</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Quiz — Relations collectives</h3>
+      <div class="quiz-section">
+        <div class="quiz-question">❓ Quelle instance représentative du personnel est obligatoire dans les entreprises de 11 salariés et plus depuis 2020 ?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" data-wrong-msg="Non — le CE était pour les entreprises de 50 salariés et a été fusionné dans le CSE en 2017-2020.">Comité d'entreprise (CE)</div>
+          <div class="quiz-option" data-correct="true" data-right-msg="Exact ! Le CSE (Comité Social et Économique) a remplacé CE, DP et CHSCT depuis 2020.">Comité Social et Économique (CSE)</div>
+          <div class="quiz-option" data-correct="false" data-wrong-msg="Non — le CHSCT a été fusionné dans le CSE.">CHSCT</div>
+          <div class="quiz-option" data-correct="false" data-wrong-msg="Non — le syndicat est une organisation indépendante, pas une instance élue dans l'entreprise.">Délégué syndical</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+  </div><!-- /ch13 -->
+
+  <!-- ================================================================
+       TERMINALE — Protection du consommateur + Responsabilité pénale
+  ================================================================ -->
+  <div class="theme-sep">
+    <span class="theme-label">Terminale · Droit de la consommation &amp; pénal</span>
+    <div class="theme-line"></div>
+  </div>
+
+  <!-- CH 14 -->
+  <div class="chapter" id="ch14">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 14 <span class="niveau-badge niveau-terminale">Terminale</span></div>
+        <h2>La protection du consommateur</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch14">
+          <label for="done-ch14">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Consommateur / Professionnel</div>
+        <p><strong>Consommateur</strong> (art. préliminaire Code de la consommation) : toute personne physique agissant à des fins qui n'entrent pas dans le cadre de son activité commerciale, industrielle, artisanale ou libérale.</p>
+        <p><strong>Professionnel</strong> : personne physique ou morale agissant dans le cadre de son activité professionnelle.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Clauses abusives</div>
+        <p>Clauses créant un <strong>déséquilibre significatif</strong> entre les droits et obligations des parties au détriment du consommateur. Elles sont réputées <strong>non écrites</strong> (supprimées du contrat) mais le reste du contrat demeure valable.</p>
+      </div>
+
+      <div class="key-points">
+        <h4>Principaux droits du consommateur</h4>
+        <ul>
+          <li><strong>Droit de rétractation</strong> : 14 jours calendaires pour se rétracter d'un contrat conclu à distance ou hors établissement, sans justification ni pénalité</li>
+          <li><strong>Garantie légale de conformité</strong> : 2 ans pour les biens neufs, vendeur tenu de réparer/remplacer/rembourser</li>
+          <li><strong>Garantie des vices cachés</strong> : défaut caché rendant le bien impropre à l'usage — action dans les 2 ans après la découverte</li>
+          <li><strong>Obligation d'information et de conseil</strong> : le professionnel doit fournir toutes informations loyales et utiles avant la vente</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice — Droits du consommateur</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 14</span>
+            <span class="exercise-name">Identifier les droits du consommateur</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-medium">Moyen</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p><strong>A.</strong> Laure commande une robe sur un site internet. Elle la reçoit et veut la retourner sans raison, 10 jours après la livraison. Le site refuse, invoquant que "tout achat est définitif".<br>
+            <strong>B.</strong> Un téléphone acheté neuf tombe en panne 18 mois après l'achat. Le vendeur refuse toute intervention car la garantie commerciale d'un an est expirée.<br>
+            <strong>C.</strong> Un contrat d'abonnement à une salle de sport contient une clause "l'abonnement est non remboursable en cas de déménagement".</p>
+            <p>Pour chaque cas, identifiez le droit invocable par le consommateur.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">A</div>
+              <div class="step-text"><strong>Droit de rétractation :</strong> Laure peut se rétracter dans un délai de <strong>14 jours</strong> à compter de la réception du colis (contrat à distance — art. L221-18 Code de la consommation). La clause "tout achat est définitif" est <strong>abusive et non écrite</strong>. Elle peut retourner la robe et obtenir le remboursement intégral.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">B</div>
+              <div class="step-text"><strong>Garantie légale de conformité :</strong> La garantie légale dure <strong>2 ans</strong> pour les biens neufs (art. L217-4 Code de la consommation), indépendamment de la garantie commerciale. 18 mois après l'achat, le consommateur est toujours couvert. Le vendeur doit réparer, remplacer ou rembourser.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">C</div>
+              <div class="step-text"><strong>Clause abusive :</strong> Une clause interdisant tout remboursement quelle que soit la situation (notamment en cas de déménagement = fait extérieur) crée un <strong>déséquilibre significatif</strong>. Elle est susceptible d'être qualifiée d'abusive et réputée <strong>non écrite</strong>. Le consommateur peut demander la résiliation et un remboursement proportionnel.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /ch14 -->
+
+  <!-- CH 15 -->
+  <div class="chapter" id="ch15">
+    <div class="chapter-header">
+      <div>
+        <div class="chapter-num">CHAPITRE 15 <span class="niveau-badge niveau-terminale">Terminale</span></div>
+        <h2>La responsabilité pénale de l'entreprise</h2>
+        <div class="ch-done-wrap">
+          <input type="checkbox" class="ch-done" id="done-ch15">
+          <label for="done-ch15">Chapitre vu ✓</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Définitions</h3>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — 3 CATÉGORIES</div>
+        <div class="def-term">L'infraction pénale</div>
+        <p>Fait punissable par la loi. 3 catégories :</p>
+        <p><strong>Crime</strong> : infraction la plus grave (meurtre, viol…), jugée par la Cour d'assises.</p>
+        <p><strong>Délit</strong> : infraction intermédiaire (escroquerie, abus de biens sociaux…), jugée par le Tribunal correctionnel.</p>
+        <p><strong>Contravention</strong> : infraction mineure (stationnement interdit…), jugée par le Tribunal de police.</p>
+      </div>
+
+      <div class="def-box droit">
+        <div class="def-label">DÉFINITION — DEPUIS 1994</div>
+        <div class="def-term">Responsabilité pénale des personnes morales</div>
+        <p>Depuis le Code pénal de 1994, les personnes morales (sociétés, associations) peuvent être <strong>pénalement responsables</strong> des infractions commises pour leur compte par leurs organes ou représentants.</p>
+        <p><strong>Peines applicables</strong> : amende multipliée par 5 (par rapport à la personne physique), dissolution, interdiction d'exercer une activité, placement sous surveillance judiciaire, exclusion des marchés publics.</p>
+      </div>
+
+      <div class="key-points">
+        <h4>Infractions fréquentes en droit des affaires</h4>
+        <ul>
+          <li><strong>Corruption active et passive</strong> : offrir ou recevoir des avantages indus</li>
+          <li><strong>Travail dissimulé</strong> : emploi de salariés sans déclaration</li>
+          <li><strong>Abus de biens sociaux (ABS)</strong> : utilisation des biens de la société dans un intérêt personnel contraire à celui de la société</li>
+          <li><strong>Harcèlement moral</strong> : agissements répétés dégradant les conditions de travail</li>
+          <li><strong>Fraude fiscale</strong> : soustraction frauduleuse à l'établissement ou au paiement de l'impôt</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Exercice BAC — Responsabilité pénale d'une société</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 15</span>
+            <span class="exercise-name">Cas pratique BAC — Responsabilité pénale</span>
+          </div>
+          <div class="exercise-meta">
+            <span class="difficulty diff-hard">Difficile</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>La SA BuildCorp, entreprise de BTP, a remporté plusieurs marchés publics grâce à son directeur commercial qui a versé des pots-de-vin à des fonctionnaires. Le directeur agissait clairement au nom et pour le compte de la société, avec l'aval tacite du PDG.</p>
+            <p><strong>1.</strong> Quelle infraction est en cause ? <strong>2.</strong> La SA BuildCorp peut-elle être pénalement responsable ? <strong>3.</strong> Quelles peines risque-t-elle ? <strong>4.</strong> Le directeur commercial et le PDG peuvent-ils également être poursuivis ?</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Infraction :</strong> <strong>Corruption active</strong> (art. 433-1 Code pénal) — le fait de proposer ou offrir des avantages à des personnes dépositaires de l'autorité publique (fonctionnaires) pour obtenir un avantage (les marchés publics). C'est un <strong>délit</strong>.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>Responsabilité pénale de la SA :</strong> Oui. Depuis 1994, les personnes morales sont pénalement responsables des infractions commises pour leur compte par leurs organes ou représentants. Le directeur commercial est un représentant de la société, il agissait dans l'intérêt de BuildCorp → <strong>la SA est pénalement responsable</strong>.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>Peines encourues par la SA :</strong> Amende × 5 (la personne physique encourt jusqu'à 10 ans + 1 M€ → la personne morale peut être condamnée à 5 M€), <strong>exclusion définitive des marchés publics</strong>, interdiction d'exercer certaines activités, éventuellement dissolution si l'infraction est grave et répétée.</div>
+            </div>
+            <div class="correction-step">
+              <div class="step-num">4</div>
+              <div class="step-text"><strong>Responsabilité des personnes physiques :</strong> Oui, la responsabilité pénale de la personne morale n'exclut pas celle des personnes physiques. Le directeur commercial (auteur principal) et le PDG (complice par aval tacite) peuvent être poursuivis à titre personnel et condamnés à des peines d'emprisonnement et d'amende.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QCM Final -->
+      <div class="divider"></div>
+      <div class="quiz-section">
+        <div class="quiz-question">❓ Quiz final — Depuis quelle année les personnes morales peuvent-elles être pénalement responsables en France ?</div>
+        <div class="quiz-options">
+          <div class="quiz-option" data-correct="false" data-wrong-msg="Non — 1958 est l'année de la Constitution de la Ve République.">1958</div>
+          <div class="quiz-option" data-correct="false" data-wrong-msg="Non — 1985 est l'année de la loi sur les SARL/SA modernisées, pas de la responsabilité pénale des PM.">1985</div>
+          <div class="quiz-option" data-correct="true" data-right-msg="Exact ! Le nouveau Code pénal entré en vigueur le 1er mars 1994 a introduit la responsabilité pénale des personnes morales.">1994</div>
+          <div class="quiz-option" data-correct="false" data-wrong-msg="Non — 2000 est trop tardif, c'est bien 1994 avec le nouveau Code pénal.">2000</div>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+  </div><!-- /ch15 -->
+
+</div><!-- /content-wrapper -->
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <p>⚖️ <strong>Droit</strong> · BAC STMG 2026 · 15 chapitres · 1ère &amp; Terminale</p>
+  <p style="margin-top:0.5rem;">
+    <a href="index.html">← Retour à l'accueil</a> ·
+    <a href="economie.html">Économie</a> ·
+    <a href="management.html">Management</a> ·
+    <a href="gestion-marketing.html">Gestion &amp; Marketing</a>
+  </p>
+  <p style="margin-top:0.75rem;font-size:0.78rem;">Contenu pédagogique conforme au programme BAC STMG 2026 · Tous droits réservés</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIG — Systèmes d'Information de Gestion · BAC STMG 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .sig { --card-color: var(--sig); }
+    .breadcrumb {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .82rem; color: var(--text2); padding: 1rem 0 0;
+    }
+    .breadcrumb a { color: var(--text2); transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--sig); }
+    .breadcrumb-sep { color: var(--border); }
+    .breadcrumb-current { color: var(--sig); font-weight: 600; }
+    .overall-progress-wrap {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1rem 1.5rem; margin-bottom: 1.25rem;
+    }
+    .overall-progress-label {
+      font-size: .8rem; color: var(--text2); margin-bottom: .4rem; display: block;
+    }
+    .overall-progress-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(90deg, var(--sig), #a78bfa);
+      transition: width .6s cubic-bezier(.4,0,.2,1);
+    }
+    .ch-done-wrap {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .82rem; color: var(--text2); margin-left: auto;
+    }
+    .ch-done { accent-color: var(--sig); width: 1rem; height: 1rem; cursor: pointer; }
+    .sql-block {
+      font-family: 'Courier New', monospace; font-size: .88rem;
+      background: #0d1117; border: 1px solid var(--border);
+      border-radius: 8px; padding: 1rem 1.25rem; color: #e6edf3;
+      line-height: 1.7; margin: .75rem 0; overflow-x: auto;
+    }
+    .sql-kw { color: #ff7b72; font-weight: 700; }
+    .sql-fn { color: #d2a8ff; }
+    .sql-str { color: #a5d6ff; }
+    .sql-cmt { color: #8b949e; font-style: italic; }
+    .mcd-table {
+      border: 1.5px solid var(--sig); border-radius: 8px;
+      overflow: hidden; display: inline-block; min-width: 150px;
+      text-align: center; font-size: .88rem;
+    }
+    .mcd-table-head {
+      background: rgba(124,58,237,.25); color: #c4b5fd;
+      font-weight: 700; padding: .4rem .8rem;
+      border-bottom: 1.5px solid var(--sig); letter-spacing: .04em;
+    }
+    .mcd-table-row { padding: .25rem .8rem; color: var(--text2); border-bottom: 1px solid var(--border); }
+    .mcd-table-row:last-child { border-bottom: none; }
+    .mcd-table-row.pk { color: var(--sig); font-weight: 700; }
+    .mcd-table-row.fk { color: #f59e0b; }
+    .mcd-assoc {
+      border: 1.5px solid var(--text2); border-radius: 4px;
+      display: inline-block; padding: .4rem .9rem;
+      font-size: .82rem; color: var(--text2);
+      background: var(--bg3); font-weight: 600;
+    }
+    .mcd-wrap {
+      display: flex; align-items: center; gap: 1rem;
+      flex-wrap: wrap; justify-content: center;
+      padding: 1.5rem; background: var(--bg2);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      margin: 1rem 0;
+    }
+    .cardinality { font-size: .75rem; color: var(--amber); font-weight: 700; }
+    .mcd-leg { display: flex; flex-direction: column; align-items: center; gap: .25rem; }
+  </style>
+</head>
+<body class="sig">
+
+<!-- ══ NAVBAR ══════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo">🎓 <span>BAC STMG</span> 2026</a>
+    <div class="navbar-links">
+      <a href="economie.html" class="nav-eco">Économie</a>
+      <a href="droit.html" class="nav-droit">Droit</a>
+      <a href="management.html" class="nav-mgmt">Management</a>
+      <a href="gestion-marketing.html" class="nav-sg">Gestion</a>
+      <a href="sig.html" class="nav-sig" style="font-weight:700;">SIG</a>
+      <a href="sciences-gestion.html" class="nav-sg">Sc. Gestion</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ PAGE HEADER ════════════════════════════════════════════ -->
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">SIG — Systèmes d'Information de Gestion</span>
+    </div>
+    <div class="page-header-inner" style="margin-top:1.5rem;">
+      <div class="page-header-icon">💻</div>
+      <div class="page-header-text">
+        <h1 style="color:var(--sig);">Systèmes d'Information de Gestion</h1>
+        <p>Spécialité Terminale STMG · Programme complet : SI, MCD/MLD, SQL, ERP, BI, sécurité et transformation numérique.</p>
+        <div class="page-header-badges">
+          <span class="badge badge-sig">Terminale STMG</span>
+          <span class="badge badge-neutral">8 chapitres</span>
+          <span class="badge badge-success">Exercices corrigés</span>
+          <span class="badge badge-warning">Quiz interactifs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LAYOUT PRINCIPAL ════════════════════════════════════════ -->
+<div class="container">
+  <div class="page-layout">
+
+    <!-- ── Sidebar ─────────────────────────────────────────── -->
+    <aside class="sidebar">
+
+      <!-- Progression globale -->
+      <div class="overall-progress-wrap">
+        <span class="overall-progress-label">Progression</span>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill overall-progress-fill" style="width:0%"></div>
+        </div>
+        <span class="overall-progress-label" style="margin-top:.35rem;" id="prog-label">0/8 chapitres vus (0%)</span>
+      </div>
+
+      <!-- TOC sidebar -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">📋 Sommaire</div>
+        <a href="#ch1" class="sidebar-link">1 · Le Système d'Information</a>
+        <a href="#ch2" class="sidebar-link">2 · Modélisation MCD/MLD</a>
+        <a href="#ch3" class="sidebar-link">3 · Bases de données & SQL</a>
+        <a href="#ch4" class="sidebar-link">4 · ERP et PGI</a>
+        <a href="#ch5" class="sidebar-link">5 · CRM et Business Intelligence</a>
+        <a href="#ch6" class="sidebar-link">6 · Sécurité du SI</a>
+        <a href="#ch7" class="sidebar-link">7 · Modélisation des traitements</a>
+        <a href="#ch8" class="sidebar-link">8 · Projet SI & Transformation numérique</a>
+      </div>
+
+      <!-- Autres matières -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">📚 Autres matières</div>
+        <a href="economie.html" class="sidebar-link">📊 Économie</a>
+        <a href="droit.html" class="sidebar-link">⚖️ Droit</a>
+        <a href="management.html" class="sidebar-link">🏢 Management</a>
+        <a href="gestion-marketing.html" class="sidebar-link">📱 Gestion & Marketing</a>
+        <a href="sciences-gestion.html" class="sidebar-link">🔢 Sciences de Gestion</a>
+      </div>
+
+    </aside>
+
+    <!-- ── Contenu principal ───────────────────────────────── -->
+    <main>
+
+      <!-- TOC inline -->
+      <div class="toc">
+        <div class="toc-title">📋 Table des matières</div>
+        <div class="toc-grid">
+          <a href="#ch1" class="toc-item"><span class="toc-item-num">01</span>Le Système d'Information (SI)</a>
+          <a href="#ch2" class="toc-item"><span class="toc-item-num">02</span>Modélisation MCD / MLD</a>
+          <a href="#ch3" class="toc-item"><span class="toc-item-num">03</span>Bases de données & SQL</a>
+          <a href="#ch4" class="toc-item"><span class="toc-item-num">04</span>ERP et PGI</a>
+          <a href="#ch5" class="toc-item"><span class="toc-item-num">05</span>CRM et Business Intelligence</a>
+          <a href="#ch6" class="toc-item"><span class="toc-item-num">06</span>Sécurité du SI</a>
+          <a href="#ch7" class="toc-item"><span class="toc-item-num">07</span>Modélisation des traitements</a>
+          <a href="#ch8" class="toc-item"><span class="toc-item-num">08</span>Projet SI & Transformation numérique</a>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 1 — Le Système d'Information
+      ══════════════════════════════════════════════════ -->
+      <section id="ch1" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">1</div>
+          <h2>Le Système d'Information (SI)</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch1" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch1" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Définition — Système d'Information (SI)</div>
+          <p>Ensemble <strong>organisé de ressources</strong> (humaines, matérielles, logicielles et procédures) permettant de <strong>collecter, stocker, traiter et diffuser</strong> l'information au sein d'une organisation.</p>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Les 4 composantes du SI</h3>
+
+        <!-- Schéma composantes -->
+        <div class="mcd-wrap" style="gap:1.5rem;">
+          <div style="text-align:center;">
+            <div class="schema-box accent" style="background:rgba(124,58,237,.2);border-color:var(--sig);color:#c4b5fd;min-width:140px;">💾 Données<br><small style="font-weight:400;font-size:.75rem;color:var(--text2);">informations stockées</small></div>
+          </div>
+          <div style="text-align:center;">
+            <div class="schema-box" style="min-width:140px;">⚙️ Traitements<br><small style="font-weight:400;font-size:.75rem;color:var(--text2);">opérations sur données</small></div>
+          </div>
+          <div style="text-align:center;">
+            <div class="schema-box" style="min-width:140px;">👥 Acteurs<br><small style="font-weight:400;font-size:.75rem;color:var(--text2);">humains & machines</small></div>
+          </div>
+          <div style="text-align:center;">
+            <div class="schema-box" style="min-width:140px;">📋 Règles de gestion<br><small style="font-weight:400;font-size:.75rem;color:var(--text2);">procédures & contraintes</small></div>
+          </div>
+        </div>
+
+        <div class="def-box" style="margin-top:1rem;">
+          <div class="def-title">📖 SI vs Système informatique</div>
+          <p>Le <strong>système informatique</strong> désigne uniquement les équipements numériques (ordinateurs, logiciels, réseaux). Le <strong>SI est plus large</strong> : il inclut aussi les <strong>humains, procédures et règles</strong> qui gèrent l'information.</p>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Finalités du SI</h3>
+        <div class="key-points">
+          <div class="key-points-title">🎯 Les 3 finalités</div>
+          <ul>
+            <li><strong>Décisionnel</strong> — fournir des informations aux dirigeants pour prendre des décisions (tableaux de bord, reporting)</li>
+            <li><strong>Opérationnel</strong> — gérer les opérations quotidiennes (commandes, factures, stocks, paie)</li>
+            <li><strong>Communication</strong> — assurer les échanges internes (intranet) et externes (e-mail, site web)</li>
+          </ul>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">🔑 À retenir — SI ouvert vs SI fermé</div>
+          <div class="formula"><strong>SI ouvert</strong> : connecté à l'extérieur (ERP, e-commerce, EDI)</div>
+          <div class="formula" style="margin-top:.5rem;"><strong>SI fermé</strong> : usage interne uniquement (comptabilité interne, fichier RH local)</div>
+        </div>
+
+        <!-- Exercice 1 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>📝 Exercice 1 — Identifier les composantes d'un SI</h4>
+            <button class="correction-toggle btn btn-sm">📖 Voir la correction</button>
+          </div>
+          <div class="exercise-body">
+            <p><strong>Situation :</strong> La boulangerie Dupont emploie 3 vendeurs. Chaque vente est enregistrée sur une caisse enregistreuse reliée à un logiciel de gestion des stocks. Un tableau Excel hebdomadaire est envoyé par mail au comptable. La règle est : toute rupture de stock doit être signalée avant 18h.</p>
+            <div class="exercise-question">
+              Identifiez les <strong>données</strong>, les <strong>traitements</strong>, les <strong>acteurs</strong> et les <strong>règles de gestion</strong> du SI de cette boulangerie.
+            </div>
+            <div class="correction-content">
+              <div class="example-box">
+                <div class="example-title">✅ Correction</div>
+                <p><strong>Données :</strong> quantités vendues, prix, niveaux de stock, coordonnées fournisseurs</p>
+                <p><strong>Traitements :</strong> enregistrement des ventes, mise à jour des stocks, génération du tableau Excel, envoi du mail</p>
+                <p><strong>Acteurs :</strong> vendeurs (saisie), caisse enregistreuse, logiciel de gestion, comptable (réception)</p>
+                <p><strong>Règles de gestion :</strong> toute rupture de stock signalée avant 18h ; envoi hebdomadaire du tableau au comptable</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quiz ch1 -->
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 1</h3>
+          <div class="quiz-question">
+            <p>Quelle composante du SI désigne les opérations effectuées sur les données ?</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Les données sont les informations stockées, pas les opérations.">
+                <span class="quiz-option-letter">A</span> Les données
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Les traitements sont les opérations (calculs, tri, mise à jour) réalisées sur les données.">
+                <span class="quiz-option-letter">B</span> Les traitements
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Les acteurs sont les personnes ou machines qui utilisent le SI.">
+                <span class="quiz-option-letter">C</span> Les acteurs
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Les règles de gestion sont les procédures et contraintes encadrant l'usage du SI.">
+                <span class="quiz-option-letter">D</span> Les règles de gestion
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 2 — Modélisation MCD/MLD
+      ══════════════════════════════════════════════════ -->
+      <section id="ch2" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">2</div>
+          <h2>La modélisation des données (MCD / MLD)</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch2" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch2" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 MCD — Modèle Conceptuel de Données</div>
+          <p>Représentation graphique des <strong>entités</strong> du monde réel et de leurs <strong>associations</strong>. Permet de modéliser la structure des données avant de créer une base de données.</p>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Vocabulaire clé du MCD</h3>
+        <div class="key-points">
+          <div class="key-points-title">📌 Concepts essentiels</div>
+          <ul>
+            <li><strong>Entité</strong> — objet du monde réel que l'on souhaite représenter (ex : CLIENT, COMMANDE, PRODUIT)</li>
+            <li><strong>Propriété</strong> — caractéristique d'une entité (ex : nom, prénom, date_naissance)</li>
+            <li><strong>Identifiant</strong> — propriété unique permettant d'identifier chaque occurrence (ex : id_client, num_commande). Souligné sur le MCD.</li>
+            <li><strong>Association</strong> — lien sémantique entre entités (ex : un CLIENT passe une COMMANDE)</li>
+            <li><strong>Occurrence</strong> — valeur concrète d'une entité (ex : le client n°42 Jean Dupont)</li>
+          </ul>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Les cardinalités</h3>
+        <div class="formula-box">
+          <div class="formula-title">🔑 Lecture des cardinalités</div>
+          <p style="color:var(--text2);margin-bottom:.5rem;">Les cardinalités indiquent le <strong>minimum</strong> et le <strong>maximum</strong> d'associations possibles entre deux entités.</p>
+          <div class="formula">(0,1) = zéro ou un · (1,1) = exactement un · (1,n) = au moins un · (0,n) = zéro ou plusieurs</div>
+          <p style="color:var(--text2);margin-top:.75rem;font-size:.9rem;"><strong>Méthode :</strong> On lit du côté de l'entité vers l'association : "Un CLIENT passe <strong>(0,n)</strong> commandes" = un client peut passer aucune ou plusieurs commandes.</p>
+        </div>
+
+        <!-- MCD exemple -->
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Exemple de MCD — Commande client</h3>
+        <div class="mcd-wrap">
+          <div class="mcd-leg">
+            <div class="mcd-table">
+              <div class="mcd-table-head">CLIENT</div>
+              <div class="mcd-table-row pk">id_client</div>
+              <div class="mcd-table-row">nom</div>
+              <div class="mcd-table-row">prenom</div>
+              <div class="mcd-table-row">email</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:.25rem;">
+            <span class="cardinality">(0,n)</span>
+            <span style="color:var(--text2);font-size:1.4rem;">↔</span>
+            <span class="cardinality">(1,1)</span>
+          </div>
+          <div class="mcd-leg">
+            <div class="mcd-assoc">passe</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:.25rem;">
+            <span class="cardinality">(1,1)</span>
+            <span style="color:var(--text2);font-size:1.4rem;">↔</span>
+            <span class="cardinality">(0,n)</span>
+          </div>
+          <div class="mcd-leg">
+            <div class="mcd-table">
+              <div class="mcd-table-head">COMMANDE</div>
+              <div class="mcd-table-row pk">num_commande</div>
+              <div class="mcd-table-row">date_commande</div>
+              <div class="mcd-table-row">montant_total</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:.25rem;">
+            <span class="cardinality">(1,n)</span>
+            <span style="color:var(--text2);font-size:1.4rem;">↔</span>
+            <span class="cardinality">(0,n)</span>
+          </div>
+          <div class="mcd-leg">
+            <div class="mcd-assoc">contient<br><small style="font-size:.72rem;color:var(--text2);">quantite</small></div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:.25rem;">
+            <span class="cardinality">(0,n)</span>
+            <span style="color:var(--text2);font-size:1.4rem;">↔</span>
+            <span class="cardinality">(1,n)</span>
+          </div>
+          <div class="mcd-leg">
+            <div class="mcd-table">
+              <div class="mcd-table-head">PRODUIT</div>
+              <div class="mcd-table-row pk">ref_produit</div>
+              <div class="mcd-table-row">libelle</div>
+              <div class="mcd-table-row">prix_unitaire</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Règles de passage MCD → MLD</h3>
+        <div class="formula-box">
+          <div class="formula-title">🔑 Règles fondamentales</div>
+          <p style="color:var(--text2);margin-bottom:.5rem;"><strong>Règle 1 — Association (1,n) / (0,1) ou (1,1) :</strong></p>
+          <div class="formula">La clé étrangère va dans la table du côté (1,1) ou (0,1)</div>
+          <p style="color:var(--text2);margin:.75rem 0 .5rem;"><strong>Règle 2 — Association (n,n) :</strong></p>
+          <div class="formula">Création d'une nouvelle table avec les deux identifiants comme clé primaire composite</div>
+        </div>
+
+        <!-- MLD exemple -->
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">MLD correspondant</h3>
+        <div class="example-box">
+          <div class="example-title">🗂️ Modèle Logique de Données</div>
+          <p><strong>CLIENT</strong>(<u>id_client</u>, nom, prenom, email)</p>
+          <p><strong>COMMANDE</strong>(<u>num_commande</u>, date_commande, montant_total, <em>#id_client</em>)</p>
+          <p style="margin-top:.5rem;font-size:.85rem;color:var(--text2);">→ #id_client = clé étrangère (association 1,n entre CLIENT et COMMANDE)</p>
+          <p style="margin-top:.75rem;"><strong>LIGNE_COMMANDE</strong>(<u>#num_commande, #ref_produit</u>, quantite)</p>
+          <p><strong>PRODUIT</strong>(<u>ref_produit</u>, libelle, prix_unitaire)</p>
+          <p style="margin-top:.5rem;font-size:.85rem;color:var(--text2);">→ Table créée pour l'association (n,n) "contient" entre COMMANDE et PRODUIT</p>
+        </div>
+
+        <!-- Exercice 2 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>📝 Exercice 2 — Créer un MCD et passer au MLD</h4>
+            <button class="correction-toggle btn btn-sm">📖 Voir la correction</button>
+          </div>
+          <div class="exercise-body">
+            <p><strong>Situation :</strong> Un club sportif gère des adhérents et des activités. Un adhérent peut s'inscrire à plusieurs activités. Une activité est animée par un seul moniteur. Un moniteur peut animer plusieurs activités.</p>
+            <div class="exercise-question">
+              1. Identifiez les entités et leurs propriétés.<br>
+              2. Représentez le MCD avec les cardinalités.<br>
+              3. Rédigez le MLD correspondant.
+            </div>
+            <div class="correction-content">
+              <div class="example-box">
+                <div class="example-title">✅ Correction</div>
+                <p><strong>1. Entités :</strong></p>
+                <p>ADHÉRENT (id_adherent, nom, prenom, date_naissance) · ACTIVITÉ (id_activite, libelle, horaire) · MONITEUR (id_moniteur, nom, specialite)</p>
+                <p style="margin-top:.75rem;"><strong>2. MCD :</strong></p>
+                <p>ADHÉRENT <strong>(0,n)</strong> — s'inscrit — <strong>(0,n)</strong> ACTIVITÉ</p>
+                <p>ACTIVITÉ <strong>(1,1)</strong> — animée par — <strong>(0,n)</strong> MONITEUR</p>
+                <p style="margin-top:.75rem;"><strong>3. MLD :</strong></p>
+                <p>ADHERENT(<u>id_adherent</u>, nom, prenom, date_naissance)</p>
+                <p>MONITEUR(<u>id_moniteur</u>, nom, specialite)</p>
+                <p>ACTIVITE(<u>id_activite</u>, libelle, horaire, <em>#id_moniteur</em>)</p>
+                <p>INSCRIPTION(<u>#id_adherent, #id_activite</u>, date_inscription)</p>
+                <p style="margin-top:.5rem;font-size:.85rem;color:var(--text2);">→ INSCRIPTION créée car (n,n) · #id_moniteur car (1,1) côté ACTIVITE</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 2</h3>
+          <div class="quiz-question">
+            <p>Dans un MCD, une association (n,n) entre deux entités donne, lors du passage au MLD :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Une clé étrangère s'applique pour les associations (1,n), pas (n,n).">
+                <span class="quiz-option-letter">A</span> Une clé étrangère dans l'une des deux tables
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Une association (n,n) génère une nouvelle table intermédiaire avec les deux identifiants en clé primaire composite.">
+                <span class="quiz-option-letter">B</span> Une nouvelle table avec les deux identifiants
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="L'association (n,n) ne disparaît pas, elle se matérialise en table.">
+                <span class="quiz-option-letter">C</span> Rien, l'association est supprimée
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="La fusion n'est pas une règle de passage MCD→MLD.">
+                <span class="quiz-option-letter">D</span> La fusion des deux tables en une seule
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 3 — Bases de données & SQL
+      ══════════════════════════════════════════════════ -->
+      <section id="ch3" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">3</div>
+          <h2>Les bases de données et SQL</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch3" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch3" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Base de données relationnelle</div>
+          <p>Ensemble de <strong>tables liées entre elles par des relations</strong> (clés étrangères). Gérée par un <strong>SGBD</strong> (Système de Gestion de Base de Données) comme MySQL, PostgreSQL, Oracle, Access ou SQL Server.</p>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Le langage SQL</h3>
+        <div class="def-box">
+          <div class="def-title">📖 SQL — Structured Query Language</div>
+          <p>Langage standard d'interrogation et de manipulation des bases de données relationnelles.</p>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">La requête SELECT</h3>
+        <div class="formula-box">
+          <div class="formula-title">🔑 Structure complète d'une requête SELECT</div>
+          <div class="formula">SELECT colonnes FROM table WHERE condition ORDER BY colonne [ASC|DESC]</div>
+        </div>
+
+        <div class="sql-block">
+<span class="sql-cmt">-- Exemple : clients dont le CA > 1000 € triés par nom</span>
+<span class="sql-kw">SELECT</span> nom, prenom, chiffre_affaires
+<span class="sql-kw">FROM</span> client
+<span class="sql-kw">WHERE</span> chiffre_affaires <span class="sql-kw">&gt;</span> <span class="sql-str">1000</span>
+<span class="sql-kw">ORDER BY</span> nom <span class="sql-kw">ASC</span>;
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Les jointures</h3>
+        <div class="example-box">
+          <div class="example-title">Jointure — relier deux tables</div>
+          <div class="sql-block" style="margin:0;">
+<span class="sql-kw">SELECT</span> c.nom, c.prenom, co.num_commande, co.date_commande
+<span class="sql-kw">FROM</span> client c
+<span class="sql-kw">JOIN</span> commande co <span class="sql-kw">ON</span> c.id_client = co.id_client
+<span class="sql-kw">WHERE</span> co.date_commande <span class="sql-kw">&gt;</span> <span class="sql-str">'2025-01-01'</span>;
+          </div>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Fonctions d'agrégation</h3>
+        <div class="key-points">
+          <div class="key-points-title">🧮 Fonctions SQL essentielles</div>
+          <ul>
+            <li><strong>COUNT(*)</strong> — compte le nombre d'enregistrements</li>
+            <li><strong>SUM(colonne)</strong> — somme des valeurs d'une colonne</li>
+            <li><strong>AVG(colonne)</strong> — moyenne des valeurs</li>
+            <li><strong>MAX(colonne) / MIN(colonne)</strong> — valeur max / min</li>
+            <li><strong>GROUP BY</strong> — regroupe les résultats par valeur d'une colonne</li>
+            <li><strong>HAVING</strong> — filtre appliqué après GROUP BY (comme WHERE mais sur agrégats)</li>
+          </ul>
+        </div>
+
+        <div class="sql-block">
+<span class="sql-cmt">-- Nombre de commandes et total par client</span>
+<span class="sql-kw">SELECT</span> c.nom, <span class="sql-fn">COUNT</span>(co.num_commande) <span class="sql-kw">AS</span> nb_commandes,
+       <span class="sql-fn">SUM</span>(co.montant_total) <span class="sql-kw">AS</span> total_achats
+<span class="sql-kw">FROM</span> client c
+<span class="sql-kw">JOIN</span> commande co <span class="sql-kw">ON</span> c.id_client = co.id_client
+<span class="sql-kw">GROUP BY</span> c.id_client, c.nom
+<span class="sql-kw">HAVING</span> <span class="sql-fn">COUNT</span>(co.num_commande) <span class="sql-kw">&gt;</span> <span class="sql-str">3</span>
+<span class="sql-kw">ORDER BY</span> total_achats <span class="sql-kw">DESC</span>;
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Modification des données</h3>
+        <div class="sql-block">
+<span class="sql-cmt">-- Insérer un client</span>
+<span class="sql-kw">INSERT INTO</span> client (nom, prenom, email) <span class="sql-kw">VALUES</span> (<span class="sql-str">'Martin'</span>, <span class="sql-str">'Sophie'</span>, <span class="sql-str">'s.martin@mail.fr'</span>);
+
+<span class="sql-cmt">-- Modifier un client</span>
+<span class="sql-kw">UPDATE</span> client <span class="sql-kw">SET</span> email = <span class="sql-str">'nouveau@mail.fr'</span> <span class="sql-kw">WHERE</span> id_client = <span class="sql-str">42</span>;
+
+<span class="sql-cmt">-- Supprimer un client</span>
+<span class="sql-kw">DELETE FROM</span> client <span class="sql-kw">WHERE</span> id_client = <span class="sql-str">42</span>;
+        </div>
+
+        <!-- Exercice 3 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>📝 Exercice 3 — Requêtes SQL</h4>
+            <button class="correction-toggle btn btn-sm">📖 Voir la correction</button>
+          </div>
+          <div class="exercise-body">
+            <p><strong>Schéma :</strong> PRODUIT(<u>ref_produit</u>, libelle, prix_ht, categorie) · LIGNE_COMMANDE(<u>#num_commande, #ref_produit</u>, quantite)</p>
+            <div class="exercise-question">
+              1. Listez tous les produits de la catégorie "Informatique" triés par prix croissant.<br>
+              2. Calculez la quantité totale vendue pour chaque produit.<br>
+              3. Trouvez les produits dont la quantité totale vendue dépasse 50 unités.
+            </div>
+            <div class="correction-content">
+              <div class="example-box">
+                <div class="example-title">✅ Correction</div>
+                <div class="sql-block" style="margin:.5rem 0;">
+<span class="sql-cmt">-- Question 1</span>
+<span class="sql-kw">SELECT</span> libelle, prix_ht
+<span class="sql-kw">FROM</span> produit
+<span class="sql-kw">WHERE</span> categorie = <span class="sql-str">'Informatique'</span>
+<span class="sql-kw">ORDER BY</span> prix_ht <span class="sql-kw">ASC</span>;
+
+<span class="sql-cmt">-- Question 2</span>
+<span class="sql-kw">SELECT</span> p.libelle, <span class="sql-fn">SUM</span>(lc.quantite) <span class="sql-kw">AS</span> total_vendu
+<span class="sql-kw">FROM</span> produit p
+<span class="sql-kw">JOIN</span> ligne_commande lc <span class="sql-kw">ON</span> p.ref_produit = lc.ref_produit
+<span class="sql-kw">GROUP BY</span> p.ref_produit, p.libelle;
+
+<span class="sql-cmt">-- Question 3</span>
+<span class="sql-kw">SELECT</span> p.libelle, <span class="sql-fn">SUM</span>(lc.quantite) <span class="sql-kw">AS</span> total_vendu
+<span class="sql-kw">FROM</span> produit p
+<span class="sql-kw">JOIN</span> ligne_commande lc <span class="sql-kw">ON</span> p.ref_produit = lc.ref_produit
+<span class="sql-kw">GROUP BY</span> p.ref_produit, p.libelle
+<span class="sql-kw">HAVING</span> <span class="sql-fn">SUM</span>(lc.quantite) <span class="sql-kw">&gt;</span> <span class="sql-str">50</span>;
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 3</h3>
+          <div class="quiz-question">
+            <p>Quel mot-clé SQL permet de filtrer des résultats après un GROUP BY ?</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="WHERE filtre avant le regroupement, pas après.">
+                <span class="quiz-option-letter">A</span> WHERE
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="ORDER BY trie les résultats, il ne filtre pas.">
+                <span class="quiz-option-letter">B</span> ORDER BY
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! HAVING s'applique après GROUP BY et permet de filtrer sur des fonctions d'agrégation.">
+                <span class="quiz-option-letter">C</span> HAVING
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="LIMIT limite le nombre de lignes retournées, ce n'est pas un filtre d'agrégation.">
+                <span class="quiz-option-letter">D</span> LIMIT
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 4 — ERP et PGI
+      ══════════════════════════════════════════════════ -->
+      <section id="ch4" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">4</div>
+          <h2>Les ERP et PGI</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch4" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch4" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 ERP / PGI — Définition</div>
+          <p><strong>ERP</strong> (Enterprise Resource Planning) = <strong>PGI</strong> (Progiciel de Gestion Intégré). Système logiciel intégré couvrant <strong>toutes les fonctions</strong> de l'entreprise (achats, ventes, production, comptabilité, RH) avec une <strong>base de données unique et partagée</strong>.</p>
+        </div>
+
+        <div class="example-box">
+          <div class="example-title">💡 Exemples d'ERP</div>
+          <p><strong>SAP</strong> (grandes entreprises) · <strong>Oracle ERP</strong> · <strong>Sage</strong> (PME) · <strong>Microsoft Dynamics</strong> · <strong>Odoo</strong> (open source)</p>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Avantages et inconvénients</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>✅ Avantages</th>
+                <th>❌ Inconvénients</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Cohérence</strong> de l'information (données partagées)</td><td><strong>Coût élevé</strong> (achat, déploiement, formation)</td></tr>
+              <tr><td><strong>Gain de productivité</strong> (automatisation)</td><td><strong>Rigidité</strong> (personnalisation limitée)</td></tr>
+              <tr><td><strong>Traçabilité</strong> des opérations</td><td><strong>Dépendance à l'éditeur</strong></td></tr>
+              <tr><td><strong>Vue globale</strong> en temps réel</td><td><strong>Conduite du changement</strong> complexe (résistance)</td></tr>
+              <tr><td><strong>Interopérabilité</strong> entre services</td><td><strong>Risque de panne</strong> généralisée</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Exercice 4 -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>📝 Exercice 4 — Justifier le choix d'un ERP</h4>
+            <button class="correction-toggle btn btn-sm">📖 Voir la correction</button>
+          </div>
+          <div class="exercise-body">
+            <p><strong>Cas :</strong> La société Techniparts (150 salariés, industrie) utilise actuellement 5 logiciels différents pour la comptabilité, les achats, la production, les ventes et les RH. Des doublons de données existent et la communication entre services est difficile.</p>
+            <div class="exercise-question">
+              Justifiez l'intérêt d'adopter un ERP pour Techniparts. Identifiez aussi deux risques à anticiper.
+            </div>
+            <div class="correction-content">
+              <div class="example-box">
+                <div class="example-title">✅ Correction</div>
+                <p><strong>Intérêts :</strong></p>
+                <p>— Suppression des doublons : base unique partagée entre tous les services</p>
+                <p>— Meilleure communication inter-services : les données de production alimentent automatiquement les achats et la comptabilité</p>
+                <p>— Traçabilité améliorée et gain de temps (saisies uniques)</p>
+                <p>— Tableau de bord global en temps réel pour les dirigeants</p>
+                <p style="margin-top:.75rem;"><strong>Risques :</strong></p>
+                <p>— Coût de mise en place élevé (licence + paramétrage + formation)</p>
+                <p>— Résistance au changement des salariés (conduite du changement à prévoir)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 4</h3>
+          <div class="quiz-question">
+            <p>Qu'est-ce qui distingue principalement un ERP d'une collection de logiciels séparés ?</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Le coût n'est pas le critère distinctif — un ERP coûte souvent plus cher.">
+                <span class="quiz-option-letter">A</span> Un ERP coûte moins cher
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! L'ERP repose sur une base de données unique et partagée, garantissant la cohérence et l'unicité des informations.">
+                <span class="quiz-option-letter">B</span> Une base de données unique et partagée entre tous les modules
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="L'ERP ne remplace pas les salariés, il automatise certaines tâches.">
+                <span class="quiz-option-letter">C</span> Il supprime le besoin de salariés
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Faux : un ERP intègre plusieurs modules (compta, RH, production, ventes...).">
+                <span class="quiz-option-letter">D</span> Il gère une seule fonction de l'entreprise
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 5 — CRM et Business Intelligence
+      ══════════════════════════════════════════════════ -->
+      <section id="ch5" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">5</div>
+          <h2>CRM et Business Intelligence</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch5" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch5" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 CRM — Customer Relationship Management</div>
+          <p>Logiciel de <strong>gestion de la relation client</strong> centralisant l'historique des contacts, des achats, des réclamations et du SAV. Objectif : fidéliser les clients et personnaliser la relation.</p>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Entonnoir de conversion client</h3>
+        <div class="schema-diagram">
+          <div class="schema-box" style="background:rgba(124,58,237,.15);border-color:var(--sig);color:#c4b5fd;">🎯 Prospect<br><small>contact potentiel</small></div>
+          <div class="schema-arrow">→</div>
+          <div class="schema-box">📞 Lead<br><small>prospect qualifié</small></div>
+          <div class="schema-arrow">→</div>
+          <div class="schema-box" style="background:rgba(22,163,74,.1);border-color:var(--green);color:#86efac;">🛒 Client<br><small>1er achat</small></div>
+          <div class="schema-arrow">→</div>
+          <div class="schema-box" style="background:rgba(245,158,11,.1);border-color:var(--amber);color:#fcd34d;">⭐ Fidèle<br><small>achats répétés</small></div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Business Intelligence (BI)</div>
+          <p>Ensemble des outils et méthodes permettant de <strong>collecter, analyser et visualiser</strong> les données de l'entreprise pour faciliter la <strong>prise de décision</strong>.</p>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">📌 Concepts clés de la BI</div>
+          <ul>
+            <li><strong>Data Warehouse</strong> — entrepôt de données historisées et agrégées provenant de différentes sources</li>
+            <li><strong>Tableau de bord décisionnel</strong> — visualisation synthétique des KPI (indicateurs clés de performance)</li>
+            <li><strong>KPI</strong> (Key Performance Indicator) — indicateur mesurable évaluant l'atteinte d'un objectif</li>
+            <li><strong>OLAP</strong> (Online Analytical Processing) — traitement analytique multidimensionnel des données</li>
+            <li><strong>Big Data</strong> — données massives caractérisées par les 3V : <strong>Volume</strong> (quantité), <strong>Vélocité</strong> (vitesse), <strong>Variété</strong> (types)</li>
+          </ul>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 5</h3>
+          <div class="quiz-question">
+            <p>Quel outil stocke des données historisées et agrégées pour l'analyse décisionnelle ?</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Le CRM gère la relation client, pas le stockage analytique.">
+                <span class="quiz-option-letter">A</span> CRM
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="L'ERP gère les opérations courantes, pas l'analyse décisionnelle historisée.">
+                <span class="quiz-option-letter">B</span> ERP
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Le Data Warehouse est un entrepôt de données historisées conçu pour l'analyse et le reporting décisionnel.">
+                <span class="quiz-option-letter">C</span> Data Warehouse
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Le tableau de bord visualise les KPI, mais ne stocke pas les données lui-même.">
+                <span class="quiz-option-letter">D</span> Tableau de bord
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 6 — Sécurité du SI
+      ══════════════════════════════════════════════════ -->
+      <section id="ch6" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">6</div>
+          <h2>La sécurité du SI</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch6" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch6" class="ch-done">
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">🔑 DICP — Les 4 critères de sécurité</div>
+          <div class="formula"><strong>D</strong>isponibilité · <strong>I</strong>ntégrité · <strong>C</strong>onfidentialité · <strong>P</strong>reuve (traçabilité)</div>
+          <p style="color:var(--text2);margin-top:.75rem;font-size:.9rem;">
+            <strong>D</strong>isponibilité = le SI est accessible quand on en a besoin<br>
+            <strong>I</strong>ntégrité = les données ne sont pas altérées<br>
+            <strong>C</strong>onfidentialité = seules les personnes autorisées accèdent aux données<br>
+            <strong>P</strong>reuve = les actions sont tracées et vérifiables (non-répudiation)
+          </p>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Menaces et mesures de protection</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Menace</th><th>Description</th><th>Mesure de protection</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Virus / Malware</strong></td><td>Logiciel malveillant altérant le SI</td><td>Antivirus, mises à jour</td></tr>
+              <tr><td><strong>Ransomware</strong></td><td>Chiffre les données pour rançon</td><td>Sauvegardes régulières, PCA</td></tr>
+              <tr><td><strong>Phishing</strong></td><td>Usurpation d'identité par mail</td><td>Formation, filtre anti-spam</td></tr>
+              <tr><td><strong>Intrusion</strong></td><td>Accès non autorisé au SI</td><td>Pare-feu, MFA, VPN</td></tr>
+              <tr><td><strong>Perte de données</strong></td><td>Suppression accidentelle ou panne</td><td>Plan de sauvegarde (3-2-1)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="notice-box">
+          <div class="notice-title">⚠️ RGPD — Règlement Général sur la Protection des Données</div>
+          <p>Règlement européen en vigueur depuis <strong>mai 2018</strong>. Encadre la collecte et le traitement des données personnelles. Droits des personnes : accès, rectification, effacement (droit à l'oubli), portabilité, opposition. L'entreprise doit désigner un <strong>DPO</strong> (Délégué à la Protection des Données) si elle traite des données à grande échelle.</p>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">📌 Mesures techniques de sécurité</div>
+          <ul>
+            <li><strong>Pare-feu (firewall)</strong> — contrôle les flux réseau entrants et sortants</li>
+            <li><strong>Chiffrement</strong> — rend les données illisibles sans clé (SSL/TLS, AES)</li>
+            <li><strong>Authentification forte (MFA)</strong> — mot de passe + second facteur (SMS, appli)</li>
+            <li><strong>Plan de Continuité d'Activité (PCA)</strong> — procédures pour maintenir l'activité en cas d'incident</li>
+            <li><strong>Audit de sécurité</strong> — évaluation régulière des vulnérabilités</li>
+          </ul>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 6</h3>
+          <div class="quiz-question">
+            <p>Parmi les critères DICP, lequel garantit que les données ne sont accessibles qu'aux personnes autorisées ?</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="La disponibilité garantit l'accès au SI quand on en a besoin, pas la restriction d'accès.">
+                <span class="quiz-option-letter">A</span> Disponibilité
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="L'intégrité garantit que les données ne sont pas altérées.">
+                <span class="quiz-option-letter">B</span> Intégrité
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! La confidentialité garantit que seules les personnes habilitées peuvent accéder aux données.">
+                <span class="quiz-option-letter">C</span> Confidentialité
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="La preuve (traçabilité) assure que les actions sont enregistrées et vérifiables.">
+                <span class="quiz-option-letter">D</span> Preuve
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 7 — Modélisation des traitements
+      ══════════════════════════════════════════════════ -->
+      <section id="ch7" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">7</div>
+          <h2>La modélisation des traitements</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch7" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch7" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Processus</div>
+          <p>Enchaînement d'<strong>activités organisées</strong> pour produire un résultat à partir d'un <strong>événement déclencheur</strong>. Ex : le processus "traiter une commande" est déclenché par la réception d'une commande client.</p>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">📌 Concepts essentiels</div>
+          <ul>
+            <li><strong>Événement déclencheur</strong> — fait qui initie le processus (ex : réception d'un bon de commande)</li>
+            <li><strong>Résultat / livrable</strong> — sortie du processus (ex : commande livrée, facture émise)</li>
+            <li><strong>Logigramme</strong> — représentation graphique du processus avec des formes standardisées (début, action, décision, fin)</li>
+            <li><strong>Diagramme de flux</strong> — schéma montrant les échanges d'informations entre acteurs</li>
+            <li><strong>Procédure</strong> — description détaillée et séquentielle des étapes d'un processus</li>
+            <li><strong>Automatisation / RPA</strong> (Robotic Process Automation) — robots logiciels exécutant des tâches répétitives</li>
+          </ul>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Exemple — Processus de traitement d'une commande</h3>
+        <div class="schema-diagram" style="flex-direction:column;align-items:flex-start;gap:.5rem;padding:1.25rem;">
+          <div style="display:flex;align-items:center;gap:.75rem;">
+            <div class="schema-box" style="background:rgba(124,58,237,.2);border-color:var(--sig);min-width:180px;">📥 Réception commande<br><small style="color:var(--text2);">Événement déclencheur</small></div>
+            <span class="schema-arrow">↓</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.75rem;padding-left:2rem;">
+            <div class="schema-box" style="min-width:180px;">✅ Vérification disponibilité stock</div>
+            <span class="schema-arrow">↓ (si disponible)</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.75rem;padding-left:4rem;">
+            <div class="schema-box" style="min-width:180px;">📦 Préparation de la commande</div>
+            <span class="schema-arrow">↓</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.75rem;padding-left:4rem;">
+            <div class="schema-box" style="min-width:180px;">🚚 Expédition</div>
+            <span class="schema-arrow">↓</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:.75rem;padding-left:4rem;">
+            <div class="schema-box" style="background:rgba(22,163,74,.1);border-color:var(--green);color:#86efac;min-width:180px;">🧾 Émission facture<br><small style="color:var(--text2);">Résultat</small></div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 7</h3>
+          <div class="quiz-question">
+            <p>Le RPA (Robotic Process Automation) consiste à :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Le RPA concerne les logiciels, pas les robots physiques.">
+                <span class="quiz-option-letter">A</span> Fabriquer des robots industriels
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Le RPA automatise les tâches répétitives via des robots logiciels qui imitent les actions humaines sur les applications.">
+                <span class="quiz-option-letter">B</span> Automatiser des tâches répétitives via des robots logiciels
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="La modélisation de données relève du MCD/MLD, pas du RPA.">
+                <span class="quiz-option-letter">C</span> Modéliser les données d'une base
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="La sécurité est un domaine distinct de l'automatisation des processus.">
+                <span class="quiz-option-letter">D</span> Sécuriser les données personnelles
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════
+           CHAPITRE 8 — Projet SI et Transformation numérique
+      ══════════════════════════════════════════════════ -->
+      <section id="ch8" class="chapter">
+        <div class="chapter-header">
+          <div class="chapter-number">8</div>
+          <h2>Le projet SI et la transformation numérique</h2>
+          <div class="ch-done-wrap">
+            <label for="done-ch8" style="font-size:.8rem;color:var(--text2);">Vu ✓</label>
+            <input type="checkbox" id="done-ch8" class="ch-done">
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">📖 Projet SI</div>
+          <p>Démarche structurée visant à <strong>mettre en place ou faire évoluer</strong> un système d'information. Comprend des phases : cadrage, conception, développement, tests, déploiement, maintenance.</p>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">MOA vs MOE</h3>
+        <div class="grid-2" style="margin:1rem 0;">
+          <div class="def-box">
+            <div class="def-title">🏢 MOA — Maîtrise d'Ouvrage</div>
+            <p>Représente le <strong>client / donneur d'ordre</strong>. Exprime les besoins, valide les livrables. Rédige le <strong>cahier des charges fonctionnel</strong>.</p>
+          </div>
+          <div class="def-box">
+            <div class="def-title">⚙️ MOE — Maîtrise d'Oeuvre</div>
+            <p>Représente le <strong>réalisateur technique</strong>. Conçoit et développe la solution. Rédige le <strong>cahier des charges technique</strong>.</p>
+          </div>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Méthodes de gestion de projet</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Méthode</th><th>Description</th><th>Avantage</th><th>Limite</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Cascade (Waterfall)</strong></td>
+                <td>Phases séquentielles : analyse → conception → dev → test → livraison</td>
+                <td>Simple, structuré</td>
+                <td>Peu flexible aux changements</td>
+              </tr>
+              <tr>
+                <td><strong>Agile (Scrum)</strong></td>
+                <td>Sprints courts (2-4 sem.), livraisons itératives, équipe auto-organisée</td>
+                <td>Flexible, adaptatif</td>
+                <td>Scope difficile à cadrer</td>
+              </tr>
+              <tr>
+                <td><strong>Kanban</strong></td>
+                <td>Tableau visuel des tâches (À faire / En cours / Terminé)</td>
+                <td>Visualisation, flux continu</td>
+                <td>Moins structuré qu'Agile</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Cloud computing</h3>
+        <div class="key-points">
+          <div class="key-points-title">☁️ Modèles de service Cloud</div>
+          <ul>
+            <li><strong>IaaS</strong> (Infrastructure as a Service) — location de serveurs et infrastructure (ex : AWS, Azure)</li>
+            <li><strong>PaaS</strong> (Platform as a Service) — plateforme de développement en ligne (ex : Google App Engine)</li>
+            <li><strong>SaaS</strong> (Software as a Service) — logiciel accessible via internet (ex : Google Workspace, Salesforce)</li>
+          </ul>
+        </div>
+
+        <h3 style="color:var(--sig);margin:1.5rem 0 .75rem;">Technologies de la transformation numérique</h3>
+        <div class="key-points">
+          <div class="key-points-title">🚀 Technologies clés</div>
+          <ul>
+            <li><strong>Intelligence artificielle (IA)</strong> — automatisation intelligente, reconnaissance, prédiction</li>
+            <li><strong>Blockchain</strong> — registre décentralisé, transparent et inaltérable (traçabilité, cryptomonnaies)</li>
+            <li><strong>IoT</strong> (Internet des Objets) — objets connectés remontant des données en temps réel</li>
+            <li><strong>Big Data & Data Science</strong> — analyse de volumes massifs de données pour décisions</li>
+          </ul>
+        </div>
+
+        <!-- Exercice BAC -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>📝 Exercice BAC — Analyser et proposer une évolution du SI</h4>
+            <span class="badge badge-sig">Type BAC</span>
+            <button class="correction-toggle btn btn-sm">📖 Voir la correction</button>
+          </div>
+          <div class="exercise-body">
+            <p><strong>Cas :</strong> La chaîne de restaurants "FoodZen" (30 établissements) gère ses commandes par téléphone, ses stocks sur des fichiers Excel locaux et sa comptabilité avec un logiciel isolé. Les dirigeants souffrent d'un manque de vision globale, de doublons et d'une réactivité insuffisante face aux ruptures de stock.</p>
+            <div class="exercise-question">
+              1. Identifiez les dysfonctionnements du SI actuel de FoodZen.<br>
+              2. Proposez une évolution du SI et justifiez vos choix technologiques.<br>
+              3. Identifiez les risques de ce projet de transformation.
+            </div>
+            <div class="correction-content">
+              <div class="example-box">
+                <div class="example-title">✅ Correction type BAC</div>
+                <p><strong>1. Dysfonctionnements :</strong></p>
+                <p>— SI fragmenté : 3 outils non interconnectés → incohérences de données</p>
+                <p>— Absence de vision globale : pas de tableau de bord consolidé pour les 30 restaurants</p>
+                <p>— Gestion des stocks inefficace : fichiers Excel locaux non synchronisés → ruptures non anticipées</p>
+                <p>— Prise de commandes manuelle (téléphone) → risque d'erreur et délais</p>
+                <p style="margin-top:.75rem;"><strong>2. Propositions d'évolution :</strong></p>
+                <p>— Déployer un <strong>ERP en mode SaaS</strong> (ex : Odoo ou Sage) pour intégrer stocks, commandes et comptabilité</p>
+                <p>— Mettre en place un <strong>CRM</strong> pour centraliser la relation client et les commandes en ligne</p>
+                <p>— Installer un système de <strong>capteurs IoT</strong> sur les frigos pour anticiper les ruptures</p>
+                <p>— Créer un <strong>tableau de bord BI</strong> accessible en temps réel par la direction</p>
+                <p style="margin-top:.75rem;"><strong>3. Risques :</strong></p>
+                <p>— Coût de déploiement et de formation élevé</p>
+                <p>— Résistance des employés au changement (conduite du changement à prévoir)</p>
+                <p>— Risque de panne généralisée si le SaaS est inaccessible (dépendance internet)</p>
+                <p>— Risque de sécurité et RGPD (données clients en ligne)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section">
+          <h3>🧠 Quiz — Chapitre 8</h3>
+          <div class="quiz-question">
+            <p>Dans le modèle SaaS, le logiciel est :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Dans le SaaS, on n'installe rien sur les postes locaux.">
+                <span class="quiz-option-letter">A</span> Installé sur chaque poste de travail
+              </button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Le SaaS (Software as a Service) est accessible via un navigateur web, sans installation locale. Ex : Gmail, Salesforce, Google Docs.">
+                <span class="quiz-option-letter">B</span> Accessible via un navigateur web, sans installation locale
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="L'IaaS loue de l'infrastructure (serveurs), pas du logiciel applicatif.">
+                <span class="quiz-option-letter">C</span> Hébergé sur les serveurs de l'entreprise
+              </button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Le SaaS est précisément le modèle qui n'a pas besoin d'être installé.">
+                <span class="quiz-option-letter">D</span> Livré sur clé USB et installé en local
+              </button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div><!-- /.page-layout -->
+</div><!-- /.container -->
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-brand">💻 SIG — Systèmes d'Information de Gestion</div>
+      <div class="footer-desc">BAC STMG 2026 · Terminale · Programme officiel Éducation Nationale</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">Accueil</a>
+      <a href="sciences-gestion.html">Sciences de Gestion</a>
+      <a href="management.html">Management</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>BacSTMG 2026 — Révision complète</span>
+    <span>Bon courage ! 💪</span>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+  // Override progress label for this page
+  function updateOverallProgress() {
+    const total = document.querySelectorAll('.ch-done').length;
+    const done  = document.querySelectorAll('.ch-done:checked').length;
+    const pct   = total ? Math.round((done / total) * 100) : 0;
+    const fill  = document.querySelector('.overall-progress-fill');
+    const lbl   = document.getElementById('prog-label');
+    if (fill) fill.style.width = pct + '%';
+    if (lbl)  lbl.textContent  = `${done}/${total} chapitres vus (${pct}%)`;
+  }
+</script>
+</body>
+</html>

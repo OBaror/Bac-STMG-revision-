@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion &amp; Finance — BAC STMG 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root { --card-color: var(--gf); }
+    .gf { color: var(--gf) !important; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .82rem; color: var(--text2); padding: .75rem 0;
+    }
+    .breadcrumb a { color: var(--text2); transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--gf); }
+    .breadcrumb-sep { color: var(--bg3); }
+    .breadcrumb-current { color: var(--gf); font-weight: 600; }
+
+    /* Progress */
+    .overall-progress { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.5rem; margin-bottom: 1.5rem; }
+    .overall-progress-label { font-size: .82rem; color: var(--text2); margin-bottom: .4rem; }
+    .overall-progress-fill { background: linear-gradient(90deg, var(--gf), #5eead4); }
+
+    /* Ch-done checkbox */
+    .ch-done-wrap { display: flex; align-items: center; gap: .4rem; font-size: .8rem; color: var(--text2); }
+    .ch-done { accent-color: var(--gf); width: 15px; height: 15px; cursor: pointer; }
+
+    /* Cascade SIG */
+    .sig-cascade { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 1.5rem 0; }
+    .sig-row { display: flex; align-items: center; padding: .7rem 1.2rem; border-bottom: 1px solid var(--border); gap: 1rem; }
+    .sig-row:last-child { border-bottom: none; }
+    .sig-row.highlight { background: rgba(13,148,136,.12); }
+    .sig-label { flex: 1; font-size: .9rem; color: var(--text2); }
+    .sig-label strong { color: var(--text); }
+    .sig-value { font-family: 'Courier New', monospace; font-weight: 700; color: var(--gf); min-width: 90px; text-align: right; }
+    .sig-op { font-size: .85rem; color: var(--text2); min-width: 20px; text-align: center; }
+
+    /* SR Graphique */
+    .sr-graph { background: var(--bg3); border-radius: var(--radius); padding: 1.5rem; margin: 1rem 0; font-family: 'Courier New', monospace; font-size: .85rem; line-height: 1.8; color: var(--text2); }
+
+    /* Budget tréso table */
+    .budget-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .budget-table th { background: rgba(13,148,136,.2); color: var(--gf); font-weight: 700; padding: .65rem 1rem; text-align: left; border: 1px solid var(--border); }
+    .budget-table td { padding: .6rem 1rem; border: 1px solid var(--border); color: var(--text2); }
+    .budget-table .row-total td { background: rgba(13,148,136,.1); color: var(--text); font-weight: 700; }
+    .budget-table .row-solde td { background: rgba(245,158,11,.1); color: var(--amber); font-weight: 700; }
+
+    /* Amortissement table */
+    .amort-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .amort-table th { background: rgba(13,148,136,.2); color: var(--gf); font-weight: 700; padding: .65rem 1rem; text-align: left; border: 1px solid var(--border); }
+    .amort-table td { padding: .6rem 1rem; border: 1px solid var(--border); color: var(--text2); }
+    .amort-table tr:last-child td { background: rgba(13,148,136,.08); font-weight: 600; color: var(--text); }
+
+    /* Ratios grid */
+    .ratios-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .ratio-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.2rem; border-top: 3px solid var(--gf); }
+    .ratio-name { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--gf); margin-bottom: .3rem; }
+    .ratio-formula { font-family: 'Courier New', monospace; font-size: .88rem; color: var(--text); background: rgba(0,0,0,.2); padding: .35rem .7rem; border-radius: 6px; margin-bottom: .35rem; }
+    .ratio-interp { font-size: .8rem; color: var(--text2); }
+  </style>
+</head>
+<body data-subject="gf">
+
+<!-- ── NAVBAR ─────────────────────────────────────────────── -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo">🎓 <span>BAC STMG</span> 2026</a>
+    <div class="navbar-links">
+      <a href="economie.html" class="nav-eco">Économie</a>
+      <a href="droit.html" class="nav-droit">Droit</a>
+      <a href="management.html" class="nav-mgmt">Management</a>
+      <a href="gestion-finance.html" class="nav-gf active">Gestion &amp; Finance</a>
+      <a href="rhc.html" class="nav-rhc">RHC</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── PAGE HEADER ────────────────────────────────────────── -->
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Gestion &amp; Finance</span>
+    </div>
+    <div class="page-header-inner">
+      <div class="page-header-icon">💰</div>
+      <div class="page-header-text">
+        <h1 style="color: var(--gf);">Gestion &amp; Finance</h1>
+        <p>Spécialité Terminale STMG — Bilan, SIG, ratios, seuil de rentabilité, budget de trésorerie, TVA, investissements.</p>
+        <div class="page-header-badges">
+          <span class="badge badge-gf">Terminale</span>
+          <span class="badge badge-neutral">8 chapitres</span>
+          <span class="badge badge-success">Exercices corrigés</span>
+          <span class="badge badge-warning">Coefficient fort</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── LAYOUT ─────────────────────────────────────────────── -->
+<div class="container">
+  <div class="page-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="overall-progress">
+        <div class="overall-progress-label">Progression</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill overall-progress-fill" style="width:0%"></div>
+        </div>
+        <div class="overall-progress-label" style="margin-top:.3rem;">0/8 chapitres vus (0%)</div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">📚 Chapitres</div>
+        <a href="#ch1" class="sidebar-link"><span class="toc-item-num">01</span> Le bilan comptable</a>
+        <a href="#ch2" class="sidebar-link"><span class="toc-item-num">02</span> Le compte de résultat</a>
+        <a href="#ch3" class="sidebar-link"><span class="toc-item-num">03</span> Les SIG</a>
+        <a href="#ch4" class="sidebar-link"><span class="toc-item-num">04</span> Les ratios financiers</a>
+        <a href="#ch5" class="sidebar-link"><span class="toc-item-num">05</span> Seuil de rentabilité</a>
+        <a href="#ch6" class="sidebar-link"><span class="toc-item-num">06</span> Budget de trésorerie</a>
+        <a href="#ch7" class="sidebar-link"><span class="toc-item-num">07</span> La TVA</a>
+        <a href="#ch8" class="sidebar-link"><span class="toc-item-num">08</span> Les investissements</a>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">🔗 Autres matières</div>
+        <a href="economie.html" class="sidebar-link nav-eco">📊 Économie</a>
+        <a href="droit.html" class="sidebar-link nav-droit">⚖️ Droit</a>
+        <a href="management.html" class="sidebar-link nav-mgmt">🏢 Management</a>
+        <a href="rhc.html" class="sidebar-link nav-rhc">👥 RHC</a>
+      </div>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main>
+
+      <!-- TOC -->
+      <div class="toc">
+        <div class="toc-title">📋 Table des matières — Gestion &amp; Finance</div>
+        <div class="toc-grid">
+          <a href="#ch1" class="toc-item"><span class="toc-item-num">01</span> Le bilan comptable</a>
+          <a href="#ch2" class="toc-item"><span class="toc-item-num">02</span> Le compte de résultat</a>
+          <a href="#ch3" class="toc-item"><span class="toc-item-num">03</span> Les SIG</a>
+          <a href="#ch4" class="toc-item"><span class="toc-item-num">04</span> Les ratios financiers</a>
+          <a href="#ch5" class="toc-item"><span class="toc-item-num">05</span> Seuil de rentabilité</a>
+          <a href="#ch6" class="toc-item"><span class="toc-item-num">06</span> Budget de trésorerie</a>
+          <a href="#ch7" class="toc-item"><span class="toc-item-num">07</span> La TVA</a>
+          <a href="#ch8" class="toc-item"><span class="toc-item-num">08</span> Les investissements</a>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 1 — Le bilan comptable                    -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch1">
+        <div class="chapter-header">
+          <div class="chapter-number">1</div>
+          <div style="flex:1">
+            <h2>Le bilan comptable</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Structure du patrimoine · FR · BFR · Trésorerie</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition — Bilan</div>
+          <p>Le <strong>bilan comptable</strong> est un document comptable qui photographie le patrimoine de l'entreprise à une date donnée (généralement le 31/12). Il est obligatoire et fait partie des comptes annuels.</p>
+        </div>
+
+        <div class="grid-2" style="margin: 1.5rem 0;">
+          <div class="def-box">
+            <div class="def-title">ACTIF — Ce que l'entreprise possède</div>
+            <ul style="margin-top:.5rem; display:flex; flex-direction:column; gap:.4rem;">
+              <li style="color:var(--text2); font-size:.9rem;"><strong>Actif immobilisé :</strong> immobilisations incorporelles (brevets, fonds de commerce), corporelles (terrains, bâtiments, matériel), financières (titres)</li>
+              <li style="color:var(--text2); font-size:.9rem;"><strong>Actif circulant :</strong> stocks, créances clients, disponibilités (banque, caisse)</li>
+            </ul>
+          </div>
+          <div class="def-box">
+            <div class="def-title">PASSIF — Ce que l'entreprise doit</div>
+            <ul style="margin-top:.5rem; display:flex; flex-direction:column; gap:.4rem;">
+              <li style="color:var(--text2); font-size:.9rem;"><strong>Capitaux propres :</strong> capital social, réserves, résultat de l'exercice</li>
+              <li style="color:var(--text2); font-size:.9rem;"><strong>Dettes :</strong> emprunts bancaires (LT), dettes fournisseurs, dettes fiscales et sociales (CT)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">🔑 Équilibre fondamental du bilan</div>
+          <div class="formula">ACTIF = PASSIF</div>
+          <p style="margin-top:.75rem; font-size:.88rem;">Car tout ce que possède l'entreprise a été financé soit par ses propres ressources (capitaux propres) soit par des tiers (dettes).</p>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Amortissement &amp; VNC</div>
+          <p>L'<strong>amortissement</strong> traduit la dépréciation progressive d'un bien immobilisé due à l'usure ou à l'obsolescence.</p>
+          <p style="margin-top:.5rem;"><strong>Valeur Nette Comptable (VNC)</strong> = Valeur brute − Amortissements cumulés</p>
+        </div>
+
+        <h3 style="margin: 2rem 0 1rem; color:var(--text);">Fonds de roulement, BFR et Trésorerie</h3>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 Les 3 formules essentielles du bilan fonctionnel</div>
+          <div class="formula">FR = (Capitaux propres + Dettes LT) − Actif immobilisé net</div>
+          <div class="formula" style="margin-top:.6rem;">BFR = (Stocks + Créances) − (Dettes fournisseurs + Dettes fiscales)</div>
+          <div class="formula" style="margin-top:.6rem;">TN = FR − BFR = Disponibilités − Dettes financières CT</div>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">Points clés à retenir</div>
+          <ul>
+            <li>FR &gt; 0 → l'entreprise dispose d'un excédent de ressources stables : situation saine</li>
+            <li>BFR &gt; 0 → besoin de financement du cycle d'exploitation : à financer par le FR</li>
+            <li>TN &gt; 0 → l'entreprise a des liquidités positives</li>
+            <li>TN = FR − BFR : si BFR &gt; FR, la trésorerie est négative (recours au découvert)</li>
+            <li>Les capitaux permanents = Capitaux propres + Dettes à long terme</li>
+          </ul>
+        </div>
+
+        <!-- Exercice -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice 1 — Calcul du FR, BFR et TN</h4>
+            <span class="badge badge-gf">Complet</span>
+          </div>
+          <div class="exercise-body">
+            <p>L'entreprise GERFIN SA présente le bilan simplifié suivant au 31/12/N :</p>
+            <div class="table-wrapper" style="margin: 1rem 0;">
+              <table>
+                <thead><tr><th>ACTIF</th><th>Montant (k€)</th><th>PASSIF</th><th>Montant (k€)</th></tr></thead>
+                <tbody>
+                  <tr><td>Immobilisations nettes</td><td>180</td><td>Capital social</td><td>100</td></tr>
+                  <tr><td>Stocks</td><td>40</td><td>Réserves</td><td>60</td></tr>
+                  <tr><td>Créances clients</td><td>55</td><td>Résultat</td><td>20</td></tr>
+                  <tr><td>Disponibilités</td><td>25</td><td>Emprunts LT</td><td>80</td></tr>
+                  <tr><td></td><td></td><td>Dettes fournisseurs</td><td>30</td></tr>
+                  <tr><td></td><td></td><td>Dettes fiscales</td><td>10</td></tr>
+                  <tr><td><strong>TOTAL</strong></td><td><strong>300</strong></td><td><strong>TOTAL</strong></td><td><strong>300</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="exercise-question">Calculez le FR, le BFR et la trésorerie nette. Interprétez chaque résultat.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <p><strong>Capitaux permanents</strong> = Capital + Réserves + Résultat + Emprunts LT = 100 + 60 + 20 + 80 = <strong>260 k€</strong></p>
+              <p><strong>FR</strong> = 260 − 180 = <strong>80 k€</strong> → Positif : l'entreprise dispose d'un excédent de ressources stables de 80 k€ pour financer son cycle d'exploitation. Situation financière saine.</p>
+              <p><strong>BFR</strong> = (Stocks + Créances) − (Dettes fournisseurs + Dettes fiscales) = (40 + 55) − (30 + 10) = 95 − 40 = <strong>55 k€</strong> → L'entreprise a besoin de 55 k€ pour financer son cycle d'exploitation (elle accorde du crédit à ses clients avant de payer ses fournisseurs).</p>
+              <p><strong>TN</strong> = FR − BFR = 80 − 55 = <strong>25 k€</strong> → Vérification : Disponibilités = 25 k€ ✓. La trésorerie est positive : l'entreprise peut faire face à ses engagements à court terme.</p>
+              <div class="example-box" style="margin-top:.75rem;">
+                <div class="example-title">Interprétation globale</div>
+                <p>La situation est <strong>équilibrée</strong> : le FR (80 k€) couvre largement le BFR (55 k€), dégageant une trésorerie positive de 25 k€. L'entreprise est solvable et liquide.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QCM -->
+        <div class="quiz-section" data-subject="gf">
+          <h3>🎯 QCM — Le bilan comptable</h3>
+          <div class="quiz-question">
+            <p>1. Que mesure le Fonds de Roulement (FR) ?</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, le FR mesure l'excédent des ressources stables sur les emplois stables."><span class="quiz-option-letter">A</span> L'excédent de la trésorerie sur les dettes court terme</button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! FR = Capitaux permanents − Actif immobilisé. Il mesure la marge de sécurité financière."><span class="quiz-option-letter">B</span> L'excédent des ressources stables (LT) sur les emplois stables</button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, c'est la définition du BFR."><span class="quiz-option-letter">C</span> L'excédent des stocks et créances sur les dettes d'exploitation</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </div><!-- /ch1 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 2 — Le compte de résultat                 -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch2">
+        <div class="chapter-header">
+          <div class="chapter-number">2</div>
+          <div style="flex:1">
+            <h2>Le compte de résultat</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Produits · Charges · Résultats</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition</div>
+          <p>Le <strong>compte de résultat</strong> est un document comptable qui mesure l'activité de l'entreprise sur un exercice comptable (en général une année). Il regroupe tous les <strong>produits</strong> et toutes les <strong>charges</strong> de la période.</p>
+        </div>
+
+        <div class="grid-2" style="margin:1.5rem 0;">
+          <div class="def-box">
+            <div class="def-title">PRODUITS (ressources générées)</div>
+            <ul style="margin-top:.5rem; display:flex; flex-direction:column; gap:.3rem;">
+              <li style="color:var(--text2); font-size:.88rem;">Ventes de marchandises / prestations de services</li>
+              <li style="color:var(--text2); font-size:.88rem;">Production stockée / immobilisée</li>
+              <li style="color:var(--text2); font-size:.88rem;">Produits financiers (intérêts reçus, dividendes)</li>
+              <li style="color:var(--text2); font-size:.88rem;">Produits exceptionnels (cessions d'actifs…)</li>
+            </ul>
+          </div>
+          <div class="def-box">
+            <div class="def-title">CHARGES (coûts supportés)</div>
+            <ul style="margin-top:.5rem; display:flex; flex-direction:column; gap:.3rem;">
+              <li style="color:var(--text2); font-size:.88rem;">Achats de marchandises / matières premières consommés</li>
+              <li style="color:var(--text2); font-size:.88rem;">Charges de personnel (salaires + charges sociales)</li>
+              <li style="color:var(--text2); font-size:.88rem;">Dotations aux amortissements</li>
+              <li style="color:var(--text2); font-size:.88rem;">Charges financières (intérêts d'emprunt)</li>
+              <li style="color:var(--text2); font-size:.88rem;">Charges exceptionnelles</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 Structure des résultats</div>
+          <div class="formula">Résultat d'exploitation = Produits d'exploitation − Charges d'exploitation</div>
+          <div class="formula" style="margin-top:.6rem;">Résultat financier = Produits financiers − Charges financières</div>
+          <div class="formula" style="margin-top:.6rem;">Résultat exceptionnel = Produits exceptionnels − Charges exceptionnelles</div>
+          <div class="formula" style="margin-top:.6rem;">Résultat net = Résultat courant + Résultat exceptionnel − IS − Participation</div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Chiffre d'affaires (CA)</div>
+          <p><strong>CA = Prix de vente × Quantités vendues</strong> — C'est le total des ventes réalisées sur l'exercice, hors taxes (HT).</p>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">Points clés</div>
+          <ul>
+            <li>Le compte de résultat mesure la <strong>performance</strong> sur une période (≠ bilan qui est une photo à un instant T)</li>
+            <li>Résultat positif = bénéfice ; résultat négatif = perte</li>
+            <li>Le résultat net figurera au passif du bilan (capitaux propres)</li>
+            <li>IS = Impôt sur les sociétés (taux normal 25% en France)</li>
+          </ul>
+        </div>
+      </div><!-- /ch2 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 3 — Les SIG                               -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch3">
+        <div class="chapter-header">
+          <div class="chapter-number">3</div>
+          <div style="flex:1">
+            <h2>Les Soldes Intermédiaires de Gestion (SIG)</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Marge · VA · EBE · Résultat net</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition</div>
+          <p>Les <strong>Soldes Intermédiaires de Gestion (SIG)</strong> sont un ensemble de calculs en cascade permettant d'analyser étape par étape la formation du résultat d'une entreprise, depuis le chiffre d'affaires jusqu'au résultat net.</p>
+        </div>
+
+        <h3 style="margin: 1.5rem 0 1rem; color:var(--text);">Tableau cascade des SIG</h3>
+
+        <div class="sig-cascade">
+          <div class="sig-row highlight">
+            <div class="sig-label"><strong>Ventes de marchandises HT</strong></div>
+            <div class="sig-op">−</div>
+            <div class="sig-label">Coût d'achat des marchandises vendues</div>
+            <div class="sig-value" style="color:var(--text2);">(= MC)</div>
+          </div>
+          <div class="sig-row highlight" style="background:rgba(13,148,136,.18);">
+            <div class="sig-label"><strong style="color:var(--gf);">= MARGE COMMERCIALE (MC)</strong></div>
+            <div class="sig-op"></div>
+            <div class="sig-label"></div>
+            <div class="sig-value">MC</div>
+          </div>
+          <div class="sig-row">
+            <div class="sig-label"><strong>Marge commerciale</strong> + Production de l'exercice</div>
+            <div class="sig-op">−</div>
+            <div class="sig-label">Consommations intermédiaires (achats matières + services ext.)</div>
+            <div class="sig-value" style="color:var(--text2);">(= VA)</div>
+          </div>
+          <div class="sig-row highlight" style="background:rgba(13,148,136,.18);">
+            <div class="sig-label"><strong style="color:var(--gf);">= VALEUR AJOUTÉE (VA)</strong></div>
+            <div class="sig-op"></div>
+            <div class="sig-label"></div>
+            <div class="sig-value">VA</div>
+          </div>
+          <div class="sig-row">
+            <div class="sig-label"><strong>VA</strong> + Subventions d'exploitation</div>
+            <div class="sig-op">−</div>
+            <div class="sig-label">Impôts et taxes − Charges de personnel</div>
+            <div class="sig-value" style="color:var(--text2);">(= EBE)</div>
+          </div>
+          <div class="sig-row highlight" style="background:rgba(13,148,136,.18);">
+            <div class="sig-label"><strong style="color:var(--gf);">= EXCÉDENT BRUT D'EXPLOITATION (EBE)</strong></div>
+            <div class="sig-op"></div>
+            <div class="sig-label"></div>
+            <div class="sig-value">EBE</div>
+          </div>
+          <div class="sig-row">
+            <div class="sig-label"><strong>EBE</strong> + Reprises sur amortissements/prov. + Autres produits</div>
+            <div class="sig-op">−</div>
+            <div class="sig-label">Dotations amortissements/prov. − Autres charges</div>
+            <div class="sig-value" style="color:var(--text2);">(= RE)</div>
+          </div>
+          <div class="sig-row highlight" style="background:rgba(13,148,136,.18);">
+            <div class="sig-label"><strong style="color:var(--gf);">= RÉSULTAT D'EXPLOITATION (RE)</strong></div>
+            <div class="sig-op"></div>
+            <div class="sig-label"></div>
+            <div class="sig-value">RE</div>
+          </div>
+          <div class="sig-row">
+            <div class="sig-label"><strong>RE</strong> + Résultat financier</div>
+            <div class="sig-op"></div>
+            <div class="sig-label"></div>
+            <div class="sig-value" style="color:var(--text2);">(= RCAI)</div>
+          </div>
+          <div class="sig-row highlight" style="background:rgba(13,148,136,.18);">
+            <div class="sig-label"><strong style="color:var(--gf);">= RÉSULTAT COURANT AVANT IMPÔTS (RCAI)</strong></div>
+            <div class="sig-op"></div>
+            <div class="sig-label"></div>
+            <div class="sig-value">RCAI</div>
+          </div>
+          <div class="sig-row">
+            <div class="sig-label"><strong>RCAI</strong> + Résultat exceptionnel − IS − Participation</div>
+            <div class="sig-op"></div>
+            <div class="sig-label"></div>
+            <div class="sig-value" style="color:var(--text2);">(= RN)</div>
+          </div>
+          <div class="sig-row" style="background:rgba(245,158,11,.12);">
+            <div class="sig-label"><strong style="color:var(--amber);">= RÉSULTAT NET (RN)</strong></div>
+            <div class="sig-op"></div>
+            <div class="sig-label"></div>
+            <div class="sig-value" style="color:var(--amber);">RN</div>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 Les formules SIG à mémoriser</div>
+          <div class="formula">MC = Ventes HT − Coût d'achat marchandises vendues</div>
+          <div class="formula" style="margin-top:.5rem;">Production exercice = Production vendue + Prod. stockée + Prod. immobilisée</div>
+          <div class="formula" style="margin-top:.5rem;">VA = MC + Production − Consommations intermédiaires</div>
+          <div class="formula" style="margin-top:.5rem;">EBE = VA + Subventions − Impôts/taxes − Charges personnel</div>
+          <div class="formula" style="margin-top:.5rem;">RE = EBE + Reprises − Dotations ± Autres</div>
+          <div class="formula" style="margin-top:.5rem;">RCAI = RE + Résultat financier</div>
+          <div class="formula" style="margin-top:.5rem;">RN = RCAI + Résultat exceptionnel − IS − Participation</div>
+        </div>
+
+        <!-- Exercice SIG -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice — Calcul des SIG</h4>
+            <span class="badge badge-gf">Incontournable BAC</span>
+          </div>
+          <div class="exercise-body">
+            <p>L'entreprise TEALFIN SA présente les éléments suivants pour l'exercice N (en k€) :</p>
+            <div class="table-wrapper" style="margin:1rem 0;">
+              <table>
+                <thead><tr><th>Élément</th><th>Montant (k€)</th></tr></thead>
+                <tbody>
+                  <tr><td>Ventes de marchandises HT</td><td>500</td></tr>
+                  <tr><td>Achats de marchandises</td><td>180</td></tr>
+                  <tr><td>Variation de stocks (marchandises)</td><td>+20 (augmentation)</td></tr>
+                  <tr><td>Services extérieurs (consommations)</td><td>60</td></tr>
+                  <tr><td>Charges de personnel</td><td>120</td></tr>
+                  <tr><td>Impôts et taxes</td><td>15</td></tr>
+                  <tr><td>Dotations aux amortissements</td><td>25</td></tr>
+                  <tr><td>Charges financières (intérêts)</td><td>8</td></tr>
+                  <tr><td>Impôt sur les sociétés</td><td>18</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="exercise-question">Calculez l'ensemble des SIG jusqu'au résultat net.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <p><strong>Coût d'achat marchandises vendues</strong> = Achats − Variation stocks = 180 − 20 = 160 k€</p>
+              <p><strong>MC</strong> = 500 − 160 = <strong>340 k€</strong></p>
+              <p><strong>VA</strong> = MC − Consommations intermédiaires = 340 − 60 = <strong>280 k€</strong></p>
+              <p><strong>EBE</strong> = VA − Impôts/taxes − Charges personnel = 280 − 15 − 120 = <strong>145 k€</strong></p>
+              <p><strong>RE</strong> = EBE − Dotations = 145 − 25 = <strong>120 k€</strong></p>
+              <p><strong>Résultat financier</strong> = 0 − 8 = −8 k€</p>
+              <p><strong>RCAI</strong> = RE + Résultat financier = 120 − 8 = <strong>112 k€</strong></p>
+              <p><strong>RN</strong> = RCAI − IS = 112 − 18 = <strong>94 k€</strong></p>
+              <div class="example-box" style="margin-top:.75rem;">
+                <div class="example-title">Interprétation</div>
+                <p>L'EBE (145 k€) est très positif : l'activité dégageant suffisamment de ressources pour couvrir les amortissements et les charges financières. Le RN (94 k€) confirme une rentabilité nette solide.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /ch3 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 4 — Les ratios                            -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch4">
+        <div class="chapter-header">
+          <div class="chapter-number">4</div>
+          <div style="flex:1">
+            <h2>Les ratios d'analyse financière</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Rentabilité · Solvabilité · Liquidité · Délais</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition — Ratio</div>
+          <p>Un <strong>ratio</strong> est un rapport entre deux grandeurs financières permettant d'analyser et de comparer la performance, la structure et l'équilibre financier d'une entreprise (avec ses résultats passés ou ses concurrents).</p>
+        </div>
+
+        <div class="ratios-grid">
+          <div class="ratio-card">
+            <div class="ratio-name">Taux de marge commerciale</div>
+            <div class="ratio-formula">MC / CA HT × 100</div>
+            <div class="ratio-interp">Part du CA conservée après paiement des marchandises. Plus il est élevé, mieux c'est.</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-name">Taux de Valeur Ajoutée</div>
+            <div class="ratio-formula">VA / CA HT × 100</div>
+            <div class="ratio-interp">Richesse créée par l'entreprise rapportée au CA.</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-name">Rentabilité économique</div>
+            <div class="ratio-formula">EBE / Capital investi × 100</div>
+            <div class="ratio-interp">Mesure l'efficacité de l'outil de production, indépendamment du mode de financement.</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-name">Rentabilité financière</div>
+            <div class="ratio-formula">Résultat net / Capitaux propres × 100</div>
+            <div class="ratio-interp">Rendement pour les actionnaires. Doit être supérieur au taux sans risque.</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-name">Ratio de solvabilité</div>
+            <div class="ratio-formula">Capitaux propres / Total bilan × 100</div>
+            <div class="ratio-interp">Indépendance financière. Idéalement &gt; 30-40%.</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-name">Ratio d'endettement</div>
+            <div class="ratio-formula">Dettes financières / Capitaux propres × 100</div>
+            <div class="ratio-interp">Levier financier. Un ratio &gt; 100% signale un endettement excessif.</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-name">Ratio de liquidité générale</div>
+            <div class="ratio-formula">Actif circulant / Dettes CT × 100</div>
+            <div class="ratio-interp">Capacité à rembourser les dettes CT avec l'actif circulant. Idéalement &gt; 100%.</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-name">Délai clients (jours)</div>
+            <div class="ratio-formula">Créances clients / CA TTC × 360</div>
+            <div class="ratio-interp">Nombre de jours moyen pour récupérer l'argent des clients. À minimiser.</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-name">Délai fournisseurs (jours)</div>
+            <div class="ratio-formula">Dettes fournisseurs / Achats TTC × 360</div>
+            <div class="ratio-interp">Nombre de jours moyen pour payer les fournisseurs. À maximiser (dans la limite du raisonnable).</div>
+          </div>
+        </div>
+
+        <div class="notice-box">
+          <div class="notice-title">⚠️ Attention BAC</div>
+          <p>On vous demandera souvent <strong>d'interpréter</strong> un ratio : comparer à N-1 ou à la norme sectorielle, conclure sur la santé financière, et proposer des pistes d'amélioration.</p>
+        </div>
+
+        <!-- Exercice ratios -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice — Calcul et interprétation des ratios</h4>
+            <span class="badge badge-gf">Type BAC</span>
+          </div>
+          <div class="exercise-body">
+            <p>Pour l'entreprise TEALFIN SA (N) : CA HT = 500 k€, MC = 340 k€, VA = 280 k€, EBE = 145 k€, RN = 94 k€, Capitaux propres = 180 k€, Total bilan = 300 k€, Dettes financières = 80 k€, Actif circulant = 120 k€, Dettes CT = 40 k€, Créances clients = 55 k€ (CA TTC = 600 k€).</p>
+            <div class="exercise-question">Calculez et interprétez 4 ratios : taux de MC, rentabilité financière, ratio d'endettement, délai clients.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <p><strong>Taux de marge commerciale</strong> = 340 / 500 × 100 = <strong>68%</strong> → Très élevé : l'entreprise conserve 68 centimes par euro de vente après paiement des marchandises.</p>
+              <p><strong>Rentabilité financière</strong> = 94 / 180 × 100 = <strong>52,2%</strong> → Excellente rentabilité pour les actionnaires.</p>
+              <p><strong>Ratio d'endettement</strong> = 80 / 180 × 100 = <strong>44,4%</strong> → Modéré : les dettes financières représentent 44% des capitaux propres. Pas de risque de surendettement.</p>
+              <p><strong>Délai clients</strong> = 55 / 600 × 360 = <strong>33 jours</strong> → Les clients paient en moyenne en 33 jours. Acceptable (délai légal max 60 jours).</p>
+            </div>
+          </div>
+        </div>
+      </div><!-- /ch4 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 5 — Seuil de rentabilité                  -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch5">
+        <div class="chapter-header">
+          <div class="chapter-number">5</div>
+          <div style="flex:1">
+            <h2>Le seuil de rentabilité</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Charges variables · Charges fixes · Point mort</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:1.5rem;">
+          <div class="def-box">
+            <div class="def-title">Charges variables (CV)</div>
+            <p>Charges qui <strong>varient proportionnellement</strong> avec le volume d'activité (CA). Ex : achats de marchandises, emballages, commissions.</p>
+          </div>
+          <div class="def-box">
+            <div class="def-title">Charges fixes (CF)</div>
+            <p>Charges <strong>indépendantes</strong> du volume d'activité (dans une certaine fourchette). Ex : loyer, salaires fixes, amortissements, assurances.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 Les formules du seuil de rentabilité</div>
+          <div class="formula">MCV = CA − CV (Marge sur Coût Variable)</div>
+          <div class="formula" style="margin-top:.5rem;">TMCV = MCV / CA (Taux de MCV)</div>
+          <div class="formula" style="margin-top:.5rem;">SR = CF / TMCV (Seuil de Rentabilité en valeur)</div>
+          <div class="formula" style="margin-top:.5rem;">SR (volume) = CF / MCV unitaire</div>
+          <div class="formula" style="margin-top:.5rem;">Point mort (jours) = SR / CA × 360</div>
+          <div class="formula" style="margin-top:.5rem;">Marge de sécurité = CA − SR</div>
+          <div class="formula" style="margin-top:.5rem;">Indice de sécurité = (CA − SR) / CA × 100</div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Interprétation du seuil de rentabilité</div>
+          <p>Le <strong>seuil de rentabilité (SR)</strong> est le chiffre d'affaires minimum que l'entreprise doit réaliser pour couvrir <em>toutes</em> ses charges (fixes + variables) et donc ne pas perdre d'argent. En dessous du SR = perte ; au-dessus = bénéfice.</p>
+        </div>
+
+        <h3 style="margin:1.5rem 0 .75rem; color:var(--text);">Représentation graphique (schéma)</h3>
+        <div class="sr-graph">
+┌─────────────────────────────────────────────────────────────┐
+│  Montant                                                     │
+│  (€)    ↑                        /  ← Courbe CA (CA = f(q)) │
+│         │                      /  /                          │
+│         │                    / /                             │
+│         │                  / /  ← Zone BÉNÉFICE             │
+│    CF   │- - - - - - - - */  ← Courbe Coûts totaux          │
+│         │              /  /  ← Point mort (SR)              │
+│         │            /  /                                    │
+│         │          /  /                                      │
+│         │        /  /  ← Zone PERTE                         │
+│    CF ──│──────/──/── ←  Charges fixes (droite horizontale) │
+│         │    /  /                                            │
+│         │  /  /                                              │
+│         │/  /                                                │
+│         └────────────────────────────→  Quantités / CA      │
+│                   ↑                                          │
+│                 Point mort                                   │
+└─────────────────────────────────────────────────────────────┘
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice 1 — Calcul du SR en valeur et en volume</h4>
+            <span class="badge badge-gf">Classique BAC</span>
+          </div>
+          <div class="exercise-body">
+            <p>L'entreprise VERT'CAP vend des articles à 50 € l'unité. Coût variable unitaire = 20 €. Charges fixes annuelles = 180 000 €. CA prévisionnel = 400 000 €.</p>
+            <div class="exercise-question">1. Calculez la MCV unitaire et le TMCV. 2. Calculez le SR en valeur et en volume. 3. L'entreprise est-elle bénéficiaire ?</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <p><strong>MCV unitaire</strong> = 50 − 20 = <strong>30 €/unité</strong></p>
+              <p><strong>TMCV</strong> = 30 / 50 = <strong>0,60 soit 60%</strong></p>
+              <p><strong>SR en valeur</strong> = CF / TMCV = 180 000 / 0,60 = <strong>300 000 €</strong></p>
+              <p><strong>SR en volume</strong> = CF / MCV unitaire = 180 000 / 30 = <strong>6 000 unités</strong></p>
+              <p><strong>Vérification</strong> : à 6 000 unités → CA = 300 000 €, CV = 120 000 €, MCV = 180 000 €, CF = 180 000 € → Résultat = 0 ✓</p>
+              <p><strong>Bénéficiaire ?</strong> CA prévisionnel (400 000 €) &gt; SR (300 000 €) → OUI, l'entreprise est bénéficiaire. Résultat = (400 000 − 300 000) × 60% = <strong>60 000 €</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice 2 — Point mort et marge de sécurité</h4>
+            <span class="badge badge-gf">Type BAC</span>
+          </div>
+          <div class="exercise-body">
+            <p>Reprendre les données de l'exercice 1 (SR = 300 000 €, CA = 400 000 €).</p>
+            <div class="exercise-question">Calculez le point mort (en jours), la marge de sécurité et l'indice de sécurité. Interprétez.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <p><strong>Point mort</strong> = SR / CA × 360 = 300 000 / 400 000 × 360 = <strong>270 jours</strong> → L'entreprise couvre ses charges au bout de 270 jours (soit environ le 27 septembre).</p>
+              <p><strong>Marge de sécurité</strong> = CA − SR = 400 000 − 300 000 = <strong>100 000 €</strong></p>
+              <p><strong>Indice de sécurité</strong> = 100 000 / 400 000 × 100 = <strong>25%</strong></p>
+              <p><strong>Interprétation</strong> : Le CA peut baisser de 25% (soit 100 000 €) avant que l'entreprise ne soit en déficit. La marge de sécurité est correcte mais à surveiller.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section" data-subject="gf">
+          <h3>🎯 QCM — Seuil de rentabilité</h3>
+          <div class="quiz-question">
+            <p>2. Que représente le TMCV de 60% ?</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, 60% correspond au TMCV, pas au taux de CF."><span class="quiz-option-letter">A</span> Les charges fixes représentent 60% du CA</button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Pour chaque euro de CA, 0,60 € contribue à couvrir les charges fixes."><span class="quiz-option-letter">B</span> 60 centimes de chaque euro de CA couvrent les charges fixes</button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, 60% représente la part de la MCV dans le CA."><span class="quiz-option-letter">C</span> Le bénéfice représente 60% du CA</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </div><!-- /ch5 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 6 — Budget de trésorerie                  -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch6">
+        <div class="chapter-header">
+          <div class="chapter-number">6</div>
+          <div style="flex:1">
+            <h2>Le budget de trésorerie</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Encaissements · Décaissements · Soldes prévisionnels</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition — Budget de trésorerie</div>
+          <p>Le <strong>budget de trésorerie</strong> est un tableau prévisionnel mensuel qui recense tous les <strong>encaissements</strong> (rentrées d'argent) et <strong>décaissements</strong> (sorties d'argent) afin d'anticiper les besoins ou excédents de trésorerie.</p>
+        </div>
+
+        <div class="grid-2" style="margin:1.5rem 0;">
+          <div class="def-box">
+            <div class="def-title">ENCAISSEMENTS</div>
+            <ul style="margin-top:.5rem; display:flex; flex-direction:column; gap:.3rem;">
+              <li style="color:var(--text2); font-size:.88rem;">Ventes TTC (avec décalage si crédit client)</li>
+              <li style="color:var(--text2); font-size:.88rem;">Remboursements TVA créditrice</li>
+              <li style="color:var(--text2); font-size:.88rem;">Produits financiers encaissés</li>
+              <li style="color:var(--text2); font-size:.88rem;">Apports en capital / emprunts reçus</li>
+            </ul>
+          </div>
+          <div class="def-box">
+            <div class="def-title">DÉCAISSEMENTS</div>
+            <ul style="margin-top:.5rem; display:flex; flex-direction:column; gap:.3rem;">
+              <li style="color:var(--text2); font-size:.88rem;">Achats TTC (avec décalage si crédit fournisseur)</li>
+              <li style="color:var(--text2); font-size:.88rem;">Salaires + charges sociales</li>
+              <li style="color:var(--text2); font-size:.88rem;">TVA à décaisser</li>
+              <li style="color:var(--text2); font-size:.88rem;">Remboursement d'emprunts (capital + intérêts)</li>
+              <li style="color:var(--text2); font-size:.88rem;">Investissements, impôts, dividendes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 Formules du budget de trésorerie</div>
+          <div class="formula">Solde mensuel = Encaissements du mois − Décaissements du mois</div>
+          <div class="formula" style="margin-top:.5rem;">Solde cumulé = Solde du mois + Solde cumulé mois précédent</div>
+        </div>
+
+        <!-- Exercice budget -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice — Budget de trésorerie sur 3 mois</h4>
+            <span class="badge badge-gf">Complet</span>
+          </div>
+          <div class="exercise-body">
+            <p>L'entreprise FLUXTEC prévoit pour le 1er trimestre N+1 (trésorerie initiale = 5 000 €) :</p>
+            <div class="table-wrapper" style="margin:1rem 0;">
+              <table>
+                <thead><tr><th>Données</th><th>Janvier</th><th>Février</th><th>Mars</th></tr></thead>
+                <tbody>
+                  <tr><td>Ventes TTC (encaissées le mois même)</td><td>30 000</td><td>35 000</td><td>40 000</td></tr>
+                  <tr><td>Achats TTC (payés le mois même)</td><td>15 000</td><td>18 000</td><td>20 000</td></tr>
+                  <tr><td>Salaires + charges</td><td>8 000</td><td>8 000</td><td>8 000</td></tr>
+                  <tr><td>TVA à décaisser (du mois M-1)</td><td>2 000</td><td>2 500</td><td>3 000</td></tr>
+                  <tr><td>Remboursement emprunt</td><td>1 500</td><td>1 500</td><td>1 500</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="exercise-question">Construisez le budget de trésorerie et calculez les soldes mensuels et cumulés.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <div class="table-wrapper" style="margin:.75rem 0;">
+                <table class="budget-table">
+                  <thead><tr><th>Rubrique</th><th>Janvier</th><th>Février</th><th>Mars</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>ENCAISSEMENTS</strong></td><td></td><td></td><td></td></tr>
+                    <tr><td>Ventes TTC</td><td>30 000</td><td>35 000</td><td>40 000</td></tr>
+                    <tr class="row-total"><td>Total encaissements</td><td>30 000</td><td>35 000</td><td>40 000</td></tr>
+                    <tr><td><strong>DÉCAISSEMENTS</strong></td><td></td><td></td><td></td></tr>
+                    <tr><td>Achats TTC</td><td>15 000</td><td>18 000</td><td>20 000</td></tr>
+                    <tr><td>Salaires + charges</td><td>8 000</td><td>8 000</td><td>8 000</td></tr>
+                    <tr><td>TVA à décaisser</td><td>2 000</td><td>2 500</td><td>3 000</td></tr>
+                    <tr><td>Remboursement emprunt</td><td>1 500</td><td>1 500</td><td>1 500</td></tr>
+                    <tr class="row-total"><td>Total décaissements</td><td>26 500</td><td>30 000</td><td>32 500</td></tr>
+                    <tr class="row-solde"><td>Solde mensuel</td><td>+3 500</td><td>+5 000</td><td>+7 500</td></tr>
+                    <tr class="row-solde"><td>Trésorerie initiale</td><td>5 000</td><td>8 500</td><td>13 500</td></tr>
+                    <tr class="row-solde"><td><strong>Solde cumulé (fin de mois)</strong></td><td><strong>8 500</strong></td><td><strong>13 500</strong></td><td><strong>21 000</strong></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p><strong>Interprétation :</strong> La trésorerie est constamment positive et croissante. Aucun recours au crédit de trésorerie n'est nécessaire. L'excédent de mars (21 000 €) pourrait être placé.</p>
+            </div>
+          </div>
+        </div>
+      </div><!-- /ch6 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 7 — La TVA                                -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch7">
+        <div class="chapter-header">
+          <div class="chapter-number">7</div>
+          <div style="flex:1">
+            <h2>La TVA</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Taxe sur la Valeur Ajoutée · Collectée · Déductible</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition — TVA</div>
+          <p>La <strong>TVA (Taxe sur la Valeur Ajoutée)</strong> est un impôt indirect sur la consommation. L'entreprise la collecte sur ses ventes pour le compte de l'État et la récupère (déduit) sur ses achats. Elle n'est <em>pas</em> une charge pour l'entreprise.</p>
+        </div>
+
+        <div class="grid-2" style="margin:1.5rem 0;">
+          <div class="def-box">
+            <div class="def-title">TVA collectée (sur les ventes)</div>
+            <p>TVA que l'entreprise facture à ses clients, qu'elle reverse ensuite à l'État.</p>
+          </div>
+          <div class="def-box">
+            <div class="def-title">TVA déductible (sur les achats)</div>
+            <p>TVA payée sur les achats et charges, récupérable auprès de l'État.</p>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 Formules TVA essentielles</div>
+          <div class="formula">TVA à décaisser = TVA collectée − TVA déductible</div>
+          <div class="formula" style="margin-top:.5rem;">Prix TTC = Prix HT × (1 + taux TVA)</div>
+          <div class="formula" style="margin-top:.5rem;">Prix HT = Prix TTC / (1 + taux TVA)</div>
+          <div class="formula" style="margin-top:.5rem;">TVA = Prix HT × taux TVA</div>
+        </div>
+
+        <div class="table-wrapper" style="margin:1.5rem 0;">
+          <table>
+            <thead><tr><th>Taux</th><th>Valeur</th><th>Produits/services concernés</th></tr></thead>
+            <tbody>
+              <tr><td>Taux normal</td><td><strong>20%</strong></td><td>Majorité des biens et services (électronique, vêtements, services…)</td></tr>
+              <tr><td>Taux intermédiaire</td><td><strong>10%</strong></td><td>Restauration, transport de voyageurs, travaux de rénovation</td></tr>
+              <tr><td>Taux réduit</td><td><strong>5,5%</strong></td><td>Produits alimentaires, livres, abonnements énergie, médicaments non remboursés</td></tr>
+              <tr><td>Taux super-réduit</td><td><strong>2,1%</strong></td><td>Médicaments remboursables, presse, spectacles vivants</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Exercice TVA -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice — Calcul de la TVA à décaisser</h4>
+            <span class="badge badge-gf">Calculatoire</span>
+          </div>
+          <div class="exercise-body">
+            <p>En mars N, l'entreprise TEALFIN SA réalise : Ventes HT = 25 000 € (TVA 20%), Achats HT = 10 000 € (TVA 20%), Services extérieurs HT = 3 000 € (TVA 20%). Crédit de TVA du mois précédent = 0.</p>
+            <div class="exercise-question">Calculez la TVA à décaisser en mars.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <p><strong>TVA collectée</strong> = 25 000 × 20% = <strong>5 000 €</strong></p>
+              <p><strong>TVA déductible sur achats</strong> = 10 000 × 20% = 2 000 €</p>
+              <p><strong>TVA déductible sur services</strong> = 3 000 × 20% = 600 €</p>
+              <p><strong>Total TVA déductible</strong> = 2 000 + 600 = <strong>2 600 €</strong></p>
+              <p><strong>TVA à décaisser</strong> = 5 000 − 2 600 = <strong>2 400 €</strong></p>
+              <p>Cette somme sera versée à l'administration fiscale (DGFiP) généralement le mois suivant (avril).</p>
+            </div>
+          </div>
+        </div>
+      </div><!-- /ch7 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 8 — Les investissements                   -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch8">
+        <div class="chapter-header">
+          <div class="chapter-number">8</div>
+          <div style="flex:1">
+            <h2>Les investissements et leur financement</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Amortissement d'emprunt · Annuité constante</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition — Investissement</div>
+          <p>Un <strong>investissement</strong> est l'acquisition d'un actif durable destiné à servir l'activité de l'entreprise sur plusieurs exercices. On distingue les investissements <strong>corporels</strong> (machines, véhicules), <strong>incorporels</strong> (brevets, logiciels) et <strong>financiers</strong> (titres).</p>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">Modes de financement</div>
+          <ul>
+            <li><strong>Autofinancement</strong> : utilisation des bénéfices mis en réserve (capacité d'autofinancement)</li>
+            <li><strong>Emprunt bancaire</strong> : financement externe avec remboursement par annuités</li>
+            <li><strong>Crédit-bail (leasing)</strong> : location avec option d'achat, pas d'immobilisation</li>
+            <li><strong>Augmentation de capital</strong> : appel aux actionnaires (dilution du capital)</li>
+          </ul>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 Tableau d'amortissement d'emprunt — Annuité constante</div>
+          <div class="formula">a = K × [ i / (1 − (1 + i)^−n) ]</div>
+          <p style="margin-top:.75rem; font-size:.88rem;">Avec : <strong>K</strong> = capital emprunté, <strong>i</strong> = taux d'intérêt annuel, <strong>n</strong> = durée en années</p>
+          <p style="font-size:.88rem; margin-top:.4rem;">Chaque annuité (a) = Intérêts de la période + Amortissement du capital</p>
+          <p style="font-size:.88rem; margin-top:.4rem;"><strong>Intérêts</strong> = Capital restant dû × i | <strong>Amortissement</strong> = a − Intérêts</p>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice — Tableau d'amortissement d'emprunt sur 3 ans</h4>
+            <span class="badge badge-gf">Calcul complet</span>
+          </div>
+          <div class="exercise-body">
+            <p>L'entreprise TEALFIN SA emprunte <strong>30 000 €</strong> à un taux annuel de <strong>5%</strong> sur <strong>3 ans</strong>, remboursement par annuités constantes.</p>
+            <div class="exercise-question">1. Calculez l'annuité constante. 2. Construisez le tableau d'amortissement complet.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <p><strong>Calcul de l'annuité :</strong></p>
+              <p>a = 30 000 × [0,05 / (1 − (1,05)^−3)] = 30 000 × [0,05 / (1 − 0,8638)] = 30 000 × [0,05 / 0,1362] = 30 000 × 0,36721 = <strong>11 016,35 €</strong> (arrondi à 11 016 €)</p>
+              <div class="table-wrapper" style="margin:.75rem 0;">
+                <table class="amort-table">
+                  <thead><tr><th>Année</th><th>Capital restant dû (début)</th><th>Intérêts (5%)</th><th>Amortissement capital</th><th>Annuité</th><th>Capital restant dû (fin)</th></tr></thead>
+                  <tbody>
+                    <tr><td>1</td><td>30 000</td><td>1 500</td><td>9 516</td><td>11 016</td><td>20 484</td></tr>
+                    <tr><td>2</td><td>20 484</td><td>1 024</td><td>9 992</td><td>11 016</td><td>10 492</td></tr>
+                    <tr><td>3</td><td>10 492</td><td>525</td><td>10 491</td><td>11 016</td><td>1 (arrondi ≈ 0)</td></tr>
+                    <tr><td><strong>TOTAL</strong></td><td></td><td><strong>3 049</strong></td><td><strong>29 999</strong></td><td><strong>33 048</strong></td><td></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p><strong>Interprétation :</strong> L'entreprise remboursera 33 048 € au total (30 000 € de capital + 3 048 € d'intérêts). Les intérêts diminuent chaque année car le capital restant dû baisse.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- QCM final -->
+        <div class="quiz-section" data-subject="gf">
+          <h3>🎯 QCM — Récapitulatif Gestion &amp; Finance</h3>
+          <div class="quiz-question">
+            <p>3. Comment calcule-t-on la Valeur Ajoutée (VA) ?</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, c'est la Marge Commerciale."><span class="quiz-option-letter">A</span> Ventes HT − Coût d'achat des marchandises vendues</button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, c'est l'EBE."><span class="quiz-option-letter">B</span> VA + Subventions − Impôts/taxes − Charges de personnel</button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! La VA = MC + Production − Consommations intermédiaires."><span class="quiz-option-letter">C</span> Marge commerciale + Production − Consommations intermédiaires</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+          <div class="quiz-question" style="margin-top:1.5rem;">
+            <p>4. Si TVA collectée = 4 000 € et TVA déductible = 1 500 €, la TVA à décaisser est :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, 5 500 € serait la somme des deux TVA."><span class="quiz-option-letter">A</span> 5 500 €</button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! TVA à décaisser = TVA collectée − TVA déductible = 4 000 − 1 500 = 2 500 €."><span class="quiz-option-letter">B</span> 2 500 €</button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, c'est la TVA déductible seule."><span class="quiz-option-letter">C</span> 1 500 €</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </div><!-- /ch8 -->
+
+    </main>
+  </div><!-- /page-layout -->
+</div><!-- /container -->
+
+<!-- ── FOOTER ──────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">💰 Gestion &amp; Finance — BAC STMG 2026</div>
+        <div class="footer-desc">8 chapitres · Bilan, SIG, ratios, seuil de rentabilité, TVA, investissements · Exercices corrigés</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="economie.html">Économie</a>
+        <a href="droit.html">Droit</a>
+        <a href="management.html">Management</a>
+        <a href="rhc.html">RHC</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>🎓 BacSTMG 2026 — Programme officiel Éducation Nationale</span>
+      <span>Bon courage ! Tu vas réussir 💪</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ressources Humaines &amp; Communication — BAC STMG 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root { --card-color: var(--rhc); }
+    .rhc { color: var(--rhc) !important; }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .82rem; color: var(--text2); padding: .75rem 0;
+    }
+    .breadcrumb a { color: var(--text2); transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--rhc); }
+    .breadcrumb-sep { color: var(--bg3); }
+    .breadcrumb-current { color: var(--rhc); font-weight: 600; }
+
+    /* Progress */
+    .overall-progress { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.5rem; margin-bottom: 1.5rem; }
+    .overall-progress-label { font-size: .82rem; color: var(--text2); margin-bottom: .4rem; }
+    .overall-progress-fill { background: linear-gradient(90deg, var(--rhc), #fda4af); }
+
+    /* Ch-done */
+    .ch-done-wrap { display: flex; align-items: center; gap: .4rem; font-size: .8rem; color: var(--text2); }
+    .ch-done { accent-color: var(--rhc); width: 15px; height: 15px; cursor: pointer; }
+
+    /* Théories motivation */
+    .theory-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem 1.5rem;
+      border-top: 3px solid var(--rhc); margin-bottom: 1rem;
+    }
+    .theory-name { font-size: 1rem; font-weight: 800; color: var(--rhc); margin-bottom: .25rem; }
+    .theory-author { font-size: .78rem; color: var(--text2); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: .6rem; }
+    .theory-desc { font-size: .9rem; color: var(--text2); margin-bottom: .6rem; }
+    .theory-rhapp { font-size: .85rem; background: rgba(225,29,72,.08); border-left: 3px solid var(--rhc); padding: .5rem .75rem; border-radius: 0 8px 8px 0; color: var(--text2); }
+
+    /* Maslow pyramid */
+    .maslow-pyramid { display: flex; flex-direction: column; align-items: center; gap: 3px; margin: 1.5rem 0; }
+    .maslow-level {
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px; font-size: .82rem; font-weight: 600;
+      color: #fff; text-align: center; padding: .55rem 1rem;
+      transition: transform var(--transition);
+    }
+    .maslow-level:hover { transform: scale(1.02); }
+
+    /* Compétences tableau */
+    .comp-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .comp-table th { padding: .75rem 1rem; border: 1px solid var(--border); background: rgba(225,29,72,.15); color: var(--rhc); font-weight: 700; }
+    .comp-table td { padding: .65rem 1rem; border: 1px solid var(--border); color: var(--text2); }
+    .comp-table tr:hover td { background: var(--bg3); }
+
+    /* Communication types */
+    .comm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .comm-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.2rem; border-left: 4px solid var(--rhc); }
+    .comm-type { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--rhc); margin-bottom: .3rem; }
+    .comm-desc { font-size: .85rem; color: var(--text2); }
+    .comm-exemple { font-size: .8rem; font-style: italic; color: var(--text2); margin-top: .3rem; border-top: 1px solid var(--border); padding-top: .3rem; }
+
+    /* Processus recrutement */
+    .process-steps { display: flex; flex-direction: column; gap: .6rem; margin: 1.5rem 0; }
+    .process-step { display: flex; align-items: flex-start; gap: 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: .85rem 1.2rem; }
+    .step-num { min-width: 2rem; height: 2rem; border-radius: 50%; background: var(--rhc); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .85rem; flex-shrink: 0; }
+    .step-text strong { color: var(--text); font-size: .9rem; display: block; margin-bottom: .2rem; }
+    .step-text span { color: var(--text2); font-size: .83rem; }
+
+    /* Salaire calc */
+    .salaire-calc { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .salaire-row { display: flex; justify-content: space-between; align-items: center; padding: .4rem 0; border-bottom: 1px dashed var(--border); font-size: .9rem; }
+    .salaire-row:last-child { border-bottom: none; }
+    .salaire-row .label { color: var(--text2); }
+    .salaire-row .val { font-weight: 700; color: var(--text); font-family: 'Courier New', monospace; }
+    .salaire-row.total { border-top: 2px solid var(--rhc); border-bottom: none; margin-top: .5rem; padding-top: .75rem; }
+    .salaire-row.total .label { color: var(--rhc); font-weight: 700; }
+    .salaire-row.total .val { color: var(--rhc); font-size: 1.1rem; }
+  </style>
+</head>
+<body data-subject="rhc">
+
+<!-- ── NAVBAR ─────────────────────────────────────────────── -->
+<nav class="navbar">
+  <div class="container navbar-inner">
+    <a href="index.html" class="navbar-logo">🎓 <span>BAC STMG</span> 2026</a>
+    <div class="navbar-links">
+      <a href="economie.html" class="nav-eco">Économie</a>
+      <a href="droit.html" class="nav-droit">Droit</a>
+      <a href="management.html" class="nav-mgmt">Management</a>
+      <a href="gestion-finance.html" class="nav-gf">Gestion &amp; Finance</a>
+      <a href="rhc.html" class="nav-rhc active">RHC</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── PAGE HEADER ────────────────────────────────────────── -->
+<div class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">Ressources Humaines &amp; Communication</span>
+    </div>
+    <div class="page-header-inner">
+      <div class="page-header-icon">👥</div>
+      <div class="page-header-text">
+        <h1 style="color: var(--rhc);">Ressources Humaines &amp; Communication</h1>
+        <p>Spécialité Terminale STMG — Compétences, GPEC, recrutement, rémunération, motivation, QVT, conflits, communication interne/externe et de crise.</p>
+        <div class="page-header-badges">
+          <span class="badge badge-rhc">Terminale</span>
+          <span class="badge badge-neutral">9 chapitres</span>
+          <span class="badge badge-success">Exercices corrigés</span>
+          <span class="badge badge-warning">Coefficient fort</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── LAYOUT ─────────────────────────────────────────────── -->
+<div class="container">
+  <div class="page-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="overall-progress">
+        <div class="overall-progress-label">Progression</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill overall-progress-fill" style="width:0%"></div>
+        </div>
+        <div class="overall-progress-label" style="margin-top:.3rem;">0/9 chapitres vus (0%)</div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">📚 Chapitres</div>
+        <a href="#ch1" class="sidebar-link"><span class="toc-item-num">01</span> La compétence</a>
+        <a href="#ch2" class="sidebar-link"><span class="toc-item-num">02</span> GPEC &amp; formation</a>
+        <a href="#ch3" class="sidebar-link"><span class="toc-item-num">03</span> Le recrutement</a>
+        <a href="#ch4" class="sidebar-link"><span class="toc-item-num">04</span> La rémunération</a>
+        <a href="#ch5" class="sidebar-link"><span class="toc-item-num">05</span> Théories motivation</a>
+        <a href="#ch6" class="sidebar-link"><span class="toc-item-num">06</span> QVT &amp; RPS</a>
+        <a href="#ch7" class="sidebar-link"><span class="toc-item-num">07</span> Gestion des conflits</a>
+        <a href="#ch8" class="sidebar-link"><span class="toc-item-num">08</span> Communication organisationnelle</a>
+        <a href="#ch9" class="sidebar-link"><span class="toc-item-num">09</span> Communication de crise</a>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">🔗 Autres matières</div>
+        <a href="economie.html" class="sidebar-link nav-eco">📊 Économie</a>
+        <a href="droit.html" class="sidebar-link nav-droit">⚖️ Droit</a>
+        <a href="management.html" class="sidebar-link nav-mgmt">🏢 Management</a>
+        <a href="gestion-finance.html" class="sidebar-link nav-gf">💰 Gestion &amp; Finance</a>
+      </div>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main>
+
+      <!-- TOC -->
+      <div class="toc">
+        <div class="toc-title">📋 Table des matières — RHC</div>
+        <div class="toc-grid">
+          <a href="#ch1" class="toc-item"><span class="toc-item-num">01</span> La compétence</a>
+          <a href="#ch2" class="toc-item"><span class="toc-item-num">02</span> GPEC &amp; formation</a>
+          <a href="#ch3" class="toc-item"><span class="toc-item-num">03</span> Le recrutement</a>
+          <a href="#ch4" class="toc-item"><span class="toc-item-num">04</span> La rémunération</a>
+          <a href="#ch5" class="toc-item"><span class="toc-item-num">05</span> Théories de la motivation</a>
+          <a href="#ch6" class="toc-item"><span class="toc-item-num">06</span> QVT &amp; RPS</a>
+          <a href="#ch7" class="toc-item"><span class="toc-item-num">07</span> Gestion des conflits</a>
+          <a href="#ch8" class="toc-item"><span class="toc-item-num">08</span> Communication organisationnelle</a>
+          <a href="#ch9" class="toc-item"><span class="toc-item-num">09</span> Communication de crise</a>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 1 — La notion de compétence               -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch1">
+        <div class="chapter-header">
+          <div class="chapter-number">1</div>
+          <div style="flex:1">
+            <h2>La notion de compétence</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Savoirs · Savoir-faire · Savoir-être · GPEC · Employabilité</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition — Compétence</div>
+          <p>Une <strong>compétence</strong> est la combinaison de trois dimensions mobilisées dans une situation professionnelle donnée :</p>
+          <ul style="margin-top:.6rem; display:flex; flex-direction:column; gap:.3rem;">
+            <li style="color:var(--text2); font-size:.9rem;"><strong>Savoirs</strong> : connaissances théoriques et conceptuelles acquises par la formation</li>
+            <li style="color:var(--text2); font-size:.9rem;"><strong>Savoir-faire</strong> : aptitudes pratiques, capacité à réaliser une tâche concrète</li>
+            <li style="color:var(--text2); font-size:.9rem;"><strong>Savoir-être</strong> : comportements, attitudes relationnelles et qualités personnelles</li>
+          </ul>
+        </div>
+
+        <h3 style="margin:1.5rem 0 1rem; color:var(--text);">Tableau des 3 dimensions de la compétence</h3>
+        <div class="table-wrapper">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th>Définition</th>
+                <th>Exemples en entreprise</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Savoirs</strong><br><span style="font-size:.78rem; color:var(--rhc);">Connaissances</span></td>
+                <td>Ensemble des connaissances théoriques maîtrisées</td>
+                <td>Connaissance du droit du travail, maîtrise d'un logiciel comptable, connaissance des procédures ISO</td>
+              </tr>
+              <tr>
+                <td><strong>Savoir-faire</strong><br><span style="font-size:.78rem; color:var(--rhc);">Aptitudes pratiques</span></td>
+                <td>Capacité à réaliser concrètement une tâche ou une activité</td>
+                <td>Rédiger un contrat de travail, conduire un entretien, analyser un bilan, utiliser Excel</td>
+              </tr>
+              <tr>
+                <td><strong>Savoir-être</strong><br><span style="font-size:.78rem; color:var(--rhc);">Attitudes</span></td>
+                <td>Comportements et qualités relationnelles attendus</td>
+                <td>Sens de l'écoute, rigueur, adaptabilité, esprit d'équipe, gestion du stress, leadership</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid-2" style="margin:1.5rem 0;">
+          <div class="def-box">
+            <div class="def-title">Compétence individuelle</div>
+            <p>Propre à un salarié, développée par son expérience et sa formation. Elle est évaluée lors des entretiens annuels.</p>
+          </div>
+          <div class="def-box">
+            <div class="def-title">Compétence collective</div>
+            <p>Emerge de la combinaison et de l'interaction des compétences individuelles d'une équipe. Elle est supérieure à la somme des compétences individuelles.</p>
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Référentiel des compétences</div>
+          <p>Document RH qui décrit l'ensemble des <strong>compétences requises</strong> pour occuper un poste donné. Il sert de base au recrutement, à l'évaluation et à la formation.</p>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Employabilité</div>
+          <p>Capacité d'un individu à <strong>trouver, conserver ou retrouver un emploi</strong> grâce à ses compétences actuelles et à sa capacité à les développer. L'entreprise et le salarié ont une responsabilité partagée dans le maintien de l'employabilité.</p>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice — Identifier les compétences dans un profil de poste</h4>
+            <span class="badge badge-rhc">Analyse documentaire</span>
+          </div>
+          <div class="exercise-body">
+            <p>Annonce de poste : <em>"Nous recherchons un(e) Chargé(e) RH. Bac+3 en GRH requis. Vous maîtrisez la gestion de la paie et les outils SIRH. Vous savez mener des entretiens de recrutement. Vous êtes reconnu(e) pour votre discrétion, votre sens du contact et votre capacité à travailler en équipe pluridisciplinaire."</em></p>
+            <div class="exercise-question">Classez chaque exigence dans la bonne catégorie : savoirs / savoir-faire / savoir-être.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <div class="table-wrapper" style="margin:.75rem 0;">
+                <table class="comp-table">
+                  <thead><tr><th>Exigence du poste</th><th>Catégorie</th></tr></thead>
+                  <tbody>
+                    <tr><td>Bac+3 en GRH (connaissances RH, droit du travail)</td><td><strong>Savoirs</strong></td></tr>
+                    <tr><td>Maîtriser la gestion de la paie et les outils SIRH</td><td><strong>Savoir-faire</strong></td></tr>
+                    <tr><td>Savoir mener des entretiens de recrutement</td><td><strong>Savoir-faire</strong></td></tr>
+                    <tr><td>Discrétion, sens du contact</td><td><strong>Savoir-être</strong></td></tr>
+                    <tr><td>Capacité à travailler en équipe pluridisciplinaire</td><td><strong>Savoir-être</strong></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p><strong>Conclusion :</strong> Ce profil de poste exige les trois dimensions. Le savoir-être est particulièrement important dans un poste RH exposé à des informations confidentielles.</p>
+            </div>
+          </div>
+        </div>
+      </div><!-- /ch1 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 2 — GPEC et formation                     -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch2">
+        <div class="chapter-header">
+          <div class="chapter-number">2</div>
+          <div style="flex:1">
+            <h2>La GPEC et la formation professionnelle</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">PDC · CPF · Bilan de compétences · VAE</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition — GPEC</div>
+          <p>La <strong>GPEC (Gestion Prévisionnelle des Emplois et des Compétences)</strong> est une démarche anticipatrice visant à <strong>adapter les emplois, les effectifs et les compétences</strong> aux besoins futurs de l'organisation, en tenant compte des évolutions économiques, technologiques et sociales.</p>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">Les outils de la formation professionnelle</div>
+          <ul>
+            <li><strong>Plan de Développement des Compétences (PDC)</strong> : remplace le plan de formation depuis 2018. Document élaboré par l'employeur recensant les actions de formation prévues pour les salariés.</li>
+            <li><strong>CPF (Compte Personnel de Formation)</strong> : droit à la formation attaché à chaque actif (salarié ou demandeur d'emploi). Alimenté en euros (500 €/an, plafond 5 000 €). Géré par la Caisse des Dépôts.</li>
+            <li><strong>Bilan de compétences</strong> : démarche permettant au salarié de faire le point sur ses aptitudes, compétences et motivations afin de définir un projet professionnel ou de formation.</li>
+            <li><strong>VAE (Validation des Acquis de l'Expérience)</strong> : dispositif permettant d'obtenir tout ou partie d'un diplôme ou titre professionnel grâce à l'expérience acquise (au moins 1 an d'expérience).</li>
+            <li><strong>Pro-A (Reconversion ou Promotion par alternance)</strong> : permet au salarié de se reconvertir ou d'évoluer via la formation en alternance.</li>
+          </ul>
+        </div>
+
+        <div class="example-box">
+          <div class="example-title">Exemple concret — GPEC chez un industriel</div>
+          <p>Une usine automobile anticipe l'automatisation de 30% de ses postes d'ici 5 ans. Via la GPEC, elle identifie les compétences en robotique à développer, propose des formations ciblées (PDC), et accompagne les salariés dont les postes seront transformés via des bilans de compétences et des VAE.</p>
+        </div>
+      </div><!-- /ch2 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 3 — Le recrutement                        -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch3">
+        <div class="chapter-header">
+          <div class="chapter-number">3</div>
+          <div style="flex:1">
+            <h2>Le recrutement</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Interne · Externe · Processus · Onboarding</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:1.5rem;">
+          <div class="def-box">
+            <div class="def-title">Recrutement interne</div>
+            <p><strong>Promotion ou mutation</strong> d'un salarié déjà en poste. <br><span style="font-size:.85rem;">✓ Moins coûteux, fidélise, motivation du personnel, intégration rapide.<br>✗ Ferme la porte à des compétences extérieures, peut créer des jalousies.</span></p>
+          </div>
+          <div class="def-box">
+            <div class="def-title">Recrutement externe</div>
+            <p>Appel à des candidats extérieurs. Sources : annonces, cabinets de recrutement, jobboards, cooptation, réseaux sociaux pro (LinkedIn), alternance. <br><span style="font-size:.85rem;">✓ Sang neuf, nouvelles compétences.<br>✗ Coûteux, risque d'inadaptation culturelle, intégration longue.</span></p>
+          </div>
+        </div>
+
+        <h3 style="margin:1.5rem 0 1rem; color:var(--text);">Les étapes du processus de recrutement</h3>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <strong>Définition du besoin</strong>
+              <span>Analyser le poste à pourvoir, justifier le besoin (départ, création de poste, augmentation d'activité).</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <strong>Rédaction du profil de poste (fiche de poste)</strong>
+              <span>Missions, responsabilités, compétences requises (savoirs / savoir-faire / savoir-être), conditions de travail.</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <strong>Sourcing (diffusion / recherche de candidats)</strong>
+              <span>Choix des canaux : APEC, Pôle Emploi, jobboards, réseaux sociaux, cabinets, cooptation, interne.</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">4</div>
+            <div class="step-text">
+              <strong>Sélection des candidats</strong>
+              <span>Tri des CV, lettres de motivation, entretiens individuels/collectifs, tests techniques, tests de personnalité, mises en situation.</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">5</div>
+            <div class="step-text">
+              <strong>Décision et proposition d'embauche</strong>
+              <span>Choix du candidat retenu, négociation des conditions, rédaction et signature du contrat de travail.</span>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-num">6</div>
+            <div class="step-text">
+              <strong>Intégration — Onboarding</strong>
+              <span>Accueil, présentation de l'équipe, remise du livret d'accueil, tutorat, période d'essai. L'onboarding conditionne la rétention du nouveau salarié.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice — Analyser une procédure de recrutement</h4>
+            <span class="badge badge-rhc">Type BAC</span>
+          </div>
+          <div class="exercise-body">
+            <p>L'entreprise NOVA COMM doit remplacer un responsable communication parti à la retraite. Elle décide de ne publier l'offre que sur son intranet. Après 3 candidatures internes, elle choisit la collaboratrice ayant le plus d'ancienneté, sans entretien formalisé.</p>
+            <div class="exercise-question">1. Qualifiez le mode de recrutement choisi. 2. Relevez deux dysfonctionnements dans ce processus. 3. Proposez des améliorations.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <p><strong>1. Mode de recrutement :</strong> Recrutement <strong>interne</strong> (diffusion sur intranet uniquement, candidates déjà en poste).</p>
+              <p><strong>2. Dysfonctionnements :</strong></p>
+              <ul style="margin:.5rem 0 .5rem 1rem; display:flex; flex-direction:column; gap:.3rem;">
+                <li style="color:var(--text2); font-size:.9rem;">Critère de sélection basé sur l'ancienneté uniquement → critère non pertinent pour évaluer les compétences requises pour le poste.</li>
+                <li style="color:var(--text2); font-size:.9rem;">Absence d'entretien formalisé → impossible d'évaluer objectivement les compétences (savoir-faire, savoir-être) et de respecter l'égalité de traitement.</li>
+                <li style="color:var(--text2); font-size:.9rem;">Aucune fiche de poste mentionnée → les candidats ne connaissent pas précisément les attentes.</li>
+              </ul>
+              <p><strong>3. Améliorations :</strong> Rédiger une fiche de poste précise, conduire des entretiens structurés avec des grilles d'évaluation, définir des critères objectifs (compétences communication, management d'équipe…), envisager un recrutement mixte (interne + externe) si le vivier interne est insuffisant.</p>
+            </div>
+          </div>
+        </div>
+      </div><!-- /ch3 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 4 — La rémunération                       -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch4">
+        <div class="chapter-header">
+          <div class="chapter-number">4</div>
+          <div style="flex:1">
+            <h2>La rémunération</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Salaire brut · Net · SMIC · Charges · Rémunération variable</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Les composantes de la rémunération</div>
+          <p><strong>Salaire brut</strong> : montant de référence avant déduction des cotisations sociales salariales. Base de calcul des droits sociaux (retraite, chômage, maladie).</p>
+          <p style="margin-top:.5rem;"><strong>Salaire net</strong> = Salaire brut − Cotisations salariales (≈ 22% du brut)</p>
+          <p style="margin-top:.5rem;"><strong>SMIC</strong> : Salaire Minimum Interprofessionnel de Croissance. Garanti légalement à tout salarié. Revalorié chaque année (et en cas d'inflation).</p>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-title">📐 Formules de la rémunération</div>
+          <div class="formula">Salaire net ≈ Salaire brut × (1 − 22%)</div>
+          <div class="formula" style="margin-top:.5rem;">Coût du travail employeur = Salaire brut + Charges patronales (≈ 40-45% du brut)</div>
+          <div class="formula" style="margin-top:.5rem;">Coût total employeur ≈ Salaire brut × 1,42 (avec charges patronales à 42%)</div>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">Les composantes de la rémunération globale</div>
+          <ul>
+            <li><strong>Rémunération fixe</strong> : salaire de base, déterminé par la grille conventionnelle et la classification</li>
+            <li><strong>Rémunération variable individuelle</strong> : primes de performance, commissions, bonus</li>
+            <li><strong>Rémunération variable collective</strong> : intéressement (lié aux résultats), participation (obligatoire &gt;50 salariés)</li>
+            <li><strong>Épargne salariale</strong> : plan d'épargne entreprise (PEE), PERCO, stock-options</li>
+            <li><strong>Avantages en nature</strong> : voiture de fonction, tickets restaurant, mutuelle, téléphone…</li>
+          </ul>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice — Calcul salaire net et coût employeur</h4>
+            <span class="badge badge-rhc">Calcul</span>
+          </div>
+          <div class="exercise-body">
+            <p>Mme Dupont a un <strong>salaire brut de 2 500 €/mois</strong>. Taux de cotisations salariales = 22%. Taux de charges patronales = 42%.</p>
+            <div class="exercise-question">1. Calculez le salaire net de Mme Dupont. 2. Calculez le coût mensuel total pour l'employeur.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <div class="salaire-calc">
+                <div class="salaire-row">
+                  <span class="label">Salaire brut</span>
+                  <span class="val">2 500,00 €</span>
+                </div>
+                <div class="salaire-row">
+                  <span class="label">− Cotisations salariales (22%)</span>
+                  <span class="val">− 550,00 €</span>
+                </div>
+                <div class="salaire-row total">
+                  <span class="label">= SALAIRE NET</span>
+                  <span class="val">1 950,00 €</span>
+                </div>
+              </div>
+              <div class="salaire-calc" style="margin-top:1rem;">
+                <div class="salaire-row">
+                  <span class="label">Salaire brut</span>
+                  <span class="val">2 500,00 €</span>
+                </div>
+                <div class="salaire-row">
+                  <span class="label">+ Charges patronales (42%)</span>
+                  <span class="val">+ 1 050,00 €</span>
+                </div>
+                <div class="salaire-row total">
+                  <span class="label">= COÛT TOTAL EMPLOYEUR</span>
+                  <span class="val">3 550,00 €</span>
+                </div>
+              </div>
+              <p style="margin-top:.75rem;"><strong>Interprétation :</strong> Pour verser 1 950 € à Mme Dupont, l'employeur débourse 3 550 € au total. Le ratio net/coût employeur est de 1 950/3 550 ≈ 55% : moins de 60% du coût du travail arrive dans la poche du salarié.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-section" data-subject="rhc">
+          <h3>🎯 QCM — Rémunération</h3>
+          <div class="quiz-question">
+            <p>1. La participation est-elle obligatoire pour toutes les entreprises ?</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, la participation n'est pas obligatoire pour toutes les entreprises."><span class="quiz-option-letter">A</span> Oui, pour toutes les entreprises dès le 1er salarié</button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! La participation est obligatoire dans les entreprises de plus de 50 salariés."><span class="quiz-option-letter">B</span> Oui, mais seulement pour les entreprises de plus de 50 salariés</button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, la participation est bien obligatoire au-delà d'un certain seuil."><span class="quiz-option-letter">C</span> Non, c'est toujours facultatif</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </div><!-- /ch4 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 5 — Théories de la motivation             -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch5">
+        <div class="chapter-header">
+          <div class="chapter-number">5</div>
+          <div style="flex:1">
+            <h2>Les théories de la motivation</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Maslow · Herzberg · Vroom · McClelland · Adams</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <!-- Maslow -->
+        <div class="theory-card">
+          <div class="theory-name">La Pyramide de Maslow</div>
+          <div class="theory-author">Abraham Maslow — 1943</div>
+          <div class="theory-desc">5 niveaux de besoins hiérarchisés : un individu cherche à satisfaire les besoins de niveau inférieur avant d'aspirer aux besoins supérieurs.</div>
+          <div class="maslow-pyramid">
+            <div class="maslow-level" style="background: #e11d48; width: 38%;">Accomplissement de soi</div>
+            <div class="maslow-level" style="background: #be185d; width: 52%;">Estime (reconnaissance, statut)</div>
+            <div class="maslow-level" style="background: #9d174d; width: 66%;">Appartenance (équipe, lien social)</div>
+            <div class="maslow-level" style="background: #831843; width: 80%;">Sécurité (emploi stable, contrat CDI)</div>
+            <div class="maslow-level" style="background: #6b1a3a; width: 94%;">Besoins physiologiques (salaire suffisant)</div>
+          </div>
+          <div class="theory-rhapp"><strong>Application RH :</strong> Un salarié dont les besoins de sécurité ne sont pas satisfaits (contrat précaire) sera peu sensible aux arguments de reconnaissance. Il faut répondre aux besoins de base avant de viser l'engagement.</div>
+        </div>
+
+        <!-- Herzberg -->
+        <div class="theory-card">
+          <div class="theory-name">La théorie des deux facteurs — Herzberg</div>
+          <div class="theory-author">Frederick Herzberg — 1959</div>
+          <div class="theory-desc">Distinction entre facteurs d'hygiène (dont l'absence crée de l'insatisfaction mais la présence ne motive pas) et facteurs de motivation (sources d'épanouissement et d'engagement).</div>
+          <div class="table-wrapper" style="margin:.75rem 0;">
+            <table>
+              <thead><tr><th>Facteurs d'hygiène (évitent l'insatisfaction)</th><th>Facteurs de motivation (créent la satisfaction)</th></tr></thead>
+              <tbody>
+                <tr><td>Salaire de base, conditions matérielles</td><td>Accomplissement dans le travail</td></tr>
+                <tr><td>Sécurité de l'emploi</td><td>Reconnaissance des résultats</td></tr>
+                <tr><td>Politique de l'entreprise</td><td>Responsabilités accordées</td></tr>
+                <tr><td>Relations avec la hiérarchie</td><td>Promotion et évolution de carrière</td></tr>
+                <tr><td>Conditions physiques de travail</td><td>Intérêt et enrichissement du travail</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="theory-rhapp"><strong>Application RH :</strong> Augmenter le salaire seul ne motivera pas durablement. Il faut aussi enrichir le contenu du travail, donner des responsabilités et reconnaître les succès.</div>
+        </div>
+
+        <!-- Vroom -->
+        <div class="theory-card">
+          <div class="theory-name">La théorie des attentes — Vroom (VIE)</div>
+          <div class="theory-author">Victor Vroom — 1964</div>
+          <div class="theory-desc">La motivation est le produit de trois perceptions :</div>
+          <div class="formula-box" style="margin:.75rem 0;">
+            <div class="formula-title">Modèle VIE</div>
+            <div class="formula">Force motivationnelle (F) = V × I × E</div>
+            <p style="margin-top:.5rem; font-size:.85rem;"><strong>V (Valence)</strong> = valeur accordée à la récompense | <strong>I (Instrumentalité)</strong> = croyance que la performance mène à la récompense | <strong>E (Expectation)</strong> = croyance que l'effort mène à la performance</p>
+          </div>
+          <div class="theory-rhapp"><strong>Application RH :</strong> Si un salarié doute que ses efforts seront récompensés (I faible) ou que la récompense lui convient (V faible), sa motivation chute à zéro. L'encadrant doit clarifier les objectifs et les récompenses.</div>
+        </div>
+
+        <!-- McClelland -->
+        <div class="theory-card">
+          <div class="theory-name">Théorie des besoins acquis — McClelland</div>
+          <div class="theory-author">David McClelland — 1961</div>
+          <div class="theory-desc">Chaque individu est animé par une combinaison de trois besoins dominants, acquis au cours de sa vie sociale :</div>
+          <div class="key-points" style="margin:.75rem 0;">
+            <div class="key-points-title">Les 3 besoins de McClelland</div>
+            <ul>
+              <li><strong>Besoin d'accomplissement</strong> : désir de réaliser des choses difficiles, d'exceller, de se surpasser</li>
+              <li><strong>Besoin de pouvoir</strong> : désir d'influencer, de diriger, d'avoir de l'autorité sur les autres</li>
+              <li><strong>Besoin d'affiliation</strong> : désir de relations sociales harmonieuses, d'appartenir à un groupe</li>
+            </ul>
+          </div>
+          <div class="theory-rhapp"><strong>Application RH :</strong> Adapter les missions selon le profil : projets challengeants pour les profils "accomplissement", postes de management pour les profils "pouvoir", travail en équipe et cohésion pour les profils "affiliation".</div>
+        </div>
+
+        <!-- Adams -->
+        <div class="theory-card">
+          <div class="theory-name">Théorie de l'équité — Adams</div>
+          <div class="theory-author">John Stacey Adams — 1963</div>
+          <div class="theory-desc">Un individu compare son ratio contribution/rétribution avec celui de ses collègues. Toute iniquité perçue génère une tension et une baisse de motivation.</div>
+          <div class="formula-box" style="margin:.75rem 0;">
+            <div class="formula-title">Principe de l'équité</div>
+            <div class="formula">Rétribution propre / Contribution propre = Rétribution des autres / Contribution des autres</div>
+            <p style="margin-top:.5rem; font-size:.85rem;">Si l'égalité est respectée → équité → motivation maintenue. Sinon → sentiment d'injustice → désengagement.</p>
+          </div>
+          <div class="theory-rhapp"><strong>Application RH :</strong> Assurer la transparence des critères de rémunération et d'avancement. Un salarié qui se juge sous-payé par rapport à un collègue fournira moins d'efforts pour rééquilibrer la balance.</div>
+        </div>
+
+        <!-- Tableau comparatif -->
+        <h3 style="margin:2rem 0 1rem; color:var(--text);">Tableau comparatif des théories de la motivation</h3>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>Théorie</th><th>Auteur</th><th>Idée centrale</th><th>Levier RH principal</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Pyramide des besoins</strong></td><td>Maslow</td><td>Besoins hiérarchisés (5 niveaux)</td><td>Satisfaire les besoins de base avant les besoins supérieurs</td></tr>
+              <tr><td><strong>Deux facteurs</strong></td><td>Herzberg</td><td>Hygiène ≠ motivation</td><td>Enrichir le travail, reconnaître les succès</td></tr>
+              <tr><td><strong>VIE / Attentes</strong></td><td>Vroom</td><td>F = V × I × E</td><td>Clarifier objectifs et récompenses attendues</td></tr>
+              <tr><td><strong>Besoins acquis</strong></td><td>McClelland</td><td>3 besoins dominants acquis</td><td>Adapter les postes aux profils</td></tr>
+              <tr><td><strong>Équité</strong></td><td>Adams</td><td>Comparaison contribution/rétribution</td><td>Transparence et équité perçue</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Exercice BAC -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice BAC — Leviers de motivation</h4>
+            <span class="badge badge-rhc">Incontournable</span>
+          </div>
+          <div class="exercise-body">
+            <p><em>Document 1 :</em> Chez INNOV'RH, le taux de turnover est passé de 8% à 18% en 2 ans. Les entretiens de départ révèlent que les salariés se sentent peu reconnus, que leurs efforts ne sont pas récompensés et que les augmentations sont opaques.</p>
+            <p style="margin-top:.5rem;"><em>Document 2 :</em> Le DRH envisage : (a) une hausse générale de salaire de 3%, (b) la création d'une prime annuelle basée sur les objectifs individuels, (c) la mise en place d'entretiens trimestriels de feedback, (d) des déjeuners d'équipe mensuels.</p>
+            <div class="exercise-question">À partir des documents et de vos connaissances des théories de la motivation, analysez les causes du turnover et évaluez la pertinence de chaque mesure proposée.</div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <p><strong>Analyse des causes :</strong></p>
+              <p>— Sentiment de non-reconnaissance → Herzberg : absence de facteurs de motivation (reconnaissance des résultats). Maslow : besoin d'estime non satisfait.</p>
+              <p>— Efforts non récompensés → Vroom : instrumentalité (I) faible : les salariés ne croient pas que leur performance sera récompensée.</p>
+              <p>— Opacité des augmentations → Adams : sentiment d'iniquité, tension génératrice de démotivation et de départ.</p>
+              <p><strong>Évaluation des mesures :</strong></p>
+              <p><strong>(a) Hausse de salaire de 3%</strong> → Herzberg : facteur d'hygiène, évite l'insatisfaction mais ne motivera pas durablement. Pertinent à court terme si le salaire était insuffisant.</p>
+              <p><strong>(b) Prime sur objectifs individuels</strong> → Vroom : renforce l'instrumentalité (I) et la valence (V). Très pertinent : récompense visible liée à la performance.</p>
+              <p><strong>(c) Entretiens de feedback trimestriels</strong> → Herzberg : facteur de motivation (reconnaissance). Maslow : besoin d'estime. Très pertinent et peu coûteux.</p>
+              <p><strong>(d) Déjeuners d'équipe</strong> → Maslow : besoin d'appartenance. McClelland : profils "affiliation". Pertinent pour renforcer la cohésion mais ne résout pas les causes profondes.</p>
+              <div class="example-box" style="margin-top:.75rem;">
+                <div class="example-title">Recommandation</div>
+                <p>Combiner (b) + (c) pour agir sur les causes identifiées (non-reconnaissance, manque de clarté). Compléter par (a) si nécessaire. (d) en soutien à la culture d'équipe.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /ch5 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 6 — QVT et RPS                            -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch6">
+        <div class="chapter-header">
+          <div class="chapter-number">6</div>
+          <div style="flex:1">
+            <h2>La qualité de vie au travail (QVT)</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">RPS · DUERP · Télétravail · Bien-être</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition — QVT</div>
+          <p>La <strong>Qualité de Vie au Travail (QVT)</strong> désigne l'ensemble des conditions dans lesquelles les salariés exercent leur travail, leur capacité à s'exprimer et à agir, et les marges d'autonomie dont ils disposent. Elle englobe la santé physique et mentale, les relations de travail et l'équilibre vie pro/perso.</p>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">Les Risques Psychosociaux (RPS) à connaître</div>
+          <ul>
+            <li><strong>Stress</strong> : déséquilibre entre exigences perçues et ressources disponibles (modèle Karasek)</li>
+            <li><strong>Burn-out (épuisement professionnel)</strong> : épuisement émotionnel, dépersonnalisation et sentiment d'inefficacité dû au surmenage chronique</li>
+            <li><strong>Harcèlement moral</strong> : agissements répétés ayant pour objet ou effet une dégradation des conditions de travail (Art. L1152-1 Code du travail)</li>
+            <li><strong>Harcèlement sexuel</strong> : propos ou comportements à connotation sexuelle non désirés, imposés de façon répétée</li>
+            <li><strong>Violences au travail</strong> : comportements abusifs (physiques ou psychologiques) entre collègues ou avec des tiers</li>
+          </ul>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">DUERP — Document Unique d'Évaluation des Risques Professionnels</div>
+          <p>Le <strong>DUERP</strong> est un document <strong>obligatoire</strong> dans toutes les entreprises (dès 1 salarié). Il recense l'ensemble des risques professionnels (physiques, chimiques, psychosociaux) et les mesures de prévention associées. Il doit être mis à jour au moins une fois par an et tenu à disposition des salariés.</p>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Télétravail et équilibre vie pro / perso</div>
+          <p>Depuis les ordonnances Macron (2017) et la loi de 2021, le <strong>télétravail</strong> est un droit pour le salarié dans les postes compatibles. Il améliore l'équilibre vie pro/perso mais peut générer de l'isolement et brouiller les frontières. L'<strong>ANI (Accord National Interprofessionnel)</strong> du 26 novembre 2020 encadre les modalités.</p>
+        </div>
+      </div><!-- /ch6 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 7 — La gestion des conflits               -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch7">
+        <div class="chapter-header">
+          <div class="chapter-number">7</div>
+          <div style="flex:1">
+            <h2>La gestion des conflits</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Types · Négociation · Médiation · Action syndicale</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition — Conflit</div>
+          <p>Un <strong>conflit</strong> est un désaccord ou une opposition entre individus ou groupes aux intérêts, valeurs ou perceptions divergents, pouvant perturber le fonctionnement de l'organisation.</p>
+        </div>
+
+        <div class="table-wrapper" style="margin:1.5rem 0;">
+          <table>
+            <thead><tr><th>Type de conflit</th><th>Description</th><th>Exemple</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Conflit d'intérêts</strong></td><td>Opposition sur la répartition de ressources ou d'avantages</td><td>Désaccord sur les augmentations salariales entre direction et syndicats</td></tr>
+              <tr><td><strong>Conflit de valeurs</strong></td><td>Divergences profondes sur les principes éthiques ou les priorités</td><td>Désaccord sur la RSE, le sens du travail</td></tr>
+              <tr><td><strong>Conflit de personnalités</strong></td><td>Incompatibilités relationnelles entre individus</td><td>Tensions entre deux managers aux styles opposés</td></tr>
+              <tr><td><strong>Conflit organisationnel</strong></td><td>Lié aux dysfonctionnements de l'organisation (rôles flous, surcharge)</td><td>Ambiguïté des responsabilités, chevauchement de tâches</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">Les modes de résolution des conflits collectifs</div>
+          <ul>
+            <li><strong>Négociation collective</strong> : dialogue direct entre employeur et représentants syndicaux pour aboutir à un accord. Solution préférée car préserve les relations.</li>
+            <li><strong>Médiation</strong> : intervention d'un tiers neutre facilitant le dialogue et la recherche d'une solution mutuellement acceptable.</li>
+            <li><strong>Conciliation</strong> : le tiers propose une solution sans l'imposer (avant la médiation ou l'arbitrage).</li>
+            <li><strong>Arbitrage</strong> : le tiers arbitre tranche le différend par une décision contraignante (comme un jugement).</li>
+            <li><strong>Grève</strong> : cessation collective du travail pour faire pression. Droit constitutionnel des salariés (préavis obligatoire dans le public).</li>
+            <li><strong>Lock-out</strong> : fermeture temporaire de l'entreprise par l'employeur en réponse à une grève (fortement encadré).</li>
+          </ul>
+        </div>
+
+        <div class="quiz-section" data-subject="rhc">
+          <h3>🎯 QCM — Conflits et motivation</h3>
+          <div class="quiz-question">
+            <p>2. Selon Herzberg, une augmentation de salaire est :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, pour Herzberg, le salaire est un facteur d'hygiène, pas de motivation."><span class="quiz-option-letter">A</span> Un facteur de motivation qui accroît durablement l'engagement</button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Pour Herzberg, le salaire est un facteur d'hygiène : son absence crée de l'insatisfaction mais sa présence ne motive pas durablement."><span class="quiz-option-letter">B</span> Un facteur d'hygiène qui évite l'insatisfaction sans créer de motivation durable</button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, une augmentation de salaire n'est pas sans effet selon Herzberg — elle évite l'insatisfaction."><span class="quiz-option-letter">C</span> Un facteur neutre sans aucun effet sur la satisfaction</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </div><!-- /ch7 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 8 — Communication organisationnelle       -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch8">
+        <div class="chapter-header">
+          <div class="chapter-number">8</div>
+          <div style="flex:1">
+            <h2>La communication organisationnelle</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Interne · Externe · Marque employeur · Identité</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:1.5rem;">
+          <div class="def-box">
+            <div class="def-title">Communication interne</div>
+            <p>Ensemble des échanges d'informations et de messages <strong>au sein de l'organisation</strong>, entre ses membres, pour coordonner l'action et créer du lien.</p>
+          </div>
+          <div class="def-box">
+            <div class="def-title">Communication externe</div>
+            <p>Ensemble des échanges d'informations entre l'organisation et ses <strong>parties prenantes extérieures</strong> (clients, fournisseurs, médias, pouvoirs publics, grand public).</p>
+          </div>
+        </div>
+
+        <h3 style="margin:1.5rem 0 1rem; color:var(--text);">Les flux de la communication interne</h3>
+        <div class="comm-grid">
+          <div class="comm-card">
+            <div class="comm-type">Descendante</div>
+            <div class="comm-desc">De la hiérarchie vers les salariés : informations, directives, objectifs.</div>
+            <div class="comm-exemple">Ex : note de service, réunion d'équipe, newsletter interne</div>
+          </div>
+          <div class="comm-card">
+            <div class="comm-type">Ascendante</div>
+            <div class="comm-desc">Des salariés vers la hiérarchie : remontées de terrain, suggestions, alertes.</div>
+            <div class="comm-exemple">Ex : boîte à idées, enquête de satisfaction, entretien annuel</div>
+          </div>
+          <div class="comm-card">
+            <div class="comm-type">Transversale (horizontale)</div>
+            <div class="comm-desc">Entre salariés de même niveau hiérarchique, différents services.</div>
+            <div class="comm-exemple">Ex : réunion de projet inter-services, messagerie collaborative</div>
+          </div>
+          <div class="comm-card">
+            <div class="comm-type">Informelle</div>
+            <div class="comm-desc">Échanges spontanés hors canaux officiels, bouche à oreille.</div>
+            <div class="comm-exemple">Ex : rumeur, discussions à la machine à café</div>
+          </div>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">Les supports de communication interne</div>
+          <ul>
+            <li><strong>Intranet</strong> : portail numérique interne centralisant l'information (procédures, annonces, actualités RH)</li>
+            <li><strong>Journal d'entreprise / newsletter</strong> : communication régulière sur la vie de l'organisation</li>
+            <li><strong>Réunions</strong> : échanges synchrones formels ou informels</li>
+            <li><strong>Affichage obligatoire</strong> : panneaux syndicaux, consignes sécurité, conventions collectives</li>
+            <li><strong>Livret d'accueil</strong> : document remis lors de l'intégration (règlement, organigramme, avantages)</li>
+            <li><strong>Outils collaboratifs</strong> : Teams, Slack, SharePoint (communication numérique en temps réel)</li>
+          </ul>
+        </div>
+
+        <div class="grid-2" style="margin:1.5rem 0;">
+          <div class="def-box">
+            <div class="def-title">Identité d'entreprise</div>
+            <p>Ce que l'entreprise <strong>est réellement</strong> : ses valeurs, sa culture, son histoire, sa mission. C'est ce qu'elle décide de mettre en avant.</p>
+          </div>
+          <div class="def-box">
+            <div class="def-title">Image d'entreprise</div>
+            <p>Ce que les parties prenantes <strong>perçoivent</strong> de l'entreprise. Elle peut différer de l'identité si la communication est défaillante.</p>
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Marque employeur</div>
+          <p>La <strong>marque employeur</strong> est l'image de l'entreprise en tant qu'<strong>employeur</strong>, perçue par les salariés actuels et les candidats potentiels. Une marque employeur forte permet d'attirer et de fidéliser les talents, de réduire le turnover et les coûts de recrutement.</p>
+          <p style="margin-top:.5rem; font-size:.88rem;"><em>Exemple :</em> Google, L'Oréal ou Décathlon investissent massivement dans leur marque employeur via des politiques RH innovantes et une communication externe RH active (réseaux sociaux, événements, labels).</p>
+        </div>
+      </div><!-- /ch8 -->
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- CHAPITRE 9 — Communication de crise                -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <div class="chapter" id="ch9">
+        <div class="chapter-header">
+          <div class="chapter-number">9</div>
+          <div style="flex:1">
+            <h2>La communication de crise</h2>
+            <p style="font-size:.88rem; color:var(--text2); margin:0;">Gestion · E-réputation · Bad buzz · Cellule de crise</p>
+          </div>
+          <label class="ch-done-wrap"><input type="checkbox" class="ch-done"> Vu ✓</label>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">Définition — Crise</div>
+          <p>Une <strong>crise</strong> est une situation exceptionnelle, généralement soudaine, qui <strong>menace l'image, la réputation ou la survie</strong> de l'organisation. Elle peut être d'origine interne (accident, scandale RH, fraude) ou externe (catastrophe, attaque médiatique, bad buzz).</p>
+        </div>
+
+        <div class="key-points">
+          <div class="key-points-title">Les principes fondamentaux de la communication de crise</div>
+          <ul>
+            <li><strong>Réactivité / Rapidité</strong> : prendre la parole rapidement pour éviter que l'espace communicationnel soit occupé par des rumeurs (principe du "premier à parler")</li>
+            <li><strong>Transparence</strong> : ne pas mentir ni dissimuler. Reconnaître les faits établis sans amplifier la crise.</li>
+            <li><strong>Empathie</strong> : montrer de la considération pour les victimes, les parties prenantes impactées.</li>
+            <li><strong>Cohérence</strong> : tenir un seul discours, coordonné par le porte-parole. Éviter les messages contradictoires.</li>
+            <li><strong>Actions concrètes</strong> : ne pas se limiter à la communication, montrer des mesures réelles (rappel produit, indemnisation, sanctions internes).</li>
+          </ul>
+        </div>
+
+        <div class="def-box">
+          <div class="def-title">La cellule de crise</div>
+          <p>Équipe restreinte et transversale activée lors d'une crise, réunissant le DG, le DRH, le directeur communication, le responsable juridique et, selon le cas, le DSI. Elle centralise les décisions et coordonne les communications internes et externes. Un <strong>porte-parole désigné</strong> est l'unique voix officielle de l'organisation.</p>
+        </div>
+
+        <div class="grid-2" style="margin:1.5rem 0;">
+          <div class="def-box">
+            <div class="def-title">Bad buzz</div>
+            <p>Phénomène de propagation virale d'une information négative sur les réseaux sociaux, pouvant gravement nuire à l'image de l'entreprise en quelques heures.</p>
+          </div>
+          <div class="def-box">
+            <div class="def-title">E-réputation</div>
+            <p>Image d'une organisation construite sur internet (réseaux sociaux, forums, avis clients, presse en ligne). Elle est partiellement hors contrôle de l'entreprise et nécessite une veille constante.</p>
+          </div>
+        </div>
+
+        <div class="notice-box">
+          <div class="notice-title">⚠️ Erreurs à éviter en communication de crise</div>
+          <p>Minimiser ou nier les faits (crée de la méfiance), se taire (vide comblé par des rumeurs), multiplier les porte-paroles (messages contradictoires), attaquer les journalistes ou les victimes (amplifie la crise), promettre sans tenir (perd la confiance).</p>
+        </div>
+
+        <!-- Exercice BAC communication de crise -->
+        <div class="exercise">
+          <div class="exercise-header">
+            <h4>✏️ Exercice BAC — Analyser et proposer une stratégie de communication de crise</h4>
+            <span class="badge badge-rhc">Incontournable BAC</span>
+          </div>
+          <div class="exercise-body">
+            <p><em>Contexte :</em> L'entreprise NATURAFOOD, fabricant de produits bio, est victime d'un bad buzz après qu'un influenceur a publié une vidéo accusant ses produits de contenir des résidus de pesticides. La vidéo cumule 500 000 vues en 48h. Le hashtag #NaturaFoodMenteuse est en tendance sur Twitter. Les ventes chutent de 30% en 3 jours. La direction hésite : certains veulent attaquer l'influenceur en justice, d'autres veulent rester silencieux en attendant une analyse en laboratoire.</p>
+            <div class="exercise-question">
+              1. Caractérisez la crise à laquelle NATURAFOOD est confrontée.<br>
+              2. Évaluez les options envisagées par la direction.<br>
+              3. Proposez une stratégie de communication de crise détaillée.
+            </div>
+            <button class="correction-toggle">📖 Voir la correction</button>
+            <div class="correction-content">
+              <p><strong>1. Caractérisation de la crise :</strong></p>
+              <p>Il s'agit d'une <strong>crise d'image et de réputation</strong> d'origine externe, déclenchée par un bad buzz sur les réseaux sociaux. Elle menace directement les ventes (−30%), l'image de marque (discordance avec le positionnement bio/éthique) et potentiellement la confiance des distributeurs. La crise est amplifiée par la viralité numérique (500 000 vues, hashtag tendance).</p>
+
+              <p><strong>2. Évaluation des options envisagées :</strong></p>
+              <p><strong>Option A — Attaquer en justice l'influenceur :</strong> Fortement déconseillée à ce stade. Une action judiciaire sans preuve immédiate sera perçue comme une tentative de censure, amplifiera le bad buzz (effet Streisand), et allongera la durée de la crise sans apporter de réponse aux consommateurs inquiets.</p>
+              <p><strong>Option B — Rester silencieux en attendant les analyses :</strong> Déconseillée. Le silence laisse le champ libre à la rumeur et sera interprété comme un aveu. Les 48h écoulées montrent que la crise s'emballe sans prise de parole. Les parties prenantes attendent une réaction de l'entreprise.</p>
+
+              <p><strong>3. Stratégie de communication de crise proposée :</strong></p>
+              <p><strong>Phase 1 — Réaction immédiate (J+0, dans les 4h) :</strong></p>
+              <ul style="margin:.4rem 0 .6rem 1rem; display:flex; flex-direction:column; gap:.2rem;">
+                <li style="color:var(--text2); font-size:.88rem;">Activer la cellule de crise (DG, DRH, directeur communication, juriste, directeur qualité)</li>
+                <li style="color:var(--text2); font-size:.88rem;">Désigner un porte-parole unique (de préférence le PDG, pour montrer l'engagement au plus haut niveau)</li>
+                <li style="color:var(--text2); font-size:.88rem;">Publier un premier communiqué court sur les réseaux sociaux : "Nous prenons les accusations très au sérieux. Des analyses indépendantes sont immédiatement commandées. Nous communiquerons les résultats sous 72h."</li>
+              </ul>
+              <p><strong>Phase 2 — Gestion de crise (J+1 à J+3) :</strong></p>
+              <ul style="margin:.4rem 0 .6rem 1rem; display:flex; flex-direction:column; gap:.2rem;">
+                <li style="color:var(--text2); font-size:.88rem;">Mandater un laboratoire indépendant accrédité pour des analyses sur les produits incriminés</li>
+                <li style="color:var(--text2); font-size:.88rem;">Mettre en place une hotline consommateurs dédiée (transparence + empathie)</li>
+                <li style="color:var(--text2); font-size:.88rem;">Communication interne aux salariés pour éviter la propagation des rumeurs en interne et leur donner les éléments de langage</li>
+                <li style="color:var(--text2); font-size:.88rem;">Veille numérique intensive (e-réputation) pour monitorer l'évolution du bad buzz</li>
+              </ul>
+              <p><strong>Phase 3 — Résolution (à la réception des résultats) :</strong></p>
+              <ul style="margin:.4rem 0 .6rem 1rem; display:flex; flex-direction:column; gap:.2rem;">
+                <li style="color:var(--text2); font-size:.88rem;"><em>Si les analyses sont négatives (pas de pesticides) :</em> conférence de presse avec résultats de laboratoire, communication massive sur la conformité des produits. Envisager (avec prudence) une action judiciaire contre l'influenceur pour dénonciation calomnieuse.</li>
+                <li style="color:var(--text2); font-size:.88rem;"><em>Si les analyses révèlent un problème réel :</em> reconnaître publiquement le problème, retirer les lots concernés, indemniser les consommateurs, expliquer les mesures correctives mises en place. Cette transparence, bien que douloureuse, préserve la crédibilité à long terme.</li>
+              </ul>
+              <div class="example-box" style="margin-top:.75rem;">
+                <div class="example-title">Synthèse — Les 4 principes appliqués</div>
+                <p><strong>Rapidité</strong> (prise de parole sous 4h) · <strong>Transparence</strong> (analyses indépendantes, résultats publiés) · <strong>Empathie</strong> (hotline, considération pour les consommateurs) · <strong>Cohérence</strong> (un seul porte-parole, discours unifié en interne et externe).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QCM final -->
+        <div class="quiz-section" data-subject="rhc">
+          <h3>🎯 QCM — Communication de crise et RHC</h3>
+          <div class="quiz-question">
+            <p>3. Quel est le premier principe à respecter en communication de crise ?</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, attaquer les accusateurs aggrave souvent la crise (effet Streisand)."><span class="quiz-option-letter">A</span> Attaquer juridiquement les accusateurs pour dissuader les critiques</button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, le silence laisse le champ libre aux rumeurs et aggrave la crise."><span class="quiz-option-letter">B</span> Rester silencieux pour ne pas amplifier la crise</button>
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! Prendre rapidement la parole avec transparence et empathie est le premier réflexe essentiel."><span class="quiz-option-letter">C</span> Réagir rapidement avec transparence et empathie pour occuper l'espace communicationnel</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+          <div class="quiz-question" style="margin-top:1.5rem;">
+            <p>4. La GPEC est une démarche :</p>
+            <div class="quiz-options">
+              <button class="quiz-option" data-correct="true" data-right-msg="Exact ! La GPEC est bien une démarche anticipatrice visant à adapter emplois et compétences aux besoins futurs."><span class="quiz-option-letter">A</span> Anticipatrice visant à adapter les emplois et compétences aux évolutions futures de l'organisation</button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, la GPEC ne se limite pas au recrutement. Elle couvre formation, mobilité, reconversion..."><span class="quiz-option-letter">B</span> Réactive visant uniquement à recruter des profils rares sur le marché du travail</button>
+              <button class="quiz-option" data-correct="false" data-wrong-msg="Non, la GPEC concerne aussi les PME, bien qu'elle soit obligatoire uniquement au-delà de 300 salariés."><span class="quiz-option-letter">C</span> Obligatoire exclusivement pour les grandes entreprises de plus de 1 000 salariés</button>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+        </div>
+      </div><!-- /ch9 -->
+
+    </main>
+  </div><!-- /page-layout -->
+</div><!-- /container -->
+
+<!-- ── FOOTER ──────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">👥 Ressources Humaines &amp; Communication — BAC STMG 2026</div>
+        <div class="footer-desc">9 chapitres · Compétences, GPEC, recrutement, rémunération, motivation, QVT, conflits, communication · Exercices corrigés</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="economie.html">Économie</a>
+        <a href="droit.html">Droit</a>
+        <a href="management.html">Management</a>
+        <a href="gestion-finance.html">Gestion &amp; Finance</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>🎓 BacSTMG 2026 — Programme officiel Éducation Nationale</span>
+      <span>Bon courage ! Tu vas réussir 💪</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

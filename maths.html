@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Révise les Mathématiques STMG 2026 : suites numériques, dérivées, probabilités, loi binomiale, logarithme, suites financières. Fiches et exercices corrigés.">
+  <title>Mathématiques STMG 2026 — Fiches &amp; Exercices corrigés</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root { --card-color: var(--maths); }
+    .maths .chapter-header { border-left-color: var(--maths); }
+    .maths .chapter-number { background: var(--maths); }
+    .maths .def-box { border-left-color: var(--maths); }
+    .maths .def-box .def-title { color: var(--maths); }
+    .maths .key-points li::before { color: var(--maths); }
+    .maths .exercise-question { border-left-color: var(--maths); }
+    .maths .toc-item-num { color: var(--maths); }
+    .hero-maths {
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(8,145,178,.3) 0%, transparent 70%),
+                  linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+    }
+    .hero-maths h1 span {
+      background: linear-gradient(135deg, #22d3ee, #0891b2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .formula-maths {
+      background: rgba(8,145,178,.1);
+      border: 1px solid rgba(8,145,178,.3);
+      border-left: 4px solid var(--maths);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+    }
+    .formula-maths .formula-title {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: #22d3ee; margin-bottom: .5rem;
+    }
+    .formula-maths .formula {
+      font-family: 'Courier New', monospace; font-size: 1rem; color: var(--text);
+      font-weight: 600; background: rgba(0,0,0,.25); padding: .5rem .9rem;
+      border-radius: 8px; margin-top: .4rem; display: inline-block;
+    }
+    .overall-progress-wrap {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.25rem 1.5rem; margin-bottom: 2.5rem;
+    }
+    .overall-progress-fill { background: linear-gradient(90deg, var(--maths), #22d3ee); }
+    .ch-done-label {
+      display: flex; align-items: center; gap: .5rem; font-size: .85rem;
+      color: var(--text2); cursor: pointer; margin-top: .25rem;
+    }
+    .ch-done-label input { accent-color: var(--maths); width: 1rem; height: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body class="maths">
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">🎓 BAC STMG 2026</a>
+      <div class="navbar-links">
+        <a href="economie.html"         class="nav-eco">📊 Économie</a>
+        <a href="droit.html"            class="nav-droit">⚖️ Droit</a>
+        <a href="management.html"       class="nav-mgmt">🏢 Management</a>
+        <a href="sciences-gestion.html" class="nav-sg">💻 SGN</a>
+        <a href="mercatique.html"       class="nav-merca">📣 Mercatique</a>
+        <a href="rhc.html"              class="nav-rhc">👥 RHC</a>
+        <a href="gestion-finance.html"  class="nav-gf">💰 G&amp;F</a>
+        <a href="sig.html"              class="nav-sig">🖥️ SIG</a>
+        <a href="maths.html"            class="nav-maths" style="background:rgba(8,145,178,.12);">🔢 Maths</a>
+        <a href="grand-oral.html"       class="nav-go">🎤 Grand Oral</a>
+        <a href="annales.html"          class="badge badge-neutral" style="border-radius:8px;">📂 Annales</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section class="hero hero-maths">
+  <div class="container" style="position:relative;z-index:1;">
+    <div class="hero-badge" style="background:rgba(8,145,178,.15);border-color:rgba(8,145,178,.35);color:#67e8f9;">
+      🔢 Mathématiques STMG · 1ère &amp; Terminale · Coeff. 6
+    </div>
+    <h1>Mathématiques<br><span>STMG 2026</span></h1>
+    <p class="hero-desc">
+      7 chapitres complets : suites, dérivées, probabilités, statistiques, loi binomiale, finances et logarithme.
+      Fiches de cours, formules et exercices corrigés conformes au programme officiel.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-value">7</span>
+        <span class="stat-label">Chapitres</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-value">20+</span>
+        <span class="stat-label">Exercices</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-value">coeff. 6</span>
+        <span class="stat-label">Au BAC</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#chapitre-1" class="btn" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff;">🚀 Commencer le cours</a>
+      <a href="annales.html#maths" class="btn btn-secondary">📂 Annales Maths</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     CONTENU PRINCIPAL
+══════════════════════════════════════════════════════════ -->
+<main class="section">
+  <div class="container">
+
+    <!-- Barre de progression globale -->
+    <div class="overall-progress-wrap">
+      <div class="progress-label">
+        <span style="font-weight:600;color:var(--text);">📈 Progression globale</span>
+        <span class="overall-progress-label">0/7 chapitres vus (0%)</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="overall-progress-fill progress-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Table des matières -->
+    <div class="toc">
+      <div class="toc-title">📋 Table des matières</div>
+      <div class="toc-grid">
+        <a href="#chapitre-1" class="toc-item"><span class="toc-item-num">1</span> Suites numériques (1ère)</a>
+        <a href="#chapitre-2" class="toc-item"><span class="toc-item-num">2</span> Fonctions et dérivées (1ère)</a>
+        <a href="#chapitre-3" class="toc-item"><span class="toc-item-num">3</span> Probabilités (1ère)</a>
+        <a href="#chapitre-4" class="toc-item"><span class="toc-item-num">4</span> Statistiques à deux variables (Tle)</a>
+        <a href="#chapitre-5" class="toc-item"><span class="toc-item-num">5</span> Loi binomiale (Tle)</a>
+        <a href="#chapitre-6" class="toc-item"><span class="toc-item-num">6</span> Applications financières (Tle)</a>
+        <a href="#chapitre-7" class="toc-item"><span class="toc-item-num">7</span> Logarithme et exponentielle (Tle)</a>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         CHAPITRE 1 — Suites numériques
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="chapitre-1">
+      <div class="chapter-header">
+        <div class="chapter-number">1</div>
+        <div>
+          <h2>Suites numériques</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">1ère STMG — Progressions arithmétiques et géométriques</p>
+        </div>
+        <label class="ch-done-label" style="margin-left:auto;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Définitions fondamentales</div>
+        <p><strong>Suite numérique :</strong> liste ordonnée de nombres appelés <em>termes</em>. Le terme de rang n est noté u<sub>n</sub>.</p>
+        <p style="margin-top:.5rem;"><strong>Suite arithmétique :</strong> chaque terme s'obtient en ajoutant une constante r (la raison) au terme précédent.<br>
+        <em>u<sub>n+1</sub> = u<sub>n</sub> + r</em></p>
+        <p style="margin-top:.5rem;"><strong>Suite géométrique :</strong> chaque terme s'obtient en multipliant le terme précédent par une constante q (la raison).<br>
+        <em>u<sub>n+1</sub> = u<sub>n</sub> × q</em></p>
+      </div>
+
+      <div class="formula-maths">
+        <div class="formula-title">📐 Formules du terme général</div>
+        <div class="formula">Suite arithmétique : u<sub>n</sub> = u<sub>0</sub> + n × r</div><br>
+        <div class="formula">Suite géométrique : u<sub>n</sub> = u<sub>0</sub> × q<sup>n</sup></div>
+      </div>
+
+      <div class="formula-maths">
+        <div class="formula-title">📐 Sommes de termes</div>
+        <div class="formula">Arithmétique : S = n × (u<sub>1</sub> + u<sub>n</sub>) / 2</div><br>
+        <div class="formula">Géométrique (q ≠ 1) : S = u<sub>1</sub> × (1 − q<sup>n</sup>) / (1 − q)</div>
+      </div>
+
+      <div class="key-points">
+        <div class="key-points-title">Points clés à retenir</div>
+        <ul>
+          <li>Pour reconnaître une suite arithmétique : vérifier que u<sub>n+1</sub> − u<sub>n</sub> = constante</li>
+          <li>Pour reconnaître une suite géométrique : vérifier que u<sub>n+1</sub> / u<sub>n</sub> = constante</li>
+          <li>Si r > 0 la suite arithmétique est croissante ; si r < 0 elle est décroissante</li>
+          <li>Si q > 1 la suite géométrique est croissante (u<sub>0</sub> > 0) ; si 0 < q < 1 elle est décroissante</li>
+        </ul>
+      </div>
+
+      <!-- Exercice 1 -->
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>✏️ Exercice 1 — Terme général d'une suite</h4>
+          <div style="display:flex;gap:.5rem;align-items:center;">
+            <span class="badge badge-maths">Arithmétique / Géométrique</span>
+            <span class="badge badge-neutral">Basique</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <p>On donne les suites suivantes :</p>
+          <ul style="margin:.75rem 0 .75rem 1.5rem;list-style:disc;color:var(--text2);">
+            <li><strong>(u<sub>n</sub>)</strong> : 5 ; 8 ; 11 ; 14 ; ...</li>
+            <li><strong>(v<sub>n</sub>)</strong> : 3 ; 6 ; 12 ; 24 ; ...</li>
+          </ul>
+          <div class="exercise-question">
+            1. Reconnaître la nature de chaque suite.<br>
+            2. Donner le terme général u<sub>n</sub> et v<sub>n</sub>.<br>
+            3. Calculer u<sub>10</sub> et v<sub>7</sub>.
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1. Nature des suites :</strong></p>
+            <p>u<sub>n+1</sub> − u<sub>n</sub> = 8 − 5 = 3 (constante) → <strong>suite arithmétique</strong> de raison r = 3 et de premier terme u<sub>0</sub> = 5.</p>
+            <p style="margin-top:.5rem;">v<sub>n+1</sub> / v<sub>n</sub> = 6/3 = 2 (constante) → <strong>suite géométrique</strong> de raison q = 2 et de premier terme v<sub>0</sub> = 3.</p>
+            <p style="margin-top:.75rem;"><strong>2. Termes généraux :</strong></p>
+            <p>u<sub>n</sub> = u<sub>0</sub> + n × r = <strong>5 + 3n</strong></p>
+            <p>v<sub>n</sub> = v<sub>0</sub> × q<sup>n</sup> = <strong>3 × 2<sup>n</sup></strong></p>
+            <p style="margin-top:.75rem;"><strong>3. Calculs :</strong></p>
+            <p>u<sub>10</sub> = 5 + 3 × 10 = <strong>35</strong></p>
+            <p>v<sub>7</sub> = 3 × 2<sup>7</sup> = 3 × 128 = <strong>384</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercice 2 -->
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>✏️ Exercice 2 — Somme de termes</h4>
+          <div style="display:flex;gap:.5rem;align-items:center;">
+            <span class="badge badge-maths">Sommes</span>
+            <span class="badge badge-neutral">Intermédiaire</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <p>Une suite arithmétique a pour premier terme u<sub>1</sub> = 4 et pour raison r = 7.</p>
+          <div class="exercise-question">
+            1. Calculer u<sub>10</sub> puis la somme S = u<sub>1</sub> + u<sub>2</sub> + ... + u<sub>10</sub>.<br>
+            2. Une suite géométrique a u<sub>1</sub> = 2 et q = 3. Calculer la somme des 6 premiers termes.
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1. Suite arithmétique :</strong></p>
+            <p>u<sub>10</sub> = u<sub>1</sub> + (10 − 1) × r = 4 + 9 × 7 = 4 + 63 = <strong>67</strong></p>
+            <p>S = 10 × (u<sub>1</sub> + u<sub>10</sub>) / 2 = 10 × (4 + 67) / 2 = 10 × 71/2 = <strong>355</strong></p>
+            <p style="margin-top:.75rem;"><strong>2. Suite géométrique :</strong></p>
+            <p>S = u<sub>1</sub> × (1 − q<sup>6</sup>) / (1 − q) = 2 × (1 − 3<sup>6</sup>) / (1 − 3)</p>
+            <p>3<sup>6</sup> = 729 → S = 2 × (1 − 729) / (−2) = 2 × (−728) / (−2) = 2 × 364 = <strong>728</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercice BAC -->
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>🎓 Exercice BAC — Évolution du chiffre d'affaires</h4>
+          <div style="display:flex;gap:.5rem;align-items:center;">
+            <span class="badge badge-maths">Type BAC</span>
+            <span class="badge badge-warning">★★★</span>
+          </div>
+        </div>
+        <div class="exercise-body">
+          <p>La société <strong>TechShop</strong> réalise un chiffre d'affaires de <strong>80 000 €</strong> en 2020 (année 0). Son chiffre d'affaires augmente de <strong>5 000 €</strong> chaque année.</p>
+          <div class="exercise-question">
+            1. Montrer que la suite (CA<sub>n</sub>) est arithmétique et donner sa raison.<br>
+            2. Donner l'expression de CA<sub>n</sub> en fonction de n.<br>
+            3. Quel sera le CA en 2026 (n = 6) ?<br>
+            4. Au bout de combien d'années le CA dépassera-t-il 120 000 € ?
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1.</strong> CA<sub>n+1</sub> − CA<sub>n</sub> = 5 000 (constante) → suite arithmétique de raison <strong>r = 5 000</strong>.</p>
+            <p style="margin-top:.5rem;"><strong>2.</strong> CA<sub>n</sub> = CA<sub>0</sub> + n × r = <strong>80 000 + 5 000n</strong></p>
+            <p style="margin-top:.5rem;"><strong>3.</strong> CA<sub>6</sub> = 80 000 + 5 000 × 6 = 80 000 + 30 000 = <strong>110 000 €</strong></p>
+            <p style="margin-top:.5rem;"><strong>4.</strong> On résout : 80 000 + 5 000n > 120 000<br>
+            5 000n > 40 000 → n > 8<br>
+            Donc à partir de <strong>n = 9</strong>, soit en <strong>2029</strong>, le CA dépassera 120 000 €.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         CHAPITRE 2 — Fonctions et dérivées
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="chapitre-2">
+      <div class="chapter-header">
+        <div class="chapter-number">2</div>
+        <div>
+          <h2>Fonctions et dérivées</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">1ère STMG — Sens de variation, calcul de dérivées, extremums</p>
+        </div>
+        <label class="ch-done-label" style="margin-left:auto;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Définitions</div>
+        <p><strong>Fonction :</strong> règle qui à chaque valeur de x (variable) associe une unique valeur f(x) (image).</p>
+        <p style="margin-top:.5rem;"><strong>Dérivée f'(x) :</strong> donne la pente de la tangente au point d'abscisse x. Elle indique le sens de variation de f.</p>
+        <p style="margin-top:.5rem;"><strong>Sens de variation :</strong></p>
+        <ul style="margin:.5rem 0 0 1.25rem;list-style:disc;color:var(--text2);">
+          <li>f'(x) > 0 sur un intervalle → f est <strong>croissante</strong> sur cet intervalle</li>
+          <li>f'(x) < 0 sur un intervalle → f est <strong>décroissante</strong> sur cet intervalle</li>
+          <li>f'(x) = 0 en un point → <strong>extremum</strong> (maximum ou minimum local)</li>
+        </ul>
+      </div>
+
+      <div class="formula-maths">
+        <div class="formula-title">📐 Règles de dérivation</div>
+        <div class="formula">f(x) = a (constante) → f'(x) = 0</div><br>
+        <div class="formula">f(x) = x<sup>n</sup> → f'(x) = n × x<sup>n−1</sup></div><br>
+        <div class="formula">f(x) = au + bv → f'(x) = au' + bv' (linéarité)</div><br>
+        <div class="formula">f(x) = u × v → f'(x) = u'v + uv' (produit)</div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-title">Exemple — Tableau de variations</div>
+        <p>Soit f(x) = x² − 4x + 3. On calcule f'(x) = 2x − 4.</p>
+        <p style="margin-top:.4rem;">f'(x) = 0 ↔ 2x − 4 = 0 ↔ x = 2</p>
+        <p style="margin-top:.4rem;">Pour x < 2 : f'(x) < 0 → f décroissante | Pour x > 2 : f'(x) > 0 → f croissante</p>
+        <p style="margin-top:.4rem;">Minimum en x = 2 : f(2) = 4 − 8 + 3 = <strong>−1</strong></p>
+      </div>
+
+      <!-- Exercice dérivées -->
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>✏️ Exercice — Calculer les dérivées</h4>
+          <span class="badge badge-maths">Dérivation</span>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            Calculer f'(x) pour chacune des fonctions suivantes :<br>
+            a) f(x) = 3x² − 5x + 2 &nbsp;&nbsp; b) f(x) = 4x³ + 2x − 7 &nbsp;&nbsp; c) f(x) = (2x + 1)(x − 3)
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>a)</strong> f(x) = 3x² − 5x + 2 → f'(x) = 6x − 5</p>
+            <p><strong>b)</strong> f(x) = 4x³ + 2x − 7 → f'(x) = 12x² + 2</p>
+            <p><strong>c)</strong> f(x) = (2x + 1)(x − 3) : on utilise la règle du produit avec u = 2x + 1 et v = x − 3.<br>
+            u' = 2, v' = 1<br>
+            f'(x) = u'v + uv' = 2(x − 3) + (2x + 1)(1) = 2x − 6 + 2x + 1 = <strong>4x − 5</strong><br>
+            (Vérification : f(x) = 2x² − 5x − 3 → f'(x) = 4x − 5 ✓)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercice extremums -->
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>✏️ Exercice — Extremums d'une fonction</h4>
+          <span class="badge badge-maths">Variations</span>
+        </div>
+        <div class="exercise-body">
+          <p>Soit f(x) = −x² + 6x + 1 définie sur ℝ.</p>
+          <div class="exercise-question">
+            1. Calculer f'(x).<br>
+            2. Étudier le signe de f'(x) et dresser le tableau de variations.<br>
+            3. En déduire le maximum de f.
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1.</strong> f'(x) = −2x + 6</p>
+            <p style="margin-top:.5rem;"><strong>2.</strong> f'(x) = 0 ↔ −2x + 6 = 0 ↔ x = 3</p>
+            <p>Sur ]−∞ ; 3[ : f'(x) > 0 → f croissante</p>
+            <p>Sur ]3 ; +∞[ : f'(x) < 0 → f décroissante</p>
+            <p style="margin-top:.5rem;"><strong>3.</strong> f admet un <strong>maximum</strong> en x = 3 :<br>
+            f(3) = −9 + 18 + 1 = <strong>10</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Application profit -->
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>🎓 Application — Maximiser le profit d'une entreprise</h4>
+          <span class="badge badge-warning">★★★ Type BAC</span>
+        </div>
+        <div class="exercise-body">
+          <p>Le profit <strong>P(x)</strong> (en milliers d'euros) d'une entreprise en fonction de la quantité produite x (en milliers d'unités) est :</p>
+          <p style="text-align:center;font-size:1.05rem;font-weight:600;color:var(--text);margin:.75rem 0;">P(x) = −2x² + 12x − 10</p>
+          <p>avec x ∈ [0 ; 6].</p>
+          <div class="exercise-question">
+            1. Calculer P'(x).<br>
+            2. Pour quelle quantité le profit est-il maximal ?<br>
+            3. Quel est ce profit maximum ?
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1.</strong> P'(x) = −4x + 12</p>
+            <p style="margin-top:.5rem;"><strong>2.</strong> P'(x) = 0 ↔ −4x + 12 = 0 ↔ x = 3</p>
+            <p>Sur [0 ; 3[ : P'(x) > 0 → P croissant | Sur ]3 ; 6] : P'(x) < 0 → P décroissant</p>
+            <p>Le profit est maximal pour <strong>x = 3</strong>, soit 3 000 unités produites.</p>
+            <p style="margin-top:.5rem;"><strong>3.</strong> P(3) = −2(9) + 12(3) − 10 = −18 + 36 − 10 = <strong>8 000 €</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         CHAPITRE 3 — Probabilités
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="chapitre-3">
+      <div class="chapter-header">
+        <div class="chapter-number">3</div>
+        <div>
+          <h2>Probabilités</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">1ère STMG — Événements, probabilités conditionnelles, arbres</p>
+        </div>
+        <label class="ch-done-label" style="margin-left:auto;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Définitions</div>
+        <p><strong>Expérience aléatoire :</strong> expérience dont on ne peut pas prévoir le résultat à l'avance.</p>
+        <p style="margin-top:.4rem;"><strong>Univers Ω :</strong> ensemble de tous les résultats possibles (issues).</p>
+        <p style="margin-top:.4rem;"><strong>Événement :</strong> sous-ensemble de Ω. Sa probabilité est un nombre entre 0 et 1.</p>
+        <p style="margin-top:.4rem;"><strong>Événement contraire Ā :</strong> « A ne se réalise pas ».</p>
+        <p style="margin-top:.4rem;"><strong>Probabilité conditionnelle P(B|A) :</strong> probabilité que B se réalise sachant que A est réalisé.</p>
+      </div>
+
+      <div class="formula-maths">
+        <div class="formula-title">📐 Formules</div>
+        <div class="formula">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</div><br>
+        <div class="formula">P(Ā) = 1 − P(A)</div><br>
+        <div class="formula">P(B|A) = P(A ∩ B) / P(A)  avec P(A) ≠ 0</div><br>
+        <div class="formula">P(A ∩ B) = P(A) × P(B|A)</div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-title">Méthode — Arbre de probabilité</div>
+        <p>Un arbre représente une expérience à plusieurs étapes. Les probabilités se <strong>multiplient</strong> le long des branches et les probabilités des issues s'<strong>additionnent</strong>.</p>
+        <p style="margin-top:.4rem;">Chaque niveau de l'arbre correspond à une étape. La somme des probabilités des branches issues d'un même nœud est toujours <strong>égale à 1</strong>.</p>
+      </div>
+
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>✏️ Exercice — Arbre de probabilité et probabilités conditionnelles</h4>
+          <span class="badge badge-warning">★★ Intermédiaire</span>
+        </div>
+        <div class="exercise-body">
+          <p>Une entreprise dispose de deux machines M1 et M2. M1 produit <strong>60 %</strong> des pièces, M2 produit <strong>40 %</strong>. Le taux de défauts est de <strong>3 %</strong> pour M1 et <strong>5 %</strong> pour M2. On prélève une pièce au hasard.</p>
+          <div class="exercise-question">
+            1. Construire un arbre de probabilité.<br>
+            2. Calculer P(pièce défectueuse).<br>
+            3. Sachant que la pièce est défectueuse, quelle est la probabilité qu'elle vienne de M1 ? (Théorème de Bayes)
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1. Arbre :</strong></p>
+            <p>M1 (0,6) → Défaut (0,03) | M1 (0,6) → Correct (0,97)</p>
+            <p>M2 (0,4) → Défaut (0,05) | M2 (0,4) → Correct (0,95)</p>
+            <p style="margin-top:.5rem;"><strong>2. Probabilité de défaut :</strong></p>
+            <p>P(D) = P(M1) × P(D|M1) + P(M2) × P(D|M2)</p>
+            <p>P(D) = 0,6 × 0,03 + 0,4 × 0,05 = 0,018 + 0,020 = <strong>0,038</strong></p>
+            <p>Il y a donc <strong>3,8 %</strong> de pièces défectueuses.</p>
+            <p style="margin-top:.5rem;"><strong>3. Théorème de Bayes :</strong></p>
+            <p>P(M1|D) = P(M1 ∩ D) / P(D) = 0,018 / 0,038 ≈ <strong>0,474</strong></p>
+            <p>Si la pièce est défectueuse, il y a environ <strong>47,4 %</strong> de chances qu'elle vienne de M1.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         CHAPITRE 4 — Statistiques à deux variables
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="chapitre-4">
+      <div class="chapter-header">
+        <div class="chapter-number">4</div>
+        <div>
+          <h2>Statistiques à deux variables</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">Terminale STMG — Corrélation, droite de régression, séries chronologiques</p>
+        </div>
+        <label class="ch-done-label" style="margin-left:auto;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Définitions</div>
+        <p><strong>Nuage de points :</strong> représentation graphique des paires (x<sub>i</sub> ; y<sub>i</sub>) dans un repère.</p>
+        <p style="margin-top:.4rem;"><strong>Coefficient de corrélation linéaire r :</strong> mesure l'intensité du lien linéaire entre deux variables. r ∈ [−1 ; 1].</p>
+        <ul style="margin:.4rem 0 0 1.25rem;list-style:disc;color:var(--text2);">
+          <li>|r| proche de 1 → corrélation forte</li>
+          <li>|r| proche de 0 → corrélation faible ou nulle</li>
+          <li>r > 0 → liaison positive ; r < 0 → liaison négative</li>
+        </ul>
+        <p style="margin-top:.4rem;"><strong>Droite de régression (moindres carrés) :</strong> droite y = ax + b qui minimise la somme des carrés des écarts.</p>
+        <p style="margin-top:.4rem;"><strong>Point moyen G :</strong> (x̄ ; ȳ) — la droite de régression passe toujours par G.</p>
+      </div>
+
+      <div class="formula-maths">
+        <div class="formula-title">📐 Formules de la droite de régression y = ax + b</div>
+        <div class="formula">a = (Σx<sub>i</sub>y<sub>i</sub>/n − x̄ × ȳ) / (Σx<sub>i</sub>² / n − x̄²)</div><br>
+        <div class="formula">b = ȳ − a × x̄</div><br>
+        <div class="formula">x̄ = Σx<sub>i</sub> / n &nbsp;&nbsp; ȳ = Σy<sub>i</sub> / n</div>
+      </div>
+
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>🎓 Exercice BAC — Droite de régression et prévision</h4>
+          <span class="badge badge-warning">★★★ Type BAC</span>
+        </div>
+        <div class="exercise-body">
+          <p>Un magasin relève ses ventes (y, en milliers d'€) en fonction des dépenses publicitaires (x, en milliers d'€) :</p>
+          <div class="table-wrapper" style="margin:.75rem 0;">
+            <table>
+              <thead><tr><th>x (pub)</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+              <tbody>
+                <tr><td><strong>y (ventes)</strong></td><td>10</td><td>13</td><td>15</td><td>18</td><td>21</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="exercise-question">
+            1. Calculer x̄ et ȳ (point moyen).<br>
+            2. Calculer Σx<sub>i</sub>y<sub>i</sub>, Σx<sub>i</sub>², puis les coefficients a et b.<br>
+            3. Écrire l'équation de la droite de régression.<br>
+            4. Prévoir les ventes si les dépenses pub s'élèvent à 7 000 €.
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1. Point moyen :</strong></p>
+            <p>x̄ = (1+2+3+4+5)/5 = 15/5 = <strong>3</strong></p>
+            <p>ȳ = (10+13+15+18+21)/5 = 77/5 = <strong>15,4</strong></p>
+            <p style="margin-top:.5rem;"><strong>2. Calculs intermédiaires :</strong></p>
+            <p>Σx<sub>i</sub>y<sub>i</sub> = 1×10 + 2×13 + 3×15 + 4×18 + 5×21 = 10+26+45+72+105 = <strong>258</strong></p>
+            <p>Σx<sub>i</sub>² = 1+4+9+16+25 = <strong>55</strong></p>
+            <p>a = (258/5 − 3×15,4) / (55/5 − 3²) = (51,6 − 46,2) / (11 − 9) = 5,4 / 2 = <strong>2,7</strong></p>
+            <p>b = ȳ − a × x̄ = 15,4 − 2,7 × 3 = 15,4 − 8,1 = <strong>7,3</strong></p>
+            <p style="margin-top:.5rem;"><strong>3. Droite de régression :</strong> <em>y = 2,7x + 7,3</em></p>
+            <p style="margin-top:.5rem;"><strong>4. Prévision pour x = 7 :</strong></p>
+            <p>y = 2,7 × 7 + 7,3 = 18,9 + 7,3 = <strong>26,2 milliers d'€</strong></p>
+            <p style="font-size:.85rem;color:var(--text2);margin-top:.4rem;">Attention : x = 7 est une extrapolation (hors des données observées). La prévision est moins fiable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         CHAPITRE 5 — Loi binomiale
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="chapitre-5">
+      <div class="chapter-header">
+        <div class="chapter-number">5</div>
+        <div>
+          <h2>Loi binomiale</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">Terminale STMG — Épreuve de Bernoulli, schéma de Bernoulli, B(n,p)</p>
+        </div>
+        <label class="ch-done-label" style="margin-left:auto;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Définitions</div>
+        <p><strong>Épreuve de Bernoulli :</strong> expérience aléatoire à deux issues — succès (probabilité p) et échec (probabilité 1−p).</p>
+        <p style="margin-top:.4rem;"><strong>Schéma de Bernoulli :</strong> répétition de n épreuves de Bernoulli <em>indépendantes</em> et identiques.</p>
+        <p style="margin-top:.4rem;"><strong>Loi binomiale B(n, p) :</strong> X suit une loi binomiale si X compte le nombre de succès parmi n épreuves.</p>
+      </div>
+
+      <div class="formula-maths">
+        <div class="formula-title">📐 Formules de la loi binomiale B(n, p)</div>
+        <div class="formula">P(X = k) = C(n,k) × p<sup>k</sup> × (1−p)<sup>n−k</sup></div><br>
+        <div class="formula">C(n,k) = n! / [k! × (n−k)!]</div><br>
+        <div class="formula">Espérance : E(X) = n × p</div><br>
+        <div class="formula">Variance : V(X) = n × p × (1−p)</div><br>
+        <div class="formula">Écart-type : σ = √[n × p × (1−p)]</div>
+      </div>
+
+      <div class="notice-box">
+        <div class="notice-title">⚠️ Conditions d'utilisation</div>
+        <p>Pour utiliser la loi binomiale, il faut : (1) n épreuves <strong>indépendantes</strong>, (2) même probabilité p à chaque épreuve, (3) deux issues seulement.</p>
+      </div>
+
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>🎓 Exercice BAC — Calcul de probabilités binomiales</h4>
+          <span class="badge badge-warning">★★★ Type BAC</span>
+        </div>
+        <div class="exercise-body">
+          <p>Une chaîne de production fabrique des pièces dont <strong>8 %</strong> sont défectueuses. On prélève un échantillon de <strong>10 pièces</strong>. X désigne le nombre de pièces défectueuses. X suit la loi B(10 ; 0,08).</p>
+          <div class="exercise-question">
+            1. Calculer P(X = 0) et interpréter.<br>
+            2. Calculer P(X = 1).<br>
+            3. Calculer P(X ≥ 2) = 1 − P(X ≤ 1).<br>
+            4. Calculer l'espérance et l'écart-type de X.
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1. P(X = 0) :</strong></p>
+            <p>P(X = 0) = C(10,0) × 0,08⁰ × 0,92¹⁰ = 1 × 1 × 0,92¹⁰ ≈ <strong>0,4344</strong></p>
+            <p><em>Interprétation :</em> il y a environ 43,4 % de chances qu'aucune pièce ne soit défectueuse.</p>
+            <p style="margin-top:.5rem;"><strong>2. P(X = 1) :</strong></p>
+            <p>P(X = 1) = C(10,1) × 0,08¹ × 0,92⁹ = 10 × 0,08 × 0,92⁹ ≈ 10 × 0,08 × 0,4722 ≈ <strong>0,3777</strong></p>
+            <p style="margin-top:.5rem;"><strong>3. P(X ≥ 2) :</strong></p>
+            <p>P(X ≤ 1) = P(X = 0) + P(X = 1) ≈ 0,4344 + 0,3777 = 0,8121</p>
+            <p>P(X ≥ 2) = 1 − 0,8121 ≈ <strong>0,1879</strong> soit environ 18,8 %</p>
+            <p style="margin-top:.5rem;"><strong>4. Espérance et écart-type :</strong></p>
+            <p>E(X) = n × p = 10 × 0,08 = <strong>0,8</strong> pièce défectueuse en moyenne</p>
+            <p>σ = √(10 × 0,08 × 0,92) = √0,736 ≈ <strong>0,858</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         CHAPITRE 6 — Suites et applications financières
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="chapitre-6">
+      <div class="chapter-header">
+        <div class="chapter-number">6</div>
+        <div>
+          <h2>Applications financières des suites</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">Terminale STMG — Annuités, valeur acquise, emprunt, amortissement</p>
+        </div>
+        <label class="ch-done-label" style="margin-left:auto;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Définitions</div>
+        <p><strong>Annuité :</strong> versement périodique d'un montant constant a à intervalle régulier (annuel, mensuel…).</p>
+        <p style="margin-top:.4rem;"><strong>Taux d'intérêt i :</strong> taux appliqué à chaque période.</p>
+        <p style="margin-top:.4rem;"><strong>Valeur acquise :</strong> capital total (versements + intérêts capitalisés) après n périodes.</p>
+        <p style="margin-top:.4rem;"><strong>Valeur actuelle :</strong> montant qu'il faut disposer aujourd'hui pour être équivalent à un flux futur.</p>
+        <p style="margin-top:.4rem;"><strong>Tableau d'amortissement :</strong> tableau récapitulatif des remboursements d'emprunt : capital restant dû, intérêts, amortissement, annuité.</p>
+      </div>
+
+      <div class="formula-maths">
+        <div class="formula-title">📐 Formules des annuités</div>
+        <div class="formula">Valeur acquise (VA) = a × [(1+i)<sup>n</sup> − 1] / i</div><br>
+        <div class="formula">Valeur actuelle (Vact) = a × [1 − (1+i)<sup>−n</sup>] / i</div><br>
+        <div class="formula">Annuité constante d'un emprunt C : a = C × i / [1 − (1+i)<sup>−n</sup>]</div>
+      </div>
+
+      <!-- Exercice tableau d'amortissement -->
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>✏️ Exercice — Tableau d'amortissement sur 4 ans</h4>
+          <span class="badge badge-maths">Emprunt</span>
+        </div>
+        <div class="exercise-body">
+          <p>Une entreprise emprunte <strong>20 000 €</strong> à un taux annuel de <strong>5 %</strong> sur <strong>4 ans</strong>, remboursé par annuités constantes.</p>
+          <div class="exercise-question">
+            1. Calculer l'annuité constante a.<br>
+            2. Compléter le tableau d'amortissement pour les 4 années.
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1. Annuité :</strong></p>
+            <p>a = 20 000 × 0,05 / [1 − (1,05)<sup>−4</sup>] = 1 000 / [1 − 0,8227] = 1 000 / 0,1773 ≈ <strong>5 640,24 €</strong></p>
+            <p style="margin-top:.75rem;"><strong>2. Tableau d'amortissement :</strong></p>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Année</th>
+                    <th>Capital restant dû début</th>
+                    <th>Intérêts (×5%)</th>
+                    <th>Amortissement</th>
+                    <th>Annuité</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>20 000,00 €</td><td>1 000,00 €</td><td>4 640,24 €</td><td>5 640,24 €</td></tr>
+                  <tr><td>2</td><td>15 359,76 €</td><td>767,99 €</td><td>4 872,25 €</td><td>5 640,24 €</td></tr>
+                  <tr><td>3</td><td>10 487,51 €</td><td>524,38 €</td><td>5 115,86 €</td><td>5 640,24 €</td></tr>
+                  <tr><td>4</td><td>5 371,65 €</td><td>268,58 €</td><td>5 371,65 €</td><td>5 640,23 €</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:.85rem;color:var(--text2);">Remarque : l'amortissement augmente chaque année car les intérêts diminuent (capital restant dû décroissant), mais l'annuité reste constante.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercice BAC annuités -->
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>🎓 Exercice BAC — Valeur acquise d'une épargne</h4>
+          <span class="badge badge-warning">★★★ Type BAC</span>
+        </div>
+        <div class="exercise-body">
+          <p>Manon verse <strong>1 200 €</strong> chaque année pendant <strong>8 ans</strong> sur un livret rémunéré à <strong>3 %</strong> par an. Le premier versement est effectué en fin de première année.</p>
+          <div class="exercise-question">
+            1. Calculer la valeur acquise à la fin des 8 ans.<br>
+            2. Quel serait le capital total versé sans intérêts ? En déduire le montant des intérêts perçus.
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1. Valeur acquise :</strong></p>
+            <p>VA = a × [(1+i)<sup>n</sup> − 1] / i = 1 200 × [(1,03)<sup>8</sup> − 1] / 0,03</p>
+            <p>(1,03)<sup>8</sup> ≈ 1,2668</p>
+            <p>VA = 1 200 × (1,2668 − 1) / 0,03 = 1 200 × 0,2668 / 0,03 = 1 200 × 8,892 ≈ <strong>10 670 €</strong></p>
+            <p style="margin-top:.5rem;"><strong>2. Capital versé sans intérêts :</strong> 1 200 × 8 = <strong>9 600 €</strong></p>
+            <p><strong>Intérêts :</strong> 10 670 − 9 600 = <strong>1 070 €</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ══════════════════════════════════════════════════════
+         CHAPITRE 7 — Logarithme et exponentielle
+    ══════════════════════════════════════════════════════ -->
+    <div class="chapter" id="chapitre-7">
+      <div class="chapter-header">
+        <div class="chapter-number">7</div>
+        <div>
+          <h2>Logarithme et exponentielle</h2>
+          <p style="color:var(--text2);font-size:.88rem;margin-top:.2rem;">Terminale STMG — exp, ln, propriétés, résolution d'équations, croissance</p>
+        </div>
+        <label class="ch-done-label" style="margin-left:auto;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+
+      <div class="def-box">
+        <div class="def-title">Définitions</div>
+        <p><strong>Fonction exponentielle :</strong> f(x) = e<sup>x</sup>, définie sur ℝ, toujours positive, dérivée = e<sup>x</sup>, croissante, e<sup>0</sup> = 1.</p>
+        <p style="margin-top:.4rem;"><strong>Constante e :</strong> e ≈ 2,718... (nombre d'Euler).</p>
+        <p style="margin-top:.4rem;"><strong>Fonction logarithme népérien :</strong> f(x) = ln(x), définie sur ]0 ; +∞[, dérivée = 1/x, ln(e) = 1, ln(1) = 0.</p>
+        <p style="margin-top:.4rem;"><strong>Lien inverse :</strong> exp et ln sont des fonctions réciproques l'une de l'autre : e<sup>ln(x)</sup> = x et ln(e<sup>x</sup>) = x.</p>
+      </div>
+
+      <div class="formula-maths">
+        <div class="formula-title">📐 Propriétés algébriques de ln</div>
+        <div class="formula">ln(a × b) = ln(a) + ln(b)</div><br>
+        <div class="formula">ln(a / b) = ln(a) − ln(b)</div><br>
+        <div class="formula">ln(a<sup>n</sup>) = n × ln(a)</div><br>
+        <div class="formula">Résoudre e<sup>x</sup> = a → x = ln(a)  (avec a > 0)</div>
+      </div>
+
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>✏️ Exercice — Résoudre des équations avec exp et ln</h4>
+          <span class="badge badge-maths">Équations</span>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            Résoudre dans ℝ (ou dans le domaine de définition) :<br>
+            a) e<sup>x</sup> = 15 &nbsp;&nbsp; b) e<sup>2x</sup> = 7 &nbsp;&nbsp; c) ln(x) = 4 &nbsp;&nbsp; d) ln(2x − 1) = ln(5)
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>a)</strong> e<sup>x</sup> = 15 → x = ln(15) ≈ <strong>2,708</strong></p>
+            <p><strong>b)</strong> e<sup>2x</sup> = 7 → 2x = ln(7) → x = ln(7)/2 ≈ 1,946/2 ≈ <strong>0,973</strong></p>
+            <p><strong>c)</strong> ln(x) = 4 → x = e<sup>4</sup> ≈ <strong>54,60</strong></p>
+            <p><strong>d)</strong> ln(2x − 1) = ln(5) → 2x − 1 = 5 → 2x = 6 → x = <strong>3</strong><br>
+            Vérification du domaine : 2×3 − 1 = 5 > 0 ✓</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="exercise-header">
+          <h4>🎓 Application — Modèle de croissance exponentielle</h4>
+          <span class="badge badge-warning">★★★ Type BAC</span>
+        </div>
+        <div class="exercise-body">
+          <p>Une population de bactéries compte <strong>500</strong> individus à t = 0 (heure). Sa taille est modélisée par la fonction <strong>N(t) = 500 × e<sup>0,4t</sup></strong> où t est en heures.</p>
+          <div class="exercise-question">
+            1. Quelle est la population après 3 heures ?<br>
+            2. Au bout de combien d'heures la population dépassera-t-elle 10 000 individus ?<br>
+            3. Calculer N'(t) et interpréter.
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <p><strong>1.</strong> N(3) = 500 × e<sup>1,2</sup> ≈ 500 × 3,320 ≈ <strong>1 660 bactéries</strong></p>
+            <p style="margin-top:.5rem;"><strong>2.</strong> On résout : 500 × e<sup>0,4t</sup> > 10 000</p>
+            <p>e<sup>0,4t</sup> > 20</p>
+            <p>0,4t > ln(20)</p>
+            <p>t > ln(20) / 0,4 ≈ 2,996 / 0,4 ≈ 7,49</p>
+            <p>La population dépassera 10 000 à partir de <strong>t ≈ 7,5 heures</strong>.</p>
+            <p style="margin-top:.5rem;"><strong>3.</strong> N'(t) = 500 × 0,4 × e<sup>0,4t</sup> = 200 × e<sup>0,4t</sup></p>
+            <p>N'(t) représente le <strong>taux de croissance instantané</strong> de la population. Il est toujours positif : la population croît sans cesse. Plus t est grand, plus la croissance est rapide.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">🎓 BAC STMG 2026</div>
+        <p class="footer-desc">
+          Fiches de Mathématiques STMG — 1ère &amp; Terminale.<br>
+          Conforme au programme officiel · Session juin 2026.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="economie.html">Économie</a>
+        <a href="droit.html">Droit</a>
+        <a href="management.html">Management</a>
+        <a href="maths.html" style="color:var(--maths);">Maths</a>
+        <a href="grand-oral.html">Grand Oral</a>
+        <a href="annales.html">Annales</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BAC STMG Révision — Usage personnel uniquement.</span>
+      <span>Fait avec ❤️ pour les lycéens STMG</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

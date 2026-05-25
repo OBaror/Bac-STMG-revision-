@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mercatique — BAC STMG 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .merca { --merca-color: #f59e0b; }
+    .def-box.merca { border-left-color: #f59e0b; }
+    .section h3.merca-title { border-left-color: #f59e0b; color: #f59e0b; }
+    .chapter-header .chapter-num.merca { color: #f59e0b; opacity: 1; }
+    .toc a:hover { color: #f59e0b; }
+    .theme-header {
+      background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.04));
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.75rem;
+      margin: 2.5rem 0 1.5rem;
+    }
+    .theme-header h2 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #f59e0b;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .theme-header p { color: var(--text2); font-size: 0.9rem; margin-top: 0.25rem; }
+    .method-box {
+      background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(245,158,11,0.04));
+      border: 2px solid rgba(245,158,11,0.4);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+    }
+    .method-box h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #f59e0b;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .method-box ol { padding-left: 1.5rem; }
+    .method-box li { color: var(--text2); margin-bottom: 0.4rem; font-size: 0.95rem; }
+    .method-box li strong { color: var(--text); }
+    .lifecycle-diagram {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+    .lifecycle-phase {
+      background: var(--card);
+      padding: 1rem;
+      text-align: center;
+    }
+    .lifecycle-phase .phase-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+    .lifecycle-phase .phase-ca { font-size: 0.78rem; color: #4ade80; }
+    .lifecycle-phase .phase-profit { font-size: 0.78rem; color: #f87171; }
+    .lifecycle-phase .phase-desc { font-size: 0.78rem; color: var(--text2); margin-top: 0.3rem; }
+    .phase-launch .phase-name { color: #60a5fa; }
+    .phase-growth .phase-name { color: #4ade80; }
+    .phase-maturity .phase-name { color: #f59e0b; }
+    .phase-decline .phase-name { color: #f87171; }
+    @media (max-width: 600px) {
+      .lifecycle-diagram { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body class="merca">
+
+<nav>
+  <a href="index.html" class="nav-brand">🎓 <span>BAC STMG</span> 2026</a>
+  <ul class="nav-links">
+    <li><a href="economie.html" class="eco">Économie</a></li>
+    <li><a href="droit.html" class="droit">Droit</a></li>
+    <li><a href="management.html" class="mgmt">Management</a></li>
+    <li><a href="mercatique.html" class="active" style="color:#f59e0b;background:rgba(245,158,11,0.1)">Mercatique</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Accueil</a> › Spécialité Mercatique</div>
+  <h1>📣 <span style="background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Mercatique</span> — Terminale STMG</h1>
+  <p>Programme complet de Spécialité Mercatique : comportement du consommateur, analyse de marché, segmentation, mix marketing (4P), mercatique digitale et responsable. Définitions, formules, exemples et exercices corrigés.</p>
+  <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1rem;">
+    <span class="badge badge-gold">13 chapitres</span>
+    <span class="badge badge-gold">4 thèmes</span>
+    <span class="badge badge-gold">Formules & calculs</span>
+    <span class="badge badge-gold">QCM interactifs</span>
+    <span class="badge badge-gray">Terminale</span>
+  </div>
+</div>
+
+<div class="content-wrapper">
+
+  <!-- PROGRESS -->
+  <div class="progress-section">
+    <h3>📊 Ma progression</h3>
+    <div class="progress-item">
+      <div class="progress-label">
+        <span>Chapitres vus</span>
+        <span class="overall-progress-label">0/13 (0%)</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill overall-progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h3>📋 Sommaire</h3>
+    <ol>
+      <li><a href="#ch1" data-num="1">Pourquoi les consommateurs achètent-ils ?</a></li>
+      <li><a href="#ch2" data-num="2">Comment analyser le marché ?</a></li>
+      <li><a href="#ch3" data-num="3">L'étude de marché</a></li>
+      <li><a href="#ch4" data-num="4">Segmentation et ciblage</a></li>
+      <li><a href="#ch5" data-num="5">Le positionnement</a></li>
+      <li><a href="#ch6" data-num="6">La veille mercatique</a></li>
+      <li><a href="#ch7" data-num="7">Politique de produit</a></li>
+      <li><a href="#ch8" data-num="8">Politique de prix</a></li>
+      <li><a href="#ch9" data-num="9">Politique de distribution</a></li>
+      <li><a href="#ch10" data-num="10">Politique de communication</a></li>
+      <li><a href="#ch11" data-num="11">Mercatique relationnelle & CRM</a></li>
+      <li><a href="#ch12" data-num="12">Mercatique digitale</a></li>
+      <li><a href="#ch13" data-num="13">Mercatique responsable</a></li>
+    </ol>
+  </div>
+
+  <!-- ===================== THÈME 1 ===================== -->
+  <div class="theme-header">
+    <h2>Thème 1 — Mercatique et consommateurs</h2>
+    <p>Comprendre les comportements d'achat et analyser les marchés</p>
+  </div>
+
+  <!-- CHAPITRE 1 -->
+  <div class="chapter" id="ch1">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 01</div>
+      <div>
+        <h2>Pourquoi les consommateurs achètent-ils ?</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Définitions clés</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Mercatique (Marketing)</div>
+        <p>Ensemble des actions visant à adapter l'offre d'une entreprise aux attentes du marché. La mercatique part des besoins des consommateurs pour concevoir, fixer le prix, distribuer et communiquer une offre.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Besoin</div>
+        <p>Sentiment de manque ressenti par un individu. Maslow classe les besoins en 5 niveaux : physiologiques → sécurité → appartenance → estime → accomplissement. La mercatique s'adresse surtout aux besoins d'appartenance, d'estime et d'accomplissement.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Désir</div>
+        <p>Besoin orienté vers un objet ou service particulier. Le besoin de communication devient le désir d'un iPhone. Le marketing transforme les besoins en désirs.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Motivations d'achat</div>
+        <p><strong>Hédoniste :</strong> recherche de plaisir personnel (se faire plaisir). <strong>Oblative :</strong> faire plaisir à autrui (offrir un cadeau). <strong>Auto-expression :</strong> affirmer son image, son identité (montrer qui on est).</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Frein à l'achat</div>
+        <p>Obstacle qui empêche ou retarde l'achat. <strong>Peur :</strong> risque perçu (tomber en panne, être déçu). <strong>Inhibition :</strong> culpabilité ou honte d'acheter. <strong>Risque perçu :</strong> financier, physique, social, fonctionnel.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Processus d'achat (5 étapes)</div>
+        <p>1. <strong>Reconnaissance du besoin</strong> → 2. <strong>Recherche d'informations</strong> (interne : mémoire ; externe : internet, bouche-à-oreille) → 3. <strong>Évaluation des alternatives</strong> (comparaison des offres) → 4. <strong>Décision d'achat</strong> → 5. <strong>Comportement post-achat</strong> (satisfaction ou insatisfaction).</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Dissonance cognitive</div>
+        <p>Insatisfaction ou doute ressenti après l'achat, lorsque le produit ne correspond pas entièrement aux attentes. L'entreprise cherche à la réduire (SAV, garanties, communication post-achat).</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Schéma — Processus d'achat</h3>
+      <div class="schema">
+        <div class="schema-box">1. Reconnaissance<br>du besoin</div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box">2. Recherche<br>d'informations</div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box">3. Évaluation<br>des alternatives</div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box">4. Décision<br>d'achat</div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box">5. Comportement<br>post-achat</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exemple</h3>
+      <div class="example-box">
+        <div class="example-label">EXEMPLE — Achat d'un iPhone</div>
+        <p><strong>Besoin :</strong> communication (appartenance/estime chez Maslow).</p>
+        <p><strong>Motivation :</strong> auto-expression (montrer son appartenance à un groupe, afficher un statut social).</p>
+        <p><strong>Freins :</strong> prix élevé (risque financier), peur de la dépendance, risque de vol.</p>
+        <p><strong>Processus :</strong> l'utilisateur compare sur YouTube, lit les avis, va en Apple Store, achète, puis peut ressentir une légère dissonance cognitive si le produit ne remplit pas toutes ses attentes.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercice — Analyser le comportement d'achat</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 01</span>
+            <span class="exercise-name">Comportement d'achat d'un consommateur</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-easy">Facile</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Léa, 22 ans, souhaite acheter une paire de baskets. Elle hésite entre Nike (180 €) et une marque inconnue (40 €). Elle consulte des avis en ligne, demande l'avis de ses amis, essaie les deux paires en magasin et finit par acheter les Nike. Le lendemain, elle se demande si elle n'a pas trop dépensé.</p>
+            <p><strong>Questions :</strong><br>
+            1. Identifiez le besoin de Léa et situez-le dans la pyramide de Maslow.<br>
+            2. Quelles sont les motivations d'achat à l'œuvre ?<br>
+            3. Quels freins Léa a-t-elle rencontrés ?<br>
+            4. Repérez les 5 étapes du processus d'achat dans ce cas.<br>
+            5. De quel phénomène souffre-t-elle le lendemain ?</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>Besoin :</strong> se chausser (physiologique) mais aussi besoin d'estime et d'appartenance (montrer qu'elle appartient à un groupe de personnes qui portent des marques connues) — niveau 3 et 4 de Maslow.</div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>Motivations :</strong> auto-expression (les Nike affirment son image), hédoniste (plaisir de porter de belles baskets). Possible oblative si c'est un cadeau.</div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Freins :</strong> risque financier (prix élevé, 180 €), risque fonctionnel (et si elles sont moins confortables ?), risque social (et si mes amis jugent mon choix ?).</div></div>
+            <div class="correction-step"><div class="step-num">4</div><div class="step-text"><strong>Processus :</strong> 1. Besoin de renouveler ses baskets → 2. Consultation d'avis en ligne + amis → 3. Comparaison Nike vs marque inconnue → 4. Achat des Nike → 5. Doute le lendemain.</div></div>
+            <div class="correction-step"><div class="step-num">5</div><div class="step-text"><strong>Dissonance cognitive :</strong> elle doute de son choix après l'achat, se demandant si elle a fait le bon choix financièrement.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ Ch1 -->
+    <div class="quiz-section">
+      <div class="quiz-question">❓ Quelle motivation pousse un consommateur à offrir un cadeau à un proche ?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" data-correct="false" data-wrong-msg="La motivation hédoniste concerne le plaisir PERSONNEL.">A. Hédoniste</div>
+        <div class="quiz-option" data-correct="true" data-right-msg="Exact ! L'oblative = faire plaisir aux autres, offrir.">B. Oblative</div>
+        <div class="quiz-option" data-correct="false" data-wrong-msg="L'auto-expression vise à affirmer son image de soi.">C. Auto-expression</div>
+        <div class="quiz-option" data-correct="false" data-wrong-msg="Ce n'est pas une catégorie de motivation d'achat.">D. Cognitive</div>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 2 -->
+  <div class="chapter" id="ch2">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 02</div>
+      <div>
+        <h2>Comment analyser le marché ?</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Les marchés</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Marché</div>
+        <p>Lieu de rencontre (réel ou virtuel) entre l'offre et la demande d'un bien ou service. Le marché peut s'analyser sous plusieurs angles : principal, environnant, générique, support.</p>
+      </div>
+
+      <div class="key-points">
+        <h4>Types de marchés</h4>
+        <ul>
+          <li><strong>Marché principal :</strong> produits semblables et directement concurrents (ex. marché du café en capsules)</li>
+          <li><strong>Marché environnant :</strong> produits différents mais satisfaisant le même besoin (ex. café en grains, café soluble)</li>
+          <li><strong>Marché générique :</strong> tous les produits liés au même besoin global (ex. toutes les boissons chaudes)</li>
+          <li><strong>Marché support :</strong> produits nécessaires à la consommation du produit principal (ex. machines à café pour les capsules)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">La demande</h3>
+      <div class="key-points">
+        <h4>Structure de la demande</h4>
+        <ul>
+          <li><strong>Consommateurs actuels :</strong> achètent déjà le produit</li>
+          <li><strong>Non-consommateurs relatifs (NCR) :</strong> n'achètent pas encore mais pourraient (levée de freins possible)</li>
+          <li><strong>Non-consommateurs absolus (NCA) :</strong> ne pourront jamais acheter (raisons médicales, religieuses, financières irrécupérables)</li>
+        </ul>
+      </div>
+      <div class="formula-box">
+        <div class="formula-label">FORMULE</div>
+        <div class="formula">Demande potentielle = Consommateurs actuels + Non-consommateurs relatifs (NCR)</div>
+        <div class="formula-note">Les NCA sont exclus car ils ne constituent pas un potentiel de marché réaliste.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">L'offre — Concurrence</h3>
+      <div class="key-points">
+        <h4>Les 4 forces concurrentielles (simplifiées)</h4>
+        <ul>
+          <li><strong>Concurrents directs :</strong> vendent le même type de produit (Nike vs Adidas)</li>
+          <li><strong>Concurrents indirects :</strong> satisfont le même besoin autrement (vélo vs voiture)</li>
+          <li><strong>Entrants potentiels :</strong> entreprises susceptibles d'entrer sur le marché</li>
+          <li><strong>Produits de substitution :</strong> produits différents remplissant la même fonction</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Formules essentielles</h3>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE — Part de marché en volume</div>
+        <div class="formula">PDM volume (%) = (Ventes entreprise en unités / Ventes totales du marché en unités) × 100</div>
+        <div class="formula-note">Exemple : entreprise vend 50 000 unités sur un marché total de 200 000 → PDM = 25%</div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE — Part de marché en valeur</div>
+        <div class="formula">PDM valeur (%) = (CA entreprise / CA total du marché) × 100</div>
+        <div class="formula-note">Attention : PDM en valeur ≠ PDM en volume si les prix diffèrent (ex. marque premium)</div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE — Taux de pénétration</div>
+        <div class="formula">Taux de pénétration (%) = (Acheteurs du produit / Acheteurs potentiels) × 100</div>
+        <div class="formula-note">Mesure la part des acheteurs potentiels ayant effectivement acheté le produit.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercice — Calculs de parts de marché</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 02</span>
+            <span class="exercise-name">Parts de marché et taux de pénétration</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-medium">Moyen</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Le marché des smartphones en France représente 20 millions d'unités vendues pour un CA total de 8 milliards d'euros. La marque "AlphaPhone" vend 3 millions d'unités pour un CA de 1,8 milliard d'euros. Le marché potentiel est estimé à 50 millions de personnes.</p>
+          </div>
+          <div class="exercise-data">
+            <div class="data-title">DONNÉES</div>
+            <ul>
+              <li>Ventes totales marché : 20 millions d'unités / 8 Md€ de CA</li>
+              <li>Ventes AlphaPhone : 3 millions d'unités / 1,8 Md€ de CA</li>
+              <li>Marché potentiel : 50 millions de personnes</li>
+            </ul>
+          </div>
+          <div class="exercise-question">
+            <p><strong>Calculez :</strong> 1. La PDM en volume d'AlphaPhone. 2. La PDM en valeur d'AlphaPhone. 3. Le taux de pénétration du marché. 4. Commentez l'écart entre PDM volume et PDM valeur.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>PDM en volume :</strong> (3 000 000 / 20 000 000) × 100 = <strong>15%</strong></div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>PDM en valeur :</strong> (1 800 000 000 / 8 000 000 000) × 100 = <strong>22,5%</strong></div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Taux de pénétration :</strong> (20 000 000 / 50 000 000) × 100 = <strong>40%</strong> — 60% du marché potentiel reste à conquérir.</div></div>
+            <div class="correction-step"><div class="step-num">4</div><div class="step-text"><strong>Commentaire :</strong> La PDM en valeur (22,5%) est supérieure à la PDM en volume (15%), ce qui signifie qu'AlphaPhone pratique des <strong>prix moyens plus élevés</strong> que ses concurrents. C'est un indicateur de positionnement haut de gamme.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 3 -->
+  <div class="chapter" id="ch3">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 03</div>
+      <div>
+        <h2>L'étude de marché</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Définitions</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Étude de marché</div>
+        <p>Recueil, traitement et analyse d'informations sur le marché pour aider à la prise de décision mercatique. Elle réduit l'incertitude avant de lancer un produit ou de modifier la stratégie.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Étude documentaire (secondaire)</div>
+        <p>Exploite des informations déjà existantes. <strong>Sources internes :</strong> statistiques de ventes, fichiers clients, rapports. <strong>Sources externes :</strong> INSEE, Eurostat, études sectorielles, presse professionnelle, organismes (Banque de France…).</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Étude qualitative</div>
+        <p>Vise à <strong>comprendre</strong> les motivations, attitudes, perceptions. Méthodes : entretien individuel en profondeur, focus group (réunion de groupe), observation ethnographique. Échantillon petit, non représentatif.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Étude quantitative</div>
+        <p>Vise à <strong>mesurer</strong> et chiffrer. Méthodes : questionnaire, sondage, panel. Grand échantillon représentatif. Résultats généralisables à la population étudiée.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Panel</div>
+        <p><strong>Panel consommateurs :</strong> échantillon permanent de ménages enregistrant leurs achats (ex. Kantar). <strong>Panel distributeurs :</strong> échantillon de points de vente mesurant les ventes (ex. Nielsen, IRI). Permet de suivre l'évolution du marché dans le temps.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">L'échantillonnage et le questionnaire</h3>
+      <div class="key-points">
+        <h4>Méthodes d'échantillonnage</h4>
+        <ul>
+          <li><strong>Aléatoire :</strong> tirage au sort (très représentatif, coûteux)</li>
+          <li><strong>Par quotas :</strong> reproduction de la structure de la population (sexe, âge, CSP…)</li>
+          <li><strong>Par convenance :</strong> personnes facilement accessibles (rapide mais peu représentatif)</li>
+        </ul>
+      </div>
+      <div class="key-points">
+        <h4>Types de questions dans un questionnaire</h4>
+        <ul>
+          <li><strong>Questions fermées :</strong> choix prédéfinis (oui/non, QCM) — faciles à analyser</li>
+          <li><strong>Questions ouvertes :</strong> réponse libre — riches mais difficiles à coder</li>
+          <li><strong>Échelle de Likert :</strong> "Êtes-vous satisfait ? 1 (pas du tout) à 5 (tout à fait)" — mesure une attitude</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercice — Critiquer un questionnaire</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 03</span>
+            <span class="exercise-name">Critique et amélioration d'un questionnaire</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-medium">Moyen</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Voici des questions extraites d'un questionnaire sur une nouvelle boisson :</p>
+            <p>Q1 : « Vous aimez bien les nouvelles boissons, n'est-ce pas ? »<br>
+            Q2 : « Quel est votre revenu ? » (question ouverte, en première position)<br>
+            Q3 : « Achetez-vous souvent ou rarement cette boisson ? »<br>
+            Q4 : « Sur une échelle de 1 à 5, comment évaluez-vous le goût de cette boisson ? »</p>
+            <p><strong>Pour chaque question, identifiez le problème et proposez une amélioration.</strong></p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">Q1</div><div class="step-text"><strong>Problème :</strong> question orientée (suggère la réponse "oui"). <strong>Amélioration :</strong> "Consommez-vous régulièrement de nouvelles boissons ? ☐ Oui ☐ Non"</div></div>
+            <div class="correction-step"><div class="step-num">Q2</div><div class="step-text"><strong>Problèmes :</strong> question indiscrète en tête de questionnaire + format ouvert inadapté. <strong>Amélioration :</strong> placer en fin de questionnaire avec des tranches : "Moins de 1 500 € / 1 500-3 000 € / Plus de 3 000 €"</div></div>
+            <div class="correction-step"><div class="step-num">Q3</div><div class="step-text"><strong>Problème :</strong> les termes "souvent" et "rarement" sont subjectifs et non mesurables. <strong>Amélioration :</strong> "Combien de fois par semaine achetez-vous cette boisson ? ☐ Jamais ☐ 1 fois ☐ 2-3 fois ☐ Plus de 3 fois"</div></div>
+            <div class="correction-step"><div class="step-num">Q4</div><div class="step-text"><strong>Bonne pratique :</strong> c'est une échelle de Likert bien formulée. Préciser les pôles : "1 = Très mauvais, 5 = Excellent". Aucun problème majeur.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== THÈME 2 ===================== -->
+  <div class="theme-header">
+    <h2>Thème 2 — Segmentation, ciblage, positionnement</h2>
+    <p>Définir sa cible et occuper une place unique dans l'esprit des consommateurs</p>
+  </div>
+
+  <!-- CHAPITRE 4 -->
+  <div class="chapter" id="ch4">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 04</div>
+      <div>
+        <h2>La segmentation et le ciblage</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">La segmentation</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Segmentation</div>
+        <p>Découpage du marché en groupes homogènes d'individus (segments) ayant des caractéristiques et des besoins similaires, et réagissant de façon identique à une offre marketing.</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Critère</th>
+              <th>Variables</th>
+              <th>Exemple</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Sociodémographique</strong></td>
+              <td>Âge, sexe, CSP, revenu, taille du ménage, niveau d'études</td>
+              <td>Produits seniors, offres familles nombreuses</td>
+            </tr>
+            <tr>
+              <td><strong>Géographique</strong></td>
+              <td>Région, pays, urbain/rural, taille de ville</td>
+              <td>Offre spécifique région parisienne vs province</td>
+            </tr>
+            <tr>
+              <td><strong>Psychographique</strong></td>
+              <td>Style de vie, valeurs, personnalité, centres d'intérêt</td>
+              <td>Consommateurs écologiques, sportifs, créatifs</td>
+            </tr>
+            <tr>
+              <td><strong>Comportemental</strong></td>
+              <td>Fréquence d'achat, fidélité, occasion d'usage, avantages recherchés</td>
+              <td>Gros consommateurs, occasionnels, fidèles</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="key-points">
+        <h4>Qualités d'un bon segment (MARA)</h4>
+        <ul>
+          <li><strong>Mesurable :</strong> peut être quantifié (taille, pouvoir d'achat)</li>
+          <li><strong>Accessible :</strong> peut être atteint par les actions marketing</li>
+          <li><strong>Rentable :</strong> suffisamment large pour générer des profits</li>
+          <li><strong>Actionnable :</strong> on peut concevoir une offre adaptée</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Les stratégies de ciblage</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Stratégie</th>
+              <th>Principe</th>
+              <th>Avantages / Inconvénients</th>
+              <th>Exemple</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Indifférenciée</strong> (masse)</td>
+              <td>Un seul mix pour tous les segments</td>
+              <td>Économies d'échelle / peu adapté aux besoins spécifiques</td>
+              <td>Coca-Cola classique</td>
+            </tr>
+            <tr>
+              <td><strong>Différenciée</strong></td>
+              <td>Mix adapté à chaque segment ciblé</td>
+              <td>Mieux adapté / coûts plus élevés</td>
+              <td>Renault (Dacia, Clio, Mégane, Alpine)</td>
+            </tr>
+            <tr>
+              <td><strong>Concentrée</strong> (niche)</td>
+              <td>Un seul segment très spécifique</td>
+              <td>Expertise / dépendance à un segment</td>
+              <td>Rolls-Royce (ultra-luxe)</td>
+            </tr>
+            <tr>
+              <td><strong>One-to-one</strong></td>
+              <td>Offre personnalisée pour chaque individu</td>
+              <td>Très précis / coûteux, nécessite les données</td>
+              <td>Netflix (recommandations), Amazon</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-label">EXEMPLE — Renault</div>
+      <p><strong>Dacia :</strong> segment prix/économique (NCR sensibles au budget). <strong>Renault Clio :</strong> segment grand public/polyvalent. <strong>Alpine :</strong> segment performance/passion. Stratégie <strong>différenciée</strong> avec un mix distinct pour chaque cible.</p>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercice — Segmenter un marché</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 04</span>
+            <span class="exercise-name">Segmentation et choix de ciblage</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-medium">Moyen</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Une marque de montres souhaite entrer sur le marché français. Elle identifie les segments suivants : (A) 18-25 ans, budget limité, style urbain ; (B) 30-50 ans, cadres, montres de prestige ; (C) sportifs, toutes catégories d'âge, recherche robustesse/GPS.</p>
+            <p><strong>Questions :</strong> 1. Pour chaque segment, précisez quel critère de segmentation est utilisé. 2. Évaluez chaque segment selon les critères MARA. 3. La marque choisit de cibler uniquement le segment B. Quelle stratégie de ciblage est-ce ? Justifiez.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>Segment A :</strong> sociodémographique (âge) + psychographique (style de vie). <strong>Segment B :</strong> sociodémographique (âge, CSP) + comportemental (avantage prestige). <strong>Segment C :</strong> comportemental (avantage recherché : robustesse/GPS) + psychographique (sport).</div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>Segment B — MARA :</strong> Mesurable ✓ (données INSEE sur les cadres), Accessible ✓ (salons, bijouteries, e-commerce haut de gamme), Rentable ✓ (fort pouvoir d'achat, marge élevée), Actionnable ✓ (offre de prestige différenciée possible). C'est le segment le plus attractif.</div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Stratégie concentrée (niche) :</strong> la marque se concentre sur un seul segment (B). Avantage : expertise et image forte sur ce segment. Risque : dépendance à un seul segment.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 5 -->
+  <div class="chapter" id="ch5">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 05</div>
+      <div>
+        <h2>Le positionnement</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Définitions</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Positionnement</div>
+        <p>Place qu'occupe un produit ou une marque dans l'esprit des consommateurs par rapport à la concurrence, sur les dimensions jugées importantes par la cible. Il doit être <strong>distinct, crédible et attractif</strong>.</p>
+      </div>
+
+      <div class="key-points">
+        <h4>Axes de positionnement</h4>
+        <ul>
+          <li><strong>Fonctionnel :</strong> performance, qualité, caractéristiques techniques (ex. Dyson = aspiration puissante)</li>
+          <li><strong>Symbolique :</strong> image, statut social, appartenance (ex. Louis Vuitton = luxe et prestige)</li>
+          <li><strong>Relationnel :</strong> relation avec la marque, communauté, expérience (ex. Apple = communauté créative)</li>
+        </ul>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">ÉNONCÉ DE POSITIONNEMENT (structure)</div>
+        <div class="formula" style="font-family:'Segoe UI',sans-serif;font-size:0.95rem;">Pour [cible], [marque] est le [cadre de référence] qui [avantage principal] parce que [preuve/raison d'y croire].</div>
+        <div class="formula-note">Exemple : "Pour les parents soucieux de la santé de leurs enfants, Évian est l'eau minérale qui hydrate et préserve la santé grâce à sa pureté naturelle et son origine alpine."</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">La carte perceptuelle (mapping)</h3>
+      <div class="def-box merca">
+        <div class="def-label">OUTIL</div>
+        <div class="def-term">Carte perceptuelle</div>
+        <p>Représentation graphique en 2 axes des positionnements des différentes marques d'un marché selon les perceptions des consommateurs. Permet d'identifier des <strong>zones vides</strong> (opportunités) et des <strong>zones de surencombrement</strong> (forte concurrence).</p>
+      </div>
+      <div class="example-box">
+        <div class="example-label">EXEMPLE — Marché de l'eau minérale</div>
+        <p><strong>Axe horizontal :</strong> Bas de gamme ← → Haut de gamme.</p>
+        <p><strong>Axe vertical :</strong> Eau plate ← → Eau pétillante.</p>
+        <p><strong>Évian :</strong> haut de gamme / plate (positionnement fonctionnel + symbolique). <strong>Perrier :</strong> haut de gamme / pétillante. <strong>Cristaline :</strong> bas de gamme / plate. <strong>Zone vide :</strong> bas de gamme / pétillante haut de gamme.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercice — Carte perceptuelle</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 05</span>
+            <span class="exercise-name">Construire et analyser une carte perceptuelle</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-hard">Difficile</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Sur le marché automobile français, positionnez les marques suivantes sur deux axes : Prix (bas → élevé) et Image (populaire → premium). Marques : Dacia, Renault, Peugeot, Citroën, BMW, Mercedes, Tesla, Porsche.</p>
+            <p><strong>Questions :</strong> 1. Positionnez chaque marque sur la carte. 2. Identifiez une zone vide. 3. Proposez un positionnement pour une nouvelle marque qui voudrait occuper cette zone.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>Positionnements :</strong> Dacia (bas prix / populaire), Renault/Peugeot/Citroën (prix moyen / milieu de gamme), BMW/Mercedes (prix élevé / premium), Porsche (très élevé / ultra-premium), Tesla (prix élevé / premium technologique/éco).</div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>Zone vide identifiable :</strong> prix moyen / image premium écologique — un segment de véhicules électriques accessibles avec une forte image "verte" et design soigné, sans atteindre les prix BMW.</div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Positionnement proposé :</strong> "Pour les jeunes actifs engagés, [marque] est le véhicule électrique qui combine design premium et prix accessible, grâce à une fabrication responsable et une technologie de pointe made in Europe." Axe différenciateur : éco-premium accessible.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 6 -->
+  <div class="chapter" id="ch6">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 06</div>
+      <div>
+        <h2>La veille mercatique</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Définitions et types de veille</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Veille mercatique</div>
+        <p>Surveillance continue et systématique de l'environnement de l'entreprise pour anticiper les évolutions et adapter sa stratégie. Elle permet de ne pas être pris par surprise par les concurrents ou les tendances du marché.</p>
+      </div>
+
+      <div class="key-points">
+        <h4>Les 4 types de veille</h4>
+        <ul>
+          <li><strong>Veille concurrentielle :</strong> surveiller les actions des concurrents (prix, nouveaux produits, campagnes)</li>
+          <li><strong>Veille technologique :</strong> suivre les innovations et brevets susceptibles d'impacter le marché</li>
+          <li><strong>Veille réglementaire :</strong> anticiper les évolutions législatives (RGPD, normes environnementales)</li>
+          <li><strong>Veille sociétale :</strong> identifier les tendances de consommation, valeurs émergentes</li>
+        </ul>
+      </div>
+
+      <div class="key-points">
+        <h4>Outils de veille</h4>
+        <ul>
+          <li>Google Alerts (veille automatique par mots-clés)</li>
+          <li>Réseaux sociaux (Twitter/X, LinkedIn, TikTok pour les tendances)</li>
+          <li>Salons professionnels et foires</li>
+          <li>Études sectorielles (cabinets spécialisés : Nielsen, Kantar, Xerfi)</li>
+          <li>Presse spécialisée, revues académiques</li>
+          <li>Intelligence économique : collecte et analyse stratégique d'informations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== THÈME 3 ===================== -->
+  <div class="theme-header">
+    <h2>Thème 3 — Le plan de marchéage (Marketing Mix — 4P)</h2>
+    <p>Produit, Prix, Distribution (Place), Communication (Promotion)</p>
+  </div>
+
+  <!-- CHAPITRE 7 -->
+  <div class="chapter" id="ch7">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 07</div>
+      <div>
+        <h2>La politique de produit</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Définitions</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Produit</div>
+        <p>Bien ou service destiné à satisfaire un besoin ou un désir. Le produit est défini par ses <strong>attributs matériels</strong> (fonctionnalités, packaging, qualité technique) et <strong>immatériels</strong> (marque, design, image, service associé).</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Marque</div>
+        <p>Signe distinctif permettant d'identifier les produits d'une entreprise. <strong>Fonctions :</strong> identification (distinguer), garantie (rassurer), personnalisation (exprimer une identité), ludique (plaisir d'appartenance à une marque).</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Gamme de produits</div>
+        <p>Ensemble de produits liés au même besoin, vendus sous la même marque. <strong>Largeur :</strong> nombre de lignes de produits. <strong>Profondeur :</strong> nombre de références dans chaque ligne.</p>
+      </div>
+
+      <div class="key-points">
+        <h4>Structure d'une gamme</h4>
+        <ul>
+          <li><strong>Produit d'appel :</strong> prix très bas pour attirer les clients</li>
+          <li><strong>Produit cœur de gamme :</strong> principale source de CA (produit star)</li>
+          <li><strong>Produit de prestige :</strong> haut de gamme, valorise l'image de la marque même si peu vendu</li>
+          <li><strong>Extension de marque :</strong> utiliser la marque sur un nouveau produit</li>
+          <li><strong>Co-branding :</strong> associer deux marques sur un même produit</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Le cycle de vie du produit</h3>
+
+      <div class="lifecycle-diagram">
+        <div class="lifecycle-phase phase-launch">
+          <div class="phase-name">1. Lancement</div>
+          <div class="phase-ca">CA : faible et croissant</div>
+          <div class="phase-profit">Profit : négatif</div>
+          <div class="phase-desc">Coûts élevés, notoriété faible, distribution limitée</div>
+        </div>
+        <div class="lifecycle-phase phase-growth">
+          <div class="phase-name">2. Croissance</div>
+          <div class="phase-ca">CA : forte hausse</div>
+          <div class="phase-profit">Profit : croissant</div>
+          <div class="phase-desc">Concurrents arrivent, distribution s'élargit, prix peut baisser</div>
+        </div>
+        <div class="lifecycle-phase phase-maturity">
+          <div class="phase-name">3. Maturité</div>
+          <div class="phase-ca">CA : stable / plateau</div>
+          <div class="phase-profit">Profit : maximum</div>
+          <div class="phase-desc">Marché saturé, forte concurrence, fidélisation prioritaire</div>
+        </div>
+        <div class="lifecycle-phase phase-decline">
+          <div class="phase-name">4. Déclin</div>
+          <div class="phase-ca">CA : décroissant</div>
+          <div class="phase-profit">Profit : faible ou nul</div>
+          <div class="phase-desc">Produit obsolète, décision : relancer ou abandonner</div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">EXEMPLES — Cycle de vie</div>
+        <p><strong>Lancement :</strong> Vision Pro d'Apple (2024), nouvelles IA génératives. <strong>Croissance :</strong> ChatGPT / IA conversationnelle, véhicules électriques. <strong>Maturité :</strong> iPhone (depuis 2012 environ), smartphones en général. <strong>Déclin :</strong> CD physiques, téléphones fixes, DVD.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercice — Analyser une gamme</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 06</span>
+            <span class="exercise-name">Analyse de la gamme iPhone</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-easy">Facile</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>La gamme iPhone comprend : iPhone 16 (modèle courant, 999€), iPhone 16 Plus (1 099€), iPhone 16 Pro (1 199€), iPhone 16 Pro Max (1 299€), et un modèle reconditionné iPhone SE (429€).</p>
+            <p><strong>Questions :</strong> 1. Quelle est la largeur de cette gamme ? 2. Identifiez le produit d'appel, le cœur de gamme et le produit de prestige. 3. À quelle phase du cycle de vie se situe l'iPhone ? Justifiez. 4. Quelles sont les fonctions de la marque Apple dans ce contexte ?</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>Largeur :</strong> 1 ligne de produits (iPhone). Profondeur : 5 références (SE, 16, 16 Plus, 16 Pro, 16 Pro Max).</div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>Produit d'appel :</strong> iPhone SE (429€, entrée de gamme). <strong>Cœur de gamme :</strong> iPhone 16 (999€, le plus vendu). <strong>Produit de prestige :</strong> iPhone 16 Pro Max (1 299€, valorise l'image premium d'Apple).</div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Phase de maturité :</strong> le marché des smartphones est saturé (taux de pénétration élevé), les évolutions sont incrémentales, la concurrence est intense (Samsung, Xiaomi). Apple maintient ses parts de marché par la fidélisation.</div></div>
+            <div class="correction-step"><div class="step-num">4</div><div class="step-text"><strong>Fonctions de la marque Apple :</strong> Identification (logo reconnaissable), Garantie (qualité associée), Personnalisation (expression d'un style créatif/premium), Ludique (appartenance à l'écosystème Apple, communauté).</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 8 -->
+  <div class="chapter" id="ch8">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 08</div>
+      <div>
+        <h2>La politique de prix</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Méthodes de fixation du prix</h3>
+
+      <div class="key-points">
+        <h4>Les 3 approches</h4>
+        <ul>
+          <li><strong>Par les coûts :</strong> à partir du coût de revient + marge souhaitée</li>
+          <li><strong>Par la demande :</strong> en fonction de ce que les consommateurs sont prêts à payer (prix psychologique)</li>
+          <li><strong>Par la concurrence :</strong> en s'alignant, en dessous ou au-dessus des concurrents</li>
+        </ul>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Prix d'écrémage</div>
+        <p>Prix élevé au lancement pour maximiser la marge sur les premiers acheteurs (early adopters) peu sensibles au prix. Puis baisse progressive. <strong>Exemples :</strong> iPhone à sa sortie, PS5, médicaments innovants.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Prix de pénétration</div>
+        <p>Prix bas au lancement pour conquérir rapidement des parts de marché. Accepte des marges faibles au départ. <strong>Exemples :</strong> Xiaomi, Free Mobile (2012), Netflix à ses débuts.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Prix psychologique (prix d'acceptabilité)</div>
+        <p>Fourchette de prix acceptable pour la majorité des consommateurs, déterminée par une enquête. En dessous : le produit paraît de mauvaise qualité. Au-dessus : trop cher. On cherche le prix qui maximise le % de personnes acceptant d'acheter.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Formules essentielles</h3>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE — Prix de vente HT par les coûts</div>
+        <div class="formula">Prix de vente HT = Coût de revient / (1 − Taux de marge)</div>
+        <div class="formula-note">Exemple : coût de revient = 60€, taux de marge souhaité = 25% → PV HT = 60 / (1 − 0,25) = 60 / 0,75 = 80€</div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE — Taux de marge (sur prix de vente)</div>
+        <div class="formula">Taux de marge (%) = [(Prix HT − Coût HT) / Prix HT] × 100</div>
+        <div class="formula-note">Mesure la part de la marge dans le prix de vente. Utilisé par les distributeurs.</div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE — Taux de marque (sur coût)</div>
+        <div class="formula">Taux de marque (%) = [(Prix HT − Coût HT) / Coût HT] × 100</div>
+        <div class="formula-note">Aussi appelé taux de marge commerciale ou coefficient multiplicateur. Mesure la marge par rapport au coût.</div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">DISTINCTION CLÉS</div>
+        <div class="formula" style="font-family:'Segoe UI',sans-serif;font-size:0.9rem;">Taux de marge : base = Prix de vente HT | Taux de marque : base = Coût d'achat HT</div>
+        <div class="formula-note">Exemple : achat 60€, vendu 80€ → Marge brute = 20€ → Taux de marge = 20/80 = 25% | Taux de marque = 20/60 = 33,3%</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercices de calcul</h3>
+
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 07</span>
+            <span class="exercise-name">Calcul du prix de vente HT</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-easy">Facile</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Un fabricant de chaussures a un coût de revient de 45€ par paire. Il souhaite appliquer un taux de marge de 40%. Calculez le prix de vente HT.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>Formule :</strong> PV HT = Coût de revient / (1 − taux de marge) = 45 / (1 − 0,40) = 45 / 0,60 = <strong>75€ HT</strong></div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>Vérification :</strong> Marge = 75 − 45 = 30€. Taux de marge = 30/75 = 0,40 = 40% ✓</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 08</span>
+            <span class="exercise-name">Taux de marge et taux de marque</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-medium">Moyen</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-data">
+            <div class="data-title">DONNÉES</div>
+            <ul>
+              <li>Coût d'achat HT d'un produit : 120€</li>
+              <li>Prix de vente HT au consommateur : 180€</li>
+            </ul>
+          </div>
+          <div class="exercise-question">
+            <p>Calculez : 1. La marge brute. 2. Le taux de marge. 3. Le taux de marque. 4. Expliquez la différence entre ces deux taux.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>Marge brute :</strong> 180 − 120 = <strong>60€</strong></div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>Taux de marge :</strong> 60 / 180 × 100 = <strong>33,3%</strong> (base = prix de vente)</div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Taux de marque :</strong> 60 / 120 × 100 = <strong>50%</strong> (base = coût d'achat)</div></div>
+            <div class="correction-step"><div class="step-num">4</div><div class="step-text"><strong>Différence :</strong> Le taux de marge utilise le prix de vente comme base (vision distributeur, part de marge dans le CA). Le taux de marque utilise le coût comme base (vision producteur, combien on gagne par rapport à ce qu'on a dépensé). Le taux de marque est toujours supérieur au taux de marge pour un même produit.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 09</span>
+            <span class="exercise-name">Test d'acceptabilité (prix psychologique)</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-hard">Difficile</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Un sondage auprès de 200 personnes sur un nouveau casque audio donne les résultats suivants :</p>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr><th>Prix testé</th><th>Trop cher (%)</th><th>Mauvaise qualité (%)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>50€</td><td>2%</td><td>40%</td></tr>
+                <tr><td>70€</td><td>5%</td><td>28%</td></tr>
+                <tr><td>90€</td><td>15%</td><td>18%</td></tr>
+                <tr><td>110€</td><td>30%</td><td>10%</td></tr>
+                <tr><td>130€</td><td>50%</td><td>5%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="exercise-question">
+            <p><strong>Questions :</strong> 1. Calculez le % d'acheteurs potentiels pour chaque prix. 2. Identifiez le prix psychologique. 3. Expliquez ce que signifie le prix psychologique.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text">
+              <strong>% acheteurs potentiels = 100% − % trop cher − % mauvaise qualité</strong><br>
+              50€ : 100 − 2 − 40 = <strong>58%</strong> | 70€ : 100 − 5 − 28 = <strong>67%</strong> | 90€ : 100 − 15 − 18 = <strong>67%</strong> | 110€ : 100 − 30 − 10 = <strong>60%</strong> | 130€ : 100 − 50 − 5 = <strong>45%</strong>
+            </div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>Prix psychologique : 70€ ou 90€</strong> (ex-æquo à 67%). En pratique, on choisit <strong>70€</strong> car il maximise les ventes en volume pour un marché large, ou 90€ si l'on cherche à valoriser l'image qualité.</div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Le prix psychologique</strong> est la fourchette de prix jugée acceptable par le plus grand nombre de consommateurs. En dessous, le produit est perçu comme de mauvaise qualité ; au-dessus, il est perçu comme trop cher. Il maximise le nombre d'acheteurs potentiels.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 9 -->
+  <div class="chapter" id="ch9">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 09</div>
+      <div>
+        <h2>La politique de distribution</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Les canaux de distribution</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Canal</th><th>Circuit</th><th>Avantages</th><th>Exemples</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Direct</strong></td>
+              <td>Fabricant → Consommateur</td>
+              <td>Marge maximale, contact direct client, contrôle total</td>
+              <td>Apple Store, vente à la ferme, e-commerce en propre</td>
+            </tr>
+            <tr>
+              <td><strong>Court</strong></td>
+              <td>Fabricant → Détaillant → Consommateur</td>
+              <td>Moins de stockage, bonne couverture locale</td>
+              <td>Boulangerie, boutiques indépendantes</td>
+            </tr>
+            <tr>
+              <td><strong>Long</strong></td>
+              <td>Fabricant → Grossiste → Détaillant → Consommateur</td>
+              <td>Très large couverture, délégation logistique</td>
+              <td>Grande distribution (Coca-Cola en GMS)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Les stratégies de distribution</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Stratégie</th><th>Principe</th><th>Adapté pour</th><th>Exemples</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Intensive</strong></td>
+              <td>Maximum de points de vente</td>
+              <td>Produits de grande consommation, fréquence d'achat élevée</td>
+              <td>Coca-Cola, Danone, journaux</td>
+            </tr>
+            <tr>
+              <td><strong>Sélective</strong></td>
+              <td>Points de vente sélectionnés selon critères</td>
+              <td>Produits à valeur ajoutée, nécessitant conseil</td>
+              <td>Parfums, cosmétiques haut de gamme, hi-fi</td>
+            </tr>
+            <tr>
+              <td><strong>Exclusive</strong></td>
+              <td>Un seul distributeur par zone géographique</td>
+              <td>Produits de luxe, automobiles (image + service)</td>
+              <td>Concessionnaires auto, marques de luxe</td>
+            </tr>
+            <tr>
+              <td><strong>Franchisée</strong></td>
+              <td>Réseau de franchisés sous enseigne commune</td>
+              <td>Développement rapide avec contrôle de l'image</td>
+              <td>McDonald's, Yves Rocher, Sephora</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Distribution omnicanale et digitale</h3>
+      <div class="key-points">
+        <h4>Nouvelles formes de distribution</h4>
+        <ul>
+          <li><strong>E-commerce :</strong> vente en ligne sur site propre ou marketplace</li>
+          <li><strong>Marketplace :</strong> plateforme tierce (Amazon, Cdiscount, Fnac Marketplace)</li>
+          <li><strong>Drive :</strong> commande en ligne, retrait en voiture</li>
+          <li><strong>Click &amp; Collect :</strong> commande en ligne, retrait en magasin</li>
+          <li><strong>Omnicanal :</strong> intégration cohérente de tous les canaux (physique + digital)</li>
+          <li><strong>Merchandising :</strong> optimisation de la présentation en rayon (linéaire, facing, PLV)</li>
+        </ul>
+      </div>
+      <div class="example-box">
+        <div class="example-label">EXEMPLE — Apple (distribution sélective)</div>
+        <p>Apple utilise une stratégie de distribution <strong>sélective</strong> : Apple Stores en propre (contrôle total de l'expérience client) + revendeurs agréés sélectionnés (Fnac, Darty, opérateurs). Amazon et les marketplaces de masse sont exclues pour préserver l'image premium.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercice — Choisir une politique de distribution</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 10</span>
+            <span class="exercise-name">Choix et justification d'une stratégie de distribution</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-medium">Moyen</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Une PME française lance un vin de Bordeaux haut de gamme (prix : 35€ la bouteille). Elle hésite entre : (A) vente en grande distribution (Carrefour, Leclerc) ; (B) distribution sélective via cavistes et restaurants gastronomiques ; (C) vente directe en ligne sur son site.</p>
+            <p><strong>Questions :</strong> 1. Analysez chaque option. 2. Quelle stratégie recommandez-vous ? Justifiez avec 3 arguments.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">A</div><div class="step-text"><strong>Grande distribution :</strong> large couverture MAIS pression sur les prix (marges réduites), image dégradée pour un vin premium, perte de contrôle. Inadapté au positionnement haut de gamme.</div></div>
+            <div class="correction-step"><div class="step-num">B</div><div class="step-text"><strong>Distribution sélective (cavistes/restaurants) :</strong> cohérence avec le positionnement premium, conseil expert au client, image préservée, prix maintenu. Meilleure adéquation produit/circuit.</div></div>
+            <div class="correction-step"><div class="step-num">C</div><div class="step-text"><strong>Vente directe en ligne :</strong> marge maximale, relation directe client, mais nécessite logistique et notoriété préalable. Peut compléter la stratégie B.</div></div>
+            <div class="correction-step"><div class="step-num">✓</div><div class="step-text"><strong>Recommandation :</strong> Stratégie B + C (omnicanal sélectif). Arguments : 1. Cohérence positionnement haut de gamme. 2. Conseil et expertise client (caviste valorise le produit). 3. Vente directe en ligne permet de capter les clients directement et de préserver la marge.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 10 -->
+  <div class="chapter" id="ch10">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 10</div>
+      <div>
+        <h2>La politique de communication</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Définitions</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Communication mercatique</div>
+        <p>Ensemble des actions d'émission de messages visant à informer, convaincre et fidéliser les consommateurs afin d'influencer leurs comportements d'achat. Elle comprend la publicité, la promotion, les RP, le marketing digital…</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Catégorie</th><th>Définition</th><th>Outils</th><th>Exemples</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ATL</strong> (Above the Line)</td>
+              <td>Médias de masse, achat d'espace</td>
+              <td>TV, radio, presse, affichage, cinéma</td>
+              <td>Spot TV Renault, affichage Nike</td>
+            </tr>
+            <tr>
+              <td><strong>BTL</strong> (Below the Line)</td>
+              <td>Hors médias, ciblé</td>
+              <td>Promotion, marketing direct, événementiel, RP, PLV</td>
+              <td>Bon de réduction, mailing, salon professionnel</td>
+            </tr>
+            <tr>
+              <td><strong>Digital</strong></td>
+              <td>Canaux numériques</td>
+              <td>SEO, SEA, réseaux sociaux, e-mailing, influence</td>
+              <td>Publicité Instagram, campagne Google Ads</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Les outils de communication</h3>
+
+      <div class="key-points">
+        <h4>Principaux outils</h4>
+        <ul>
+          <li><strong>Publicité :</strong> achat d'espace contre paiement pour diffuser un message (TV, internet, affichage)</li>
+          <li><strong>Promotion des ventes :</strong> incitation à court terme (réduction prix, coupons, jeux concours, offres spéciales)</li>
+          <li><strong>Relations publiques (RP) :</strong> entretenir l'image et la notoriété (communiqués de presse, événements, lobbying)</li>
+          <li><strong>Sponsoring :</strong> association de la marque à un événement sportif/culturel contre visibilité</li>
+          <li><strong>Mécénat :</strong> soutien financier à une cause d'intérêt général sans contrepartie directe (image RSE)</li>
+          <li><strong>Marketing d'influence :</strong> partenariats avec des influenceurs (micro : &lt;100k, macro : 100k-1M, méga : &gt;1M abonnés)</li>
+          <li><strong>Identité visuelle :</strong> logo, charte graphique, signature (baseline/slogan)</li>
+        </ul>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Notoriété</div>
+        <p><strong>Notoriété assistée :</strong> % de personnes qui reconnaissent une marque quand on la leur cite. <strong>Notoriété spontanée :</strong> % de personnes qui citent spontanément une marque sur un marché. <strong>Top of mind :</strong> marque citée en premier spontanément (la plus mémorisée).</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercices communication</h3>
+
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 11</span>
+            <span class="exercise-name">Analyser une campagne de communication</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-medium">Moyen</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Nike lance une campagne "Just Do It" avec : (1) spot TV pendant la Coupe du Monde, (2) affichage dans les grandes villes, (3) partenariat avec Kylian Mbappé sur Instagram, (4) événement de running gratuit dans 10 villes françaises.</p>
+            <p><strong>Questions :</strong> Pour chaque action, indiquez si c'est ATL, BTL ou digital, et précisez l'outil utilisé.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>Spot TV :</strong> ATL — Publicité télévisée. Large audience, fort impact émotionnel, coût élevé.</div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>Affichage :</strong> ATL — Publicité outdoor (affichage). Forte visibilité locale, répétition du message.</div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Mbappé sur Instagram :</strong> Digital — Marketing d'influence (macro-influenceur). Ciblage précis, authenticité perçue, engagement fort de la communauté.</div></div>
+            <div class="correction-step"><div class="step-num">4</div><div class="step-text"><strong>Événement running :</strong> BTL — Marketing événementiel. Expérience directe avec la marque, bouche-à-oreille, contenu UGC (photos partagées par les participants).</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 12</span>
+            <span class="exercise-name">Construire un plan de communication (type BAC)</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-hard">Difficile</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Une marque de smoothies bio ("VerdaFresh") veut lancer son nouveau produit auprès des 18-35 ans urbains. Budget : 50 000€. Elle vous demande de proposer un plan de communication.</p>
+            <p><strong>Rédigez un plan en précisant :</strong> objectifs, cible, message, canaux choisis, répartition budgétaire indicative, et indicateurs de mesure.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>Objectifs :</strong> notoriété (faire connaître le produit), image (marque saine et engagée), comportement (inciter à l'essai et à l'achat).</div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>Cible :</strong> 18-35 ans urbains, CSP+, sensibles au bien-être et à l'écologie, actifs sur les réseaux sociaux.</div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Message :</strong> "VerdaFresh — Le smoothie bio qui fait du bien à vous et à la planète." Axe : naturel, plaisir, responsabilité.</div></div>
+            <div class="correction-step"><div class="step-num">4</div><div class="step-text"><strong>Canaux :</strong> Instagram/TikTok (20 000€, influence marketing micro), affichage métro grandes villes (15 000€), événement dégustation en boutiques bio partenaires (10 000€), Google Ads (5 000€). Total = 50 000€.</div></div>
+            <div class="correction-step"><div class="step-num">5</div><div class="step-text"><strong>Indicateurs :</strong> taux d'engagement Instagram, notoriété assistée (sondage avant/après), nombre de dégustations, évolution des ventes au lancement (+30% objectif).</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== THÈME 4 ===================== -->
+  <div class="theme-header">
+    <h2>Thème 4 — Mercatique relationnelle et société</h2>
+    <p>CRM, digital, et responsabilité de la mercatique</p>
+  </div>
+
+  <!-- CHAPITRE 11 -->
+  <div class="chapter" id="ch11">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 11</div>
+      <div>
+        <h2>La mercatique relationnelle et le CRM</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Définitions</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Marketing transactionnel vs relationnel</div>
+        <p><strong>Transactionnel :</strong> orienté sur la transaction unique (vendre le plus possible maintenant). <strong>Relationnel :</strong> construire une relation durable et rentable avec chaque client (fidélisation, satisfaction, LTV). Moins coûteux de fidéliser un client existant que d'en acquérir un nouveau.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">CRM (Customer Relationship Management)</div>
+        <p>Gestion de la relation client : ensemble des pratiques, stratégies et outils logiciels permettant de gérer et d'analyser les interactions avec les clients tout au long de leur cycle de vie. Objectif : améliorer la satisfaction et la fidélisation.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">LTV — Lifetime Value (valeur vie client)</div>
+        <p>Chiffre d'affaires total estimé qu'un client va générer pendant toute la durée de sa relation avec l'entreprise. Plus la LTV est élevée, plus le client est précieux. La fidélisation augmente la LTV.</p>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE — NPS (Net Promoter Score)</div>
+        <div class="formula">NPS = % Promoteurs − % Détracteurs</div>
+        <div class="formula-note">Promoteurs : note 9-10/10 (recommandent activement). Passifs : 7-8/10. Détracteurs : 0-6/10 (peuvent nuire à l'image). NPS varie de −100 à +100. Un bon NPS est &gt; 30.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Fidélisation</h3>
+      <div class="key-points">
+        <h4>Outils de fidélisation</h4>
+        <ul>
+          <li><strong>Programme de fidélité :</strong> carte, points cumulables, avantages exclusifs (Fnac, SNCF)</li>
+          <li><strong>Service après-vente (SAV) :</strong> support client, garantie étendue</li>
+          <li><strong>Personnalisation :</strong> recommandations, offres sur mesure (Amazon, Netflix)</li>
+          <li><strong>Club clients :</strong> communauté exclusive, accès anticipé aux nouveautés</li>
+          <li><strong>E-mailing personnalisé :</strong> relances, offres d'anniversaire, contenus adaptés</li>
+        </ul>
+      </div>
+      <div class="example-box">
+        <div class="example-label">EXEMPLES — CRM et fidélisation</div>
+        <p><strong>Amazon Prime :</strong> abonnement payant offrant livraison rapide + Prime Video + avantages exclusifs → augmente la LTV et crée une barrière à la sortie. <strong>Carte Fnac :</strong> programme points, magazine, accès billetterie prioritaire → fidélité émotionnelle et économique.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercice — Analyser une stratégie de fidélisation</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 13</span>
+            <span class="exercise-name">Calcul NPS et analyse fidélisation</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-medium">Moyen</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-data">
+            <div class="data-title">DONNÉES — Enquête satisfaction (200 clients)</div>
+            <ul>
+              <li>Notes 9-10 : 80 clients</li>
+              <li>Notes 7-8 : 60 clients</li>
+              <li>Notes 0-6 : 60 clients</li>
+            </ul>
+          </div>
+          <div class="exercise-question">
+            <p><strong>Questions :</strong> 1. Calculez le NPS. 2. Évaluez ce résultat. 3. Proposez 2 actions pour améliorer le NPS.</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>% Promoteurs :</strong> 80/200 = 40%. <strong>% Détracteurs :</strong> 60/200 = 30%. <strong>NPS = 40 − 30 = 10</strong></div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>Évaluation :</strong> Un NPS de 10 est positif mais faible. L'entreprise a autant de détracteurs (30%) que de promoteurs moins la marge. Il y a un potentiel d'amélioration important. Objectif raisonnable : atteindre 30+.</div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Actions :</strong> (a) Enquêtes approfondies auprès des détracteurs pour identifier et corriger les points de friction (SAV, délais, qualité). (b) Programme de fidélité renforcé pour les promoteurs (parrainage, avantages exclusifs) afin d'augmenter leur engagement et réduire le churn des détracteurs.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 12 -->
+  <div class="chapter" id="ch12">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 12</div>
+      <div>
+        <h2>La mercatique digitale</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Définitions</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Inbound vs Outbound marketing</div>
+        <p><strong>Inbound (attirer) :</strong> créer du contenu pertinent pour que les clients viennent d'eux-mêmes (SEO, blog, vidéos YouTube, podcasts). <strong>Outbound (aller chercher) :</strong> messages envoyés vers les prospects (publicité display, e-mailing de masse, appels téléphoniques).</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Outil</th><th>Définition</th><th>Exemple</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>SEO</strong></td>
+              <td>Search Engine Optimization — référencement naturel (gratuit, long terme)</td>
+              <td>Apparaître en 1ère page Google sans payer</td>
+            </tr>
+            <tr>
+              <td><strong>SEA</strong></td>
+              <td>Search Engine Advertising — référencement payant (Google Ads)</td>
+              <td>Annonce "Sponsorisé" en haut de Google</td>
+            </tr>
+            <tr>
+              <td><strong>Social Media</strong></td>
+              <td>Marketing sur les réseaux sociaux (organique + payant)</td>
+              <td>Posts Instagram, TikTok, LinkedIn, Facebook Ads</td>
+            </tr>
+            <tr>
+              <td><strong>E-mailing</strong></td>
+              <td>Envoi d'e-mails ciblés et personnalisés</td>
+              <td>Newsletter, relance panier abandonné</td>
+            </tr>
+            <tr>
+              <td><strong>Influence marketing</strong></td>
+              <td>Partenariats avec influenceurs pour promouvoir la marque</td>
+              <td>Micro-influenceur beauté sur Instagram</td>
+            </tr>
+            <tr>
+              <td><strong>Data marketing</strong></td>
+              <td>Collecte et analyse des données clients pour personnaliser</td>
+              <td>Recommandations Netflix, Amazon</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">RGPD (Règlement Général sur la Protection des Données)</div>
+        <p>Règlement européen (2018) encadrant la collecte et l'utilisation des données personnelles. Oblige les entreprises à obtenir le <strong>consentement explicite</strong> des utilisateurs, à garantir le droit à l'oubli, la portabilité des données et à nommer un DPO (Délégué à la Protection des Données).</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Exercice — Présence digitale d'une marque</h3>
+      <div class="exercise">
+        <div class="exercise-header">
+          <div class="exercise-title">
+            <span class="exercise-num">EX 14</span>
+            <span class="exercise-name">Analyser la stratégie digitale de Sephora</span>
+          </div>
+          <div class="exercise-meta"><span class="difficulty diff-medium">Moyen</span></div>
+        </div>
+        <div class="exercise-body">
+          <div class="exercise-question">
+            <p>Sephora dispose de : (1) un site e-commerce avec recommandations personnalisées, (2) une application mobile avec "essayage virtuel" en réalité augmentée, (3) 4M d'abonnés Instagram avec partenariats influenceurs, (4) un programme de fidélité "Beauty Insider" avec points et cadeaux, (5) des e-mails personnalisés avec offres d'anniversaire.</p>
+            <p><strong>Questions :</strong> 1. Identifiez les outils de mercatique digitale utilisés. 2. Quelles données Sephora doit-elle protéger selon le RGPD ? 3. Quelle est la logique globale de cette stratégie ?</p>
+          </div>
+          <button class="correction-toggle">📖 Voir la correction</button>
+          <div class="correction-content">
+            <div class="correction-step"><div class="step-num">1</div><div class="step-text"><strong>Outils :</strong> (1) E-commerce + data marketing (personnalisation). (2) Application mobile + réalité augmentée (innovation digitale). (3) Social media marketing + influence marketing. (4) CRM / programme de fidélité. (5) E-mailing personnalisé (marketing direct digital).</div></div>
+            <div class="correction-step"><div class="step-num">2</div><div class="step-text"><strong>RGPD :</strong> Données protégées : nom, prénom, e-mail, date de naissance, historique d'achats, données comportementales (produits consultés), localisation géographique. Sephora doit obtenir le consentement, permettre la désinscription, et sécuriser les données.</div></div>
+            <div class="correction-step"><div class="step-num">3</div><div class="step-text"><strong>Logique globale :</strong> stratégie omnicanale data-driven orientée fidélisation. Sephora collecte des données à chaque point de contact (site, app, magasin, e-mail) pour personnaliser l'expérience et augmenter la LTV de chaque client. C'est du marketing relationnel digital.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-question">❓ Quelle est la différence principale entre SEO et SEA ?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" data-correct="false" data-wrong-msg="Non, les deux peuvent cibler les mêmes mots-clés.">A. Le SEO cible des mots-clés différents du SEA</div>
+        <div class="quiz-option" data-correct="true" data-right-msg="Correct ! SEO = gratuit/long terme, SEA = payant/immédiat.">B. Le SEO est gratuit (résultats naturels) alors que le SEA est payant (annonces)</div>
+        <div class="quiz-option" data-correct="false" data-wrong-msg="Les deux concernent les moteurs de recherche.">C. Le SEA ne fonctionne que sur les réseaux sociaux</div>
+        <div class="quiz-option" data-correct="false" data-wrong-msg="Non, le SEO concerne aussi bien les entreprises que le SEA.">D. Le SEO est réservé aux grandes entreprises</div>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 13 -->
+  <div class="chapter" id="ch13">
+    <div class="chapter-header">
+      <div class="chapter-num merca">CHAPITRE 13</div>
+      <div>
+        <h2>La mercatique responsable</h2>
+        <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text2);margin-top:0.4rem;cursor:pointer;">
+          <input type="checkbox" class="ch-done"> Chapitre vu ✓
+        </label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Définitions</h3>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Marketing éthique</div>
+        <p>Intégration de valeurs morales et de critères RSE (Responsabilité Sociale et Environnementale) dans les décisions mercatiques. L'entreprise cherche à créer de la valeur pour le client ET pour la société.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Marketing vert</div>
+        <p>Mise en avant des attributs environnementaux d'un produit ou d'une marque (emballage recyclable, bilan carbone réduit, matières bio…). Répond à la demande croissante de consommateurs responsables.</p>
+      </div>
+
+      <div class="def-box merca" style="border-left-color: #f87171;">
+        <div class="def-label" style="color:#f87171;">ATTENTION — À NE PAS CONFONDRE</div>
+        <div class="def-term">Greenwashing</div>
+        <p>Pratique trompeuse consistant à se présenter comme "vert" ou "écologique" de façon exagérée ou mensongère, sans actions réelles. Exemples : allégations vagues ("naturel", "vert"), logos faux, mise en avant d'un seul aspect écologique en cachant d'autres impacts négatifs. Sanctionné par la loi (ARPP, DGCCRF).</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Consommation responsable</div>
+        <p>Comportement d'achat intégrant des préoccupations sociales et environnementales : circuits courts, produits locaux, labels (Bio, Fairtrade, Écolabel européen, Label Rouge), économie circulaire, partage/location.</p>
+      </div>
+
+      <div class="def-box merca">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Marketing social</div>
+        <p>Utilisation des techniques mercatiques pour promouvoir des comportements socialement bénéfiques (campagnes de prévention routière, lutte contre le tabac, dons aux associations). L'objectif n'est pas commercial mais sociétal.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 class="merca-title">Distinguer marketing vert et greenwashing</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Marketing vert (légitime)</th><th>Greenwashing (trompeur)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Preuves concrètes (labels certifiés, données vérifiables)</td>
+              <td>Allégations vagues ("naturel", "respectueux de la nature")</td>
+            </tr>
+            <tr>
+              <td>Démarche globale RSE de l'entreprise</td>
+              <td>Un aspect écologique mis en avant, reste du bilan caché</td>
+            </tr>
+            <tr>
+              <td>Transparence sur les efforts et les limites</td>
+              <td>Visuels "nature" trompeurs (pré vert, feuilles) sans lien réel</td>
+            </tr>
+            <tr>
+              <td>Exemples : Patagonia, Veja, Biocoop</td>
+              <td>Exemples : certaines campagnes pétrolières "vertes"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-question">❓ Une marque de vêtements se présente comme "écologique" car ses emballages sont en papier recyclé, mais ses vêtements sont fabriqués dans des conditions sociales problématiques. Il s'agit de :</div>
+      <div class="quiz-options">
+        <div class="quiz-option" data-correct="false" data-wrong-msg="Non, le marketing vert implique une démarche sincère et globale.">A. Marketing vert</div>
+        <div class="quiz-option" data-correct="true" data-right-msg="Exact ! C'est du greenwashing : un aspect positif mis en avant pour cacher des problèmes plus importants.">B. Greenwashing</div>
+        <div class="quiz-option" data-correct="false" data-wrong-msg="Le marketing social vise à promouvoir des comportements bénéfiques pour la société.">C. Marketing social</div>
+        <div class="quiz-option" data-correct="false" data-wrong-msg="Le co-branding est une association de deux marques sur un produit.">D. Co-branding</div>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+  </div>
+
+  <!-- MÉTHODE BAC -->
+  <div class="divider"></div>
+
+  <div class="method-box" id="methode">
+    <h3>Méthode BAC — Analyser une situation mercatique</h3>
+    <ol>
+      <li><strong>Identifier le marché et ses acteurs :</strong> marché principal, offre (concurrents directs, indirects), demande (cible, taille, parts de marché)</li>
+      <li><strong>Analyser la démarche mercatique :</strong> segmentation utilisée, cible retenue, positionnement (axes, carte perceptuelle, énoncé)</li>
+      <li><strong>Analyser le mix marketing (4P) :</strong> Produit (attributs, gamme, marque, cycle de vie) | Prix (méthode, stratégie d'écrémage/pénétration) | Distribution (canal, stratégie) | Communication (outils ATL/BTL/digital, message)</li>
+      <li><strong>Évaluer les résultats :</strong> parts de marché, taux de pénétration, NPS, indicateurs de fidélisation, LTV</li>
+      <li><strong>Proposer des recommandations :</strong> identifier les forces/faiblesses du mix, suggérer des ajustements cohérents avec le positionnement</li>
+    </ol>
+  </div>
+
+  <div class="key-points" style="margin-top:1.5rem;">
+    <h4>Formules à retenir absolument</h4>
+    <ul>
+      <li>PDM volume = (ventes entreprise / ventes marché) × 100</li>
+      <li>PDM valeur = (CA entreprise / CA marché) × 100</li>
+      <li>Taux de pénétration = (acheteurs produit / acheteurs potentiels) × 100</li>
+      <li>PV HT = Coût de revient / (1 − taux de marge)</li>
+      <li>Taux de marge = [(PV − Coût) / PV] × 100</li>
+      <li>Taux de marque = [(PV − Coût) / Coût] × 100</li>
+      <li>NPS = % promoteurs − % détracteurs</li>
+      <li>% acheteurs potentiels = 100 − % trop cher − % mauvaise qualité</li>
+    </ul>
+  </div>
+
+</div><!-- end content-wrapper -->
+
+<footer>
+  <p>BAC STMG 2026 — Spécialité Mercatique · Programme Terminale · <a href="index.html">← Retour à l'accueil</a></p>
+  <p style="margin-top:0.5rem;font-size:0.78rem;opacity:0.6;">Sources : Hachette Technique, Foucher, programmes officiels Éducation nationale · Dernière mise à jour : 2026</p>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

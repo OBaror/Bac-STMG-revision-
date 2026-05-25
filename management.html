@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Management — BAC STMG 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, rgba(22,163,74,0.12) 0%, rgba(15,23,42,0) 60%);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 2rem 2rem;
+    }
+    .page-hero-inner { max-width: 1000px; margin: 0 auto; }
+    .page-hero .breadcrumb { font-size: 0.85rem; color: var(--text2); margin-bottom: 0.75rem; }
+    .page-hero .breadcrumb a { color: var(--text2); text-decoration: none; }
+    .page-hero .breadcrumb a:hover { color: var(--text); }
+    .page-hero h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 0.75rem; }
+    .page-hero h1 span { color: #4ade80; }
+    .page-hero p { color: var(--text2); max-width: 700px; margin-bottom: 1.5rem; }
+    .page-hero-meta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    .theme-separator {
+      background: linear-gradient(90deg, rgba(22,163,74,0.15), transparent);
+      border: 1px solid rgba(22,163,74,0.25);
+      border-radius: var(--radius);
+      padding: 0.75rem 1.25rem;
+      margin: 2.5rem 0 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #4ade80;
+      text-transform: uppercase;
+    }
+
+    .term-separator {
+      background: linear-gradient(90deg, rgba(245,158,11,0.12), transparent);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: var(--radius);
+      padding: 0.75rem 1.25rem;
+      margin: 2.5rem 0 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #f59e0b;
+      text-transform: uppercase;
+    }
+
+    .blake-grid {
+      display: grid;
+      grid-template-columns: auto 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+    }
+    .blake-cell {
+      background: var(--bg2);
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .blake-cell.header { background: var(--bg3); font-weight: 700; color: var(--text2); font-size: 0.8rem; }
+    .blake-cell.axis { background: var(--bg3); font-weight: 700; color: var(--text2); writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.75rem; }
+    .blake-cell.ideal { background: rgba(22,163,74,0.15); border: 1px solid rgba(22,163,74,0.3); }
+    .blake-cell .style-name { font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+    .blake-cell .style-desc { color: var(--text2); font-size: 0.8rem; }
+
+    .pyramid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin: 1rem 0;
+    }
+    .pyramid-level {
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      position: relative;
+    }
+    .pyramid-level .level-num {
+      font-size: 0.7rem;
+      color: var(--text2);
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+    .pyr-5 { width: 140px; background: rgba(22,163,74,0.3); border: 1px solid rgba(22,163,74,0.5); }
+    .pyr-4 { width: 200px; background: rgba(22,163,74,0.22); border: 1px solid rgba(22,163,74,0.35); }
+    .pyr-3 { width: 270px; background: rgba(22,163,74,0.15); border: 1px solid rgba(22,163,74,0.25); }
+    .pyr-2 { width: 340px; background: rgba(22,163,74,0.1); border: 1px solid rgba(22,163,74,0.18); }
+    .pyr-1 { width: 400px; background: rgba(22,163,74,0.06); border: 1px solid rgba(22,163,74,0.12); }
+    .pyramid-note { font-size: 0.8rem; color: var(--text2); margin-top: 0.5rem; font-style: italic; }
+
+    .bcg-grid {
+      display: grid;
+      grid-template-columns: auto 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 1rem 0;
+      font-size: 0.85rem;
+    }
+    .bcg-cell { background: var(--bg2); padding: 1rem; text-align: center; }
+    .bcg-cell.header { background: var(--bg3); font-weight: 700; color: var(--text2); font-size: 0.8rem; }
+    .bcg-cell.axis-v { background: var(--bg3); font-weight: 700; color: var(--text2); writing-mode: vertical-rl; transform: rotate(180deg); font-size: 0.75rem; text-align: center; display: flex; align-items: center; justify-content: center; }
+    .bcg-cell .bcg-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
+    .bcg-cell .bcg-name { font-weight: 700; color: var(--text); }
+    .bcg-cell .bcg-desc { color: var(--text2); font-size: 0.78rem; margin-top: 0.2rem; }
+
+    .swot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .swot-box { border-radius: var(--radius); padding: 1.25rem; }
+    .swot-box h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .swot-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+    .swot-box li { font-size: 0.88rem; color: var(--text2); padding-left: 1.1rem; position: relative; }
+    .swot-box li::before { content: '•'; position: absolute; left: 0; }
+    .swot-s { background: rgba(22,163,74,0.1); border: 1px solid rgba(22,163,74,0.25); }
+    .swot-s h4, .swot-s li::before { color: #4ade80; }
+    .swot-w { background: rgba(220,38,38,0.08); border: 1px solid rgba(220,38,38,0.2); }
+    .swot-w h4, .swot-w li::before { color: #f87171; }
+    .swot-o { background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); }
+    .swot-o h4, .swot-o li::before { color: #60a5fa; }
+    .swot-t { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); }
+    .swot-t h4, .swot-t li::before { color: #fbbf24; }
+
+    .overall-progress-bar-bg { height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
+    .overall-progress-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, #16a34a, #4ade80); transition: width 0.5s ease; width: 0%; }
+    .overall-progress-label { font-size: 0.85rem; color: var(--text2); }
+
+    .ch-done-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text2); cursor: pointer; margin-top: 0.5rem; }
+    .ch-done-label input[type=checkbox] { accent-color: #16a34a; width: 15px; height: 15px; cursor: pointer; }
+
+    @media (max-width: 600px) {
+      .swot-grid { grid-template-columns: 1fr; }
+      .pyr-1, .pyr-2, .pyr-3, .pyr-4, .pyr-5 { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">🎓 <span>BAC STMG</span> 2026</a>
+  <ul class="nav-links">
+    <li><a href="economie.html" class="eco">Économie</a></li>
+    <li><a href="droit.html" class="droit">Droit</a></li>
+    <li><a href="management.html" class="mgmt active">Management</a></li>
+    <li><a href="gestion-marketing.html" class="gestion">Gestion &amp; Marketing</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Accueil</a> › Management</div>
+    <h1>📊 <span>Management</span> des organisations</h1>
+    <p>Organisations, prise de décision, motivation, performance, stratégie, structures — tout le programme 1ère &amp; Terminale STMG pour viser le 20/20.</p>
+    <div class="page-hero-meta">
+      <span class="badge badge-mgmt">1ère + Terminale</span>
+      <span class="badge badge-gold">14 chapitres</span>
+      <span class="badge badge-gray">Coeff. 6 — 4h</span>
+    </div>
+  </div>
+</div>
+
+<div class="content-wrapper">
+
+  <!-- PROGRESS -->
+  <div class="progress-section">
+    <h3>📈 Ma progression</h3>
+    <div class="overall-progress-label">0/14 chapitres vus (0%)</div>
+    <div class="overall-progress-bar-bg"><div class="overall-progress-fill"></div></div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h3>📋 Sommaire</h3>
+    <ol>
+      <li><a href="#ch1" data-num="01">Les organisations</a></li>
+      <li><a href="#ch2" data-num="02">Fonctions du management</a></li>
+      <li><a href="#ch3" data-num="03">Processus de décision</a></li>
+      <li><a href="#ch4" data-num="04">Styles de management</a></li>
+      <li><a href="#ch5" data-num="05">Théories de la motivation</a></li>
+      <li><a href="#ch6" data-num="06">Mesurer la performance</a></li>
+      <li><a href="#ch7" data-num="07">Finalités et RSE</a></li>
+      <li><a href="#ch8" data-num="08">Diagnostic stratégique</a></li>
+      <li><a href="#ch9" data-num="09">Stratégie globale</a></li>
+      <li><a href="#ch10" data-num="10">Stratégie concurrentielle</a></li>
+      <li><a href="#ch11" data-num="11">Structures organisationnelles</a></li>
+      <li><a href="#ch12" data-num="12">Management et numérique</a></li>
+      <li><a href="#ch13" data-num="13">Animation des équipes</a></li>
+      <li><a href="#ch14" data-num="14">Conduite du changement</a></li>
+    </ol>
+  </div>
+
+  <!-- ========== PREMIERE ========== -->
+  <div class="theme-separator">🎓 Première — Thème 1 : Qu'est-ce que le management ?</div>
+
+  <!-- CHAPITRE 1 -->
+  <div class="chapter" id="ch1">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 01</div>
+      <div>
+        <h2>Les organisations</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définitions essentielles</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Organisation</div>
+        <p>Groupement de personnes poursuivant un <strong>but commun</strong> en mobilisant des <strong>ressources humaines, financières et matérielles</strong> dans le cadre d'une structure organisée.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Finalités de l'organisation</div>
+        <p><strong>Économique :</strong> réaliser du profit et créer de la valeur. <strong>Sociale :</strong> assurer l'emploi et le bien-être des salariés. <strong>Sociétale :</strong> contribuer à la société (RSE). <strong>Humaine :</strong> développement personnel des membres.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Parties prenantes</div>
+        <p>Tous les acteurs concernés par les décisions de l'organisation : <strong>internes</strong> (actionnaires, salariés, direction) et <strong>externes</strong> (clients, fournisseurs, État, collectivités, ONG, médias).</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Types d'organisations</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>But</th>
+              <th>Financement</th>
+              <th>Exemples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Entreprise privée</strong></td>
+              <td>But lucratif — réaliser du profit</td>
+              <td>Capitaux privés, emprunts</td>
+              <td>TotalEnergies, LVMH, Renault</td>
+            </tr>
+            <tr>
+              <td><strong>Organisation publique</strong></td>
+              <td>Service d'intérêt général</td>
+              <td>Impôts, subventions</td>
+              <td>SNCF, EDF, hôpital public, mairie</td>
+            </tr>
+            <tr>
+              <td><strong>Association (loi 1901)</strong></td>
+              <td>But non lucratif</td>
+              <td>Cotisations, dons, subventions</td>
+              <td>Médecins sans Frontières, Croix-Rouge</td>
+            </tr>
+            <tr>
+              <td><strong>Organisation syndicale</strong></td>
+              <td>Défense des intérêts professionnels</td>
+              <td>Cotisations des membres</td>
+              <td>CGT, CFDT, FO, MEDEF</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">EXEMPLES CONCRETS</div>
+        <p><strong>SNCF :</strong> organisation publique — mission de service public (transport ferroviaire), financée en partie par l'État.</p>
+        <p><strong>Médecins sans Frontières :</strong> association — aide humanitaire internationale, financée par dons, aucun actionnaire.</p>
+        <p><strong>TotalEnergies :</strong> entreprise — but lucratif, cotée en bourse, actionnaires attendent un dividende.</p>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 1</span>
+          <span class="exercise-name">Identifier le type et les finalités d'une organisation</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-easy">Facile</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p>La <strong>Fondation Abbé Pierre</strong> est une association française qui lutte contre le mal-logement. Elle est financée par des dons de particuliers et des subventions publiques. Elle emploie 160 salariés et mobilise des bénévoles sur tout le territoire. Elle interpelle les pouvoirs publics sur les questions de logement.</p>
+          <p><strong>Travail :</strong> 1) Quel est le type d'organisation ? 2) Quelles sont ses finalités ? 3) Identifiez 4 parties prenantes.</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <div class="correction-step">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Type :</strong> Association (loi 1901) — but non lucratif, financée par dons et subventions, pas d'actionnaires.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Finalités :</strong> Sociale (améliorer le bien-être des sans-abri, emploi de salariés), Sociétale (lutte contre l'exclusion, plaidoyer politique), Humaine (engagement des bénévoles et salariés).</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Parties prenantes :</strong> Salariés (internes), Bénévoles (internes), Donateurs (externes), État et collectivités (externes), Personnes sans logement (bénéficiaires, externes), Médias (externes).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 2 -->
+  <div class="chapter" id="ch2">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 02</div>
+      <div>
+        <h2>Les fonctions du management</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définitions essentielles</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Management</div>
+        <p>Art de <strong>diriger une organisation</strong> pour atteindre ses objectifs en mobilisant et coordonnant les ressources humaines, financières et matérielles disponibles.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">FAYOL — POCCC</div>
+        <div class="def-term">Les 5 fonctions du management (Fayol)</div>
+        <p><strong>Prévoir</strong> (fixer les objectifs et planifier) · <strong>Organiser</strong> (répartir les tâches et ressources) · <strong>Commander</strong> (donner des instructions) · <strong>Coordonner</strong> (harmoniser les actions) · <strong>Contrôler</strong> (vérifier l'atteinte des objectifs)</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">MINTZBERG — Rôles du manager</div>
+        <div class="def-term">3 familles de rôles (Mintzberg)</div>
+        <p><strong>Interpersonnel :</strong> symbole, leader, agent de liaison. <strong>Informationnel :</strong> observateur actif, diffuseur, porte-parole. <strong>Décisionnel :</strong> entrepreneur, régulateur, répartiteur de ressources, négociateur.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Niveaux de management</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Niveau</th>
+              <th>Acteurs</th>
+              <th>Horizon temporel</th>
+              <th>Exemples de décisions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Stratégique</strong></td>
+              <td>PDG, DG, Comité de direction</td>
+              <td>Long terme (3–10 ans)</td>
+              <td>Fusion-acquisition, internationalisation</td>
+            </tr>
+            <tr>
+              <td><strong>Tactique</strong></td>
+              <td>Directeurs de département, cadres</td>
+              <td>Moyen terme (1–3 ans)</td>
+              <td>Budget annuel, plan marketing</td>
+            </tr>
+            <tr>
+              <td><strong>Opérationnel</strong></td>
+              <td>Chefs d'équipe, contremaîtres</td>
+              <td>Court terme (quotidien)</td>
+              <td>Planning des équipes, gestion des stocks</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">EXEMPLE — RENAULT</div>
+        <p><strong>PDG de Renault</strong> = management stratégique : décide de lancer la gamme 100% électrique, d'ouvrir une usine en Europe de l'Est.</p>
+        <p><strong>Chef d'atelier à Flins</strong> = management opérationnel : organise le planning des 30 ouvriers de la chaîne de montage pour la semaine.</p>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 2</span>
+          <span class="exercise-name">Identifier les niveaux de management</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-easy">Facile</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p>Chez <strong>Carrefour</strong>, identifiez le niveau de management pour chaque situation :</p>
+          <p>A) Le PDG décide d'acquérir une chaîne de supermarchés en Espagne pour 500 M€.</p>
+          <p>B) Le directeur régional Île-de-France définit les objectifs de vente pour les 15 hypermarchés de sa zone.</p>
+          <p>C) Le chef de rayon fruits &amp; légumes réorganise l'étalage suite à une livraison tardive.</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <div class="correction-step">
+            <div class="step-num">A</div>
+            <div class="step-text"><strong>Niveau stratégique</strong> — décision de long terme, engage l'avenir de toute l'entreprise, prise par le PDG (niveau hiérarchique le plus élevé).</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">B</div>
+            <div class="step-text"><strong>Niveau tactique</strong> — décision de moyen terme concernant une zone géographique, prise par un cadre intermédiaire (directeur régional).</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">C</div>
+            <div class="step-text"><strong>Niveau opérationnel</strong> — décision quotidienne, concerne directement l'activité de terrain, prise par le chef de rayon pour son équipe immédiate.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== THEME 2 ========== -->
+  <div class="theme-separator">⚡ Thème 2 : La prise de décision</div>
+
+  <!-- CHAPITRE 3 -->
+  <div class="chapter" id="ch3">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 03</div>
+      <div>
+        <h2>Le processus de décision</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définitions essentielles</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Décision</div>
+        <p>Choix entre plusieurs alternatives visant à résoudre un problème ou saisir une opportunité. Toute décision implique une <strong>incertitude</strong> et engage des ressources.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">SIMON — Modèle IMC</div>
+        <div class="def-term">Les 3 phases de la décision (Simon)</div>
+        <p><strong>I — Intelligence :</strong> collecter l'information, identifier le problème. <strong>M — Modélisation :</strong> élaborer les solutions possibles, évaluer. <strong>C — Choix :</strong> sélectionner la meilleure alternative et la mettre en œuvre.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Rationalité limitée (Simon)</div>
+        <p>Le décideur ne peut pas être parfaitement rationnel car il dispose d'une <strong>information incomplète</strong>, de <strong>capacités cognitives limitées</strong> et d'un <strong>temps contraint</strong>. Il prend donc une décision "suffisamment bonne" plutôt qu'optimale.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Décision programmée vs non programmée</div>
+        <p><strong>Programmée (routinière) :</strong> répétitive, procédures établies, peu de risque (ex : réapprovisionner les stocks). <strong>Non programmée (unique) :</strong> inédite, complexe, enjeux forts (ex : lancer un nouveau produit, fusionner avec un concurrent).</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Délégation</div>
+        <p>Transfert de <strong>responsabilité</strong> et d'autorité d'un supérieur à un subordonné pour accomplir une tâche définie. La délégation est <strong>partielle</strong> : le délégant reste responsable du résultat final.</p>
+      </div>
+    </div>
+
+    <div class="key-points">
+      <h4>POINTS CLÉS — CENTRALISATION VS DÉCENTRALISATION</h4>
+      <ul>
+        <li><strong>Centralisation :</strong> les décisions sont prises au sommet de la hiérarchie → rapidité, cohérence, mais risque de surcharge et d'éloignement du terrain.</li>
+        <li><strong>Décentralisation :</strong> délégation des décisions aux niveaux inférieurs → réactivité, motivation des équipes, mais risque d'incohérence.</li>
+        <li>Le choix dépend de la taille de l'organisation, de son secteur et de la culture managériale.</li>
+      </ul>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 3</span>
+          <span class="exercise-name">Analyser une décision selon le modèle IMC</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-medium">Intermédiaire</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p><strong>Cas :</strong> La direction de <strong>Michelin</strong> constate une baisse de 15% de ses parts de marché en Asie sur 2 ans. Elle commande une étude de marché (résultat : les concurrents asiatiques proposent des prix 30% inférieurs). Après analyse de 3 scénarios (baisser les prix, délocaliser la production, lancer une gamme low-cost), Michelin décide de créer une marque secondaire "BFGoodrich Asia" à prix réduit.</p>
+          <p><strong>Travail :</strong> Identifiez les 3 phases du modèle IMC dans cette situation.</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <div class="correction-step">
+            <div class="step-num">I</div>
+            <div class="step-text"><strong>Intelligence (collecte d'information) :</strong> Michelin constate la baisse de parts de marché (−15%) et commande une étude qui révèle les prix 30% inférieurs des concurrents. Le problème est identifié : perte de compétitivité-prix en Asie.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">M</div>
+            <div class="step-text"><strong>Modélisation (élaboration de solutions) :</strong> 3 scénarios sont analysés : baisser les prix sur toute la gamme, délocaliser la production, ou créer une marque dédiée. Chaque option est évaluée (coûts, risques, faisabilité).</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">C</div>
+            <div class="step-text"><strong>Choix :</strong> Michelin sélectionne la création de la marque "BFGoodrich Asia" — solution qui préserve l'image premium de Michelin tout en captant le marché à bas prix. C'est une décision <strong>non programmée</strong> au niveau <strong>stratégique</strong>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 4 -->
+  <div class="chapter" id="ch4">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 04</div>
+      <div>
+        <h2>Les styles de management</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Grille de Blake et Mouton</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Style de management</div>
+        <p>Manière habituelle d'un manager de <strong>diriger, animer et influencer</strong> ses collaborateurs pour atteindre les objectifs fixés. Il dépend de la personnalité du manager, du contexte et des équipes.</p>
+      </div>
+
+      <p style="color:var(--text2); margin: 1rem 0 0.5rem;">La grille de Blake et Mouton croisse <strong>l'intérêt pour la production</strong> (axe horizontal, 1→9) et <strong>l'intérêt pour l'humain</strong> (axe vertical, 1→9) :</p>
+
+      <div class="blake-grid">
+        <div class="blake-cell header"></div>
+        <div class="blake-cell header">⬇ Faible intérêt pour l'humain</div>
+        <div class="blake-cell header">⬆ Fort intérêt pour l'humain</div>
+        <div class="blake-cell header">⬆ Fort intérêt pour la production</div>
+        <div class="blake-cell">
+          <div class="style-name">🏭 Autocratique (9,1)</div>
+          <div class="style-desc">Production maximale, collaborateurs ignorés. Obéissance exigée.</div>
+        </div>
+        <div class="blake-cell ideal">
+          <div class="style-name">⭐ Intégrateur (9,9)</div>
+          <div class="style-desc">Style idéal : fort intérêt production ET humain. Participation, confiance, objectifs ambitieux.</div>
+        </div>
+        <div class="blake-cell header">↔ Moyen (compromis)</div>
+        <div class="blake-cell" style="grid-column: 2 / 4;">
+          <div class="style-name">⚖️ Compromis (5,5)</div>
+          <div class="style-desc">Équilibre moyen entre production et humain. Résultats corrects mais sans excellence.</div>
+        </div>
+        <div class="blake-cell header">⬇ Faible intérêt pour la production</div>
+        <div class="blake-cell">
+          <div class="style-name">😴 Laisser-faire (1,1)</div>
+          <div class="style-desc">Ni production ni humain. Manager absent, peu impliqué.</div>
+        </div>
+        <div class="blake-cell">
+          <div class="style-name">🤝 Social (1,9)</div>
+          <div class="style-desc">Priorité à l'humain, production négligée. Ambiance excellente mais résultats faibles.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Les 4 styles de Likert</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Style</th>
+              <th>Caractéristiques</th>
+              <th>Relation manager/équipe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Autoritaire exploiteur</strong></td>
+              <td>Ordres, sanctions, peur. Aucune confiance envers les subordonnés.</td>
+              <td>Très hiérarchisée, communication descendante uniquement</td>
+            </tr>
+            <tr>
+              <td><strong>Autoritaire paternaliste</strong></td>
+              <td>Récompenses et punitions, légère confiance. Communication descendante dominante.</td>
+              <td>Relation "père-enfant", peu de participation</td>
+            </tr>
+            <tr>
+              <td><strong>Consultatif</strong></td>
+              <td>Consulte les équipes mais décide seul. Confiance partielle.</td>
+              <td>Communication bidirectionnelle, participation limitée</td>
+            </tr>
+            <tr>
+              <td><strong>Participatif</strong> ⭐</td>
+              <td>Décisions collectives, pleine confiance, objectifs partagés. Style optimal selon Likert.</td>
+              <td>Équipe autonome, forte cohésion, communication ouverte</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">EXEMPLES RÉELS</div>
+        <p><strong>Jeff Bezos (Amazon, début 2000s) :</strong> style autocratique / autoritaire exploiteur — objectifs de productivité extrêmes, culture de la peur, surveillance constante des entrepôts.</p>
+        <p><strong>Google (aujourd'hui) :</strong> style intégrateur / participatif — 20% du temps libre pour projets personnels, management par objectifs (OKR), forte autonomie des équipes.</p>
+      </div>
+    </div>
+
+    <!-- QCM -->
+    <div class="quiz-section">
+      <div class="quiz-question">🧠 QCM — Un manager dit à son équipe : "Je vous explique mes décisions et j'écoute vos remarques, mais c'est moi qui décide au final." Quel style de management selon Likert ?</div>
+      <div class="quiz-options">
+        <div class="quiz-option" data-correct="false" data-wrong-msg="Non — l'autoritaire exploiteur ne consulte pas du tout ses équipes.">A) Autoritaire exploiteur</div>
+        <div class="quiz-option" data-correct="false" data-wrong-msg="Non — le paternaliste donne des récompenses/punitions mais écoute peu.">B) Autoritaire paternaliste</div>
+        <div class="quiz-option" data-correct="true" data-right-msg="Exact ! Le style consultatif = le manager consulte les équipes mais garde le pouvoir de décision final.">C) Consultatif</div>
+        <div class="quiz-option" data-correct="false" data-wrong-msg="Non — le participatif implique des décisions collectives, pas unilatérales.">D) Participatif</div>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 4</span>
+          <span class="exercise-name">Identifier le style de management</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-medium">Intermédiaire</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p>Marie est directrice d'une agence de communication de 12 personnes. Elle fixe des objectifs précis chaque lundi matin et vérifie chaque vendredi les résultats. Elle demande régulièrement l'avis de ses équipes sur les projets clients, organise des réunions de brainstorming, mais prend toujours la décision finale seule. Les salariés sont bien payés, l'ambiance est bonne, mais certains se sentent peu autonomes.</p>
+          <p><strong>Travail :</strong> 1) Quel est le style de Marie selon Blake et Mouton ? 2) Selon Likert ? 3) Quelles améliorations pourrait-elle apporter ?</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <div class="correction-step">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Blake et Mouton :</strong> Style <strong>compromis (5,5)</strong> — Marie s'intéresse à la fois à la production (objectifs, contrôle) et à l'humain (brainstorming, bonne ambiance, salaires), mais de façon équilibrée sans excellence dans les deux dimensions.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Likert :</strong> Style <strong>consultatif</strong> — elle demande l'avis de ses équipes (consultation) mais décide seule au final. Les salariés participent partiellement mais n'ont pas de pouvoir décisionnel réel.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Améliorations :</strong> Évoluer vers le style <strong>participatif (intégrateur)</strong> en déléguant davantage, en permettant aux équipes de prendre certaines décisions opérationnelles elles-mêmes, et en valorisant l'autonomie individuelle → augmenterait la motivation et la créativité.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== THEME 3 ========== -->
+  <div class="theme-separator">💡 Thème 3 : La motivation</div>
+
+  <!-- CHAPITRE 5 -->
+  <div class="chapter" id="ch5">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 05</div>
+      <div>
+        <h2>Les théories de la motivation</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définition &amp; Maslow</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Motivation</div>
+        <p>Ensemble des <strong>forces internes et externes</strong> qui poussent un individu à agir, à maintenir ou à orienter son comportement vers un but. Elle influence directement la performance et l'engagement au travail.</p>
+      </div>
+
+      <p style="color:var(--text2); margin: 1rem 0 0.5rem; font-weight:600;">Pyramide de MASLOW — 5 niveaux de besoins (du plus fondamental au plus élevé) :</p>
+
+      <div class="pyramid">
+        <div class="pyramid-level pyr-5">
+          <span class="level-num">Niveau 5</span>
+          🌟 Accomplissement (réalisation de soi, créativité, dépassement)
+        </div>
+        <div class="pyramid-level pyr-4">
+          <span class="level-num">Niveau 4</span>
+          🏆 Estime (reconnaissance, statut, respect, confiance en soi)
+        </div>
+        <div class="pyramid-level pyr-3">
+          <span class="level-num">Niveau 3</span>
+          🤝 Sociaux (appartenance, amitié, amour, intégration au groupe)
+        </div>
+        <div class="pyramid-level pyr-2">
+          <span class="level-num">Niveau 2</span>
+          🛡️ Sécurité (emploi stable, logement, santé, revenu régulier)
+        </div>
+        <div class="pyramid-level pyr-1">
+          <span class="level-num">Niveau 1</span>
+          🍞 Physiologiques (manger, dormir, respirer, chaleur)
+        </div>
+        <p class="pyramid-note">⚠️ Un besoin supérieur ne motive que si les besoins inférieurs sont satisfaits</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Herzberg — Théorie bi-factorielle</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">HERZBERG</div>
+        <div class="def-term">Facteurs d'hygiène vs facteurs de motivation</div>
+        <p><strong>Facteurs d'hygiène</strong> (leur absence démotive, leur présence ne suffit pas à motiver) : salaire de base, conditions de travail, sécurité de l'emploi, relations avec les collègues.<br>
+        <strong>Facteurs de motivation</strong> (leur présence motive vraiment) : responsabilité, reconnaissance, sentiment d'accomplissement, intérêt du travail, évolution de carrière.</p>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">APPLICATION HERZBERG</div>
+        <p><strong>Augmenter le salaire</strong> (facteur d'hygiène) évite l'insatisfaction mais ne crée pas de motivation durable. Pour vraiment motiver, il faut enrichir le travail : confier plus de responsabilités, valoriser publiquement les réussites, offrir des perspectives d'évolution.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Taylor, Mayo, Vroom</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">TAYLOR — OST</div>
+        <div class="def-term">Organisation Scientifique du Travail</div>
+        <p><strong>Parcellisation :</strong> décomposer le travail en tâches élémentaires. <strong>Spécialisation :</strong> chaque ouvrier répète une seule tâche. <strong>One best way :</strong> une seule méthode optimale pour exécuter chaque tâche. <strong>Salaire au rendement :</strong> rémunération selon la production. <mark>Critique :</mark> déshumanisation, absentéisme, grèves, taylorisme = motivé uniquement par l'argent.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">MAYO — Hawthorne</div>
+        <div class="def-term">Expériences de Hawthorne</div>
+        <p>Les études menées chez Western Electric (1927–1932) montrent que l'<strong>intérêt porté aux travailleurs</strong> améliore la productivité indépendamment des conditions matérielles. Les <strong>relations humaines et la vie de groupe</strong> sont des facteurs de motivation plus puissants que les seules conditions physiques de travail.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">VROOM — Théorie VIE</div>
+        <div class="def-term">Formule : Motivation = V × I × E</div>
+        <p><strong>V — Valence :</strong> importance accordée à la récompense obtenue. <strong>I — Instrumentalité :</strong> conviction que la performance sera récompensée. <strong>E — Expectation :</strong> conviction de sa propre capacité à réussir. Si l'un des trois facteurs = 0, la motivation = 0.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Tableau comparatif des théories</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Théoricien</th>
+              <th>Théorie</th>
+              <th>Levier de motivation</th>
+              <th>Critique / Limite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Taylor</strong></td>
+              <td>OST (1911)</td>
+              <td>Salaire au rendement, efficacité</td>
+              <td>Déshumanisation, absentéisme, conflits sociaux</td>
+            </tr>
+            <tr>
+              <td><strong>Maslow</strong></td>
+              <td>Pyramide des besoins (1943)</td>
+              <td>Satisfaire les besoins dans l'ordre</td>
+              <td>Hiérarchie rigide, varie selon les individus</td>
+            </tr>
+            <tr>
+              <td><strong>Mayo</strong></td>
+              <td>Relations humaines (1927)</td>
+              <td>Intérêt porté aux salariés, groupe</td>
+              <td>Oublie les facteurs économiques</td>
+            </tr>
+            <tr>
+              <td><strong>Herzberg</strong></td>
+              <td>Bi-factorielle (1959)</td>
+              <td>Enrichissement du travail</td>
+              <td>Ne s'applique pas à tous les métiers</td>
+            </tr>
+            <tr>
+              <td><strong>Vroom</strong></td>
+              <td>VIE (1964)</td>
+              <td>Attentes, instrumentalité, valence</td>
+              <td>Modèle complexe, difficile à mesurer</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 5 — TYPE BAC</span>
+          <span class="exercise-name">Comment améliorer la motivation des salariés ?</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-hard">BAC</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p><strong>Contexte :</strong> L'entreprise <strong>LogiPack</strong> (entrepôts logistiques, 300 salariés) connaît un taux d'absentéisme de 12% (moyenne nationale : 5%) et un turnover de 35% par an. Les salariés sont payés au SMIC + prime de rendement (système taylorien). Les managers contrôlent les cadences à la minute. Les salariés se plaignent de l'absence de reconnaissance et du manque de perspectives d'évolution.</p>
+          <p><strong>Question BAC :</strong> À partir des documents et de vos connaissances, <strong>comment améliorer la motivation des salariés de LogiPack</strong> ?</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <p><strong>Introduction :</strong> LogiPack présente des indicateurs sociaux alarmants (absentéisme 12%, turnover 35%) révélant une crise de motivation profonde due à un système taylorien déshumanisant.</p>
+          <div class="correction-step">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Selon Herzberg :</strong> Les seules primes de rendement sont des facteurs d'hygiène insuffisants. Il faut enrichir le travail : donner plus de responsabilités (gérer une zone d'entrepôt), valoriser publiquement les performances, créer des parcours d'évolution vers des postes de chef d'équipe.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Selon Maslow :</strong> Les besoins de sécurité (emploi stable, cadences raisonnables) et d'estime (reconnaissance, statut) ne sont pas satisfaits. LogiPack doit assurer des conditions de travail dignes et mettre en place des systèmes de reconnaissance (Salarié du mois, entretiens valorisants).</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Selon Mayo :</strong> Développer la cohésion des équipes (team building, espaces de détente), former les managers à l'écoute active, créer des moments d'échange collectif pour montrer l'intérêt porté aux salariés.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">4</div>
+            <div class="step-text"><strong>Conclusion :</strong> LogiPack doit évoluer d'un management taylorien vers un management participatif combinant meilleures conditions de travail (hygiène), enrichissement des tâches (motivation) et développement des relations humaines.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== THEME 4 ========== -->
+  <div class="theme-separator">📊 Thème 4 : La performance</div>
+
+  <!-- CHAPITRE 6 -->
+  <div class="chapter" id="ch6">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 06</div>
+      <div>
+        <h2>Mesurer la performance</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définitions essentielles</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Performance</div>
+        <p><strong>Efficacité</strong> (atteindre les objectifs fixés) + <strong>Efficience</strong> (atteindre ces objectifs avec le minimum de ressources). Une entreprise performante est à la fois efficace et efficiente.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Tableau de bord</div>
+        <p>Outil de <strong>pilotage</strong> regroupant les indicateurs clés permettant au manager de suivre l'avancement vers les objectifs, détecter les écarts et prendre des décisions correctives.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">KAPLAN &amp; NORTON</div>
+        <div class="def-term">Balanced Scorecard (tableau de bord prospectif)</div>
+        <p>Outil qui mesure la performance selon <strong>4 axes complémentaires :</strong> Financier (rentabilité, CA), Client (satisfaction, fidélité), Processus internes (qualité, délais), Apprentissage &amp; Innovation (formation, R&amp;D).</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Formules à maîtriser</h3>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE</div>
+        <div class="formula">Taux d'absentéisme = (Heures d'absence / Heures théoriques de travail) × 100</div>
+        <div class="formula-note">Exprimé en %. Norme secteur : environ 4–5%. Au-delà de 8% = signal d'alerte.</div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE</div>
+        <div class="formula">Taux de turnover = [(Départs + Arrivées) / 2] / Effectif moyen × 100</div>
+        <div class="formula-note">Exprimé en %. Fort turnover = coûts de recrutement élevés, perte de compétences.</div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE</div>
+        <div class="formula">ROI = (Bénéfice net / Capital investi) × 100</div>
+        <div class="formula-note">Return On Investment. Mesure la rentabilité d'un investissement. Ex: ROI = 15% → chaque 100€ investi rapporte 15€.</div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">FORMULE</div>
+        <div class="formula">Taux de marge = (Marge / Chiffre d'affaires) × 100</div>
+        <div class="formula-note">Marge = CA − Coûts variables. Indicateur de rentabilité commerciale.</div>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 6</span>
+          <span class="exercise-name">Calculer et interpréter des indicateurs</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-medium">Intermédiaire</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <div class="exercise-data">
+            <div class="data-title">DONNÉES — ENTREPRISE TEXTIL SA (2025)</div>
+            <ul>
+              <li>Effectif moyen : 80 salariés</li>
+              <li>Heures théoriques annuelles par salarié : 1 600 h</li>
+              <li>Total heures d'absence : 9 600 h</li>
+              <li>Départs dans l'année : 18 | Arrivées : 14</li>
+              <li>CA : 2 400 000 € | Coûts variables : 1 440 000 €</li>
+              <li>Investissement réalisé : 200 000 € | Bénéfice net : 42 000 €</li>
+            </ul>
+          </div>
+          <p><strong>Travail :</strong> Calculez le taux d'absentéisme, le taux de turnover, le taux de marge et le ROI. Interprétez chaque résultat.</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <div class="correction-step">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Taux d'absentéisme :</strong> 9 600 / (80 × 1 600) × 100 = 9 600 / 128 000 × 100 = <strong>7,5%</strong>. Supérieur à la moyenne nationale (5%) → signal préoccupant, risque de problèmes de motivation ou de conditions de travail.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Taux de turnover :</strong> [(18+14)/2] / 80 × 100 = 16 / 80 × 100 = <strong>20%</strong>. Très élevé → coûts importants de recrutement et de formation, instabilité des équipes. À investiguer en priorité.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Taux de marge :</strong> (2 400 000 − 1 440 000) / 2 400 000 × 100 = 960 000 / 2 400 000 × 100 = <strong>40%</strong>. Marge correcte — pour 100€ de CA, 40€ couvrent les charges fixes et le bénéfice.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">4</div>
+            <div class="step-text"><strong>ROI :</strong> 42 000 / 200 000 × 100 = <strong>21%</strong>. Bon ROI — chaque 100€ investi rapporte 21€ de bénéfice net. L'investissement est rentable.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TERMINALE ========== -->
+  <div class="term-separator">🎓 Terminale — Thème 5 : Les finalités stratégiques</div>
+
+  <!-- CHAPITRE 7 -->
+  <div class="chapter" id="ch7">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 07</div>
+      <div>
+        <h2>Finalités et RSE</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définitions essentielles</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">RSE — Responsabilité Sociale des Entreprises</div>
+        <p>Démarche volontaire par laquelle une entreprise <strong>intègre les préoccupations sociales, environnementales et économiques</strong> dans ses activités et ses relations avec ses parties prenantes, au-delà des seules obligations légales.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">ELKINGTON</div>
+        <div class="def-term">Triple bottom line (3P)</div>
+        <p><strong>People</strong> (équité sociale : conditions de travail, droits humains, communautés locales) + <strong>Planet</strong> (préservation de l'environnement : empreinte carbone, biodiversité) + <strong>Profit</strong> (viabilité économique : rentabilité durable). Les 3 dimensions sont indissociables.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Greenwashing</div>
+        <p>Pratique consistant à utiliser des <strong>arguments écologiques trompeurs</strong> dans la communication d'une entreprise sans que ses pratiques réelles soient véritablement durables. Sanctionné par la DGCCRF.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Norme ISO 26000</div>
+        <p>Norme internationale (non certifiable) qui fournit des <strong>lignes directrices sur la RSE</strong> couvrant 7 domaines : gouvernance, droits de l'homme, conditions de travail, environnement, loyauté des pratiques, consommateurs, communautés.</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-label">EXEMPLES CONCRETS RSE</div>
+      <p><strong>Danone :</strong> certifiée B-Corp pour plusieurs filiales — entreprise engagée sur les critères sociaux et environnementaux, évaluée par l'organisme B Lab.</p>
+      <p><strong>Patagonia :</strong> entreprise à mission — statut légal qui inscrit un objectif sociétal dans les statuts (sauver la planète), profits réinvestis en partie dans la protection de l'environnement.</p>
+      <p><strong>Volkswagen — Dieselgate (2015) :</strong> manipulation des logiciels de mesure d'émissions de CO₂ → scandale mondial, 30 Md€ d'amendes, destruction de confiance → anti-exemple de RSE.</p>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 7</span>
+          <span class="exercise-name">Analyser une politique RSE</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-medium">Intermédiaire</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p><strong>Cas IKEA :</strong> IKEA s'est engagé à utiliser uniquement du coton issu de l'agriculture durable (Better Cotton Initiative), à n'utiliser que des énergies renouvelables d'ici 2030, à développer des gammes de meubles conçus pour être réparés et recyclés. En interne, IKEA s'engage sur l'égalité femmes-hommes et un salaire minimum au-dessus du SMIC dans tous ses pays. Cependant, certaines associations dénoncent des conditions de travail difficiles chez ses fournisseurs en Asie.</p>
+          <p><strong>Travail :</strong> Analysez la politique RSE d'IKEA selon les 3P d'Elkington. Identifiez une limite.</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <div class="correction-step">
+            <div class="step-num">P1</div>
+            <div class="step-text"><strong>Planet (Planète) :</strong> coton durable, 100% énergies renouvelables en 2030, économie circulaire (meubles réparables, recyclables). IKEA s'inscrit dans une logique de réduction de son empreinte carbone et de préservation des ressources.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">P2</div>
+            <div class="step-text"><strong>People (Social) :</strong> égalité femmes-hommes, politique salariale équitable dans les pays d'implantation. Ces engagements concernent les parties prenantes internes.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">P3</div>
+            <div class="step-text"><strong>Profit :</strong> IKEA maintient son modèle économique (volumes importants, prix bas) tout en investissant dans la durabilité — la RSE est intégrée à la stratégie, pas un frein.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">⚠</div>
+            <div class="step-text"><strong>Limite :</strong> Les conditions de travail dénoncées chez les fournisseurs asiatiques soulèvent une question de <strong>responsabilité étendue de la chaîne d'approvisionnement</strong>. La RSE d'IKEA ne s'applique pas encore pleinement à ses fournisseurs de rang 2 et 3 → risque de greenwashing social partiel.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 8 -->
+  <div class="chapter" id="ch8">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 08</div>
+      <div>
+        <h2>Le diagnostic stratégique</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Diagnostic externe — PESTEL &amp; Porter</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Analyse PESTEL</div>
+        <p>Outil d'analyse du <strong>macro-environnement</strong> (opportunités et menaces) selon 6 dimensions : <strong>P</strong>olitique (stabilité, fiscalité) · <strong>É</strong>conomique (croissance, taux d'intérêt) · <strong>S</strong>ocioculturel (démographie, valeurs) · <strong>T</strong>echnologique (R&amp;D, innovation) · <strong>E</strong>nvironnemental (réglementation écologique) · <strong>L</strong>égal (droit du travail, normes).</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">PORTER — 5 forces</div>
+        <div class="def-term">Modèle des 5 forces concurrentielles</div>
+        <p>Analyse du <strong>micro-environnement</strong> (secteur) : <strong>1.</strong> Intensité concurrentielle (rivalité entre firmes) · <strong>2.</strong> Pouvoir de négociation des clients · <strong>3.</strong> Pouvoir de négociation des fournisseurs · <strong>4.</strong> Menace des nouveaux entrants · <strong>5.</strong> Menace des produits/services de substitution.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Diagnostic interne &amp; SWOT</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Analyse SWOT (FFOM)</div>
+        <p>Synthèse du diagnostic stratégique croisant <strong>Strengths/Forces</strong> et <strong>Weaknesses/Faiblesses</strong> (diagnostic interne) avec <strong>Opportunities/Opportunités</strong> et <strong>Threats/Menaces</strong> (diagnostic externe). Aide à formuler des orientations stratégiques.</p>
+      </div>
+
+      <p style="color:var(--text2); margin: 1rem 0 0.5rem; font-weight:600;">Exemple SWOT — Apple (2025) :</p>
+      <div class="swot-grid">
+        <div class="swot-box swot-s">
+          <h4>Forces (Strengths)</h4>
+          <ul>
+            <li>Image de marque premium mondiale</li>
+            <li>Écosystème intégré (iPhone/Mac/Services)</li>
+            <li>R&amp;D intense et brevets</li>
+            <li>Trésorerie massive (250 Md$)</li>
+          </ul>
+        </div>
+        <div class="swot-box swot-w">
+          <h4>Faiblesses (Weaknesses)</h4>
+          <ul>
+            <li>Prix élevés (accessibilité réduite)</li>
+            <li>Dépendance à la fabrication en Chine</li>
+            <li>Innovation perçue comme moins disruptive</li>
+          </ul>
+        </div>
+        <div class="swot-box swot-o">
+          <h4>Opportunités</h4>
+          <ul>
+            <li>Croissance des marchés Inde/Afrique</li>
+            <li>Intelligence artificielle générative</li>
+            <li>Services financiers (Apple Pay)</li>
+          </ul>
+        </div>
+        <div class="swot-box swot-t">
+          <h4>Menaces</h4>
+          <ul>
+            <li>Tensions géopolitiques USA-Chine</li>
+            <li>Montée de Huawei et Samsung</li>
+            <li>Régulation antitrust (App Store)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 8</span>
+          <span class="exercise-name">Réaliser une analyse SWOT</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-hard">BAC</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p><strong>Cas :</strong> <strong>Decathlon</strong> est le leader mondial du sport accessible. Il conçoit et vend ses propres marques (Quechua, Domyos...). Il possède 1 700 magasins dans 60 pays. Ses prix sont 30–50% inférieurs aux concurrents. Sa supply chain est intégrée (conception → fabrication → vente). Les jeunes consommateurs critiquent parfois la qualité perçue comme inférieure aux marques sportives premium (Nike, Adidas). La tendance "sport santé" et le e-commerce progressent fortement.</p>
+          <p><strong>Travail :</strong> Réalisez une analyse SWOT pour Decathlon (2 éléments minimum par case).</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <div class="correction-step">
+            <div class="step-num">F</div>
+            <div class="step-text"><strong>Forces :</strong> Leader mondial en volume, prix très compétitifs (−30/50%), intégration verticale totale (maîtrise des coûts), présence dans 60 pays, marques propres connues (Quechua, Domyos), forte capacité R&amp;D interne.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">F</div>
+            <div class="step-text"><strong>Faiblesses :</strong> Image "bas de gamme" auprès des sportifs confirmés, moins de visibilité marketing que Nike/Adidas, dépendance à la grande surface physique dans un monde digitalisé.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">O</div>
+            <div class="step-text"><strong>Opportunités :</strong> Boom du "sport santé" et du bien-être (nouvelle clientèle), croissance du e-commerce, marchés émergents (Asie, Afrique, Amérique du Sud), tendance durabilité (sport éco-responsable).</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">M</div>
+            <div class="step-text"><strong>Menaces :</strong> Concurrence croissante des pure players e-commerce (Amazon Sport), montée des marques chinoises à bas prix, pression réglementaire sur les conditions de fabrication, inflation des matières premières.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== THEME 6 ========== -->
+  <div class="theme-separator">🎯 Thème 6 : Les choix stratégiques</div>
+
+  <!-- CHAPITRE 9 -->
+  <div class="chapter" id="ch9">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 09</div>
+      <div>
+        <h2>La stratégie globale</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définitions essentielles</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">DAS — Domaine d'Activité Stratégique</div>
+        <p>Ensemble d'activités partageant les mêmes <strong>Facteurs Clés de Succès (FCS)</strong>, les mêmes concurrents et les mêmes clients. Une entreprise peut avoir plusieurs DAS. Synonyme : <em>Strategic Business Unit (SBU)</em>.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Spécialisation</div>
+        <p>Concentration sur un <strong>seul DAS</strong>. Avantages : économies d'échelle, expertise renforcée, image claire. Inconvénients : vulnérabilité si le marché se retourne, dépendance à un seul secteur.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Diversification</div>
+        <p>Développement sur <strong>plusieurs DAS</strong>. <strong>Liée :</strong> nouveaux DAS proches du métier de base (ex: Apple passe des ordinateurs aux smartphones). <strong>Conglomérale :</strong> DAS sans lien entre eux (ex: Bolloré = transport + médias + plantation). Avantages : partage des risques, synergies. Inconvénient : dispersion des ressources.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Intégration verticale</div>
+        <p><strong>En amont :</strong> l'entreprise intègre ses fournisseurs (ex: Zara fabrique ses propres vêtements). <strong>En aval :</strong> l'entreprise intègre sa distribution (ex: Apple ouvre ses propres Apple Stores). Objectif : maîtriser la chaîne de valeur et réduire les coûts.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Matrice BCG</h3>
+      <div class="bcg-grid">
+        <div class="bcg-cell header"></div>
+        <div class="bcg-cell header">⬆ Fort taux de croissance du marché</div>
+        <div class="bcg-cell header">⬇ Faible taux de croissance du marché</div>
+        <div class="bcg-cell axis-v">⬅ Faible PDM relative &nbsp;&nbsp; ➡ Forte PDM relative</div>
+        <div class="bcg-cell">
+          <div class="bcg-icon">❓</div>
+          <div class="bcg-name">Dilemme</div>
+          <div class="bcg-desc">Fort potentiel mais faible position. Investir ou abandonner ?</div>
+        </div>
+        <div class="bcg-cell">
+          <div class="bcg-icon">🐄</div>
+          <div class="bcg-name">Vache à lait</div>
+          <div class="bcg-desc">Forte PDM, faible croissance. Génère du cash. À exploiter.</div>
+        </div>
+        <div class="bcg-cell">
+          <div class="bcg-icon">⭐</div>
+          <div class="bcg-name">Vedette (Star)</div>
+          <div class="bcg-desc">Forte PDM, fort potentiel. Leader sur marché dynamique. Investir.</div>
+        </div>
+        <div class="bcg-cell">
+          <div class="bcg-icon">🐕</div>
+          <div class="bcg-name">Poids mort</div>
+          <div class="bcg-desc">Faible PDM, faible croissance. Peu rentable. Désinvestir ?</div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">EXEMPLES STRATÉGIE GLOBALE</div>
+        <p><strong>LVMH :</strong> diversification liée — Louis Vuitton (maroquinerie), Moët &amp; Chandon (vins), Sephora (cosmétiques) → tous dans le luxe et le style de vie, synergies de marque et de distribution.</p>
+        <p><strong>Bolloré :</strong> conglomérat — logistique africaine, médias (CNews, Europe 1), plantations d'huile de palme → DAS sans lien entre eux.</p>
+        <p><strong>Zara (Inditex) :</strong> intégration verticale totale — conception, fabrication, distribution propriétaire → délai de collection 2 semaines vs 6 mois pour les concurrents.</p>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 9</span>
+          <span class="exercise-name">Analyser et recommander une stratégie globale</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-hard">BAC</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p><strong>Cas :</strong> <strong>Fleury Michon</strong> est spécialisée dans la charcuterie et les plats préparés (DAS principal). Face au déclin de consommation de charcuterie (−3%/an), elle a lancé une gamme de poisson fumé et développé des surgelés "bien-être". Elle hésite à investir dans la restauration collective (cantines scolaires), secteur très différent de son activité.</p>
+          <p><strong>Travail :</strong> 1) Identifiez la stratégie actuelle de Fleury Michon. 2) Analysez la proposition d'entrée en restauration collective. 3) Recommandez une orientation stratégique.</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <div class="correction-step">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Stratégie actuelle :</strong> Fleury Michon pratique une <strong>diversification liée</strong> — poisson fumé et surgelés bien-être sont proches de son métier de base (agroalimentaire transformé, circuits de distribution identiques, savoir-faire commun). C'est une extension du cœur de métier.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Restauration collective :</strong> Ce serait une <strong>diversification conglomérale</strong> (sans lien avec le métier de base). FCS très différents (appels d'offres publics, logistique de service, personnel de cuisine). Risqué pour une PME comme Fleury Michon → dispersion des ressources et des compétences.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Recommandation :</strong> Approfondir la <strong>diversification liée</strong> (protéines végétales, snacking healthy) plutôt que d'entrer en restauration collective. Renforcer l'intégration aval en développant des partenariats avec les circuits de distribution santé (bio, fitness). Éviter la congloméralisation qui serait risquée compte tenu de la taille et des ressources de l'entreprise.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 10 -->
+  <div class="chapter" id="ch10">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 10</div>
+      <div>
+        <h2>La stratégie concurrentielle (Porter)</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Les 3 stratégies génériques de Porter</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Avantage concurrentiel</div>
+        <p>Ce qui permet à une entreprise de <strong>surpasser durablement ses concurrents</strong> aux yeux des clients. Il doit être spécifique, difficile à imiter et valorisé par le marché cible.</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Stratégie</th>
+              <th>Principe</th>
+              <th>Avantages</th>
+              <th>Risques</th>
+              <th>Exemples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Domination par les coûts</strong></td>
+              <td>Produire moins cher → prix bas ou marges supérieures</td>
+              <td>Parts de marché, résistance aux guerres de prix</td>
+              <td>Guerre des prix, imitation par les concurrents</td>
+              <td>Lidl, Ryanair, Amazon, Décathlon</td>
+            </tr>
+            <tr>
+              <td><strong>Différenciation vers le haut</strong> (sophistication)</td>
+              <td>Valeur perçue supérieure → prix premium justifié</td>
+              <td>Fidélité, marges élevées, image forte</td>
+              <td>Segment premium limité, imitation possible</td>
+              <td>Apple, Hermès, Tesla haut de gamme</td>
+            </tr>
+            <tr>
+              <td><strong>Différenciation vers le bas</strong> (épuration)</td>
+              <td>Offre simplifiée, fonctionnelle → prix bas sans coûts réduits à l'extrême</td>
+              <td>Nouveau segment prix, simplicité valorisée</td>
+              <td>Cannibalisation de la gamme premium</td>
+              <td>Dacia, easyJet, Bic</td>
+            </tr>
+            <tr>
+              <td><strong>Focalisation (niche)</strong></td>
+              <td>Concentration sur un segment étroit + l'une des deux stratégies précédentes</td>
+              <td>Spécialisation poussée, fidélité forte</td>
+              <td>Segment trop petit, dépendance</td>
+              <td>Porsche (niche premium), Naturalia (niche bio)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="notice">
+        <div class="notice-label">⚠️ PIÈGE BAC — L'enlisement dans la voie médiane</div>
+        <p>Porter met en garde contre la tentative d'adopter plusieurs stratégies simultanément sans s'engager clairement dans l'une d'elles → "stuck in the middle" : ni les plus compétitifs sur les coûts, ni les plus différenciés → résultats médiocres.</p>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 10</span>
+          <span class="exercise-name">Identifier la stratégie concurrentielle</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-medium">Intermédiaire</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p>Pour chaque entreprise, identifiez la stratégie concurrentielle de Porter et justifiez :</p>
+          <p><strong>A)</strong> Ryanair : vols sans repas, pas de siège attitré, aéroports secondaires, prix à partir de 9,99€.</p>
+          <p><strong>B)</strong> Hermès : sacs Birkin à 10 000€, artisans qualifiés, liste d'attente de plusieurs années, jamais de soldes.</p>
+          <p><strong>C)</strong> Nature &amp; Découvertes : boutiques spécialisées dans l'éveil et la nature, produits sélectionnés, personnel expert, clientèle passionnée de nature.</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <div class="correction-step">
+            <div class="step-num">A</div>
+            <div class="step-text"><strong>Ryanair → Domination par les coûts :</strong> infrastructure minimale (aéroports secondaires moins chers), service épuré (payant pour tout), volume maximal → coûts les plus bas du secteur → prix imbattables. Stratégie de différenciation vers le bas combinée à la domination par les coûts.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">B</div>
+            <div class="step-text"><strong>Hermès → Différenciation vers le haut (sophistication) :</strong> valeur perçue exceptionnelle (artisanat, rareté, héritage), prix premium largement supérieur aux coûts, fidélité absolue des clients, impossible à imiter facilement → avantage concurrentiel durable.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">C</div>
+            <div class="step-text"><strong>Nature &amp; Découvertes → Focalisation (différenciation sur niche) :</strong> segment étroit (passionnés de nature) + différenciation (expertise, sélection de produits, expérience en magasin). Ne cherche pas à être le moins cher ni à conquérir le grand public.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== THEME 7 ========== -->
+  <div class="theme-separator">🏗️ Thème 7 : Les structures organisationnelles</div>
+
+  <!-- CHAPITRE 11 -->
+  <div class="chapter" id="ch11">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 11</div>
+      <div>
+        <h2>Les structures d'organisation</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définitions et types de structures</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Structure organisationnelle</div>
+        <p>Manière dont sont <strong>réparties les tâches, les responsabilités et les liens de communication</strong> entre les membres d'une organisation. Elle se représente par un <strong>organigramme</strong>.</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Structure</th>
+              <th>Principe</th>
+              <th>Avantages</th>
+              <th>Inconvénients</th>
+              <th>Exemples</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Simple</strong></td>
+              <td>Hiérarchie directe, peu de niveaux</td>
+              <td>Réactivité, communication directe</td>
+              <td>Limité en taille, tout dépend du dirigeant</td>
+              <td>Start-up, TPE, artisan</td>
+            </tr>
+            <tr>
+              <td><strong>Fonctionnelle</strong></td>
+              <td>Spécialisation par grande fonction (mktg, RH, prod.)</td>
+              <td>Expertise forte, efficacité par domaine</td>
+              <td>Silos, coordination difficile entre services</td>
+              <td>PME industrielle, cabinets</td>
+            </tr>
+            <tr>
+              <td><strong>Divisionnelle</strong></td>
+              <td>Divisions par produit, zone géo ou marché</td>
+              <td>Autonomie de chaque division, réactivité locale</td>
+              <td>Duplication des fonctions, coûts élevés</td>
+              <td>McDonald's, Renault, L'Oréal</td>
+            </tr>
+            <tr>
+              <td><strong>Matricielle</strong></td>
+              <td>Double hiérarchie : fonctionnel + projet</td>
+              <td>Flexibilité, transversalité</td>
+              <td>Conflits de hiérarchie, ambiguïté des rôles</td>
+              <td>Airbus, grands cabinets de conseil</td>
+            </tr>
+            <tr>
+              <td><strong>En réseau</strong></td>
+              <td>Noyau central + partenaires/sous-traitants</td>
+              <td>Flexibilité maximale, faibles coûts fixes</td>
+              <td>Dépendance aux partenaires, perte de contrôle</td>
+              <td>Nike, Uber, entreprises digitales</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 11</span>
+          <span class="exercise-name">Choisir la structure adaptée</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-medium">Intermédiaire</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p>Pour chaque cas, justifiez la structure la plus adaptée :</p>
+          <p><strong>A)</strong> Une entreprise de cosmétiques qui vend en Europe, en Asie et aux Amériques, avec des besoins très différents selon les marchés.</p>
+          <p><strong>B)</strong> Une agence digitale de 8 personnes qui travaille sur plusieurs projets clients simultanément.</p>
+          <p><strong>C)</strong> Un groupe aéronautique qui doit à la fois maintenir une expertise technique pointue par métier ET coordonner des projets d'avions multi-compétences.</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <div class="correction-step">
+            <div class="step-num">A</div>
+            <div class="step-text"><strong>Structure divisionnelle par zone géographique :</strong> chaque division (Europe, Asie, Amériques) dispose d'une autonomie pour adapter les produits aux spécificités locales (réglementations, goûts, cultures). Efficacité locale > coordination centrale.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">B</div>
+            <div class="step-text"><strong>Structure simple ou en réseau :</strong> 8 personnes → structure légère. Si les projets nécessitent des compétences externes ponctuelles, la structure en réseau avec freelances spécialisés est optimale. Flexibilité maximale, faibles coûts fixes.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">C</div>
+            <div class="step-text"><strong>Structure matricielle :</strong> double hiérarchie nécessaire — experts par métier (ingénieurs électriciens, mécaniciens...) rattachés à des chefs de projet (programme A350, A320...). Airbus utilise exactement cette structure, malgré les tensions de commandement qu'elle génère.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 12 -->
+  <div class="chapter" id="ch12">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 12</div>
+      <div>
+        <h2>Management et numérique</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définitions essentielles</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Transformation numérique</div>
+        <p>Processus d'<strong>intégration des technologies numériques</strong> dans toutes les activités d'une organisation, modifiant les processus, la culture et la proposition de valeur. Elle affecte le management, la relation client, la production et la RH.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Méthodes agiles (Scrum, Design Thinking)</div>
+        <p>Approches de gestion de projet fondées sur l'<strong>itération rapide</strong>, la collaboration pluridisciplinaire et l'adaptation continue. Opposées aux méthodes traditionnelles "en cascade". Popularisées dans les start-up et adoptées par les grandes entreprises.</p>
+      </div>
+
+      <div class="key-points">
+        <h4>POINTS CLÉS — MANAGEMENT À DISTANCE</h4>
+        <ul>
+          <li><strong>Télétravail :</strong> travail hors des locaux de l'entreprise, cadre légal défini par accord collectif ou charte.</li>
+          <li><strong>Management à distance :</strong> défis de confiance, de communication et d'évaluation de la performance sans présence physique.</li>
+          <li><strong>Outils :</strong> visioconférence (Teams, Zoom), gestion de projet (Trello, Jira), messagerie (Slack).</li>
+          <li><strong>Entreprise libérée :</strong> modèle où les salariés sont autonomes, sans manager intermédiaire (ex: Favi, Semco).</li>
+          <li><strong>IA et automatisation :</strong> redistribution des tâches, nouveaux rôles pour le manager (accompagnement, sens, créativité).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== THEME 8 ========== -->
+  <div class="theme-separator">🔄 Thème 8 : Animation et changement</div>
+
+  <!-- CHAPITRE 13 -->
+  <div class="chapter" id="ch13">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 13</div>
+      <div>
+        <h2>L'animation des équipes</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définitions essentielles</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Leadership</div>
+        <p>Capacité d'un individu à <strong>influencer, fédérer et inspirer</strong> d'autres personnes pour les conduire vers un objectif commun, au-delà de la seule autorité hiérarchique formelle.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">GOLEMAN</div>
+        <div class="def-term">Intelligence émotionnelle</div>
+        <p>Capacité à <strong>reconnaître, comprendre et gérer ses propres émotions</strong> et celles des autres. Comprend : la conscience de soi, la maîtrise de soi, l'empathie, les compétences sociales. Facteur clé du leadership efficace selon Goleman.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Communication managériale</div>
+        <p><strong>Descendante :</strong> du manager vers les équipes (objectifs, directives). <strong>Ascendante :</strong> des équipes vers le management (remontée d'information, feed-back). <strong>Transversale :</strong> entre services et collègues de même niveau. Un manager efficace anime les 3 flux.</p>
+      </div>
+
+      <div class="key-points">
+        <h4>POINTS CLÉS — ANIMATION D'ÉQUIPE</h4>
+        <ul>
+          <li><strong>Cohésion d'équipe :</strong> sentiment d'appartenance, objectifs partagés, confiance mutuelle.</li>
+          <li><strong>Gestion des conflits :</strong> identifier les sources (objectifs, méthodes, valeurs), médiation, arbitrage.</li>
+          <li><strong>Délégation efficace :</strong> confier une mission claire + les moyens nécessaires + évaluation des résultats.</li>
+          <li><strong>Feed-back :</strong> retour régulier sur les performances, formulé de façon constructive (positif + axe d'amélioration).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPITRE 14 -->
+  <div class="chapter" id="ch14">
+    <div class="chapter-header">
+      <div class="chapter-num">CHAPITRE 14</div>
+      <div>
+        <h2>La conduite du changement</h2>
+        <label class="ch-done-label"><input type="checkbox" class="ch-done"> Chapitre vu ✓</label>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3 style="color:#4ade80;">Définitions essentielles</h3>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Changement organisationnel</div>
+        <p>Toute <strong>modification planifiée ou non</strong> affectant les structures, les processus, les pratiques ou la culture d'une organisation. Peut être incrémental (progressif) ou radical (rupture).</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">LEWIN — Modèle en 3 phases</div>
+        <div class="def-term">Dégel / Mouvement / Regel</div>
+        <p><strong>Dégel :</strong> prendre conscience de la nécessité de changer, remettre en question l'état actuel, créer l'urgence. <strong>Mouvement :</strong> mettre en œuvre le changement, expérimenter, former. <strong>Regel :</strong> stabiliser les nouvelles pratiques, les ancrer dans la culture, consolider.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Résistance au changement</div>
+        <p>Comportements visant à <strong>ralentir ou empêcher un changement</strong>. Causes individuelles : peur de perdre ses acquis, incertitude, manque de confiance. Causes collectives : culture d'entreprise, intérêts catégoriels, syndicats. La résistance est naturelle et doit être gérée, pas ignorée.</p>
+      </div>
+
+      <div class="def-box mgmt">
+        <div class="def-label">DÉFINITION</div>
+        <div class="def-term">Innovation (OCDE)</div>
+        <p>Mise en œuvre d'un produit, procédé, méthode de commercialisation ou pratique organisationnelle nouveaux ou sensiblement améliorés. 4 types : <strong>Innovation de produit</strong> (nouveau bien/service), <strong>de procédé</strong> (nouveau processus), <strong>marketing</strong> (nouveau positionnement), <strong>organisationnelle</strong> (nouvelle façon de s'organiser).</p>
+      </div>
+
+      <div class="schema">
+        <div class="schema-box" style="border-color: rgba(22,163,74,0.4);">🧊 Dégel<br><small style="color:var(--text2)">Créer l'urgence<br>Remettre en question</small></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box" style="border-color: rgba(245,158,11,0.4);">🔄 Mouvement<br><small style="color:var(--text2)">Mettre en œuvre<br>Former, expérimenter</small></div>
+        <div class="schema-arrow">→</div>
+        <div class="schema-box" style="border-color: rgba(37,99,235,0.4);">🧲 Regel<br><small style="color:var(--text2)">Ancrer, stabiliser<br>Consolider la culture</small></div>
+      </div>
+
+      <div class="key-points">
+        <h4>FACTEURS FACILITANT LE CHANGEMENT</h4>
+        <ul>
+          <li><strong>Communication :</strong> expliquer clairement le pourquoi du changement, réduire les rumeurs.</li>
+          <li><strong>Formation :</strong> donner les compétences nécessaires pour les nouvelles pratiques.</li>
+          <li><strong>Participation :</strong> impliquer les salariés dans la conception du changement (sentiment d'appropriation).</li>
+          <li><strong>Accompagnement :</strong> soutien psychologique, groupes de travail, référents du changement.</li>
+          <li><strong>Résultats rapides (quick wins) :</strong> montrer des succès précoces pour convaincre les sceptiques.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-header">
+        <div class="exercise-title">
+          <span class="exercise-num">EX 14 — TYPE BAC</span>
+          <span class="exercise-name">Comment accompagner le changement ?</span>
+        </div>
+        <div class="exercise-meta"><span class="difficulty diff-hard">BAC</span></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-question">
+          <p><strong>Contexte :</strong> <strong>BanqueGen</strong> (800 salariés) décide de fermer 30% de ses agences physiques et de basculer vers un modèle 100% digital d'ici 2027. Les conseillers clientèle (200 personnes) seront reconvertis en "conseillers digitaux". Les syndicats s'opposent violemment. 40% des salariés ont plus de 50 ans, peu à l'aise avec les outils numériques. Les managers intermédiaires se sentent dépassés.</p>
+          <p><strong>Question BAC :</strong> Comment BanqueGen devrait-elle accompagner ce changement pour minimiser les résistances et réussir la transformation ?</p>
+        </div>
+        <button class="correction-toggle">📖 Voir la correction</button>
+        <div class="correction-content">
+          <p><strong>Introduction :</strong> Le changement chez BanqueGen est radical et générateur de fortes résistances (âge des salariés, opposition syndicale, incertitudes sur l'emploi). Le modèle de Lewin doit guider la démarche.</p>
+          <div class="correction-step">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Phase Dégel — Créer l'adhésion :</strong> Communication transparente sur les raisons économiques du changement (disruption digitale, survie de l'entreprise). Impliquer les syndicats en amont par des négociations sur les garanties d'emploi (pas de licenciements = reconversions). Expliquer le bénéfice pour les salariés (nouvelles compétences valorisables).</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>Phase Mouvement — Mettre en œuvre avec les salariés :</strong> Plan de formation massif pour les 200 conseillers (digital, relation client à distance). Pilotes volontaires pour tester les nouvelles pratiques avant généralisation. Formation spécifique pour les managers intermédiaires (management à distance, outils collaboratifs). Créer des "ambassadeurs du changement" parmi les salariés moteurs.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>Phase Regel — Ancrer le changement :</strong> Formaliser les nouvelles pratiques dans les fiches de poste, les processus et la culture d'entreprise. Valoriser et récompenser les premiers succès (quick wins). Assurer un suivi post-transformation avec des indicateurs sociaux (absentéisme, satisfaction). Maintenir un dialogue social permanent.</div>
+          </div>
+          <div class="correction-step">
+            <div class="step-num">4</div>
+            <div class="step-text"><strong>Conclusion :</strong> La réussite du changement dépend de la capacité de BanqueGen à transformer ses résistants en acteurs du changement, en combinant communication, formation et participation — et non en imposant la transformation de manière autoritaire.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end content-wrapper -->
+
+<footer>
+  <p>🎓 BacSTMG 2026 — Management des organisations · Programme officiel Éducation Nationale · <a href="index.html">Retour à l'accueil</a></p>
+  <p style="margin-top:0.5rem;">Bon courage ! Tu maîtrises le management 💪</p>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+  // Override progress for this page to use mgmt color
+  document.addEventListener('DOMContentLoaded', () => {
+    const fill = document.querySelector('.overall-progress-fill');
+    const label = document.querySelector('.overall-progress-label');
+    const checks = document.querySelectorAll('.ch-done');
+    const pageKey = 'management.html';
+
+    checks.forEach((cb, i) => {
+      const key = `${pageKey}_ch${i}`;
+      cb.checked = localStorage.getItem(key) === 'done';
+      cb.addEventListener('change', () => {
+        localStorage.setItem(key, cb.checked ? 'done' : '');
+        updateProg();
+      });
+    });
+
+    function updateProg() {
+      const total = checks.length;
+      const done = document.querySelectorAll('.ch-done:checked').length;
+      const pct = total ? Math.round((done / total) * 100) : 0;
+      if (fill) fill.style.width = pct + '%';
+      if (label) label.textContent = `${done}/${total} chapitres vus (${pct}%)`;
+    }
+
+    updateProg();
+  });
+</script>
+</body>
+</html>
