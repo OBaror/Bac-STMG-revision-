@@ -132,6 +132,8 @@
     <button class="tab-btn" onclick="showTab('psy')">🧠 Prix psychologique</button>
     <button class="tab-btn" onclick="showTab('flash')">🃏 Flashcards</button>
     <button class="tab-btn" onclick="showTab('quiz')">🏆 Quiz</button>
+    <button class="tab-btn" onclick="showTab('timer')">⏱ Chrono BAC</button>
+    <button class="tab-btn" onclick="showTab('fiches')">📋 Fiches mémo</button>
   </div>
 
   <!-- ══════════ SEUIL DE RENTABILITÉ ══════════ -->
@@ -507,6 +509,274 @@
     </div>
   </div>
 
+  <!-- ══════════ CHRONO BAC ══════════ -->
+  <div class="tool-panel" id="panel-timer">
+    <div class="tool-title">⏱ Chronomètre — Conditions d'examen</div>
+    <p class="tool-desc">Simule les conditions réelles du BAC. Choisis la durée et travaille sous pression. Une alarme sonne à la fin.</p>
+
+    <div class="timer-presets">
+      <button class="timer-preset-btn" onclick="setTimer(240)">4h — Éco-Droit / Mgmt-SGN</button>
+      <button class="timer-preset-btn" onclick="setTimer(180)">3h — Maths</button>
+      <button class="timer-preset-btn" onclick="setTimer(120)">2h — Merca / G&amp;F spé</button>
+      <button class="timer-preset-btn" onclick="setTimer(90)">1h30 — Révision rapide</button>
+      <button class="timer-preset-btn" onclick="setTimer(60)">1h — Sprint</button>
+      <button class="timer-preset-btn" onclick="setTimer(30)">30 min — Mini-session</button>
+    </div>
+
+    <div style="display:flex;gap:.5rem;align-items:center;justify-content:center;margin-bottom:.75rem;flex-wrap:wrap;">
+      <span style="font-size:.85rem;color:var(--text2);">Durée personnalisée :</span>
+      <input type="number" id="timer-custom-h" class="calc-input" style="width:70px;text-align:center;" placeholder="h" min="0" max="9" value="2">
+      <span style="color:var(--text2);">h</span>
+      <input type="number" id="timer-custom-m" class="calc-input" style="width:70px;text-align:center;" placeholder="min" min="0" max="59" value="0">
+      <span style="color:var(--text2);">min</span>
+      <button class="timer-preset-btn" onclick="setTimerCustom()">OK</button>
+    </div>
+
+    <div id="timer-display" class="timer-display">2:00:00</div>
+    <div id="timer-subtitle" class="timer-subtitle">Prêt(e) — Choisis une durée et démarre</div>
+
+    <div class="timer-progress-track">
+      <div class="timer-progress-fill" id="timer-progress-fill"></div>
+    </div>
+
+    <div class="timer-controls">
+      <button class="timer-ctrl-btn start" id="timer-start-btn" onclick="timerStart()">▶ Démarrer</button>
+      <button class="timer-ctrl-btn pause" id="timer-pause-btn" onclick="timerPause()" style="display:none;">⏸ Pause</button>
+      <button class="timer-ctrl-btn reset" onclick="timerReset()">↺ Reset</button>
+    </div>
+
+    <div class="info-box" style="margin-top:1rem;">
+      <strong>Durées officielles BAC STMG 2026 :</strong><br>
+      Économie-Droit : <strong>4h</strong> (coeff 16) &nbsp;·&nbsp;
+      Management-SGN : <strong>4h</strong> (coeff 16) &nbsp;·&nbsp;
+      Maths : <strong>3h</strong> (coeff 5) &nbsp;·&nbsp;
+      Mercatique spé : <strong>2h</strong> (coeff 8) &nbsp;·&nbsp;
+      Gestion&amp;Finance spé : <strong>2h</strong> (coeff 8)
+    </div>
+  </div>
+
+  <!-- ══════════ FICHES MÉMO ══════════ -->
+  <div class="tool-panel" id="panel-fiches">
+    <div class="tool-title">📋 Fiches mémo — Formules &amp; définitions clés</div>
+    <p class="tool-desc">Les formules et règles incontournables à avoir par cœur pour le jour J.</p>
+
+    <div class="fiche-tabs">
+      <button class="fiche-tab-btn active" onclick="showFiche('gf')">💰 Gestion &amp; Finance</button>
+      <button class="fiche-tab-btn" onclick="showFiche('merca')">📣 Mercatique</button>
+      <button class="fiche-tab-btn" onclick="showFiche('droit')">⚖️ Droit</button>
+      <button class="fiche-tab-btn" onclick="showFiche('mgmt')">🏢 Management</button>
+      <button class="fiche-tab-btn" onclick="showFiche('eco')">📊 Économie</button>
+    </div>
+
+    <!-- G&F -->
+    <div class="fiche-panel active" id="fiche-gf">
+      <div class="fiche-grid">
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--gf);">Seuil de rentabilité</div>
+          <div class="fiche-formula">SR = CF / TMCV</div>
+          <div class="fiche-formula">TMCV = (CA − CV) / CA</div>
+          <div class="fiche-formula">Point mort = SR / CA × 365</div>
+          <div class="fiche-formula">Indice sécurité = (CA−SR)/CA×100</div>
+          <div class="fiche-note">TMCV = Taux de Marge sur Coût Variable</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--gf);">SIG — Cascade</div>
+          <div class="fiche-formula">MC = Ventes − CAMV</div>
+          <div class="fiche-formula">VA = MC + Production − CI</div>
+          <div class="fiche-formula">EBE = VA + Subv − Impôts − Salaires</div>
+          <div class="fiche-formula">RE = EBE − Dotations amort.</div>
+          <div class="fiche-formula">RCAI = RE + R.financier</div>
+          <div class="fiche-formula">Résultat net = RCAI + R.excep − IS</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--gf);">TVA</div>
+          <div class="fiche-formula">TTC = HT × (1 + taux)</div>
+          <div class="fiche-formula">HT = TTC / (1 + taux)</div>
+          <div class="fiche-formula">TVA = TTC − HT</div>
+          <div class="fiche-formula">À décaisser = TVA collectée − TVA déductible</div>
+          <div class="fiche-note">TVA collectée = sur les ventes / TVA déductible = sur les achats</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--gf);">Trésorerie &amp; BFR</div>
+          <div class="fiche-formula">FR = Cap. permanents − Actif immo net</div>
+          <div class="fiche-formula">BFR = (Stocks + Créances) − Dettes expl.</div>
+          <div class="fiche-formula">TN = FR − BFR</div>
+          <div class="fiche-note">TN &lt; 0 → tension de trésorerie (FR insuffisant)</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--gf);">Amortissement emprunt</div>
+          <div class="fiche-formula">Annuité = K × i / (1−(1+i)⁻ⁿ)</div>
+          <div class="fiche-formula">Intérêts année k = CRD × i</div>
+          <div class="fiche-formula">Amort. capital = Annuité − Intérêts</div>
+          <div class="fiche-note">CRD = Capital Restant Dû</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--gf);">Ratios de gestion</div>
+          <div class="fiche-formula">Délai clients = Créances TTC / CA TTC × 360</div>
+          <div class="fiche-formula">Délai fournisseurs = Dettes TTC / Achats TTC × 360</div>
+          <div class="fiche-formula">Renta. financière = Résultat net / Cap. propres × 100</div>
+          <div class="fiche-formula">Endettement = Dettes fin. / Cap. propres × 100</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mercatique -->
+    <div class="fiche-panel" id="fiche-merca">
+      <div class="fiche-grid">
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--merca);">Marges</div>
+          <div class="fiche-formula">Marge brute = PV HT − Coût d'achat</div>
+          <div class="fiche-formula">Taux de marge = Marge / Coût × 100</div>
+          <div class="fiche-formula">Taux de marque = Marge / PV HT × 100</div>
+          <div class="fiche-note">⚠️ Marge rapportée au COÛT → taux de marge<br>Marge rapportée au PV → taux de marque</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--merca);">Parts de marché</div>
+          <div class="fiche-formula">PDM valeur = CA entreprise / CA marché × 100</div>
+          <div class="fiche-formula">PDM volume = Q ent. / Q marché × 100</div>
+          <div class="fiche-formula">Taux pénétration = Acheteurs réels / Potentiels × 100</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--merca);">Prix psychologique</div>
+          <div class="fiche-formula">% acceptabilité = 100 − % trop cher − % trop peu cher</div>
+          <div class="fiche-note">Calculer les % CUMULÉS puis trouver le prix avec l'acceptabilité maximale.</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--merca);">Mix mercatique — 4P</div>
+          <div class="fiche-formula">Produit · Prix · Place · Promotion</div>
+          <div class="fiche-note">Produit : gamme, qualité, design, marque<br>Prix : écrémage, pénétration, psychologique<br>Place : intensive, sélective, exclusive<br>Promotion : pub, promo, RP, digital</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--merca);">Segmentation &amp; ciblage</div>
+          <div class="fiche-formula">Critères : géographiques · démographiques</div>
+          <div class="fiche-formula">         psychographiques · comportementaux</div>
+          <div class="fiche-note">Ciblage : indifférencié / différencié / concentré (niche) / one-to-one</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--merca);">Variations &amp; indices</div>
+          <div class="fiche-formula">Taux var. = (Vf − Vi) / Vi × 100</div>
+          <div class="fiche-formula">Indice = Vf / Vbase × 100</div>
+          <div class="fiche-formula">Var. absolue = Vf − Vi</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Droit -->
+    <div class="fiche-panel" id="fiche-droit">
+      <div class="fiche-grid">
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--droit);">Droit de la consommation</div>
+          <div class="fiche-formula">Art. L221-18 : rétractation e-commerce = 14 j</div>
+          <div class="fiche-formula">Art. L212-1 : clause abusive = non-écrite</div>
+          <div class="fiche-formula">RGPD : amende max 4 % CA mondial ou 20 M€</div>
+          <div class="fiche-note">Garantie légale de conformité : 2 ans (biens neufs)</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--droit);">Droit du travail</div>
+          <div class="fiche-formula">CDI : contrat à durée indéterminée (règle)</div>
+          <div class="fiche-formula">CDD : cas limitatifs (remplacement, surcroît…)</div>
+          <div class="fiche-formula">ILL ≥ 8 mois : 1/4 mois/an (≤10 ans)</div>
+          <div class="fiche-formula">              + 1/3 mois/an (>10 ans)</div>
+          <div class="fiche-note">Préavis licenciement : 1 à 2 mois selon ancienneté</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--droit);">Formes juridiques</div>
+          <div class="fiche-formula">SARL : 1-100 associés, responsabilité limitée</div>
+          <div class="fiche-formula">SAS / SASU : capital libre, très flexible</div>
+          <div class="fiche-formula">SA : ≥ 2 actionnaires (≥7 si cotée)</div>
+          <div class="fiche-note">Filiale (pers. morale propre) ≠ Succursale (pas de pers. morale)</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--droit);">Méthode cas pratique — FARC</div>
+          <div class="fiche-formula">F — Faits (résumé objectif)</div>
+          <div class="fiche-formula">A — Application du droit (règle applicable)</div>
+          <div class="fiche-formula">R — Règle de droit (citation + référence)</div>
+          <div class="fiche-formula">C — Conclusion (solution concrète)</div>
+          <div class="fiche-note">Toujours citer l'article de loi (ex : Art. L221-18 C. conso.)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Management -->
+    <div class="fiche-panel" id="fiche-mgmt">
+      <div class="fiche-grid">
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--mgmt);">Théories de la motivation</div>
+          <div class="fiche-formula">Maslow : physiologique → sécurité → appartenance</div>
+          <div class="fiche-formula">          → estime → réalisation</div>
+          <div class="fiche-formula">Herzberg : hygiène (évite insatisfaction)</div>
+          <div class="fiche-formula">           vs motivation (crée engagement)</div>
+          <div class="fiche-note">Facteurs d'hygiène : salaire, conditions. Motivation : responsabilité, reconnaissance.</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--mgmt);">Styles de management</div>
+          <div class="fiche-formula">Blake &amp; Mouton — Grille managériale</div>
+          <div class="fiche-formula">1.1 = Laisser-faire  · 9.1 = Autoritaire</div>
+          <div class="fiche-formula">1.9 = Social        · 5.5 = Compromis</div>
+          <div class="fiche-formula">9.9 = Intégrateur (idéal)</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--mgmt);">Prise de décision — Simon</div>
+          <div class="fiche-formula">IMC : Intelligence → Modélisation → Choix</div>
+          <div class="fiche-formula">Rationalité limitée = solution satisfaisante</div>
+          <div class="fiche-note">Décision programmée (routine) ≠ non-programmée (unique)</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--mgmt);">Stratégies de Porter</div>
+          <div class="fiche-formula">Domination par les coûts (volume, standardisation)</div>
+          <div class="fiche-formula">Différenciation (qualité, image, innovation)</div>
+          <div class="fiche-formula">Focalisation / niche (segment restreint)</div>
+          <div class="fiche-note">Spécialisation ≠ Diversification (plusieurs DAS)</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--mgmt);">Parties prenantes (Freeman)</div>
+          <div class="fiche-formula">Internes : dirigeants, salariés, actionnaires</div>
+          <div class="fiche-formula">Externes : clients, fournisseurs, État, ONG</div>
+          <div class="fiche-note">RSE = Environnemental + Social + Économique (triple bottom line)</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--mgmt);">Structures organisationnelles</div>
+          <div class="fiche-formula">Simple · Fonctionnelle · Divisionnelle</div>
+          <div class="fiche-formula">Matricielle · Par projets</div>
+          <div class="fiche-note">Centralisation (décisions en haut) ≠ Décentralisation (autonomie locale)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Économie -->
+    <div class="fiche-panel" id="fiche-eco">
+      <div class="fiche-grid">
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--eco);">Calculs essentiels</div>
+          <div class="fiche-formula">Taux de croissance = (Vf−Vi)/Vi × 100</div>
+          <div class="fiche-formula">Taux d'inflation = (IPCn − IPC n-1)/IPC n-1 × 100</div>
+          <div class="fiche-formula">Taux de chômage = chômeurs/pop. active × 100</div>
+          <div class="fiche-formula">Déflateur = PIB nominal/PIB réel × 100</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--eco);">Grands courants</div>
+          <div class="fiche-formula">Ricardo : avantages comparatifs (libre-échange)</div>
+          <div class="fiche-formula">Keynes : relance par la demande (État)</div>
+          <div class="fiche-formula">Friedman : monétarisme (offre de monnaie)</div>
+          <div class="fiche-note">Multiplicateur keynésien : effet démultiplicateur des dépenses publiques</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--eco);">Échanges internationaux</div>
+          <div class="fiche-formula">Balance commerciale = Exports − Imports</div>
+          <div class="fiche-formula">PDM export = Exports pays / Exports mondiaux × 100</div>
+          <div class="fiche-note">IDE (Investissements Directs à l'Étranger) ≠ IDE de portefeuille<br>FMN = Firme Multinationale</div>
+        </div>
+        <div class="fiche-card">
+          <div class="fiche-card-title" style="color:var(--eco);">Rôle de l'État (Musgrave)</div>
+          <div class="fiche-formula">Allocation : biens collectifs (éducation, défense)</div>
+          <div class="fiche-formula">Redistribution : corriger les inégalités</div>
+          <div class="fiche-formula">Stabilisation : politique contra-cyclique</div>
+          <div class="fiche-note">Défaillances de marché : externalités, asymétries d'info, monopoles</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <footer style="background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 0;margin-top:2rem;">
@@ -588,6 +858,129 @@ window.startQuiz = function(subject) {
   document.getElementById('quiz-scored-title').textContent = titles[subject] || 'Quiz';
   _origStart(subject);
 };
+
+// ── Fiches mémo ──────────────────────────────────────────────
+function showFiche(id) {
+  document.querySelectorAll('.fiche-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.fiche-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('fiche-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── Chronomètre BAC ──────────────────────────────────────────
+let timerTotal   = 7200; // secondes (2h par défaut)
+let timerLeft    = 7200;
+let timerRunning = false;
+let timerInterval = null;
+
+function setTimer(minutes) {
+  timerReset();
+  timerTotal = minutes * 60;
+  timerLeft  = timerTotal;
+  document.querySelectorAll('.timer-preset-btn').forEach(b => b.classList.remove('selected'));
+  event.target.classList.add('selected');
+  updateTimerDisplay();
+  document.getElementById('timer-subtitle').textContent = 'Durée : ' + formatDuration(timerTotal) + ' — Prêt(e) à démarrer';
+}
+
+function setTimerCustom() {
+  const h = parseInt(document.getElementById('timer-custom-h').value) || 0;
+  const m = parseInt(document.getElementById('timer-custom-m').value) || 0;
+  const total = (h * 60 + m) * 60;
+  if (total <= 0) return;
+  timerReset();
+  timerTotal = total;
+  timerLeft  = total;
+  document.querySelectorAll('.timer-preset-btn').forEach(b => b.classList.remove('selected'));
+  updateTimerDisplay();
+  document.getElementById('timer-subtitle').textContent = 'Durée : ' + formatDuration(timerTotal) + ' — Prêt(e) à démarrer';
+}
+
+function formatDuration(s) {
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  if (h > 0) return h + 'h' + (m > 0 ? m.toString().padStart(2,'0') : '');
+  return m + ' min';
+}
+
+function formatTime(s) {
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  if (timerTotal >= 3600) return `${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+  return `${m}:${String(sec).padStart(2,'0')}`;
+}
+
+function updateTimerDisplay() {
+  const el  = document.getElementById('timer-display');
+  const bar = document.getElementById('timer-progress-fill');
+  el.textContent = formatTime(timerLeft);
+  const pct = timerTotal > 0 ? (timerLeft / timerTotal) * 100 : 100;
+  if (bar) {
+    bar.style.width = pct + '%';
+    bar.style.background = pct > 25 ? 'var(--mgmt)' : pct > 10 ? 'var(--amber)' : 'var(--droit)';
+  }
+  el.className = 'timer-display' + (pct <= 10 ? ' danger' : pct <= 25 ? ' warning' : '');
+}
+
+function timerStart() {
+  if (timerLeft <= 0) return;
+  timerRunning = true;
+  document.getElementById('timer-start-btn').style.display = 'none';
+  document.getElementById('timer-pause-btn').style.display = '';
+  document.getElementById('timer-subtitle').textContent = 'En cours — Concentre-toi !';
+
+  timerInterval = setInterval(() => {
+    if (!timerRunning) return;
+    timerLeft--;
+    updateTimerDisplay();
+    if (timerLeft <= 0) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      document.getElementById('timer-display').textContent = '0:00:00';
+      document.getElementById('timer-subtitle').textContent = '⏰ Temps écoulé !';
+      document.getElementById('timer-pause-btn').style.display = 'none';
+      document.getElementById('timer-start-btn').style.display = '';
+      // Essai de notification sonore
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        [0, 300, 600].forEach(delay => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.frequency.value = 880;
+          osc.type = 'sine';
+          gain.gain.setValueAtTime(.4, ctx.currentTime + delay/1000);
+          gain.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + delay/1000 + .4);
+          osc.start(ctx.currentTime + delay/1000);
+          osc.stop(ctx.currentTime + delay/1000 + .45);
+        });
+      } catch(e) {}
+    }
+  }, 1000);
+}
+
+function timerPause() {
+  timerRunning = false;
+  clearInterval(timerInterval);
+  document.getElementById('timer-pause-btn').style.display = 'none';
+  document.getElementById('timer-start-btn').style.display = '';
+  document.getElementById('timer-subtitle').textContent = 'En pause — Clique sur Démarrer pour reprendre';
+}
+
+function timerReset() {
+  timerRunning = false;
+  clearInterval(timerInterval);
+  timerLeft = timerTotal;
+  updateTimerDisplay();
+  document.getElementById('timer-pause-btn').style.display = 'none';
+  document.getElementById('timer-start-btn').style.display = '';
+  document.getElementById('timer-subtitle').textContent = 'Prêt(e) — Choisis une durée et démarre';
+  document.getElementById('timer-display').className = 'timer-display';
+}
+
+// Init timer display
+updateTimerDisplay();
 </script>
 </body>
 </html>
