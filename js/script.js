@@ -1,85 +1,152 @@
-// BAC STMG 2026 - Interactive Script
+/* BAC STMG 2026 — Script global */
 
-// ---- Correction Toggles ----
-document.querySelectorAll('.correction-toggle').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const content = btn.nextElementSibling;
-    const isOpen = content.classList.contains('open');
-    content.classList.toggle('open', !isOpen);
-    btn.classList.toggle('open', !isOpen);
-    btn.textContent = isOpen ? '📖 Voir la correction' : '✕ Masquer la correction';
+// ── Bottom nav HTML injecté sur toutes les pages ─────────────
+const BOTTOM_NAV = `
+<nav class="bottom-nav" id="bottomNav">
+  <div class="bottom-nav-items">
+    <a href="index.html"           class="bottom-nav-item" data-page="index.html">
+      <span class="bni-icon">🏠</span>Accueil
+    </a>
+    <a href="economie.html"        class="bottom-nav-item" data-page="economie.html">
+      <span class="bni-icon">📊</span>Éco
+    </a>
+    <a href="droit.html"           class="bottom-nav-item" data-page="droit.html">
+      <span class="bni-icon">⚖️</span>Droit
+    </a>
+    <a href="management.html"      class="bottom-nav-item" data-page="management.html">
+      <span class="bni-icon">🏢</span>Mgmt
+    </a>
+    <a href="mercatique.html"      class="bottom-nav-item" data-page="mercatique.html">
+      <span class="bni-icon">📣</span>Merca
+    </a>
+    <a href="gestion-finance.html" class="bottom-nav-item" data-page="gestion-finance.html">
+      <span class="bni-icon">💰</span>G&F
+    </a>
+    <a href="annales.html"         class="bottom-nav-item" data-page="annales.html">
+      <span class="bni-icon">📂</span>Annales
+    </a>
+  </div>
+</nav>`;
+
+// ── Hamburger toggle ─────────────────────────────────────────
+function initHamburger() {
+  const btn   = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (!btn || !links) return;
+
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = links.classList.toggle('open');
+    btn.textContent = open ? '✕' : '☰';
+    btn.setAttribute('aria-expanded', open);
   });
-});
 
-// ---- Quiz ----
-document.querySelectorAll('.quiz-option').forEach(opt => {
-  opt.addEventListener('click', () => {
-    const quiz = opt.closest('.quiz-section');
-    if (quiz.dataset.answered) return;
-    quiz.dataset.answered = 'true';
+  // Fermer en cliquant ailleurs
+  document.addEventListener('click', e => {
+    if (!btn.contains(e.target) && !links.contains(e.target)) {
+      links.classList.remove('open');
+      btn.textContent = '☰';
+    }
+  });
 
-    const correct = opt.dataset.correct === 'true';
-    const feedback = quiz.querySelector('.quiz-feedback');
-    const allOpts = quiz.querySelectorAll('.quiz-option');
-
-    allOpts.forEach(o => {
-      if (o.dataset.correct === 'true') o.classList.add('correct');
+  // Fermer après navigation
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      btn.textContent = '☰';
     });
+  });
+}
 
-    if (!correct) {
-      opt.classList.add('wrong');
-      feedback.className = 'quiz-feedback wrong';
-      feedback.textContent = '❌ ' + (opt.dataset.wrongMsg || 'Mauvaise réponse. Regarde la bonne réponse surlignée en vert.');
-    } else {
-      feedback.className = 'quiz-feedback correct';
-      feedback.textContent = '✅ ' + (opt.dataset.rightMsg || 'Bonne réponse !');
+// ── Active nav link ──────────────────────────────────────────
+function initActiveNav() {
+  const page = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.navbar-links a, .bottom-nav-item').forEach(a => {
+    const href = a.getAttribute('href') || a.dataset.page || '';
+    if (href === page || (page === '' && href === 'index.html')) {
+      a.classList.add('active');
     }
   });
-});
+}
 
-// ---- Progress tracking with localStorage ----
-function initProgress() {
-  const chapters = document.querySelectorAll('.chapter');
-  if (!chapters.length) return;
+// ── Correction toggles ───────────────────────────────────────
+function initCorrectionToggles() {
+  document.querySelectorAll('.correction-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const content = btn.nextElementSibling;
+      if (!content) return;
+      const open = content.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.innerHTML = open
+        ? '<span>✕</span> Masquer la correction'
+        : '<span>📖</span> Voir la correction';
+    });
+  });
+}
 
-  const pageKey = window.location.pathname.split('/').pop() || 'index';
-
-  chapters.forEach((ch, i) => {
-    const key = `${pageKey}_ch${i}`;
-    const done = localStorage.getItem(key) === 'done';
-    const checkbox = ch.querySelector('.ch-done');
-    if (checkbox) {
-      checkbox.checked = done;
-      checkbox.addEventListener('change', () => {
-        localStorage.setItem(key, checkbox.checked ? 'done' : '');
-        updateOverallProgress();
+// ── Quiz statiques (data-correct) ───────────────────────────
+function initStaticQuiz() {
+  document.querySelectorAll('.quiz-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const quiz = opt.closest('.quiz-section');
+      if (!quiz || quiz.dataset.answered) return;
+      quiz.dataset.answered = 'true';
+      const correct = opt.dataset.correct === 'true';
+      const feedback = quiz.querySelector('.quiz-feedback');
+      quiz.querySelectorAll('.quiz-option').forEach(o => {
+        if (o.dataset.correct === 'true') o.classList.add('correct');
       });
-    }
-  });
-
-  updateOverallProgress();
-}
-
-function updateOverallProgress() {
-  const bar = document.querySelector('.overall-progress-fill');
-  if (!bar) return;
-  const total = document.querySelectorAll('.ch-done').length;
-  const done = document.querySelectorAll('.ch-done:checked').length;
-  const pct = total ? Math.round((done / total) * 100) : 0;
-  bar.style.width = pct + '%';
-  const label = document.querySelector('.overall-progress-label');
-  if (label) label.textContent = `${done}/${total} chapitres vus (${pct}%)`;
-}
-
-// ---- Smooth nav highlight ----
-function highlightNav() {
-  const path = window.location.pathname;
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') && path.includes(a.getAttribute('href')));
+      if (!correct) {
+        opt.classList.add('wrong');
+        if (feedback) {
+          feedback.className = 'quiz-feedback wrong';
+          feedback.textContent = '❌ ' + (opt.dataset.wrongMsg || 'Mauvaise réponse — regarde la bonne réponse en vert.');
+        }
+      } else {
+        if (feedback) {
+          feedback.className = 'quiz-feedback correct';
+          feedback.textContent = '✅ ' + (opt.dataset.rightMsg || 'Bonne réponse !');
+        }
+      }
+    });
   });
 }
 
+// ── Progress tracking (localStorage) ────────────────────────
+function initProgress() {
+  const pageKey = location.pathname.split('/').pop() || 'index';
+  document.querySelectorAll('.ch-done').forEach((cb, i) => {
+    const key = `${pageKey}_ch${i}`;
+    cb.checked = localStorage.getItem(key) === '1';
+    cb.addEventListener('change', () => {
+      localStorage.setItem(key, cb.checked ? '1' : '');
+      updateProgress(pageKey);
+    });
+  });
+  updateProgress(pageKey);
+}
+
+function updateProgress(pageKey) {
+  const all  = document.querySelectorAll('.ch-done');
+  const done = document.querySelectorAll('.ch-done:checked');
+  const bar  = document.querySelector('.overall-progress-fill');
+  const lbl  = document.querySelector('.overall-progress-label');
+  if (!all.length) return;
+  const pct = Math.round((done.length / all.length) * 100);
+  if (bar) bar.style.width = pct + '%';
+  if (lbl) lbl.textContent = `${done.length} / ${all.length} chapitres vus (${pct} %)`;
+}
+
+// ── Init global ──────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  // Injecter bottom nav si pas déjà présent
+  if (!document.getElementById('bottomNav')) {
+    document.body.insertAdjacentHTML('beforeend', BOTTOM_NAV);
+  }
+
+  initHamburger();
+  initActiveNav();
+  initCorrectionToggles();
+  initStaticQuiz();
   initProgress();
-  highlightNav();
 });
