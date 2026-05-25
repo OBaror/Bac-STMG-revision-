@@ -25,6 +25,9 @@ const BOTTOM_NAV = `
     <a href="annales.html"         class="bottom-nav-item" data-page="annales.html">
       <span class="bni-icon">📂</span>Annales
     </a>
+    <a href="outils.html"          class="bottom-nav-item" data-page="outils.html">
+      <span class="bni-icon">🧮</span>Outils
+    </a>
   </div>
 </nav>`;
 

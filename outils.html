@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outils Interactifs — BAC STMG 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .tools-tabs {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      padding: .5rem 1.1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text2);
+      font-weight: 600;
+      font-size: .88rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: inherit;
+    }
+    .tab-btn:hover { background: var(--bg3); color: var(--text); }
+    .tab-btn.active { background: var(--amber); color: #000; border-color: var(--amber); }
+
+    .tool-panel { display: none; }
+    .tool-panel.active { display: block; }
+
+    .tool-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: .35rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .tool-desc { color: var(--text2); font-size: .92rem; margin-bottom: 1.5rem; }
+
+    /* Radio toggle */
+    .toggle-group {
+      display: flex;
+      background: var(--bg3);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 3px;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .toggle-group label {
+      flex: 1;
+      text-align: center;
+      padding: .45rem .75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--text2);
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .toggle-group input[type=radio] { display: none; }
+    .toggle-group input[type=radio]:checked + label {
+      background: var(--bg);
+      color: var(--text);
+      box-shadow: 0 1px 4px rgba(0,0,0,.3);
+    }
+
+    /* Info box */
+    .info-box {
+      background: rgba(37,99,235,.07);
+      border: 1px solid rgba(37,99,235,.25);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      font-size: .88rem;
+      color: var(--text2);
+    }
+    .info-box strong { color: #60a5fa; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">🎓 BAC STMG 2026</a>
+      <button class="nav-hamburger" id="navToggle" aria-label="Menu" aria-expanded="false">☰</button>
+      <div class="navbar-links" id="navLinks">
+        <a href="economie.html"        class="nav-eco">📊 Éco</a>
+        <a href="droit.html"           class="nav-droit">⚖️ Droit</a>
+        <a href="management.html"      class="nav-mgmt">🏢 Mgmt</a>
+        <a href="mercatique.html"      class="nav-merca">📣 Merca</a>
+        <a href="gestion-finance.html" class="nav-gf">💰 G&F</a>
+        <a href="maths.html"           class="nav-maths">🔢 Maths</a>
+        <a href="outils.html"          class="nav-merca active">🧮 Outils</a>
+        <a href="annales.html"         class="nav-merca">📂 Annales</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div style="background:var(--bg2);border-bottom:1px solid var(--border);padding:2rem 0 1.5rem;">
+  <div class="container">
+    <div style="font-size:.82rem;color:var(--text2);margin-bottom:.5rem;">
+      <a href="index.html" style="color:var(--text2)">Accueil</a> › Outils interactifs
+    </div>
+    <h1 style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:.4rem;">🧮 Outils interactifs</h1>
+    <p style="color:var(--text2);">Calculateurs · Flashcards · Quiz — Mercatique & Gestion Finance</p>
+  </div>
+</div>
+
+<div class="container" style="padding-top:2rem;padding-bottom:3rem;">
+
+  <!-- ONGLETS -->
+  <div class="tools-tabs">
+    <button class="tab-btn active" onclick="showTab('sr')">📈 Seuil de rentabilité</button>
+    <button class="tab-btn" onclick="showTab('sig')">📊 SIG</button>
+    <button class="tab-btn" onclick="showTab('tva')">🧾 TVA</button>
+    <button class="tab-btn" onclick="showTab('amort')">🏦 Amortissement</button>
+    <button class="tab-btn" onclick="showTab('marge')">💰 Marges</button>
+    <button class="tab-btn" onclick="showTab('pdm')">📣 Parts de marché</button>
+    <button class="tab-btn" onclick="showTab('psy')">🧠 Prix psychologique</button>
+    <button class="tab-btn" onclick="showTab('flash')">🃏 Flashcards</button>
+    <button class="tab-btn" onclick="showTab('quiz')">🏆 Quiz</button>
+  </div>
+
+  <!-- ══════════ SEUIL DE RENTABILITÉ ══════════ -->
+  <div class="tool-panel active" id="panel-sr">
+    <div class="tool-title">📈 Calculateur Seuil de Rentabilité</div>
+    <p class="tool-desc">Entre les charges fixes, le CA et les charges variables pour obtenir le SR, le point mort, la marge et l'indice de sécurité.</p>
+
+    <div class="info-box">
+      <strong>Formules :</strong> SR = CF / TMCV &nbsp;·&nbsp; TMCV = (CA − CV) / CA &nbsp;·&nbsp; Point mort = SR / CA × 365 &nbsp;·&nbsp; Indice sécurité = (CA − SR) / CA × 100
+    </div>
+
+    <div class="calc-form">
+      <div class="calc-field">
+        <label>Chiffre d'affaires (€) *</label>
+        <input type="number" id="sr-ca" class="calc-input" placeholder="ex : 200 000" min="0">
+      </div>
+      <div class="calc-field">
+        <label>Charges variables totales (€)</label>
+        <input type="number" id="sr-cv" class="calc-input" placeholder="ex : 120 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Charges fixes totales (€) *</label>
+        <input type="number" id="sr-cf" class="calc-input" placeholder="ex : 50 000" min="0">
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcSR()">▶ Calculer</button>
+    <div id="sr-result" class="calc-result"></div>
+  </div>
+
+  <!-- ══════════ SIG ══════════ -->
+  <div class="tool-panel" id="panel-sig">
+    <div class="tool-title">📊 Calculateur Soldes Intermédiaires de Gestion</div>
+    <p class="tool-desc">Calcule la cascade complète : marge commerciale → VA → EBE → résultat d'exploitation → résultat net.</p>
+
+    <div class="info-box">
+      <strong>Cascade :</strong> MC = Ventes − CAMV &nbsp;·&nbsp; VA = MC + Prod − CI &nbsp;·&nbsp; EBE = VA + Subv − Impôts − Salaires &nbsp;·&nbsp; R.expl = EBE − Dotations
+    </div>
+
+    <div class="calc-form">
+      <div class="calc-field">
+        <label>Ventes de marchandises HT (€)</label>
+        <input type="number" id="sig-ventes" class="calc-input" placeholder="ex : 480 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Coût d'achat marchandises vendues (€)</label>
+        <input type="number" id="sig-cmv" class="calc-input" placeholder="ex : 192 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Production vendue (€)</label>
+        <input type="number" id="sig-prod" class="calc-input" placeholder="ex : 120 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Consommations intermédiaires (€)</label>
+        <input type="number" id="sig-ci" class="calc-input" placeholder="ex : 84 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Subventions d'exploitation (€)</label>
+        <input type="number" id="sig-subv" class="calc-input" placeholder="ex : 15 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Impôts et taxes (€)</label>
+        <input type="number" id="sig-impots" class="calc-input" placeholder="ex : 12 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Charges de personnel (€)</label>
+        <input type="number" id="sig-charges" class="calc-input" placeholder="ex : 156 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Dotations aux amortissements (€)</label>
+        <input type="number" id="sig-dotations" class="calc-input" placeholder="ex : 28 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Autres charges d'exploitation (€)</label>
+        <input type="number" id="sig-autres-charges" class="calc-input" placeholder="ex : 5 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Résultat financier (€) <small style="color:var(--text2)">(négatif si charges)</small></label>
+        <input type="number" id="sig-r-financier" class="calc-input" placeholder="ex : -8 400" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Résultat exceptionnel (€)</label>
+        <input type="number" id="sig-r-excep" class="calc-input" placeholder="ex : -4 000" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Impôt sur les sociétés (€)</label>
+        <input type="number" id="sig-is" class="calc-input" placeholder="ex : 12 000" min="0" value="0">
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcSIG()">▶ Calculer les SIG</button>
+    <div id="sig-result" class="calc-result"></div>
+  </div>
+
+  <!-- ══════════ TVA ══════════ -->
+  <div class="tool-panel" id="panel-tva">
+    <div class="tool-title">🧾 Calculateur TVA</div>
+    <p class="tool-desc">Convertis HT ↔ TTC ou calcule la TVA à décaisser.</p>
+
+    <div class="toggle-group">
+      <input type="radio" name="tva-mode" id="tva-ht" value="ht-to-ttc" checked>
+      <label for="tva-ht">HT → TTC</label>
+      <input type="radio" name="tva-mode" id="tva-ttc" value="ttc-to-ht">
+      <label for="tva-ttc">TTC → HT</label>
+    </div>
+
+    <div class="calc-form">
+      <div class="calc-field">
+        <label>Montant (€) *</label>
+        <input type="number" id="tva-montant" class="calc-input" placeholder="ex : 100" min="0">
+      </div>
+      <div class="calc-field">
+        <label>Taux de TVA (%)</label>
+        <select id="tva-taux" class="calc-input">
+          <option value="20" selected>20 % (taux normal)</option>
+          <option value="10">10 % (taux intermédiaire)</option>
+          <option value="5.5">5,5 % (taux réduit)</option>
+          <option value="2.1">2,1 % (taux super réduit)</option>
+        </select>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcTVA()">▶ Calculer</button>
+    <div id="tva-result" class="calc-result"></div>
+
+    <div class="divider" style="margin:1.5rem 0;"></div>
+
+    <div class="tool-title" style="font-size:1rem;">TVA à décaisser</div>
+    <p class="tool-desc" style="margin-bottom:1rem;">TVA collectée sur ventes − TVA déductible sur achats</p>
+    <div class="calc-form">
+      <div class="calc-field">
+        <label>Ventes TTC du mois (€)</label>
+        <input type="number" id="tva-ventes-ttc" class="calc-input" placeholder="ex : 60 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Achats TTC du mois (€)</label>
+        <input type="number" id="tva-achats-ttc" class="calc-input" placeholder="ex : 36 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Taux TVA (%)</label>
+        <select id="tva-taux2" class="calc-input">
+          <option value="20" selected>20 %</option>
+          <option value="10">10 %</option>
+          <option value="5.5">5,5 %</option>
+        </select>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcTVADecaissee()">▶ Calculer TVA à décaisser</button>
+    <div id="tva-decaissee-result" class="calc-result"></div>
+  </div>
+
+  <!-- ══════════ AMORTISSEMENT ══════════ -->
+  <div class="tool-panel" id="panel-amort">
+    <div class="tool-title">🏦 Tableau d'amortissement d'emprunt</div>
+    <p class="tool-desc">Génère le tableau complet des annuités constantes avec capital restant dû.</p>
+
+    <div class="info-box">
+      <strong>Formule annuité :</strong> a = K × [i / (1 − (1+i)<sup>−n</sup>)]
+    </div>
+
+    <div class="calc-form">
+      <div class="calc-field">
+        <label>Capital emprunté K (€) *</label>
+        <input type="number" id="amort-capital" class="calc-input" placeholder="ex : 50 000" min="0">
+      </div>
+      <div class="calc-field">
+        <label>Taux annuel (%) *</label>
+        <input type="number" id="amort-taux" class="calc-input" placeholder="ex : 4" min="0" step="0.1">
+      </div>
+      <div class="calc-field">
+        <label>Durée (années) *</label>
+        <input type="number" id="amort-duree" class="calc-input" placeholder="ex : 5" min="1" max="30">
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcAmort()">▶ Générer le tableau</button>
+    <div id="amort-result" class="calc-result"></div>
+  </div>
+
+  <!-- ══════════ MARGES ══════════ -->
+  <div class="tool-panel" id="panel-marge">
+    <div class="tool-title">💰 Calculateur Taux de Marge & Marque</div>
+    <p class="tool-desc">Calcule taux de marge (/ PV HT) et taux de marque (/ coût) à partir du prix et du coût.</p>
+
+    <div class="info-box">
+      <strong>Taux de marge</strong> = (PV HT − Coût) / PV HT × 100 &nbsp;·&nbsp;
+      <strong>Taux de marque</strong> = (PV HT − Coût) / Coût × 100
+    </div>
+
+    <div class="toggle-group">
+      <input type="radio" name="marge-mode" id="marge-from-cost" value="from-cost" checked>
+      <label for="marge-from-cost">Je connais coût + PV HT</label>
+      <input type="radio" name="marge-mode" id="marge-from-rate" value="from-rate">
+      <label for="marge-from-rate">Je connais coût + taux de marge</label>
+    </div>
+
+    <div class="calc-form" id="marge-fields">
+      <div class="calc-field">
+        <label>Coût d'achat HT (€) *</label>
+        <input type="number" id="marge-v1" class="calc-input" placeholder="ex : 60" min="0">
+      </div>
+      <div class="calc-field" id="marge-field2">
+        <label id="marge-label2">Prix de vente HT (€) *</label>
+        <input type="number" id="marge-v2" class="calc-input" placeholder="ex : 100" min="0">
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcMarge()">▶ Calculer</button>
+    <div id="marge-result" class="calc-result"></div>
+  </div>
+
+  <!-- ══════════ PARTS DE MARCHÉ ══════════ -->
+  <div class="tool-panel" id="panel-pdm">
+    <div class="tool-title">📣 Calculateur Parts de Marché</div>
+    <p class="tool-desc">Calcule les parts de marché en valeur, en volume et le taux de pénétration.</p>
+
+    <div class="info-box">
+      <strong>PDM valeur</strong> = CA entreprise / CA total × 100 &nbsp;·&nbsp;
+      <strong>PDM volume</strong> = Q entreprise / Q totales × 100 &nbsp;·&nbsp;
+      <strong>Taux pénétration</strong> = Acheteurs réels / Acheteurs potentiels × 100
+    </div>
+
+    <div style="font-weight:700;font-size:.9rem;color:var(--text2);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em;">En valeur (CA)</div>
+    <div class="calc-form">
+      <div class="calc-field">
+        <label>CA de l'entreprise (€)</label>
+        <input type="number" id="pdm-ca-ent" class="calc-input" placeholder="ex : 2 100 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>CA total du marché (€)</label>
+        <input type="number" id="pdm-ca-total" class="calc-input" placeholder="ex : 9 130 000" min="0" value="0">
+      </div>
+    </div>
+
+    <div style="font-weight:700;font-size:.9rem;color:var(--text2);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em;">En volume (quantités)</div>
+    <div class="calc-form">
+      <div class="calc-field">
+        <label>Ventes entreprise (unités)</label>
+        <input type="number" id="pdm-q-ent" class="calc-input" placeholder="ex : 45 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Ventes totales marché (unités)</label>
+        <input type="number" id="pdm-q-total" class="calc-input" placeholder="ex : 200 000" min="0" value="0">
+      </div>
+    </div>
+
+    <div style="font-weight:700;font-size:.9rem;color:var(--text2);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em;">Taux de pénétration</div>
+    <div class="calc-form">
+      <div class="calc-field">
+        <label>Acheteurs réels</label>
+        <input type="number" id="pdm-acheteurs" class="calc-input" placeholder="ex : 4 500 000" min="0" value="0">
+      </div>
+      <div class="calc-field">
+        <label>Acheteurs potentiels</label>
+        <input type="number" id="pdm-potentiels" class="calc-input" placeholder="ex : 15 000 000" min="0" value="0">
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcPdm()">▶ Calculer</button>
+    <div id="pdm-result" class="calc-result"></div>
+  </div>
+
+  <!-- ══════════ PRIX PSYCHOLOGIQUE ══════════ -->
+  <div class="tool-panel" id="panel-psy">
+    <div class="tool-title">🧠 Test d'acceptabilité — Prix psychologique</div>
+    <p class="tool-desc">Saisis les réponses de ton questionnaire (nombre de personnes trouvant chaque prix trop peu cher ou trop cher). Le prix psychologique est celui avec la meilleure acceptabilité.</p>
+
+    <div class="info-box">
+      <strong>% acceptabilité</strong> = 100 − % trop cher cumulé − % trop peu cher cumulé<br>
+      Le prix psychologique = prix avec le <strong>taux d'acceptabilité le plus élevé</strong>.
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:.5rem;margin-bottom:.35rem;">
+      <div style="font-size:.78rem;font-weight:700;color:var(--text2);">Prix (€)</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--text2);">Trop peu cher (nb)</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--text2);">Trop cher (nb)</div>
+      <div></div>
+    </div>
+    <div id="psy-entries">
+      <div class="psy-row">
+        <input type="number" class="psy-prix calc-input" placeholder="5" min="0" step="0.5">
+        <input type="number" class="psy-trop-peu calc-input" placeholder="30" min="0">
+        <input type="number" class="psy-trop-cher calc-input" placeholder="2" min="0">
+        <button class="btn-remove" onclick="this.closest('.psy-row').remove()">✕</button>
+      </div>
+      <div class="psy-row">
+        <input type="number" class="psy-prix calc-input" placeholder="8" min="0" step="0.5">
+        <input type="number" class="psy-trop-peu calc-input" placeholder="18" min="0">
+        <input type="number" class="psy-trop-cher calc-input" placeholder="5" min="0">
+        <button class="btn-remove" onclick="this.closest('.psy-row').remove()">✕</button>
+      </div>
+      <div class="psy-row">
+        <input type="number" class="psy-prix calc-input" placeholder="10" min="0" step="0.5">
+        <input type="number" class="psy-trop-peu calc-input" placeholder="8" min="0">
+        <input type="number" class="psy-trop-cher calc-input" placeholder="12" min="0">
+        <button class="btn-remove" onclick="this.closest('.psy-row').remove()">✕</button>
+      </div>
+      <div class="psy-row">
+        <input type="number" class="psy-prix calc-input" placeholder="12" min="0" step="0.5">
+        <input type="number" class="psy-trop-peu calc-input" placeholder="3" min="0">
+        <input type="number" class="psy-trop-cher calc-input" placeholder="22" min="0">
+        <button class="btn-remove" onclick="this.closest('.psy-row').remove()">✕</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:.75rem;margin-top:.75rem;flex-wrap:wrap;">
+      <button class="calc-btn" onclick="addPsyRow()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border);">+ Ajouter un prix</button>
+      <button class="calc-btn" onclick="calcPrixPsy()">▶ Trouver le prix optimal</button>
+    </div>
+    <div id="psy-result" class="calc-result"></div>
+  </div>
+
+  <!-- ══════════ FLASHCARDS ══════════ -->
+  <div class="tool-panel" id="panel-flash">
+    <div class="tool-title">🃏 Flashcards</div>
+    <p class="tool-desc">Clique sur la carte pour révéler la réponse. Marque "Su ✓" ou "À revoir 🔄" pour progresser.</p>
+
+    <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <select id="fc-deck-select" class="calc-input" style="max-width:260px;" onchange="initFlashcards(this.value)">
+        <option value="">— Choisir un deck —</option>
+        <option value="mercatique">📣 Mercatique (20 cartes)</option>
+        <option value="gestion">💰 Gestion & Finance (20 cartes)</option>
+      </select>
+      <button class="calc-btn" onclick="initFlashcards(document.getElementById('fc-deck-select').value)">▶ Démarrer</button>
+    </div>
+
+    <div id="fc-progress-bar-wrap" style="display:none">
+      <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-progress-fill" style="width:0%"></div></div>
+      <div class="fc-progress-label" id="fc-progress-label">0 / 0 maîtrisées</div>
+    </div>
+
+    <div class="fc-counter" id="fc-counter" style="display:none"></div>
+
+    <div class="fc-card-area" id="fc-card-area" style="display:none">
+      <div class="fc-card-wrapper" id="fc-card-wrapper" onclick="flipCard()">
+        <div class="fc-front" id="fc-front"></div>
+        <div class="fc-back"  id="fc-back"></div>
+      </div>
+    </div>
+    <p class="fc-tap-hint" id="fc-tap-hint" style="display:none">👆 Clique sur la carte pour voir la réponse</p>
+
+    <div class="fc-action-btns" id="fc-action-btns">
+      <button class="fc-btn-review" onclick="cardReview()">🔄 À revoir</button>
+      <button class="fc-btn-known"  onclick="cardKnown()">✓ Su !</button>
+    </div>
+  </div>
+
+  <!-- ══════════ QUIZ ══════════ -->
+  <div class="tool-panel" id="panel-quiz">
+    <div class="tool-title">🏆 Quiz scoré</div>
+    <p class="tool-desc">10 questions par matière avec score final et correction détaillée des erreurs.</p>
+
+    <div id="quiz-start-screen">
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <div class="subject-card" style="cursor:pointer;max-width:260px;flex:1" onclick="startQuiz('mercatique')">
+          <div style="font-size:2rem;margin-bottom:.5rem;">📣</div>
+          <div style="font-weight:700;margin-bottom:.35rem;">Quiz Mercatique</div>
+          <div style="color:var(--text2);font-size:.88rem;">10 questions · Segmentation, Marketing Mix, Marges, Digital</div>
+          <div style="margin-top:1rem;">
+            <span class="badge badge-gold" style="background:rgba(245,158,11,.15);color:var(--amber);padding:.25rem .75rem;border-radius:999px;font-size:.78rem;font-weight:700;">▶ Démarrer</span>
+          </div>
+        </div>
+        <div class="subject-card" style="cursor:pointer;max-width:260px;flex:1" onclick="startQuiz('gestion')">
+          <div style="font-size:2rem;margin-bottom:.5rem;">💰</div>
+          <div style="font-weight:700;margin-bottom:.35rem;">Quiz Gestion & Finance</div>
+          <div style="color:var(--text2);font-size:.88rem;">10 questions · SR, SIG, TVA, Amortissement, Trésorerie</div>
+          <div style="margin-top:1rem;">
+            <span class="badge badge-gold" style="background:rgba(13,148,136,.15);color:var(--gf);padding:.25rem .75rem;border-radius:999px;font-size:.78rem;font-weight:700;">▶ Démarrer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-scored" id="quiz-scored-wrapper" style="display:none;">
+      <div class="quiz-scored-header">
+        <h3 id="quiz-scored-title">Quiz</h3>
+        <button onclick="resetQuiz()" style="background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);padding:.3rem .75rem;font-size:.82rem;cursor:pointer;">✕ Quitter</button>
+      </div>
+      <div id="quiz-container"></div>
+    </div>
+  </div>
+
+</div>
+
+<footer style="background:var(--bg2);border-top:1px solid var(--border);padding:1.5rem 0;margin-top:2rem;">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <span style="color:var(--text2);font-size:.85rem;">🎓 BAC STMG 2026 — Outils interactifs</span>
+    <a href="index.html" style="color:var(--text2);font-size:.85rem;">← Retour à l'accueil</a>
+  </div>
+</footer>
+
+<script src="js/interactif.js"></script>
+<script src="js/script.js"></script>
+<script>
+// ── Onglets ──────────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+// ── TVA décaissée ─────────────────────────────────────────────
+function calcTVADecaissee() {
+  const vttc  = parseFloat(document.getElementById('tva-ventes-ttc').value) || 0;
+  const attc  = parseFloat(document.getElementById('tva-achats-ttc').value) || 0;
+  const taux  = parseFloat(document.getElementById('tva-taux2').value) / 100;
+
+  const coef  = 1 + taux;
+  const coll  = vttc - vttc / coef;   // TVA collectée
+  const dedu  = attc - attc / coef;   // TVA déductible
+  const decaissee = coll - dedu;
+
+  const el = document.getElementById('tva-decaissee-result');
+  el.style.display = 'block';
+  el.className = 'calc-result calc-result--' + (decaissee >= 0 ? 'ok' : 'info');
+  el.innerHTML = `
+    <div class="calc-grid">
+      <div class="calc-kpi"><span class="calc-kpi-label">TVA collectée</span><span class="calc-kpi-value">${(coll).toLocaleString('fr-FR',{minimumFractionDigits:2})} €</span></div>
+      <div class="calc-kpi"><span class="calc-kpi-label">TVA déductible</span><span class="calc-kpi-value">${(dedu).toLocaleString('fr-FR',{minimumFractionDigits:2})} €</span></div>
+      <div class="calc-kpi calc-kpi--accent"><span class="calc-kpi-label">TVA à décaisser</span><span class="calc-kpi-value">${(decaissee).toLocaleString('fr-FR',{minimumFractionDigits:2})} €</span></div>
+    </div>
+    <div class="calc-interpretation">
+      TVA collectée = ${vttc.toLocaleString('fr-FR')} × ${taux.toFixed(2)}/${(1+taux).toFixed(2)} = <strong>${coll.toFixed(2)} €</strong><br>
+      TVA déductible = ${attc.toLocaleString('fr-FR')} × ${taux.toFixed(2)}/${(1+taux).toFixed(2)} = <strong>${dedu.toFixed(2)} €</strong>
+    </div>`;
+}
+
+// ── Mode marge ───────────────────────────────────────────────
+document.querySelectorAll('input[name="marge-mode"]').forEach(r => {
+  r.addEventListener('change', () => {
+    const fromRate = r.value === 'from-rate';
+    document.getElementById('marge-label2').textContent = fromRate ? 'Taux de marge (%) *' : 'Prix de vente HT (€) *';
+    document.getElementById('marge-v2').placeholder = fromRate ? 'ex : 40' : 'ex : 100';
+  });
+});
+
+// ── Flashcards show/hide elements ───────────────────────────
+const _origInit = window.initFlashcards;
+window.initFlashcards = function(subject) {
+  if (!subject) return;
+  document.getElementById('fc-progress-bar-wrap').style.display = 'block';
+  document.getElementById('fc-counter').style.display = 'block';
+  document.getElementById('fc-card-area').style.display = 'block';
+  document.getElementById('fc-tap-hint').style.display = 'block';
+  _origInit(subject);
+};
+
+// ── Quiz reset ───────────────────────────────────────────────
+window.resetQuiz = function() {
+  document.getElementById('quiz-start-screen').style.display = 'block';
+  document.getElementById('quiz-scored-wrapper').style.display = 'none';
+};
+
+const _origStart = window.startQuiz;
+window.startQuiz = function(subject) {
+  const titles = { mercatique: '📣 Quiz Mercatique', gestion: '💰 Quiz Gestion & Finance' };
+  document.getElementById('quiz-start-screen').style.display = 'none';
+  document.getElementById('quiz-scored-wrapper').style.display = 'block';
+  document.getElementById('quiz-scored-title').textContent = titles[subject] || 'Quiz';
+  _origStart(subject);
+};
+</script>
+</body>
+</html>
