@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STMG Elite 2026 — Plateforme Ultra</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="badge">Bac STMG 2026 • Mercatique + Gestion/Finance • Niveau Elite</p>
+      <h1>STMG Elite 2026</h1>
+      <p>Plateforme ultra-poussée : parcours personnalisé, examens blancs, analytics, annales, quiz adaptatif, fiches et calculs complets.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#plan">Commencer</a>
+        <a class="btn ghost" href="#exam">Mode Examen</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Vue globale</h2>
+      <div class="kpis">
+        <div class="kpi"><span id="kpiLevel">Niveau 0</span><small>Niveau actuel</small></div>
+        <div class="kpi"><span id="kpiProgress">0%</span><small>Progression globale</small></div>
+        <div class="kpi"><span id="kpiWeak">-</span><small>Matière faible</small></div>
+        <div class="kpi"><span id="kpiStrong">-</span><small>Matière forte</small></div>
+        <div class="kpi"><span id="kpiStreak">0</span><small>Streak (jours)</small></div>
+      </div>
+      <canvas id="progressChart" width="1000" height="220"></canvas>
+    </section>
+
+    <section class="card" id="plan">
+      <h2>Plan adaptatif intelligent</h2>
+      <p>Le plan quotidien se génère automatiquement selon tes scores et tes tâches non faites.</p>
+      <button id="generatePlan" class="btn">Générer mon plan du jour</button>
+      <ul id="adaptivePlan" class="list"></ul>
+    </section>
+
+    <section class="grid2">
+      <section class="card">
+        <h2>Banque d'annales + correction active</h2>
+        <div class="row">
+          <input id="annaleInput" placeholder="Ex: G&F Métropole 2023" />
+          <button id="annaleAdd" class="btn">Ajouter</button>
+        </div>
+        <ul id="annales" class="list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Flashcards mémorisation</h2>
+        <p id="flashQ" class="flash">Question</p>
+        <p id="flashA" class="muted hidden">Réponse</p>
+        <div class="row">
+          <button id="showAnswer" class="btn">Afficher réponse</button>
+          <button id="know" class="btn">Je sais</button>
+          <button id="dontKnow" class="btn danger">Je ne sais pas</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="card">
+      <h2>Calculateur complet Gestion & Finance</h2>
+      <div class="form-grid">
+        <label>CA<input id="ca" type="number"></label>
+        <label>CV<input id="cv" type="number"></label>
+        <label>CF<input id="cf" type="number"></label>
+        <label>Capitaux propres<input id="cp" type="number"></label>
+        <label>Dettes<input id="dettes" type="number"></label>
+        <label>Actif<input id="actif" type="number"></label>
+      </div>
+      <button id="calcBtn" class="btn">Calculer tous les indicateurs</button>
+      <div id="calcOut" class="result"></div>
+    </section>
+
+    <section class="grid2">
+      <section class="card">
+        <h2>Quiz adaptatif par matière</h2>
+        <div class="row">
+          <select id="quizSubject"></select>
+          <button id="nextQ" class="btn ghost">Changer question</button>
+        </div>
+        <p id="qq"></p>
+        <div id="qa" class="answers"></div>
+        <p id="qf" class="muted"></p>
+      </section>
+
+      <section class="card" id="exam">
+        <h2>Mode Examen Blanc</h2>
+        <p>Timer 2h + score final + bilan erreurs.</p>
+        <div class="row">
+          <button id="startExam" class="btn">Lancer examen blanc</button>
+          <button id="stopExam" class="btn danger">Stop</button>
+        </div>
+        <h3 id="examTimer">02:00:00</h3>
+        <label>Score obtenu /20 <input id="examScore" type="number" min="0" max="20"></label>
+        <label>Erreurs principales <textarea id="examErrors" rows="3" placeholder="Méthode, notion, calcul..."></textarea></label>
+        <button id="saveExam" class="btn">Sauvegarder bilan</button>
+        <ul id="examHistory" class="list"></ul>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
