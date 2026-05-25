@@ -3,150 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Objectif 20 - Bac STMG 2026</title>
+  <title>STMG Elite 2026 — Plateforme Ultra</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="hero">
-    <p class="badge">Programme 2026 • STMG sans RH ni SIG</p>
-    <h1>Objectif 20/20 au Bac STMG</h1>
-    <p class="subtitle">Un plan intensif avec fiches, méthodes, calculs, entraînements et annales guidées.</p>
-    <a href="#planning" class="btn">Commencer le plan de révision</a>
+    <div class="container">
+      <p class="badge">Bac STMG 2026 • Mercatique + Gestion/Finance • Niveau Elite</p>
+      <h1>STMG Elite 2026</h1>
+      <p>Plateforme ultra-poussée : parcours personnalisé, examens blancs, analytics, annales, quiz adaptatif, fiches et calculs complets.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#plan">Commencer</a>
+        <a class="btn ghost" href="#exam">Mode Examen</a>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <section class="card" id="planning">
-      <h2>1) Planning hebdo ultra-efficace</h2>
-      <div class="grid-2">
-        <article>
-          <h3>Lundi à vendredi (2h/jour)</h3>
-          <ul>
-            <li>30 min : fiches de cours actives (rappel sans regarder).</li>
-            <li>45 min : exercice type bac chronométré.</li>
-            <li>30 min : correction + journal d'erreurs.</li>
-            <li>15 min : flashcards formules/définitions.</li>
-          </ul>
-        </article>
-        <article>
-          <h3>Week-end (5h réparties)</h3>
-          <ul>
-            <li>1 sujet complet d'annale en conditions réelles.</li>
-            <li>1 oral blanc (Grand oral + Philosophie argumentation).</li>
-            <li>Mise à jour des "20 erreurs à ne plus refaire".</li>
-          </ul>
-        </article>
+  <main class="container">
+    <section class="card">
+      <h2>Vue globale</h2>
+      <div class="kpis">
+        <div class="kpi"><span id="kpiLevel">Niveau 0</span><small>Niveau actuel</small></div>
+        <div class="kpi"><span id="kpiProgress">0%</span><small>Progression globale</small></div>
+        <div class="kpi"><span id="kpiWeak">-</span><small>Matière faible</small></div>
+        <div class="kpi"><span id="kpiStrong">-</span><small>Matière forte</small></div>
+        <div class="kpi"><span id="kpiStreak">0</span><small>Streak (jours)</small></div>
       </div>
+      <canvas id="progressChart" width="1000" height="220"></canvas>
+    </section>
+
+    <section class="card" id="plan">
+      <h2>Plan adaptatif intelligent</h2>
+      <p>Le plan quotidien se génère automatiquement selon tes scores et tes tâches non faites.</p>
+      <button id="generatePlan" class="btn">Générer mon plan du jour</button>
+      <ul id="adaptivePlan" class="list"></ul>
+    </section>
+
+    <section class="grid2">
+      <section class="card">
+        <h2>Banque d'annales + correction active</h2>
+        <div class="row">
+          <input id="annaleInput" placeholder="Ex: G&F Métropole 2023" />
+          <button id="annaleAdd" class="btn">Ajouter</button>
+        </div>
+        <ul id="annales" class="list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Flashcards mémorisation</h2>
+        <p id="flashQ" class="flash">Question</p>
+        <p id="flashA" class="muted hidden">Réponse</p>
+        <div class="row">
+          <button id="showAnswer" class="btn">Afficher réponse</button>
+          <button id="know" class="btn">Je sais</button>
+          <button id="dontKnow" class="btn danger">Je ne sais pas</button>
+        </div>
+      </section>
     </section>
 
     <section class="card">
-      <h2>2) Matières STMG prioritaires</h2>
-      <p>Choisis une matière pour afficher méthodes et objectifs.</p>
-      <div class="tabs">
-        <button class="tab active" data-target="mercatique">Mercatique</button>
-        <button class="tab" data-target="gestion">Gestion & Finance</button>
-        <button class="tab" data-target="management">Management</button>
-        <button class="tab" data-target="eco">Économie-Droit</button>
-        <button class="tab" data-target="philo">Philosophie</button>
-        <button class="tab" data-target="oral">Grand Oral</button>
+      <h2>Calculateur complet Gestion & Finance</h2>
+      <div class="form-grid">
+        <label>CA<input id="ca" type="number"></label>
+        <label>CV<input id="cv" type="number"></label>
+        <label>CF<input id="cf" type="number"></label>
+        <label>Capitaux propres<input id="cp" type="number"></label>
+        <label>Dettes<input id="dettes" type="number"></label>
+        <label>Actif<input id="actif" type="number"></label>
       </div>
-
-      <div class="panel active" id="mercatique">
-        <h3>Mercatique (spécialité)</h3>
-        <ul>
-          <li>Maîtriser le diagnostic marketing (offre, demande, concurrence).</li>
-          <li>Savoir justifier un mix marketing cohérent.</li>
-          <li>Utiliser des indicateurs : part de marché, taux d'évolution, panier moyen.</li>
-        </ul>
-      </div>
-
-      <div class="panel" id="gestion">
-        <h3>Gestion & Finance (spécialité)</h3>
-        <ul>
-          <li>Soldes intermédiaires de gestion (SIG comptables) et analyse de rentabilité.</li>
-          <li>Seuil de rentabilité, marge sur coût variable, capacité d'autofinancement.</li>
-          <li>Ratios : liquidité, solvabilité, rentabilité économique/financière.</li>
-        </ul>
-      </div>
-
-      <div class="panel" id="management">
-        <h3>Management, sciences de gestion et numérique (tronc commun)</h3>
-        <ul>
-          <li>Identifier problème de management + solutions argumentées.</li>
-          <li>Mobiliser les notions : gouvernance, parties prenantes, performance globale.</li>
-          <li>Structurer la copie en "constat → analyse → recommandation".</li>
-        </ul>
-      </div>
-
-      <div class="panel" id="eco">
-        <h3>Économie-Droit</h3>
-        <ul>
-          <li>Économie : marchés, croissance, politiques économiques.</li>
-          <li>Droit : qualification juridique, règles applicables, solution motivée.</li>
-          <li>Méthode bac : faits → problème de droit → règle → application → conclusion.</li>
-        </ul>
-      </div>
-
-      <div class="panel" id="philo">
-        <h3>Philosophie</h3>
-        <ul>
-          <li>Thèse claire dès l'introduction + problématique reformulée.</li>
-          <li>Plan dialectique propre (I/II/III) avec transitions explicites.</li>
-          <li>Exemples précis (auteurs, situations concrètes) pour chaque argument.</li>
-        </ul>
-      </div>
-
-      <div class="panel" id="oral">
-        <h3>Grand Oral</h3>
-        <ul>
-          <li>Question centrale simple + enjeu concret.</li>
-          <li>Pitch d'ouverture (30 sec) mémorisé parfaitement.</li>
-          <li>Simulation de questions du jury 3 fois/semaine.</li>
-        </ul>
-      </div>
+      <button id="calcBtn" class="btn">Calculer tous les indicateurs</button>
+      <div id="calcOut" class="result"></div>
     </section>
 
-    <section class="card">
-      <h2>3) Calculs essentiels (avec mini-calculatrice)</h2>
-      <div class="calc-grid">
-        <label>Chiffre d'affaires (CA)
-          <input id="ca" type="number" placeholder="ex: 120000" />
-        </label>
-        <label>Charges variables (CV)
-          <input id="cv" type="number" placeholder="ex: 70000" />
-        </label>
-        <label>Charges fixes (CF)
-          <input id="cf" type="number" placeholder="ex: 30000" />
-        </label>
-      </div>
-      <button class="btn" id="compute">Calculer indicateurs</button>
-      <div id="results" class="results"></div>
-    </section>
+    <section class="grid2">
+      <section class="card">
+        <h2>Quiz adaptatif par matière</h2>
+        <div class="row">
+          <select id="quizSubject"></select>
+          <button id="nextQ" class="btn ghost">Changer question</button>
+        </div>
+        <p id="qq"></p>
+        <div id="qa" class="answers"></div>
+        <p id="qf" class="muted"></p>
+      </section>
 
-    <section class="card">
-      <h2>4) Annales des années précédentes (méthode)</h2>
-      <p>Pour chaque sujet :</p>
-      <ol>
-        <li>Fais le sujet en temps réel sans aide.</li>
-        <li>Corrige en 2 couleurs : notions manquantes vs erreurs de méthode.</li>
-        <li>Refais seulement les questions ratées 48h plus tard.</li>
-      </ol>
-      <p class="note">Conseil : télécharge les annales officielles sur les portails académiques et les sujets du bac publiés par l'Éducation nationale.</p>
-    </section>
-
-    <section class="card">
-      <h2>5) Contrat Objectif 20</h2>
-      <ul>
-        <li>✅ 6 jours de révision/semaine.</li>
-        <li>✅ 1 annale complète/semaine par spécialité.</li>
-        <li>✅ 1 oral blanc/semaine.</li>
-        <li>✅ Relecture des erreurs la veille de chaque entraînement.</li>
-      </ul>
+      <section class="card" id="exam">
+        <h2>Mode Examen Blanc</h2>
+        <p>Timer 2h + score final + bilan erreurs.</p>
+        <div class="row">
+          <button id="startExam" class="btn">Lancer examen blanc</button>
+          <button id="stopExam" class="btn danger">Stop</button>
+        </div>
+        <h3 id="examTimer">02:00:00</h3>
+        <label>Score obtenu /20 <input id="examScore" type="number" min="0" max="20"></label>
+        <label>Erreurs principales <textarea id="examErrors" rows="3" placeholder="Méthode, notion, calcul..."></textarea></label>
+        <button id="saveExam" class="btn">Sauvegarder bilan</button>
+        <ul id="examHistory" class="list"></ul>
+      </section>
     </section>
   </main>
-
-  <footer>
-    <p>Fait pour réussir le Bac STMG 2026 avec méthode, régularité et entraînement intelligent.</p>
-  </footer>
 
   <script src="script.js"></script>
 </body>
