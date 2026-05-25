@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annales & Sujets types — BAC STMG 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── Sujet cards ─────────────────────────────────────── */
+    .sujet-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      transition: box-shadow .2s;
+    }
+    .sujet-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.4); }
+
+    .sujet-header {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+    .sujet-header-left h3 { color: var(--text); font-size: 1.05rem; margin-bottom: .35rem; }
+    .sujet-header-left p { color: var(--text2); font-size: .85rem; margin: 0; }
+
+    .sujet-meta { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .sujet-meta .badge { font-size: .72rem; }
+
+    .sujet-body { padding: 1.5rem; }
+
+    .doc-section-title {
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text2);
+      margin: 1.5rem 0 .75rem;
+    }
+    .doc-section-title:first-child { margin-top: 0; }
+
+    .doc-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: .75rem;
+    }
+    .doc-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: var(--text2);
+      margin-bottom: .3rem;
+      text-transform: uppercase;
+    }
+    .doc-item p { margin: 0; font-size: .9rem; color: var(--text2); }
+    .doc-item strong { color: var(--text); }
+
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .82rem;
+      margin-top: .5rem;
+    }
+    .doc-table th {
+      background: var(--bg3);
+      color: var(--text);
+      font-weight: 700;
+      padding: .4rem .75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .doc-table td {
+      color: var(--text2);
+      padding: .35rem .75rem;
+      border: 1px solid var(--border);
+    }
+    .doc-table tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+
+    .question-item { margin-bottom: 1.1rem; }
+    .question-item p { margin: 0; font-size: .92rem; color: var(--text2); }
+    .question-header {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .3rem;
+      flex-wrap: wrap;
+    }
+    .question-num {
+      font-weight: 700;
+      color: var(--text);
+      font-size: .92rem;
+    }
+    .question-pts {
+      background: rgba(245,158,11,.15);
+      color: var(--amber);
+      font-size: .75rem;
+      font-weight: 700;
+      padding: .15rem .5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    /* ── Correction toggle ───────────────────────────────── */
+    .correction-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: 1.5rem;
+      padding: .55rem 1.2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text2);
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      width: 100%;
+      justify-content: center;
+    }
+    .correction-toggle:hover { background: var(--bg3); color: var(--text); }
+    .correction-toggle.open { background: rgba(245,158,11,.1); border-color: var(--amber); color: var(--amber); }
+
+    .correction-content {
+      display: none;
+      margin-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.25rem;
+    }
+    .correction-content.visible { display: block; }
+
+    .correction-q {
+      margin-bottom: 1.5rem;
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      border-left: 3px solid var(--amber);
+    }
+    .correction-q-title {
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: .6rem;
+    }
+    .correction-step-header {
+      font-weight: 700;
+      color: var(--text);
+      margin: .75rem 0 .25rem;
+      font-size: .93rem;
+    }
+    .correction-step-header:first-of-type { margin-top: 0; }
+    .correction-content p { font-size: .9rem; color: var(--text2); margin-bottom: .4rem; }
+    .correction-content strong { color: var(--text); }
+    .correction-content ul, .correction-content ol { padding-left: 1.4rem; margin-bottom: .6rem; }
+    .correction-content li { color: var(--text2); font-size: .9rem; margin-bottom: .25rem; list-style: disc; }
+    .correction-content ol li { list-style: decimal; }
+
+    .formula-box {
+      background: var(--bg3);
+      border-radius: 6px;
+      padding: .6rem 1rem;
+      font-family: 'Courier New', monospace;
+      font-size: .88rem;
+      color: var(--text);
+      margin: .5rem 0;
+      border-left: 3px solid var(--maths);
+    }
+    .result-box {
+      background: rgba(22,163,74,.12);
+      border: 1px solid rgba(22,163,74,.3);
+      border-radius: 6px;
+      padding: .5rem 1rem;
+      font-size: .88rem;
+      color: #86efac;
+      font-weight: 700;
+      margin: .4rem 0;
+    }
+    .law-box {
+      background: rgba(220,38,38,.1);
+      border-left: 3px solid var(--droit);
+      border-radius: 0 6px 6px 0;
+      padding: .6rem 1rem;
+      font-size: .88rem;
+      color: #fca5a5;
+      margin: .5rem 0;
+    }
+    .theory-box {
+      background: rgba(22,163,74,.1);
+      border-left: 3px solid var(--mgmt);
+      border-radius: 0 6px 6px 0;
+      padding: .6rem 1rem;
+      font-size: .88rem;
+      color: #86efac;
+      margin: .5rem 0;
+    }
+    .warning-box {
+      background: rgba(245,158,11,.1);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 6px 6px 0;
+      padding: .6rem 1rem;
+      font-size: .88rem;
+      color: var(--amber);
+      margin: .5rem 0;
+    }
+
+    /* ── Filtres ─────────────────────────────────────────── */
+    .filter-bar {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .filter-btn {
+      padding: .45rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text2);
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--bg3);
+      color: var(--text);
+    }
+    .filter-btn[data-filter="eco-droit"].active { border-color: var(--eco); color: #93c5fd; background: rgba(37,99,235,.1); }
+    .filter-btn[data-filter="mgmt-sgn"].active { border-color: var(--mgmt); color: #86efac; background: rgba(22,163,74,.1); }
+    .filter-btn[data-filter="merca"].active { border-color: var(--merca); color: #fcd34d; background: rgba(245,158,11,.1); }
+    .filter-btn[data-filter="gf"].active { border-color: var(--gf); color: #5eead4; background: rgba(13,148,136,.1); }
+
+    /* ── Page header ─────────────────────────────────────── */
+    .page-header-annales {
+      padding: 3rem 0 2rem;
+      background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header-annales h1 { color: var(--text); margin-bottom: .5rem; }
+    .page-header-annales p { color: var(--text2); font-size: 1rem; margin-bottom: 1.25rem; }
+
+    /* ── Méthodes section ────────────────────────────────── */
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .method-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+    .method-card h4 { color: var(--text); font-size: .95rem; margin-bottom: .75rem; }
+    .method-card p, .method-card li { font-size: .88rem; color: var(--text2); }
+    .method-card ol { padding-left: 1.2rem; }
+    .method-card ol li { list-style: decimal; margin-bottom: .25rem; }
+    .method-card ul li { list-style: disc; margin-bottom: .2rem; }
+    .method-card ul { padding-left: 1.2rem; }
+    .method-accent { font-size: .72rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem; padding: .2rem .6rem; border-radius: 4px; display: inline-block; }
+
+    /* ── Navbar hamburger ────────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: .35rem .65rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; align-items: center; }
+      .navbar-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: .25rem;
+        padding-top: .75rem;
+        border-top: 1px solid var(--border);
+        margin-top: .5rem;
+      }
+      .navbar-links.open { display: flex; }
+      .navbar-links a { padding: .5rem .75rem; font-size: .9rem; }
+      .sujet-header { flex-direction: column; }
+      .doc-table { font-size: .76rem; }
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    .footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      text-align: center;
+      margin-top: 4rem;
+    }
+    .footer p { color: var(--text2); font-size: .88rem; margin-bottom: .5rem; }
+    .footer a { color: var(--merca); font-weight: 600; }
+    .footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">🎓 BAC STMG 2026</a>
+      <button class="nav-hamburger" id="navToggle" aria-label="Menu">☰</button>
+      <div class="navbar-links" id="navLinks">
+        <a href="economie.html" class="nav-eco">📊 Éco</a>
+        <a href="droit.html" class="nav-droit">⚖️ Droit</a>
+        <a href="management.html" class="nav-mgmt">🏢 Mgmt</a>
+        <a href="sciences-gestion.html" class="nav-sg">💻 SGN</a>
+        <a href="mercatique.html" class="nav-merca">📣 Merca</a>
+        <a href="gestion-finance.html" class="nav-gf">💰 G&amp;F</a>
+        <a href="maths.html" class="nav-maths">🔢 Maths</a>
+        <a href="grand-oral.html" class="nav-go">🎤 GO</a>
+        <a href="annales.html" class="nav-merca active">📂 Annales</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE HEADER
+══════════════════════════════════════════════════════════ -->
+<div class="page-header-annales">
+  <div class="container">
+    <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;">
+      <a href="index.html" style="color:var(--text2);font-size:.85rem;">Accueil</a>
+      <span style="color:var(--border);">›</span>
+      <span style="color:var(--merca);font-size:.85rem;font-weight:600;">Annales</span>
+    </div>
+    <h1>📂 Annales &amp; Sujets types</h1>
+    <p>Sujets corrigés · Méthodologie · Exercices BAC</p>
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+      <span class="badge badge-merca">6 sujets complets</span>
+      <span class="badge badge-success">Corrections détaillées</span>
+      <span class="badge badge-neutral">Éco-Droit · Mgmt-SGN · Merca · G&amp;F</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════════════════════════ -->
+<main class="section" style="padding-top:2.5rem;">
+  <div class="container">
+
+    <!-- FILTRES -->
+    <div class="filter-bar" role="group" aria-label="Filtrer par matière">
+      <button class="filter-btn active" data-filter="all">📂 Tout</button>
+      <button class="filter-btn" data-filter="eco-droit">📊⚖️ Éco-Droit</button>
+      <button class="filter-btn" data-filter="mgmt-sgn">🏢💻 Management-SGN</button>
+      <button class="filter-btn" data-filter="merca">📣 Mercatique</button>
+      <button class="filter-btn" data-filter="gf">💰 G&amp;F</button>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SUJET 1 — ÉCONOMIE-DROIT
+    ═══════════════════════════════════════════════════════ -->
+    <div class="sujet-card" data-subject-filter="eco-droit" id="sujet1">
+      <div class="sujet-header" style="background:linear-gradient(135deg,rgba(37,99,235,.15),rgba(220,38,38,.1));">
+        <div class="sujet-header-left">
+          <h3>Sujet 1 — Économie-Droit</h3>
+          <p>Thème : La mondialisation et ses déséquilibres</p>
+        </div>
+        <div class="sujet-meta">
+          <span class="badge badge-eco">📊 Économie</span>
+          <span class="badge badge-droit">⚖️ Droit</span>
+          <span class="badge badge-neutral">Terminale STMG</span>
+          <span class="badge badge-neutral">⏱ 4h</span>
+          <span class="badge badge-warning">Coeff. 16</span>
+        </div>
+      </div>
+
+      <div class="sujet-body">
+        <div class="doc-section-title">📁 Dossier documentaire</div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 1 — Évolution des IDE mondiaux 2010–2024</div>
+          <div style="overflow-x:auto;">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Année</th><th>2010</th><th>2013</th><th>2015</th><th>2018</th><th>2020</th><th>2021</th><th>2023</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>IDE entrants (Mds $)</strong></td>
+                  <td>1 243</td><td>1 467</td><td>1 400</td><td>1 291</td><td>963</td><td>1 582</td><td>1 680</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:.5rem;font-size:.8rem;"><em>Source : données fictives inspirées des rapports CNUCED, 2024.</em></p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 2 — Firmes multinationales et délocalisation</div>
+          <p>« Les firmes multinationales (FMN) représentent aujourd'hui plus de 40 % des échanges mondiaux. Face à la pression concurrentielle, nombre d'entre elles choisissent de délocaliser leurs activités de production vers des pays à bas coûts salariaux. L'Asie du Sud-Est concentre 35 % des flux de délocalisation industrielle depuis 2015. Toutefois, ce mouvement n'est pas sans risque : risque de réputation, instabilité juridique, perte de savoir-faire. Certaines entreprises amorcent désormais une "relocalisation" partielle pour sécuriser leurs chaînes d'approvisionnement. »</p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 3 — Balance commerciale France (Mds €)</div>
+          <div style="overflow-x:auto;">
+            <table class="doc-table">
+              <thead><tr><th>Année</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th></tr></thead>
+              <tbody>
+                <tr><td>Exportations</td><td>512</td><td>441</td><td>507</td><td>581</td><td>595</td></tr>
+                <tr><td>Importations</td><td>561</td><td>477</td><td>573</td><td>698</td><td>671</td></tr>
+                <tr><td><strong>Solde</strong></td><td>-49</td><td>-36</td><td>-66</td><td>-117</td><td>-76</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:.5rem;font-size:.8rem;"><em>Source : données fictives inspirées des statistiques douanières françaises.</em></p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 4 — Protectionnisme vs libre-échange</div>
+          <p>« Le libre-échange, fondé sur la théorie des avantages comparatifs de Ricardo, prône la spécialisation internationale et l'ouverture des frontières. Il favorise la baisse des prix et l'efficacité allocative. À l'inverse, le protectionnisme — par droits de douane, quotas ou subventions — vise à protéger les industries nationales et l'emploi. Depuis 2018, la "guerre commerciale" entre les États-Unis et la Chine illustre le retour du protectionnisme dans les stratégies étatiques. L'OMC arbitre ces tensions mais voit son autorité contestée. »</p>
+        </div>
+
+        <div class="doc-section-title">❓ Questions — Économie</div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 1.</span>
+            <span class="question-pts">3 pts</span>
+          </div>
+          <p>À partir du document 1, calculez le taux de croissance des IDE entre 2015 et 2023.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 2.</span>
+            <span class="question-pts">4 pts</span>
+          </div>
+          <p>En vous appuyant sur les documents 2 et 4, expliquez pourquoi les firmes multinationales délocalisent leurs activités de production.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 3.</span>
+            <span class="question-pts">5 pts</span>
+          </div>
+          <p>En mobilisant vos connaissances et les documents, développez : quels sont les avantages et les inconvénients du libre-échange pour les pays développés ?</p>
+        </div>
+
+        <div class="doc-section-title">❓ Questions — Droit</div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 4.</span>
+            <span class="question-pts">4 pts — Cas pratique</span>
+          </div>
+          <p>La société TechParis SA souhaite s'installer en Chine. Elle hésite entre créer une <strong>filiale</strong> (SAS de droit local) ou ouvrir une <strong>succursale</strong>. Quelles formes s'offrent à elle ? Quelle est la différence fondamentale en termes de responsabilité juridique et financière ?</p>
+        </div>
+
+        <!-- CORRECTION TOGGLE -->
+        <button class="correction-toggle" onclick="toggleCorrection(this)">
+          📖 Voir la correction complète
+        </button>
+
+        <div class="correction-content">
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 1 (3 pts)</div>
+            <div class="correction-step-header">Formule :</div>
+            <div class="formula-box">Taux de croissance = [(Valeur arrivée − Valeur départ) / Valeur départ] × 100</div>
+            <div class="correction-step-header">Application :</div>
+            <div class="formula-box">[(1 680 − 1 400) / 1 400] × 100 = [280 / 1 400] × 100 = <strong>+20 %</strong></div>
+            <div class="result-box">Les IDE mondiaux ont augmenté de 20 % entre 2015 et 2023.</div>
+            <p>Interprétation : malgré la chute de 2020 (pandémie Covid-19, recul à 963 Mds$), les investissements ont rebondi fortement en 2021 et progressent régulièrement jusqu'en 2023, témoignant d'une reprise de la mondialisation des capitaux.</p>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 2 (4 pts)</div>
+            <div class="correction-step-header">Introduction :</div>
+            <p>Les FMN délocalisent pour plusieurs raisons liées à la recherche de compétitivité et de rentabilité.</p>
+            <div class="correction-step-header">Argument 1 — Réduction des coûts salariaux :</div>
+            <p>Le doc 2 souligne que l'Asie du Sud-Est concentre 35 % des flux de délocalisation. La motivation principale est la <strong>main-d'œuvre moins chère</strong> (salaires 5 à 10× inférieurs à ceux des pays développés). L'avantage comparatif (Ricardo, doc 4) pousse les entreprises à spécialiser leurs unités là où les coûts sont les plus bas.</p>
+            <div class="correction-step-header">Argument 2 — Accès aux marchés locaux :</div>
+            <p>Les IDE (doc 1) permettent aussi de pénétrer des marchés émergents à fort potentiel de croissance (Chine, Inde). S'installer localement évite les droits de douane et rapproche la production des consommateurs.</p>
+            <div class="correction-step-header">Argument 3 — Avantages fiscaux et réglementaires :</div>
+            <p>Certains pays proposent des zones franches, des exonérations d'IS, une réglementation environnementale plus souple — autant d'incitations supplémentaires à délocaliser.</p>
+            <div class="correction-step-header">Nuance (doc 2) :</div>
+            <p>Le mouvement connaît des limites : risques de réputation, instabilité juridique, pertes de savoir-faire — ce qui explique le phénomène croissant de <em>relocalisation</em>.</p>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 3 (5 pts)</div>
+            <div class="correction-step-header">Introduction — contexte :</div>
+            <p>Le libre-échange est fondé sur la théorie des avantages comparatifs (David Ricardo, 1817) selon laquelle chaque pays a intérêt à se spécialiser dans la production pour laquelle il est relativement le plus efficace.</p>
+            <div class="correction-step-header">Avantages pour les pays développés :</div>
+            <ul>
+              <li><strong>Baisse des prix</strong> à la consommation grâce à la concurrence internationale et aux importations bon marché (gain de pouvoir d'achat).</li>
+              <li><strong>Accès à des marchés extérieurs</strong> plus larges pour leurs exportations — le doc 3 montre que la France exporte 595 Mds€ en 2023.</li>
+              <li><strong>Efficacité et innovation</strong> : la pression concurrentielle pousse les entreprises à innover et à se spécialiser dans les secteurs à haute valeur ajoutée.</li>
+              <li><strong>Croissance économique</strong> : la mondialisation a contribué à la croissance mondiale depuis les années 1980.</li>
+            </ul>
+            <div class="correction-step-header">Inconvénients pour les pays développés :</div>
+            <ul>
+              <li><strong>Désindustrialisation et chômage</strong> : les secteurs exposés à la concurrence des pays à bas coûts (textile, sidérurgie) perdent des emplois. La France affiche un solde commercial négatif structurel (doc 3 : −76 Mds€ en 2023).</li>
+              <li><strong>Vulnérabilité des chaînes d'approvisionnement</strong> : la crise Covid a révélé la dépendance aux importations (masques, semi-conducteurs).</li>
+              <li><strong>Inégalités internes</strong> : les bénéfices se concentrent sur les travailleurs qualifiés et les actionnaires, tandis que les travailleurs peu qualifiés subissent la concurrence des pays à bas salaires.</li>
+            </ul>
+            <div class="correction-step-header">Conclusion :</div>
+            <p>Le libre-échange crée globalement de la richesse mais ses gains sont inégalement répartis. C'est pourquoi les États conservent des instruments protectionnistes ciblés (doc 4), tout en restant globalement ouverts au commerce international.</p>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 4 (4 pts) — Cas pratique droit</div>
+            <div class="correction-step-header">1. Les faits :</div>
+            <p>TechParis SA veut s'implanter en Chine et hésite entre deux structures : filiale (SAS de droit local) ou succursale.</p>
+            <div class="correction-step-header">2. Le problème juridique :</div>
+            <p>Quelle est la différence juridique entre une filiale et une succursale, notamment en matière de personnalité morale et de responsabilité ?</p>
+            <div class="correction-step-header">3. Les règles de droit :</div>
+            <div class="law-box">
+              <strong>Filiale</strong> : société distincte de la maison mère (personnalité morale propre). La mère ne répond de ses dettes que dans la limite de ses apports (responsabilité limitée).<br><br>
+              <strong>Succursale</strong> : établissement secondaire sans personnalité morale propre. La société mère est directement et intégralement responsable de ses actes et dettes.
+            </div>
+            <div class="correction-step-header">4. Application au cas :</div>
+            <ul>
+              <li>Si TechParis crée une <strong>filiale SAS</strong> en Chine → elle devient actionnaire, sa responsabilité est limitée à ses apports → risque financier maîtrisé.</li>
+              <li>Si TechParis ouvre une <strong>succursale</strong> → TechParis SA engage l'intégralité de son patrimoine → risque illimité en cas de difficultés.</li>
+            </ul>
+            <div class="correction-step-header">5. Conclusion :</div>
+            <div class="result-box">Il est conseillé à TechParis SA de créer une filiale, afin de limiter son exposition au risque juridique et financier sur un marché étranger incertain.</div>
+          </div>
+
+        </div><!-- /correction-content -->
+      </div><!-- /sujet-body -->
+    </div><!-- /sujet-card 1 -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SUJET 2 — ÉCONOMIE-DROIT
+    ═══════════════════════════════════════════════════════ -->
+    <div class="sujet-card" data-subject-filter="eco-droit" id="sujet2">
+      <div class="sujet-header" style="background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(220,38,38,.08));">
+        <div class="sujet-header-left">
+          <h3>Sujet 2 — Économie-Droit</h3>
+          <p>Thème : Le rôle de l'État dans l'économie et la protection du consommateur</p>
+        </div>
+        <div class="sujet-meta">
+          <span class="badge badge-eco">📊 Économie</span>
+          <span class="badge badge-droit">⚖️ Droit</span>
+          <span class="badge badge-neutral">Terminale STMG</span>
+          <span class="badge badge-neutral">⏱ 4h</span>
+          <span class="badge badge-warning">Coeff. 16</span>
+        </div>
+      </div>
+
+      <div class="sujet-body">
+        <div class="doc-section-title">📁 Dossier documentaire</div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 1 — Dépenses publiques françaises (% du PIB)</div>
+          <div style="overflow-x:auto;">
+            <table class="doc-table">
+              <thead><tr><th>Année</th><th>2015</th><th>2017</th><th>2019</th><th>2021</th><th>2023</th></tr></thead>
+              <tbody>
+                <tr><td>Dépenses publiques / PIB</td><td>56,8 %</td><td>56,5 %</td><td>55,6 %</td><td>59,4 %</td><td>57,3 %</td></tr>
+                <tr><td>PIB France (Mds €)</td><td>2 194</td><td>2 299</td><td>2 437</td><td>2 501</td><td>2 800</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top:.5rem;font-size:.8rem;"><em>Source : données fictives inspirées du rapport de la Cour des comptes, 2024.</em></p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 2 — Les politiques de relance keynésiennes</div>
+          <p>« Pour Keynes, en situation de sous-emploi, l'État doit jouer un rôle contra-cyclique : augmenter ses dépenses (investissements publics, allocations) pour soutenir la demande globale. Le multiplicateur keynésien traduit l'effet démultiplicateur d'une injection de dépenses publiques dans l'économie. En 2020, face à la crise Covid, la France a mobilisé un plan "quoi qu'il en coûte" de 100 Mds€ pour soutenir entreprises et ménages. Ce type de politique augmente le déficit public à court terme mais préserve l'emploi. »</p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 3 — E-commerce et clauses abusives (cas)</div>
+          <p>Emma achète un ordinateur portable sur le site <em>TechShop.fr</em> au prix de <strong>899 €</strong>. Les conditions générales de vente prévoient : (1) l'exclusion du droit de rétractation pour les produits déballés ; (2) des frais de restockage de <strong>50 %</strong> du prix en cas de retour. Le vendeur refuse le remboursement lorsqu'Emma, après réception, souhaite retourner le produit sous 10 jours.</p>
+        </div>
+
+        <div class="doc-section-title">❓ Questions — Économie</div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 1.</span>
+            <span class="question-pts">3 pts</span>
+          </div>
+          <p>À partir du document 1, calculez le montant des dépenses publiques en milliards d'euros en 2019 et en 2023. Calculez leur variation en valeur absolue et en pourcentage.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 2.</span>
+            <span class="question-pts">4 pts</span>
+          </div>
+          <p>Dans quels cas et de quelle manière l'État intervient-il dans l'économie ? Illustrez avec des exemples tirés des documents et de vos connaissances.</p>
+        </div>
+
+        <div class="doc-section-title">❓ Questions — Droit</div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 3.</span>
+            <span class="question-pts">5 pts — Cas pratique</span>
+          </div>
+          <p>En vous fondant sur le document 3, analysez la situation d'Emma. Quels sont ses droits ? Les clauses du vendeur sont-elles valides ?</p>
+        </div>
+
+        <button class="correction-toggle" onclick="toggleCorrection(this)">
+          📖 Voir la correction complète
+        </button>
+
+        <div class="correction-content">
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 1 (3 pts)</div>
+            <div class="correction-step-header">Calcul 2019 :</div>
+            <div class="formula-box">Dépenses 2019 = 55,6 % × 2 437 = <strong>1 354,97 Mds €</strong> ≈ 1 355 Mds €</div>
+            <div class="correction-step-header">Calcul 2023 :</div>
+            <div class="formula-box">Dépenses 2023 = 57,3 % × 2 800 = <strong>1 604,4 Mds €</strong> ≈ 1 604 Mds €</div>
+            <div class="correction-step-header">Variation :</div>
+            <div class="formula-box">Variation absolue = 1 604 − 1 355 = +249 Mds €<br>Taux de variation = [(1 604 − 1 355) / 1 355] × 100 ≈ +18,4 %</div>
+            <div class="result-box">Les dépenses publiques ont augmenté de 249 Mds € (+18,4 %) entre 2019 et 2023.</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 2 (4 pts)</div>
+            <div class="correction-step-header">Introduction :</div>
+            <p>L'État n'est pas un simple arbitre : il intervient dans l'économie selon trois grandes logiques.</p>
+            <ul>
+              <li><strong>Fonction d'allocation :</strong> l'État produit des biens collectifs (défense, justice, éducation) que le marché ne peut fournir efficacement. Exemple : l'Éducation nationale finance la formation du capital humain.</li>
+              <li><strong>Fonction de redistribution :</strong> l'État corrige les inégalités via la fiscalité progressive, les prestations sociales (RSA, allocations chômage). Le modèle social français représente ~57 % du PIB (doc 1).</li>
+              <li><strong>Fonction de stabilisation :</strong> l'État agit de façon contra-cyclique pour lisser les cycles économiques. En 2020, le plan "quoi qu'il en coûte" (doc 2, 100 Mds€) illustre cette politique keynésienne de relance : augmentation des dépenses pour soutenir la demande globale et éviter l'effondrement de l'emploi.</li>
+            </ul>
+            <p>L'État intervient aussi pour corriger les <strong>défaillances de marché</strong> : externalités négatives (pollution → taxes), asymétries d'information (réglementation), monopoles naturels (régulation).</p>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 3 (5 pts) — Cas pratique droit</div>
+            <div class="correction-step-header">1. Les faits :</div>
+            <p>Emma achète 899 € un ordinateur en ligne. Le vendeur refuse le droit de rétractation et prévoit 50 % de frais de restockage.</p>
+            <div class="correction-step-header">2. Le problème juridique :</div>
+            <p>Emma dispose-t-elle d'un droit de rétractation ? Les clauses contractuelles du vendeur sont-elles opposables ?</p>
+            <div class="correction-step-header">3. Les règles de droit :</div>
+            <div class="law-box">
+              <strong>Art. L221-18 du Code de la consommation</strong> : tout consommateur dispose d'un délai de <strong>14 jours</strong> à compter de la réception du bien pour exercer son droit de rétractation lors d'un achat à distance (e-commerce), sans avoir à justifier sa décision ni à payer de pénalités.<br><br>
+              <strong>Art. L212-1 du Code de la consommation</strong> : les clauses qui créent un déséquilibre significatif entre les droits et obligations des parties au détriment du consommateur sont réputées <strong>non-écrites</strong> (nulles de plein droit).
+            </div>
+            <div class="correction-step-header">4. Application au cas :</div>
+            <ul>
+              <li>Emma a reçu le colis et souhaite retourner le produit sous 10 jours → elle est bien dans le délai légal de 14 jours. Le refus du vendeur est <strong>illégal</strong>.</li>
+              <li>La clause excluant le droit de rétractation pour les produits "déballés" contredit le droit légal impératif → clause réputée <strong>non-écrite</strong>.</li>
+              <li>La clause de 50 % de frais de restockage est une clause abusive (déséquilibre manifeste) → également réputée <strong>non-écrite</strong>.</li>
+            </ul>
+            <div class="correction-step-header">5. Conclusion :</div>
+            <div class="result-box">Emma peut exercer son droit de rétractation et exiger le remboursement intégral de 899 €. Elle peut saisir la DGCCRF ou un médiateur de la consommation. Les deux clauses litigieuses sont nulles.</div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /sujet 2 -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SUJET 3 — MANAGEMENT & SGN
+    ═══════════════════════════════════════════════════════ -->
+    <div class="sujet-card" data-subject-filter="mgmt-sgn" id="sujet3">
+      <div class="sujet-header" style="background:linear-gradient(135deg,rgba(22,163,74,.15),rgba(147,51,234,.08));">
+        <div class="sujet-header-left">
+          <h3>Sujet 3 — Management &amp; SGN</h3>
+          <p>Thème : La stratégie de Décathlon face à la concurrence</p>
+        </div>
+        <div class="sujet-meta">
+          <span class="badge badge-mgmt">🏢 Management</span>
+          <span class="badge badge-gestion">💻 SGN</span>
+          <span class="badge badge-neutral">Terminale STMG</span>
+          <span class="badge badge-neutral">⏱ 4h</span>
+          <span class="badge badge-warning">Coeff. 16</span>
+        </div>
+      </div>
+
+      <div class="sujet-body">
+        <div class="doc-section-title">📁 Dossier documentaire</div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 1 — Chiffres clés Décathlon (données fictives cohérentes)</div>
+          <div style="overflow-x:auto;">
+            <table class="doc-table">
+              <thead><tr><th>Indicateur</th><th>Valeur</th></tr></thead>
+              <tbody>
+                <tr><td>Chiffre d'affaires 2023</td><td>15,4 Mds €</td></tr>
+                <tr><td>Nombre de magasins</td><td>1 700 (97 pays)</td></tr>
+                <tr><td>Effectifs</td><td>105 000 collaborateurs</td></tr>
+                <tr><td>Marques propres</td><td>Quechua, B'Twin, Domyos, Kipsta, Artengo…</td></tr>
+                <tr><td>Part des marques propres / CA</td><td>~70 %</td></tr>
+                <tr><td>Part de marché France (articles de sport)</td><td>22 %</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 2 — Extrait interview DRH (management participatif)</div>
+          <p>« Chez Décathlon, nous faisons confiance à nos collaborateurs. Chaque chef de rayon dispose d'une large autonomie pour gérer ses stocks, définir ses animations commerciales et recruter son équipe. Nous pratiquons le management par objectifs : les équipes fixent elles-mêmes leurs cibles avec leur responsable. Les collaborateurs sont actionnaires de l'entreprise via un fonds d'épargne salariale — ils sont véritablement co-entrepreneurs. Les idées remontent du terrain ; beaucoup de nos innovations produit naissent des retours de vendeurs-sportifs pratiquants. »</p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 3 — Extrait rapport RSE Décathlon 2023</div>
+          <p>« Décathlon s'est engagé à atteindre la neutralité carbone en 2050. En 2023, 45 % des produits vendus contiennent des matières recyclées ou éco-conçues. L'entreprise propose un service de location, de réparation et de revente de matériel d'occasion ("Decathlon Occasion"). L'objectif : allonger la durée de vie des produits et réduire les déchets. Ces engagements RSE constituent également un avantage concurrentiel : 68 % des clients déclarent que l'engagement environnemental influence leur choix d'enseigne. »</p>
+        </div>
+
+        <div class="doc-section-title">❓ Questions — Management</div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 1.</span>
+            <span class="question-pts">2 pts</span>
+          </div>
+          <p>Identifiez le type d'organisation de Décathlon. Quelles sont ses finalités économiques et non économiques ?</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 2.</span>
+            <span class="question-pts">4 pts</span>
+          </div>
+          <p>Analysez la stratégie globale de Décathlon. S'agit-il d'une stratégie de spécialisation ou de diversification ? Justifiez en vous appuyant sur les documents.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 3.</span>
+            <span class="question-pts">4 pts</span>
+          </div>
+          <p>Quel style de management semble pratiquer Décathlon ? Appuyez-vous sur le modèle de Blake et Mouton pour justifier votre réponse.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 4.</span>
+            <span class="question-pts">4 pts</span>
+          </div>
+          <p>Comment Décathlon intègre-t-il la RSE dans sa stratégie ? Quels en sont les avantages pour l'entreprise ?</p>
+        </div>
+
+        <div class="doc-section-title">❓ Questions — SGN</div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 5.</span>
+            <span class="question-pts">2 pts</span>
+          </div>
+          <p>Identifiez deux parties prenantes de Décathlon et précisez leurs attentes respectives.</p>
+        </div>
+
+        <button class="correction-toggle" onclick="toggleCorrection(this)">
+          📖 Voir la correction complète
+        </button>
+
+        <div class="correction-content">
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 1 (2 pts)</div>
+            <p><strong>Type d'organisation :</strong> Décathlon est une <strong>entreprise privée commerciale</strong> (société par actions simplifiée, groupe familial Mulliez), à but lucratif, de dimension internationale (FMN).</p>
+            <p><strong>Finalité économique :</strong> réaliser un profit, assurer sa pérennité et sa croissance (CA 15,4 Mds€, 1 700 magasins dans 97 pays).</p>
+            <p><strong>Finalités non économiques :</strong> satisfaire les clients (accès au sport pour tous), développer les collaborateurs (management participatif), contribuer à la société (RSE, neutralité carbone).</p>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 2 (4 pts)</div>
+            <div class="theory-box"><strong>Rappel de cours :</strong> Spécialisation = concentration sur un seul domaine d'activité stratégique (DAS). Diversification = présence dans plusieurs DAS distincts (conglomérat).</div>
+            <div class="correction-step-header">Analyse :</div>
+            <p>Décathlon adopte une stratégie de <strong>spécialisation</strong> dans la distribution d'articles de sport, avec une intégration verticale en amont (conception de marques propres : Quechua, B'Twin, Domyos…).</p>
+            <ul>
+              <li>Doc 1 : 70 % du CA provient des marques propres → maîtrise de toute la chaîne de valeur (conception → fabrication → distribution).</li>
+              <li>Stratégie de <strong>domination par les coûts</strong> (Porter) : en contrôlant la production, Décathlon peut proposer des prix compétitifs face à Nike, Adidas.</li>
+              <li>La diversification géographique (97 pays) ne constitue pas une diversification d'activité — le cœur de métier reste le sport.</li>
+            </ul>
+            <div class="result-box">Décathlon se spécialise dans la distribution sportive intégrée, en combinant stratégie de coûts et différenciation par l'innovation produit (marques propres).</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 3 (4 pts)</div>
+            <div class="theory-box"><strong>Modèle Blake et Mouton</strong> — grille managériale à deux axes : intérêt pour la production (résultats) et intérêt pour les personnes (relations humaines). Le style "9.9" dit "intégrateur" est le style idéal : fort intérêt pour les deux dimensions.</div>
+            <div class="correction-step-header">Application à Décathlon :</div>
+            <p>Décathlon pratique un style <strong>participatif / intégrateur (9.9)</strong> :</p>
+            <ul>
+              <li><em>Intérêt pour les personnes</em> (doc 2) : autonomie des chefs de rayon, management par objectifs, actionnariat salarié, reconnaissance des idées du terrain → fort investissement humain.</li>
+              <li><em>Intérêt pour la production</em> (doc 1) : objectifs de CA ambitieux, part de marché à défendre (22 % en France), performance économique au cœur de la stratégie.</li>
+            </ul>
+            <div class="result-box">Le style Blake et Mouton de Décathlon se positionne en 9.9 : management intégrateur alliant performance et épanouissement des collaborateurs.</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 4 (4 pts)</div>
+            <div class="correction-step-header">Intégration de la RSE :</div>
+            <ul>
+              <li><strong>Dimension environnementale</strong> (doc 3) : 45 % de produits éco-conçus, objectif neutralité carbone 2050, services location/réparation/occasion → économie circulaire.</li>
+              <li><strong>Dimension sociale</strong> (doc 2) : actionnariat salarié, management participatif, bien-être au travail.</li>
+              <li><strong>Dimension sociétale</strong> : rendre le sport accessible au plus grand nombre (prix bas, produits d'entrée de gamme).</li>
+            </ul>
+            <div class="correction-step-header">Avantages pour l'entreprise :</div>
+            <ul>
+              <li><strong>Avantage concurrentiel</strong> : 68 % des clients sensibles à l'engagement environnemental (doc 3) → fidélisation et différenciation.</li>
+              <li><strong>Image de marque</strong> : réputation renforcée auprès des consommateurs et investisseurs.</li>
+              <li><strong>Économies</strong> : réduction des déchets, efficacité énergétique → gains opérationnels à long terme.</li>
+              <li><strong>Attractivité RH</strong> : la RSE attire les talents, notamment les jeunes générations sensibles aux enjeux environnementaux.</li>
+            </ul>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 5 (2 pts)</div>
+            <div class="theory-box"><strong>Parties prenantes (Freeman, 1984)</strong> : tout acteur affecté par ou pouvant affecter les décisions de l'organisation.</div>
+            <p><strong>Partie prenante 1 — Les clients :</strong> attentes de prix bas, de qualité, de service (conseil, retour), d'engagement environnemental (doc 3).</p>
+            <p><strong>Partie prenante 2 — Les collaborateurs :</strong> attentes de rémunération équitable, d'autonomie, de développement professionnel, de sens au travail (doc 2 : actionnariat, management participatif).</p>
+            <p><em>Autres réponses acceptées : actionnaires (rentabilité), fournisseurs (volumes stables), État (emploi, fiscalité), associations environnementales (RSE).</em></p>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /sujet 3 -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SUJET 4 — MANAGEMENT & SGN
+    ═══════════════════════════════════════════════════════ -->
+    <div class="sujet-card" data-subject-filter="mgmt-sgn" id="sujet4">
+      <div class="sujet-header" style="background:linear-gradient(135deg,rgba(22,163,74,.12),rgba(147,51,234,.06));">
+        <div class="sujet-header-left">
+          <h3>Sujet 4 — Management &amp; SGN</h3>
+          <p>Thème : La transformation numérique d'une PME — La Mie Dorée</p>
+        </div>
+        <div class="sujet-meta">
+          <span class="badge badge-mgmt">🏢 Management</span>
+          <span class="badge badge-gestion">💻 SGN</span>
+          <span class="badge badge-neutral">Terminale STMG</span>
+          <span class="badge badge-neutral">PME / Digital</span>
+        </div>
+      </div>
+
+      <div class="sujet-body">
+        <div class="doc-section-title">📋 Contexte</div>
+
+        <div class="doc-item">
+          <div class="doc-label">Présentation de l'entreprise</div>
+          <p><strong>La Mie Dorée</strong> est une boulangerie artisanale parisienne fondée en 2008. Elle exploite <strong>3 boutiques</strong> dans les 11e, 15e et 18e arrondissements de Paris et emploie <strong>50 salariés</strong>. Son dirigeant, Karim Boussalem, souhaite se digitaliser : mise en place d'une boutique en ligne avec click &amp; collect, caisse enregistreuse connectée, programme de fidélité numérique et gestion des stocks en temps réel. Plusieurs salariés âgés de 45 à 60 ans expriment des résistances au changement.</p>
+        </div>
+
+        <div class="doc-section-title">❓ Questions</div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 1.</span>
+            <span class="question-pts">4 pts</span>
+          </div>
+          <p>Quelles étapes décisionnelles Karim Boussalem doit-il suivre pour mener à bien sa transformation numérique ? Utilisez le modèle IMC (Intelligence – Modélisation – Choix) d'Herbert Simon.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 2.</span>
+            <span class="question-pts">5 pts</span>
+          </div>
+          <p>Comment le dirigeant peut-il motiver les salariés résistants au changement ? Appuyez-vous sur les théories de Maslow et Herzberg.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 3.</span>
+            <span class="question-pts">3 pts</span>
+          </div>
+          <p>Quelle structure organisationnelle La Mie Dorée devrait-elle adopter pour accompagner sa croissance numérique ? Justifiez.</p>
+        </div>
+
+        <button class="correction-toggle" onclick="toggleCorrection(this)">
+          📖 Voir la correction complète
+        </button>
+
+        <div class="correction-content">
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 1 (4 pts)</div>
+            <div class="theory-box"><strong>Modèle IMC de Simon (1960)</strong> — processus de prise de décision en 3 phases : Intelligence → Modélisation → Choix</div>
+            <div class="correction-step-header">Phase 1 — Intelligence (diagnostic) :</div>
+            <p>Karim doit analyser l'environnement : étudier les attentes des clients (click &amp; collect ?), analyser la concurrence digitale (boulangeries en ligne), réaliser un état des lieux de l'existant (logiciels de caisse, systèmes de stock actuels), identifier les ressources disponibles (budget, compétences internes).</p>
+            <div class="correction-step-header">Phase 2 — Modélisation (conception des solutions) :</div>
+            <p>Il doit concevoir et évaluer plusieurs solutions : développer une application propre vs utiliser une plateforme tierce (Uber Eats, Just Eat) ; choisir un logiciel de gestion de stocks intégré (ex. Lightspeed, Zelty) ; définir le plan de formation des salariés. Il faut aussi modéliser les coûts et les gains espérés.</p>
+            <div class="correction-step-header">Phase 3 — Choix :</div>
+            <p>Sélectionner la ou les solutions les plus adaptées selon les critères retenus (coût, facilité d'adoption, retour sur investissement). Simon parle de <em>rationalité limitée</em> : le décideur ne cherche pas la solution optimale mais une solution <em>satisfaisante</em> compte tenu de ses contraintes d'information et de temps.</p>
+            <div class="result-box">Appliquer le modèle IMC permet à Karim de structurer sa démarche et de réduire les risques liés à une transformation numérique précipitée.</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 2 (5 pts)</div>
+            <div class="theory-box"><strong>Maslow (1943)</strong> : hiérarchie des besoins en 5 niveaux (physiologiques → sécurité → appartenance → estime → réalisation). Un besoin supérieur ne motive que si les besoins inférieurs sont satisfaits.</div>
+            <div class="correction-step-header">Application de Maslow :</div>
+            <ul>
+              <li><strong>Besoin de sécurité</strong> : les salariés âgés craignent de perdre leur emploi ou d'être dépassés → rassurer en garantissant qu'aucun licenciement lié à la digitalisation n'est prévu, que les outils sont des aides et non des substituts.</li>
+              <li><strong>Besoin d'appartenance</strong> : créer une dynamique de groupe autour du projet → groupes de travail mixtes jeunes/seniors, valoriser l'expérience des anciens dans la conception du parcours client.</li>
+              <li><strong>Besoin d'estime</strong> : reconnaître publiquement les efforts de formation, valoriser les progrès, nommer des "référents digitaux" parmi les salariés volontaires.</li>
+            </ul>
+            <div class="theory-box" style="margin-top:.75rem;"><strong>Herzberg (1959)</strong> : distinction entre facteurs d'hygiène (évitent l'insatisfaction) et facteurs de motivation (créent la satisfaction). Seuls les facteurs de motivation génèrent un engagement durable.</div>
+            <div class="correction-step-header">Application de Herzberg :</div>
+            <ul>
+              <li><strong>Facteurs d'hygiène à soigner</strong> : conditions de travail (matériel ergonomique, locaux adaptés), rémunération maintenue, sécurité de l'emploi — sans ces bases, les salariés resteront résistants.</li>
+              <li><strong>Facteurs de motivation à activer</strong> : confier aux salariés des responsabilités dans le projet (référent caisse connectée, responsable click &amp; collect) → enrichissement des tâches ; valoriser leurs contributions → reconnaissance ; montrer que la digitalisation ouvre de nouvelles compétences valorisantes → accomplissement personnel.</li>
+            </ul>
+            <div class="result-box">En combinant Maslow (répondre aux besoins de sécurité et d'estime) et Herzberg (enrichir les tâches et reconnaître les efforts), Karim peut transformer la résistance en adhésion au projet digital.</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 3 (3 pts)</div>
+            <div class="correction-step-header">Structure actuelle probable :</div>
+            <p>Avec 50 salariés et 3 boutiques, La Mie Dorée fonctionne probablement en <strong>structure simple</strong> (direction centralisée, faible spécialisation) ou en <strong>structure fonctionnelle</strong> légère.</p>
+            <div class="correction-step-header">Structure recommandée — Divisionnelle par site + fonction transversale digitale :</div>
+            <p>Pour accompagner la croissance numérique, une <strong>structure divisionnelle géographique</strong> (une division par boutique, avec autonomie locale) combinée à une <strong>fonction support transversale</strong> (digital, informatique, marketing) serait pertinente. Chaque boutique garde son responsable, mais un "responsable digital" coordonne les outils communs (logiciel de caisse, stocks, fidélité).</p>
+            <div class="result-box">Cette structure permet la décentralisation opérationnelle (réactivité terrain) tout en mutualisant les ressources numériques, évitant la duplication des coûts.</div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /sujet 4 -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SUJET 5 — MERCATIQUE
+    ═══════════════════════════════════════════════════════ -->
+    <div class="sujet-card" data-subject-filter="merca" id="sujet5">
+      <div class="sujet-header" style="background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(245,158,11,.05));">
+        <div class="sujet-header-left">
+          <h3>Sujet 5 — Mercatique (spécialité)</h3>
+          <p>Thème : La stratégie mercatique de Sephora</p>
+        </div>
+        <div class="sujet-meta">
+          <span class="badge badge-merca">📣 Mercatique</span>
+          <span class="badge badge-neutral">Terminale STMG</span>
+          <span class="badge badge-neutral">Spécialité</span>
+        </div>
+      </div>
+
+      <div class="sujet-body">
+        <div class="doc-section-title">📁 Dossier documentaire</div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 1 — Parts de marché cosmétiques France (valeur, 2023)</div>
+          <div style="overflow-x:auto;">
+            <table class="doc-table">
+              <thead><tr><th>Enseigne</th><th>CA (M€)</th><th>PDM (%)</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Sephora (LVMH)</strong></td><td><strong>2 100</strong></td><td>à calculer</td></tr>
+                <tr><td>Concurrent A (Marionnaud)</td><td>1 950</td><td>à calculer</td></tr>
+                <tr><td>Concurrent B (Nocibé)</td><td>1 680</td><td>–</td></tr>
+                <tr><td>Autres (GMS + parapharmacie)</td><td>3 400</td><td>–</td></tr>
+                <tr><td><strong>Total marché</strong></td><td><strong>9 130</strong></td><td>100 %</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 2 — Programme fidélité "Beauty Insider" (données fictives)</div>
+          <p>Le programme fidélité Sephora compte <strong>4,5 millions de membres</strong> en France. Il est structuré en 3 niveaux : White (entrée), Black (dès 150 pts), Gold (dès 1 000 pts). Les avantages incluent : accès à des ventes privées, produits offerts, invitations à des ateliers beauté exclusifs, service de consultation personnalisée. Le <strong>panier moyen</strong> d'un client fidèle est de <strong>145 €</strong> vs <strong>67 €</strong> pour un non-membre.</p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 3 — Présence digitale</div>
+          <p>Sephora dispose de <strong>350 points de vente</strong> en France + 1 site e-commerce (23 % du CA) + une application mobile (12 M de téléchargements). Sur les réseaux sociaux : 5,8 M d'abonnés Instagram, 2,1 M TikTok. L'appli intègre un outil de <em>réalité augmentée</em> pour tester virtuellement les produits. Sephora collabore avec <strong>850 influenceurs</strong> (macro et micro) sur des programmes de marketing d'influence.</p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Document 4 — Données produit : rouge à lèvres</div>
+          <p>Coût d'achat moyen : <strong>8 €</strong> — Prix de vente HT : <strong>22 €</strong></p>
+        </div>
+
+        <div class="doc-section-title">❓ Questions</div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 1.</span>
+            <span class="question-pts">3 pts</span>
+          </div>
+          <p>À partir du document 1, calculez la part de marché en valeur de Sephora et du concurrent A.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 2.</span>
+            <span class="question-pts">3 pts</span>
+          </div>
+          <p>À partir du document 4, calculez le taux de marge et le taux de marque du rouge à lèvres. Interprétez chacun.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 3.</span>
+            <span class="question-pts">4 pts</span>
+          </div>
+          <p>Analysez la stratégie de segmentation et de ciblage de Sephora. Appuyez-vous sur les documents.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 4.</span>
+            <span class="question-pts">4 pts</span>
+          </div>
+          <p>Comment Sephora utilise-t-il le marketing relationnel ? Évaluez son efficacité en vous appuyant sur des données chiffrées.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 5.</span>
+            <span class="question-pts">2 pts</span>
+          </div>
+          <p>Quels risques la mercatique digitale fait-elle peser sur la vie privée des clients ? Quelle réglementation encadre ces pratiques ?</p>
+        </div>
+
+        <button class="correction-toggle" onclick="toggleCorrection(this)">
+          📖 Voir la correction complète
+        </button>
+
+        <div class="correction-content">
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 1 (3 pts)</div>
+            <div class="correction-step-header">Formule :</div>
+            <div class="formula-box">PDM en valeur (%) = (CA de l'entreprise / CA total du marché) × 100</div>
+            <div class="correction-step-header">Calcul Sephora :</div>
+            <div class="formula-box">PDM Sephora = (2 100 / 9 130) × 100 = <strong>23,0 %</strong></div>
+            <div class="correction-step-header">Calcul Concurrent A :</div>
+            <div class="formula-box">PDM Concurrent A = (1 950 / 9 130) × 100 = <strong>21,4 %</strong></div>
+            <div class="result-box">Sephora est leader du marché avec 23 % de PDM, devant Marionnaud (21,4 %). L'écart est faible — la concurrence est intense.</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 2 (3 pts)</div>
+            <div class="correction-step-header">Marge commerciale unitaire :</div>
+            <div class="formula-box">Marge commerciale = PV HT − Coût d'achat = 22 − 8 = <strong>14 €</strong></div>
+            <div class="correction-step-header">Taux de marge :</div>
+            <div class="formula-box">Taux de marge = (Marge / Coût d'achat) × 100 = (14 / 8) × 100 = <strong>175 %</strong></div>
+            <p><em>Interprétation :</em> Pour chaque euro dépensé en achat, Sephora réalise 1,75 € de marge — rentabilité très élevée, typique du secteur cosmétique haut de gamme.</p>
+            <div class="correction-step-header">Taux de marque :</div>
+            <div class="formula-box">Taux de marque = (Marge / PV HT) × 100 = (14 / 22) × 100 ≈ <strong>63,6 %</strong></div>
+            <p><em>Interprétation :</em> 63,6 % du prix de vente HT est constitué de marge. C'est un indicateur de la capacité à dégager de la marge sur le prix pratiqué.</p>
+            <div class="warning-box">⚠️ Piège fréquent : ne pas confondre taux de marge (rapporté au coût d'achat) et taux de marque (rapporté au PV). Écrire la formule AVANT de calculer.</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 3 (4 pts)</div>
+            <div class="correction-step-header">Segmentation :</div>
+            <p>Sephora segmente son marché selon plusieurs critères :</p>
+            <ul>
+              <li><strong>Démographiques</strong> : principalement les femmes de 18 à 55 ans, mais avec une ouverture croissante aux hommes (soins masculins) et adolescents.</li>
+              <li><strong>Comportementaux</strong> (doc 2) : segmentation par niveau de fidélité (White / Black / Gold) selon la fréquence et le volume d'achat.</li>
+              <li><strong>Psychographiques</strong> : amateurs de beauté prestige vs masstige.</li>
+              <li><strong>Géographiques / Canal</strong> (doc 3) : clients en boutique vs e-commerce vs appli mobile.</li>
+            </ul>
+            <div class="correction-step-header">Ciblage :</div>
+            <p>Sephora adopte un ciblage <strong>différencié</strong> : elle s'adresse à plusieurs segments avec des offres adaptées — programme fidélité graduée, réalité augmentée pour les digital natives, ateliers exclusifs pour les Gold members. Son ciblage principal reste les <strong>femmes CSP+ de 25-45 ans</strong>, consommatrices de produits moyen-haut de gamme.</p>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 4 (4 pts)</div>
+            <div class="correction-step-header">Outils de marketing relationnel utilisés (doc 2 &amp; 3) :</div>
+            <ul>
+              <li><strong>Programme fidélité</strong> "Beauty Insider" : 4,5 M membres, 3 niveaux de bénéfices → personnalisation de la relation.</li>
+              <li><strong>Application mobile</strong> : 12 M de téléchargements, outil de réalité augmentée, notifications push personnalisées.</li>
+              <li><strong>Marketing d'influence</strong> : 850 influenceurs → bouche-à-oreille numérique, ciblage communautaire.</li>
+              <li><strong>Réseaux sociaux</strong> : 5,8 M abonnés Instagram, 2,1 M TikTok → animation de communauté, co-création de contenu.</li>
+              <li><strong>Ventes privées et ateliers</strong> réservés aux membres → sentiment d'exclusivité.</li>
+            </ul>
+            <div class="correction-step-header">Évaluation chiffrée de l'efficacité :</div>
+            <div class="formula-box">Panier moyen membre fidèle : 145 € vs non-membre : 67 €<br>Survaleur = 145 − 67 = +78 € (+116 %)</div>
+            <div class="result-box">Les clients fidélisés dépensent 116 % de plus que les non-membres. Le programme fidélité est très efficace : il transforme une transaction ponctuelle en relation durable et rentable.</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 5 (2 pts)</div>
+            <div class="correction-step-header">Risques pour la vie privée :</div>
+            <ul>
+              <li><strong>Collecte massive de données</strong> : comportements d'achat, localisation, préférences → profilage fin des clients sans toujours leur consentement éclairé.</li>
+              <li><strong>Ciblage comportemental</strong> (cookies, retargeting) : sentiment d'intrusion, manipulation des comportements d'achat.</li>
+              <li><strong>Failles de sécurité</strong> : bases de données clients exposées au piratage.</li>
+              <li><strong>Utilisation des données par des tiers</strong> : partage avec partenaires publicitaires sans information claire.</li>
+            </ul>
+            <div class="correction-step-header">Réglementation :</div>
+            <div class="law-box">
+              <strong>RGPD</strong> (Règlement Général sur la Protection des Données, UE, 2018) : oblige les entreprises à obtenir le consentement explicite, à informer sur l'utilisation des données, à permettre l'accès, la rectification et la suppression des données personnelles. Sanctions : jusqu'à 4 % du CA mondial ou 20 M€.<br><br>
+              <strong>Loi Informatique et Libertés</strong> (France, CNIL) : contrôle du respect du RGPD en France.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /sujet 5 -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SUJET 6 — GESTION & FINANCE
+    ═══════════════════════════════════════════════════════ -->
+    <div class="sujet-card" data-subject-filter="gf" id="sujet6">
+      <div class="sujet-header" style="background:linear-gradient(135deg,rgba(13,148,136,.15),rgba(13,148,136,.05));">
+        <div class="sujet-header-left">
+          <h3>Sujet 6 — Gestion &amp; Finance (spécialité)</h3>
+          <p>Thème : Analyse financière de la société RestoPro SARL</p>
+        </div>
+        <div class="sujet-meta">
+          <span class="badge badge-gf">💰 G&amp;F</span>
+          <span class="badge badge-neutral">Terminale STMG</span>
+          <span class="badge badge-neutral">Spécialité</span>
+        </div>
+      </div>
+
+      <div class="sujet-body">
+        <div class="doc-section-title">📋 Données comptables — RestoPro SARL</div>
+
+        <div class="doc-item">
+          <div class="doc-label">Compte de résultat simplifié (exercice N)</div>
+          <div style="overflow-x:auto;">
+            <table class="doc-table">
+              <thead><tr><th>Poste</th><th>Montant (€)</th></tr></thead>
+              <tbody>
+                <tr><td>Ventes de marchandises</td><td>480 000</td></tr>
+                <tr><td>Coût d'achat des marchandises vendues</td><td>192 000</td></tr>
+                <tr><td>Production vendue (services)</td><td>120 000</td></tr>
+                <tr><td>Consommations intermédiaires</td><td>84 000</td></tr>
+                <tr><td>Subventions d'exploitation</td><td>15 000</td></tr>
+                <tr><td>Impôts et taxes</td><td>12 000</td></tr>
+                <tr><td>Charges de personnel</td><td>156 000</td></tr>
+                <tr><td>Dotations aux amortissements</td><td>28 000</td></tr>
+                <tr><td>Charges financières</td><td>8 400</td></tr>
+                <tr><td>Résultat exceptionnel</td><td>− 4 000</td></tr>
+                <tr><td>IS (taux 30 %)</td><td>à calculer</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-label">Données complémentaires</div>
+          <p><strong>CA total HT :</strong> 600 000 € &nbsp;|&nbsp; <strong>Charges fixes :</strong> 98 000 € &nbsp;|&nbsp; <strong>Charges variables :</strong> 74 % du CA</p>
+          <p><strong>Mois étudié pour la TVA :</strong> Achats TTC : 36 000 € — Ventes TTC : 60 000 € — TVA à 20 %</p>
+        </div>
+
+        <div class="doc-section-title">❓ Questions</div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 1.</span>
+            <span class="question-pts">5 pts</span>
+          </div>
+          <p>Calculez tous les Soldes Intermédiaires de Gestion (SIG) : marge commerciale, valeur ajoutée, EBE, résultat d'exploitation, résultat courant avant impôt, résultat exceptionnel, résultat avant IS, IS et résultat net.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 2.</span>
+            <span class="question-pts">4 pts</span>
+          </div>
+          <p>Calculez le seuil de rentabilité en valeur, le point mort en jours (sur 365 jours), la marge de sécurité et l'indice de sécurité.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 3.</span>
+            <span class="question-pts">3 pts</span>
+          </div>
+          <p>Calculez la TVA collectée, la TVA déductible et la TVA à décaisser pour le mois.</p>
+        </div>
+
+        <div class="question-item">
+          <div class="question-header">
+            <span class="question-num">Question 4.</span>
+            <span class="question-pts">3 pts</span>
+          </div>
+          <p>Interprétez les résultats : cette entreprise est-elle en bonne santé financière ? Quels indicateurs vous semblent préoccupants ?</p>
+        </div>
+
+        <button class="correction-toggle" onclick="toggleCorrection(this)">
+          📖 Voir la correction complète
+        </button>
+
+        <div class="correction-content">
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 1 (5 pts) — Soldes Intermédiaires de Gestion</div>
+
+            <div class="correction-step-header">1. Marge commerciale (MC) :</div>
+            <div class="formula-box">MC = Ventes de marchandises − Coût d'achat des marchandises vendues<br>MC = 480 000 − 192 000 = <strong>288 000 €</strong></div>
+
+            <div class="correction-step-header">2. Production de l'exercice :</div>
+            <div class="formula-box">Production = Production vendue = <strong>120 000 €</strong></div>
+
+            <div class="correction-step-header">3. Valeur Ajoutée (VA) :</div>
+            <div class="formula-box">VA = MC + Production − Consommations intermédiaires<br>VA = 288 000 + 120 000 − 84 000 = <strong>324 000 €</strong></div>
+
+            <div class="correction-step-header">4. Excédent Brut d'Exploitation (EBE) :</div>
+            <div class="formula-box">EBE = VA + Subventions d'exploitation − Impôts et taxes − Charges de personnel<br>EBE = 324 000 + 15 000 − 12 000 − 156 000 = <strong>171 000 €</strong></div>
+
+            <div class="correction-step-header">5. Résultat d'exploitation (RE) :</div>
+            <div class="formula-box">RE = EBE − Dotations aux amortissements<br>RE = 171 000 − 28 000 = <strong>143 000 €</strong></div>
+
+            <div class="correction-step-header">6. Résultat courant avant impôt (RCAI) :</div>
+            <div class="formula-box">RCAI = RE − Charges financières<br>RCAI = 143 000 − 8 400 = <strong>134 600 €</strong></div>
+
+            <div class="correction-step-header">7. Résultat avant IS :</div>
+            <div class="formula-box">Résultat avant IS = RCAI + Résultat exceptionnel<br>= 134 600 + (−4 000) = <strong>130 600 €</strong></div>
+
+            <div class="correction-step-header">8. Impôt sur les sociétés (IS) :</div>
+            <div class="formula-box">IS = 130 600 × 30 % = <strong>39 180 €</strong></div>
+
+            <div class="correction-step-header">9. Résultat net :</div>
+            <div class="formula-box">Résultat net = Résultat avant IS − IS<br>= 130 600 − 39 180 = <strong>91 420 €</strong></div>
+
+            <div class="result-box">Résultat net = 91 420 € — soit 15,2 % du CA. L'entreprise est bénéficiaire.</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 2 (4 pts) — Seuil de rentabilité</div>
+
+            <div class="correction-step-header">Données :</div>
+            <p>CA = 600 000 € — Charges variables = 74 % × 600 000 = 444 000 € — Charges fixes = 98 000 €</p>
+
+            <div class="correction-step-header">1. Marge sur coûts variables (MSCV) :</div>
+            <div class="formula-box">MSCV = CA − Charges variables = 600 000 − 444 000 = <strong>156 000 €</strong></div>
+
+            <div class="correction-step-header">2. Taux de MSCV :</div>
+            <div class="formula-box">Taux MSCV = MSCV / CA = 156 000 / 600 000 = <strong>26 %</strong></div>
+
+            <div class="correction-step-header">3. Seuil de rentabilité (SR) :</div>
+            <div class="formula-box">SR = Charges fixes / Taux MSCV = 98 000 / 0,26 = <strong>376 923 €</strong></div>
+            <p>Interprétation : RestoPro doit réaliser au moins 376 923 € de CA pour couvrir l'ensemble de ses charges.</p>
+
+            <div class="correction-step-header">4. Point mort (en jours) :</div>
+            <div class="formula-box">Point mort = (SR / CA) × 365 = (376 923 / 600 000) × 365 ≈ <strong>229 jours</strong></div>
+            <p>Interprétation : le seuil de rentabilité est atteint vers le <strong>18 août</strong> (229e jour de l'année).</p>
+
+            <div class="correction-step-header">5. Marge de sécurité :</div>
+            <div class="formula-box">Marge de sécurité = CA − SR = 600 000 − 376 923 = <strong>223 077 €</strong></div>
+
+            <div class="correction-step-header">6. Indice de sécurité :</div>
+            <div class="formula-box">Indice de sécurité = Marge de sécurité / CA = 223 077 / 600 000 ≈ <strong>37,2 %</strong></div>
+            <div class="result-box">L'indice de sécurité de 37,2 % est satisfaisant : le CA pourrait baisser de 37 % avant d'atteindre le seuil de rentabilité.</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 3 (3 pts) — TVA</div>
+            <div class="warning-box">⚠️ Les données TTC fournies incluent la TVA — il faut d'abord extraire la TVA intégrée.</div>
+
+            <div class="correction-step-header">Formule d'extraction de la TVA depuis un montant TTC :</div>
+            <div class="formula-box">TVA = Montant TTC × [Taux / (1 + Taux)] = Montant TTC × (20 / 120) = Montant TTC / 6</div>
+
+            <div class="correction-step-header">TVA collectée (sur les ventes) :</div>
+            <div class="formula-box">TVA collectée = 60 000 × (20/120) = 60 000 / 6 = <strong>10 000 €</strong></div>
+
+            <div class="correction-step-header">TVA déductible (sur les achats) :</div>
+            <div class="formula-box">TVA déductible = 36 000 × (20/120) = 36 000 / 6 = <strong>6 000 €</strong></div>
+
+            <div class="correction-step-header">TVA à décaisser :</div>
+            <div class="formula-box">TVA à décaisser = TVA collectée − TVA déductible = 10 000 − 6 000 = <strong>4 000 €</strong></div>
+
+            <div class="result-box">RestoPro doit reverser 4 000 € à l'État au titre de la TVA pour ce mois.</div>
+          </div>
+
+          <div class="correction-q">
+            <div class="correction-q-title">✅ Correction — Question 4 (3 pts) — Interprétation</div>
+            <div class="correction-step-header">Points positifs :</div>
+            <ul>
+              <li><strong>Résultat net positif :</strong> 91 420 € (15,2 % du CA) — l'entreprise est rentable.</li>
+              <li><strong>EBE solide :</strong> 171 000 € (28,5 % du CA) → bonne capacité à générer du cash avant charges financières et amortissements.</li>
+              <li><strong>Indice de sécurité confortable :</strong> 37,2 % — marge suffisante avant d'atteindre le seuil de perte.</li>
+              <li><strong>VA élevée :</strong> 324 000 € (54 % du CA) — l'entreprise crée bien de la valeur.</li>
+            </ul>
+            <div class="correction-step-header">Points préoccupants :</div>
+            <ul>
+              <li><strong>Charges de personnel élevées :</strong> 156 000 € représentent 48 % de la VA → poids lourd, peu de marges de manœuvre en cas de baisse de CA.</li>
+              <li><strong>Résultat exceptionnel négatif :</strong> −4 000 € → signale un événement non récurrent à surveiller (amende ? cession d'actif à perte ?).</li>
+              <li><strong>Point mort tardif :</strong> 229e jour de l'année (mi-août) → l'entreprise ne dégage ses bénéfices que sur la deuxième moitié de l'exercice, laissant peu de coussin en cas de choc de demande.</li>
+            </ul>
+            <div class="result-box">RestoPro est globalement saine financièrement, mais sa forte dépendance aux charges de personnel et son point mort tardif constituent des vulnérabilités à surveiller, notamment en cas de ralentissement d'activité.</div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /sujet 6 -->
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION MÉTHODES
+    ═══════════════════════════════════════════════════════ -->
+    <div class="divider"></div>
+
+    <h2 class="section-title" style="margin-bottom:.5rem;">🎯 Méthodes par type d'épreuve</h2>
+    <p class="section-subtitle" style="margin-bottom:1.5rem;">Les étapes à suivre pour chaque format de question au BAC</p>
+
+    <div class="method-grid">
+
+      <div class="method-card" style="border-top:3px solid var(--eco);">
+        <div class="method-accent" style="background:rgba(37,99,235,.15);color:#93c5fd;">📊 Économie</div>
+        <h4>Analyser un document économique</h4>
+        <ol>
+          <li>Lire le document et identifier son type (tableau, graphique, texte)</li>
+          <li>Repérer les données chiffrées clés et les mots importants</li>
+          <li>Calculer si demandé (en écrivant la formule d'abord)</li>
+          <li>Rédiger : contexte → argument cours → lien avec le doc → conclusion</li>
+        </ol>
+        <div style="margin-top:.75rem;padding:.6rem;background:rgba(220,38,38,.08);border-radius:6px;border-left:3px solid var(--droit);">
+          <p style="font-size:.82rem;color:#fca5a5;margin:0;"><strong>Éviter :</strong> paraphraser le doc sans apport de cours · oublier de citer le doc · confondre cause et conséquence</p>
+        </div>
+      </div>
+
+      <div class="method-card" style="border-top:3px solid var(--droit);">
+        <div class="method-accent" style="background:rgba(220,38,38,.15);color:#fca5a5;">⚖️ Droit</div>
+        <h4>Résoudre un cas pratique (méthode FARC)</h4>
+        <ol>
+          <li><strong>Faits</strong> : résumer les éléments pertinents du cas</li>
+          <li><strong>Problème juridique</strong> : formuler la question de droit</li>
+          <li><strong>Règle de droit</strong> : citer le texte précis (article, loi, Code)</li>
+          <li><strong>Application</strong> : appliquer la règle aux faits du cas</li>
+          <li><strong>Conclusion</strong> : répondre clairement à la question posée</li>
+        </ol>
+        <div style="margin-top:.75rem;padding:.6rem;background:rgba(220,38,38,.08);border-radius:6px;border-left:3px solid var(--droit);">
+          <p style="font-size:.82rem;color:#fca5a5;margin:0;"><strong>Éviter :</strong> répondre sans citer de règle de droit · oublier la conclusion pratique · donner un avis personnel sans base juridique</p>
+        </div>
+      </div>
+
+      <div class="method-card" style="border-top:3px solid var(--mgmt);">
+        <div class="method-accent" style="background:rgba(22,163,74,.15);color:#86efac;">🏢 Management</div>
+        <h4>Analyser une entreprise</h4>
+        <ol>
+          <li>Identifier l'entreprise (type, taille, secteur, finalités)</li>
+          <li>Lire les documents et repérer les éléments factuels</li>
+          <li>Nommer la théorie / le modèle applicable</li>
+          <li>Appliquer le modèle aux données du cas</li>
+          <li>Conclure avec une analyse critique (avantages/limites)</li>
+        </ol>
+        <div style="margin-top:.75rem;padding:.6rem;background:rgba(220,38,38,.08);border-radius:6px;border-left:3px solid var(--droit);">
+          <p style="font-size:.82rem;color:#fca5a5;margin:0;"><strong>Éviter :</strong> citer une théorie sans l'appliquer au cas · rester vague ("l'entreprise est bien gérée") · oublier de s'appuyer sur les documents</p>
+        </div>
+      </div>
+
+      <div class="method-card" style="border-top:3px solid var(--merca);">
+        <div class="method-accent" style="background:rgba(245,158,11,.15);color:#fcd34d;">📣 Mercatique / 💰 G&amp;F</div>
+        <h4>Répondre à une question de calcul</h4>
+        <ol>
+          <li><strong>Écrire la formule</strong> avant de calculer (même si simple)</li>
+          <li>Identifier et noter toutes les données utilisées</li>
+          <li>Calculer proprement, étape par étape</li>
+          <li>Encadrer le résultat avec son unité (€, %, jours…)</li>
+          <li><strong>Interpréter</strong> : "Ce résultat signifie que…"</li>
+        </ol>
+        <div style="margin-top:.75rem;padding:.6rem;background:rgba(220,38,38,.08);border-radius:6px;border-left:3px solid var(--droit);">
+          <p style="font-size:.82rem;color:#fca5a5;margin:0;"><strong>Éviter :</strong> donner un résultat sans unité · confondre taux de marge et taux de marque · calculer sur des montants TTC sans extraire la TVA</p>
+        </div>
+      </div>
+
+    </div><!-- /method-grid -->
+
+  </div><!-- /container -->
+</main>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <p>📂 Annales &amp; Sujets types — <a href="index.html">Retour à l'accueil</a></p>
+    <p style="font-size:.8rem;margin-top:.35rem;">Sujets et corrections fictifs à but pédagogique · BAC STMG 2026 · Programme officiel</p>
+    <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:1rem;">
+      <a href="economie.html" class="nav-eco" style="font-size:.82rem;font-weight:600;">📊 Éco</a>
+      <a href="droit.html" class="nav-droit" style="font-size:.82rem;font-weight:600;">⚖️ Droit</a>
+      <a href="management.html" class="nav-mgmt" style="font-size:.82rem;font-weight:600;">🏢 Mgmt</a>
+      <a href="mercatique.html" class="nav-merca" style="font-size:.82rem;font-weight:600;">📣 Merca</a>
+      <a href="gestion-finance.html" class="nav-gf" style="font-size:.82rem;font-weight:600;">💰 G&amp;F</a>
+      <a href="maths.html" class="nav-maths" style="font-size:.82rem;font-weight:600;">🔢 Maths</a>
+      <a href="grand-oral.html" class="nav-go" style="font-size:.82rem;font-weight:600;">🎤 GO</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/interactif.js"></script>
+<script>
+/* ── Hamburger nav ─────────────────────────────────── */
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+  });
+}
+
+/* ── Correction toggle ─────────────────────────────── */
+function toggleCorrection(btn) {
+  const content = btn.nextElementSibling;
+  const isOpen  = content.classList.contains('visible');
+  content.classList.toggle('visible', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.textContent = isOpen ? '📖 Voir la correction complète' : '🔼 Masquer la correction';
+}
+
+/* ── Filtres matières ──────────────────────────────── */
+const filterBtns  = document.querySelectorAll('.filter-btn');
+const sujetCards  = document.querySelectorAll('.sujet-card[data-subject-filter]');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Update active btn
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+
+    sujetCards.forEach(card => {
+      if (filter === 'all' || card.dataset.subjectFilter === filter) {
+        card.style.display = '';
+        card.style.animation = 'none';
+        requestAnimationFrame(() => {
+          card.style.animation = 'fadeInUp .3s ease';
+        });
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+/* ── Fade-in animation ─────────────────────────────── */
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+`;
+document.head.appendChild(style);
+</script>
+</body>
+</html>
