@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Objectif 20 - Bac STMG 2026</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <p class="badge">Programme 2026 • STMG sans RH ni SIG</p>
+    <h1>Objectif 20/20 au Bac STMG</h1>
+    <p class="subtitle">Un plan intensif avec fiches, méthodes, calculs, entraînements et annales guidées.</p>
+    <a href="#planning" class="btn">Commencer le plan de révision</a>
+  </header>
+
+  <main>
+    <section class="card" id="planning">
+      <h2>1) Planning hebdo ultra-efficace</h2>
+      <div class="grid-2">
+        <article>
+          <h3>Lundi à vendredi (2h/jour)</h3>
+          <ul>
+            <li>30 min : fiches de cours actives (rappel sans regarder).</li>
+            <li>45 min : exercice type bac chronométré.</li>
+            <li>30 min : correction + journal d'erreurs.</li>
+            <li>15 min : flashcards formules/définitions.</li>
+          </ul>
+        </article>
+        <article>
+          <h3>Week-end (5h réparties)</h3>
+          <ul>
+            <li>1 sujet complet d'annale en conditions réelles.</li>
+            <li>1 oral blanc (Grand oral + Philosophie argumentation).</li>
+            <li>Mise à jour des "20 erreurs à ne plus refaire".</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2) Matières STMG prioritaires</h2>
+      <p>Choisis une matière pour afficher méthodes et objectifs.</p>
+      <div class="tabs">
+        <button class="tab active" data-target="mercatique">Mercatique</button>
+        <button class="tab" data-target="gestion">Gestion & Finance</button>
+        <button class="tab" data-target="management">Management</button>
+        <button class="tab" data-target="eco">Économie-Droit</button>
+        <button class="tab" data-target="philo">Philosophie</button>
+        <button class="tab" data-target="oral">Grand Oral</button>
+      </div>
+
+      <div class="panel active" id="mercatique">
+        <h3>Mercatique (spécialité)</h3>
+        <ul>
+          <li>Maîtriser le diagnostic marketing (offre, demande, concurrence).</li>
+          <li>Savoir justifier un mix marketing cohérent.</li>
+          <li>Utiliser des indicateurs : part de marché, taux d'évolution, panier moyen.</li>
+        </ul>
+      </div>
+
+      <div class="panel" id="gestion">
+        <h3>Gestion & Finance (spécialité)</h3>
+        <ul>
+          <li>Soldes intermédiaires de gestion (SIG comptables) et analyse de rentabilité.</li>
+          <li>Seuil de rentabilité, marge sur coût variable, capacité d'autofinancement.</li>
+          <li>Ratios : liquidité, solvabilité, rentabilité économique/financière.</li>
+        </ul>
+      </div>
+
+      <div class="panel" id="management">
+        <h3>Management, sciences de gestion et numérique (tronc commun)</h3>
+        <ul>
+          <li>Identifier problème de management + solutions argumentées.</li>
+          <li>Mobiliser les notions : gouvernance, parties prenantes, performance globale.</li>
+          <li>Structurer la copie en "constat → analyse → recommandation".</li>
+        </ul>
+      </div>
+
+      <div class="panel" id="eco">
+        <h3>Économie-Droit</h3>
+        <ul>
+          <li>Économie : marchés, croissance, politiques économiques.</li>
+          <li>Droit : qualification juridique, règles applicables, solution motivée.</li>
+          <li>Méthode bac : faits → problème de droit → règle → application → conclusion.</li>
+        </ul>
+      </div>
+
+      <div class="panel" id="philo">
+        <h3>Philosophie</h3>
+        <ul>
+          <li>Thèse claire dès l'introduction + problématique reformulée.</li>
+          <li>Plan dialectique propre (I/II/III) avec transitions explicites.</li>
+          <li>Exemples précis (auteurs, situations concrètes) pour chaque argument.</li>
+        </ul>
+      </div>
+
+      <div class="panel" id="oral">
+        <h3>Grand Oral</h3>
+        <ul>
+          <li>Question centrale simple + enjeu concret.</li>
+          <li>Pitch d'ouverture (30 sec) mémorisé parfaitement.</li>
+          <li>Simulation de questions du jury 3 fois/semaine.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3) Calculs essentiels (avec mini-calculatrice)</h2>
+      <div class="calc-grid">
+        <label>Chiffre d'affaires (CA)
+          <input id="ca" type="number" placeholder="ex: 120000" />
+        </label>
+        <label>Charges variables (CV)
+          <input id="cv" type="number" placeholder="ex: 70000" />
+        </label>
+        <label>Charges fixes (CF)
+          <input id="cf" type="number" placeholder="ex: 30000" />
+        </label>
+      </div>
+      <button class="btn" id="compute">Calculer indicateurs</button>
+      <div id="results" class="results"></div>
+    </section>
+
+    <section class="card">
+      <h2>4) Annales des années précédentes (méthode)</h2>
+      <p>Pour chaque sujet :</p>
+      <ol>
+        <li>Fais le sujet en temps réel sans aide.</li>
+        <li>Corrige en 2 couleurs : notions manquantes vs erreurs de méthode.</li>
+        <li>Refais seulement les questions ratées 48h plus tard.</li>
+      </ol>
+      <p class="note">Conseil : télécharge les annales officielles sur les portails académiques et les sujets du bac publiés par l'Éducation nationale.</p>
+    </section>
+
+    <section class="card">
+      <h2>5) Contrat Objectif 20</h2>
+      <ul>
+        <li>✅ 6 jours de révision/semaine.</li>
+        <li>✅ 1 annale complète/semaine par spécialité.</li>
+        <li>✅ 1 oral blanc/semaine.</li>
+        <li>✅ Relecture des erreurs la veille de chaque entraînement.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Fait pour réussir le Bac STMG 2026 avec méthode, régularité et entraînement intelligent.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
